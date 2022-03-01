@@ -1,0 +1,12 @@
+{% for version in versions -%}
+{% include "version_heading.md.jinja" %}
+
+{% for section in version.sections -%}
+{% include "section_heading.md.jinja" %}
+
+{% for commit in section.commits -%}
+{% include "commit.md.jinja" %}
+
+{% endfor %}
+{%- endfor %}
+{%- endfor %}

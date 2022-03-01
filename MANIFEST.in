@@ -1,0 +1,7 @@
+graft src
+include bin/get-rcpath
+include *.rst LICENSE
+exclude *.ini *travis*
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+prune .git*

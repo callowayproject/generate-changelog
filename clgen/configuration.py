@@ -1,0 +1,157 @@
+"""Configuration setup for CLGen."""
+from typing import Callable, Optional, Union
+
+from dataclasses import asdict, dataclass, field
+from pathlib import Path
+
+import typer
+import yaml
+
+StrOrCallable = Union[str, Callable[[], str]]
+"""The type should be either a string or a callable that returns a string."""
+
+DEFAULT_CONFIG_FILE_NAME = ".clgen"
+"""Base default configuration file name"""
+
+DEFAULT_CONFIG_FILE_NAMES = [
+    f"{DEFAULT_CONFIG_FILE_NAME}.yml",
+    f"{DEFAULT_CONFIG_FILE_NAME}.yaml",
+    DEFAULT_CONFIG_FILE_NAME,
+]
+"""Valid permutations of the default configuration file name."""
+
+DEFAULT_IGNORE_PATTERNS = [
+    "[@!]minor"
+    "[@!]cosmetic"
+    "[@!]refactor"
+    "[@!]wip"
+    "[Ff]irst commit"
+    "[Ii]nitial commit"
+    "^$"  # ignore commits with empty messages
+    "^Merge branch"
+    "^Merge pull"
+]
+
+DEFAULT_SECTION_PATTERNS = {
+    "New": [r"(?i)^(?:new|add)[^\n]*$"],
+    "Updates": [r"(?i)^(?:update|change|rename|remove|delete|improve|refactor)[^\n]*$"],
+    "Fixes": [r"(?i)^(?:fix)[^\n]*$"],
+    "Other": None,  # Match all lines
+}
+
+
+DEFAULT_STARTING_TAG_PIPELINE = [
+    {"action": "ReadFile", "kwargs": {"filename": "CHANGELOG.md"}},
+    {
+        "action": "GetFirstRegExMatch",
+        "kwargs": {
+            "pattern": r"^## (?P<rev>[0-9]+\.[0-9]+(?:\.[0-9]+)?)\s+\([0-9]+-[0-9]{2}-[0-9]{2}\)$",
+            "named_subgroup": "rev",
+        },
+    },
+]
+
+DEFAULT_SUBJECT_PIPELINE = [
+    {"action": "strip_spaces"},
+    {
+        "action": "Strip",
+        "comment": "Get rid of any periods so we don't get double periods",
+        "kwargs": {"chars": "."},
+    },
+    {"action": "SetDefault", "args": ["no commit message"]},
+    {"action": "capitalize"},
+    {"action": "append_dot"},
+]
+
+DEFAULT_BODY_PIPELINE = [
+    {
+        "action": "ParseTrailers",
+        "comment": "Parse the trailers into metadata.",
+        "kwargs": {"commit_metadata": "save_commit_metadata"},
+    }
+]
+
+
+@dataclass
+class Configuration:
+    """Configuration for CLGen."""
+
+    variables: dict = field(default_factory=dict)
+    """User variables for reference in other parts of the configuration."""
+
+    starting_tag_pipeline: Optional[list] = field(default_factory=list)
+    """Generate the changelog from this tag. ``None`` means start at first commit."""
+
+    #
+    # Output
+    #
+    unreleased_label: str = "Unreleased"
+    """Used as the section title of the changes since the last valid tag."""
+
+    subject_pipeline: list = field(default_factory=list)
+    """Process the commit's subject for use in the changelog."""
+
+    body_pipeline: list = field(default_factory=list)
+    """Process the commit's body for use in the changelog."""
+
+    output_pipeline: list = field(default_factory=list)
+    """Pipeline to do something with the full or partial changelog."""
+
+    template_dirs: list = field(default_factory=list)
+    """Paths to look for output generation templates."""
+
+    #
+    # Commit filtering
+    #
+    tag_pattern: str = r"^[0-9]+\.[0-9]+(?:\.[0-9]+)?$"
+    """Only tags matching this regular expression are used for the changelog."""
+
+    include_merges: bool = False
+    """Tells git-log whether to include merge commits in the log."""
+
+    ignore_patterns: list = field(default_factory=list)
+    """Ignore commits that match any of these regular expression patterns."""
+
+    section_patterns: dict = field(default_factory=dict)
+    """Group commits into groups if they match any of these regular expressions."""
+
+    def update_from_file(self, filename: Path):
+        """Updates the configuration from a YAML file."""
+        file_path = filename.expanduser().resolve()
+
+        if not file_path.exists():
+            typer.echo(f"'{filename}' does not exist.", err=True)
+            raise typer.Exit(1)
+
+        if not file_path.is_file():
+            typer.echo(f"'{filename}' is not a file.", err=True)
+            raise typer.Exit(1)
+
+        content = file_path.read_text()
+        values = yaml.safe_load(content)
+
+        for key, val in values.items():
+            if hasattr(self, key):
+                setattr(self, key, val)
+
+
+def get_default_config() -> Configuration:
+    """Get the default configuration."""
+    return Configuration(
+        ignore_patterns=DEFAULT_IGNORE_PATTERNS,
+        section_patterns=DEFAULT_SECTION_PATTERNS,
+        body_pipeline=DEFAULT_BODY_PIPELINE,
+        subject_pipeline=DEFAULT_SUBJECT_PIPELINE,
+        starting_tag_pipeline=DEFAULT_STARTING_TAG_PIPELINE,
+    )
+
+
+def write_default_config(filename: Path):
+    """Write a default configuration file to the specified path."""
+    file_path = filename.expanduser().resolve()
+    config = asdict(get_default_config())
+    with file_path.open("w") as f:
+        yaml.safe_dump(config, f, sort_keys=False)
+
+
+CONFIG = get_default_config()
