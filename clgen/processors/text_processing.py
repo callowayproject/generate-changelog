@@ -5,7 +5,7 @@ import re
 import textwrap
 from dataclasses import dataclass
 
-from clgen.configuration import StrOrCallable
+from clgen.configuration import IntOrCallable, StrOrCallable
 from clgen.processors import register_builtin
 from clgen.utilities import eval_if_callable
 
@@ -129,6 +129,19 @@ class FirstRegExMatch(RegExCommand):
 
 @dataclass(frozen=True)
 @register_builtin
+class FirstRegExMatchPosition(RegExCommand):
+    """When called, returns the position of the first match in a string using a predefined regex."""
+
+    def __call__(self, input_text: StrOrCallable) -> int:
+        """Search the input_text for the predefined pattern and return its position."""
+        text = eval_if_callable(input_text)
+        pattern = eval_if_callable(self.pattern)
+        match = re.search(pattern, text, self.flags)
+        return match.start() if match else 0
+
+
+@dataclass(frozen=True)
+@register_builtin
 class RegexSub(RegExCommand):
     """Create a callable that will make substitutions using regular expressions."""
 
@@ -219,3 +232,27 @@ def capitalize(msg: str) -> str:
         The capitalized string
     """
     return "" if msg is None else str(msg).capitalize()
+
+
+@register_builtin
+@dataclass
+class Slice:
+    """When called, return a slice of the sequence."""
+
+    start: Optional[IntOrCallable] = None
+    """The start of the slice. None means the beginning of the sequence."""
+
+    stop: Optional[IntOrCallable] = None
+    """The end of the slice. None means the end of the sequence."""
+
+    step: Optional[IntOrCallable] = None
+    """Slice using this step betweeen indices. None means don't use the step."""
+
+    def __call__(self, input_text: StrOrCallable) -> str:
+        """Slice the sequence."""
+        text = eval_if_callable(input_text)
+        start = eval_if_callable(self.start)
+        stop = eval_if_callable(self.stop)
+        step = eval_if_callable(self.step)
+
+        return text[start:stop:step]
