@@ -57,3 +57,27 @@ def test_stdout(capsys):
     captured = capsys.readouterr()
     assert captured.out == text + "\n"
     assert captured.err == ""
+
+
+def test_incremental_file_insert(tmp_path):
+    """Test inserting text into a file."""
+
+    temp_file = tmp_path / "output.txt"
+    test_file = fixture_dir / "pipeline_dag_test.md"
+    temp_file.write_text(test_file.read_text())
+
+    writer = file_processing.IncrementalFileInsert(str(temp_file), r"(?im)^## \d+\.\d+\.\d+")
+    writer("This is new\n")
+
+    assert temp_file.read_text() == "This is new\n\n## 0.0.1 (2022-01-01)\n\nThis stuff stays.\n"
+
+
+def test_incremental_file_insert_missing_file(tmp_path):
+    """Test inserting text into a file."""
+
+    temp_file = tmp_path / "output.txt"
+
+    writer = file_processing.IncrementalFileInsert(str(temp_file), r"(?im)^## \d+\.\d+\.\d+")
+    writer("This is new\n")
+
+    assert temp_file.read_text() == "This is new\n"

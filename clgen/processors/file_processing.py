@@ -1,4 +1,5 @@
 """File reading and writing processors."""
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -54,3 +55,29 @@ class WriteFile:
 def stdout(content):
     """Write content to stdout."""
     typer.echo(content)
+
+
+@dataclass(frozen=True)
+@register_builtin
+class IncrementalFileInsert:
+    """Replace the start of a file with text."""
+
+    filename: StrOrCallable
+    """The file name to write when called."""
+
+    last_heading_pattern: StrOrCallable
+    """A regular expression to detect the last heading. Content before this position is re-rendered and inserted."""
+
+    def __call__(self, input_text: StrOrCallable):
+        """Replace the beigging of the file to last_heading_pattern with input_text."""
+        filename = Path(eval_if_callable(self.filename))
+        pattern = eval_if_callable(self.last_heading_pattern)
+        text = eval_if_callable(input_text)
+        existing_text = filename.read_text() if filename.exists() else ""
+
+        if match := re.search(pattern, existing_text, re.MULTILINE):
+            new_text = f"{text}\n{existing_text[match.start():]}"
+        else:
+            new_text = text
+
+        filename.write_text(new_text)
