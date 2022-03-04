@@ -17,15 +17,21 @@ class ReadFile:
     filename: StrOrCallable
     """The file name to read when called."""
 
-    def __call__(self) -> str:
+    create_if_missing: bool = True
+    """When True, create a missing file. Otherwise returns an error."""
+
+    def __call__(self, *args, **kwargs) -> str:
         """Return the contents of the file."""
         filepath = Path(eval_if_callable(self.filename))
+
+        if self.create_if_missing:
+            filepath.touch()
 
         if not filepath.exists():
             typer.echo(f"The file '{filepath}' does not exist.", err=True)
             raise typer.Exit(1)
 
-        return filepath.read_text()
+        return filepath.read_text() or ""
 
 
 @dataclass

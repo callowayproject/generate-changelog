@@ -24,7 +24,7 @@ def test_file_reading():
 def test_reading_misssing_file(capsys):
     """Reading a missing file should generate an error."""
     missing_file_path = fixture_dir / "missing.txt"
-    reader = file_processing.ReadFile(missing_file_path)
+    reader = file_processing.ReadFile(missing_file_path, create_if_missing=False)
     expected_err_msg = f"The file '{missing_file_path}' does not exist.\n"
     with pytest.raises(click.exceptions.Exit):
         reader()
@@ -51,7 +51,7 @@ def test_writing_file(tmp_path):
 
 
 def test_stdout(capsys):
-    """Writing to standard out goes out."""
+    """Writing to stdout goes out."""
     text = "This is example text in an example file.\n"
     file_processing.stdout(text)
     captured = capsys.readouterr()
