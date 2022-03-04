@@ -1,4 +1,4 @@
-"""Reegular Expression command testing."""
+"""Regular Expression command testing."""
 import re
 
 import pytest
@@ -36,7 +36,7 @@ gfrm_text_1 = """Heading
 )
 def test_get_first_regex_match(text, pattern, named_subgroup, default, expected):
     """Should find the first item in the string."""
-    regex_cmd = text_processing.GetFirstRegExMatch(
+    regex_cmd = text_processing.FirstRegExMatch(
         pattern=pattern, named_subgroup=named_subgroup, default_value=default
     )
     assert regex_cmd(text) == expected

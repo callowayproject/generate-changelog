@@ -103,7 +103,7 @@ class RegExCommand:
 
 @dataclass(frozen=True)
 @register_builtin
-class GetFirstRegExMatch(RegExCommand):
+class FirstRegExMatch(RegExCommand):
     """When called, returns the first match in a string using a predefined regex."""
 
     named_subgroup: Optional[str] = None
