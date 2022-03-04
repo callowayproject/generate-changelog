@@ -20,6 +20,19 @@ DEFAULT_CONFIG_FILE_NAMES = [
 ]
 """Valid permutations of the default configuration file name."""
 
+VALID_AUTHOR_TOKENS = [
+    "author",
+    "based-on-a-patch-by",
+    "based-on-patch-by",
+    "co-authored-by",
+    "co-committed-by",
+    "contributions-by",
+    "from",
+    "helped-by",
+    "improved-by",
+    "original-patch-by",
+]
+
 DEFAULT_IGNORE_PATTERNS = [
     "[@!]minor"
     "[@!]cosmetic"

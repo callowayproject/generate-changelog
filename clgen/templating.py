@@ -10,24 +10,12 @@ from git import Actor, Repo
 from jinja2 import ChoiceLoader, Environment, FileSystemLoader, PackageLoader, select_autoescape
 
 from clgen import git_ops
-from clgen.configuration import CONFIG, Configuration
+from clgen.configuration import CONFIG, VALID_AUTHOR_TOKENS, Configuration
 from clgen.pipeline import pipeline_factory
 from clgen.processors import load_builtins
 from clgen.processors.metadata import MetadataCollector
 
 load_builtins()
-
-VALID_AUTHOR_TOKENS = [
-    "author",
-    "based-on-a-patch-by",
-    "based-on-patch-by",
-    "co-authored-by",
-    "contributions-by",
-    "from",
-    "helped-by",
-    "improved-by",
-    "original-patch-by",
-]
 
 default_env = Environment(
     loader=ChoiceLoader([FileSystemLoader(CONFIG.template_dirs), PackageLoader("clgen")]),
