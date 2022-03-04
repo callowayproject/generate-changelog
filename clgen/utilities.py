@@ -2,8 +2,26 @@
 from typing import Any, Iterable
 
 
+def is_action(value: Any) -> bool:
+    """Is the value an action?"""
+    return isinstance(value, dict) and "action" in value
+
+
+def is_pipeline(value: Any) -> bool:
+    """Is the value a pipeline?"""
+    return value and isinstance(value, list) and is_action(value[0])
+
+
 def eval_if_callable(value: Any) -> Any:
     """Return value or the result of calling value."""
+    from clgen.pipeline import pipeline_factory
+
+    if is_action(value):
+        # convert it into a single action and call it
+        return pipeline_factory([value]).run()
+    elif is_pipeline(value):
+        return pipeline_factory(value).run()
+
     return value() if callable(value) else value
 
 
