@@ -1,14 +1,17 @@
 """Tests of temmplating functions."""
 import datetime
+import textwrap
+from pathlib import Path
 from test import conftest
 
 import pytest
 from faker import Faker
 from pytest import param
 
-from clgen import templating
+from clgen import configuration, templating
 from clgen.configuration import CONFIG, DEFAULT_SECTION_PATTERNS
 
+FIXTURES_DIR = Path(__file__).parent / "fixtures"
 fake = Faker()
 
 
@@ -74,7 +77,7 @@ def test_get_context_from_tags(default_repo):
     assert v.label == CONFIG.unreleased_label
     assert v.date_time.date() == datetime.date(2022, 1, 6)
     assert len(v.sections) == 1
-    assert v.sections[0].label == "Other"
+    assert v.sections[0].label == "Updates"
     assert len(v.sections[0].commits) == 1
     assert v.sections[0].commits[0].metadata["trailers"]["co-committed-by"] == [
         "Juliet <juliet@example.com>",
@@ -84,9 +87,35 @@ def test_get_context_from_tags(default_repo):
     v = context[1]
     assert v.label == "0.0.3"
     assert v.date_time.date() == datetime.date(2022, 1, 5)
-    assert len(v.sections) == 2
+    assert len(v.sections) == 1
     assert v.sections[0].label == "New"
-    assert v.sections[1].label == "Other"
     assert len(v.sections[0].commits) == 2
     assert len(v.sections[0].commits[0].metadata["trailers"]) == 5
     assert len(v.sections[0].commits[1].metadata["trailers"]) == 0
+
+
+def test_render(default_repo, capsys):
+    """Render should render the changelog."""
+    config = configuration.get_default_config()
+    output = templating.render(default_repo, config, None)
+    expected = (FIXTURES_DIR / "rendered_default_repo.md").read_text()
+    assert output.strip() == expected.strip()
+
+
+def test_render_from_tag(default_repo, capsys):
+    """Render should render the changelog."""
+    config = configuration.get_default_config()
+    output = templating.render(default_repo, config, "0.0.3")
+    expected = textwrap.dedent(
+        """
+        # Changelog
+        
+        ## Unreleased (2022-01-06)
+        
+        ### Updates
+        
+        - Chg: modified ``b`` xxx. [Alice](alice@example.com), [Charly](charly@example.com), [Juliet](juliet@example.com)    
+
+    """
+    )
+    assert output.strip() == expected.strip()

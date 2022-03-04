@@ -1,5 +1,8 @@
-- {{ commit.subject }} {% for author in commit.authors %}[{{ author.name }}]({{ author.email }}) {% endfor %}
+- {{ commit.subject }} {% for author in commit.authors %}[{{ author.name }}]({{ author.email }}){% if not loop.last %}, {% endif %}{% endfor %}
   {{ commit.body|indent(2, first=True) }}
   {% for key, val in commit.metadata["trailers"].items() %}
-  {% if key not in VALID_AUTHOR_TOKENS %}**{{ key }}:** {{ val|join(", ") }}{% endif %}
+  {% if key not in VALID_AUTHOR_TOKENS %}
+  **{{ key }}:** {{ val|join(", ") }}
+
+  {% endif %}
 {% endfor %}
