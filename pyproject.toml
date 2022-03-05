@@ -24,7 +24,7 @@ exclude_lines = [
 
 [tool.pytest.ini_options]
 addopts = [
-    "--cov=clgen",
+    "--cov=generate_changelog",
     "--cov-branch",
     "--cov-report=term",
     "--cov-report=html",

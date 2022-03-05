@@ -1,7 +1,7 @@
 """Testing pipelines and actions."""
 from pathlib import Path
 
-from clgen import pipeline
+from generate_changelog import pipeline
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
@@ -14,7 +14,7 @@ def test_action_builtin():
 
 def test_action_import():
     """Actions run correctly."""
-    action = pipeline.Action("clgen.processors.text_processing.capitalize")
+    action = pipeline.Action("generate_changelog.processors.text_processing.capitalize")
     assert action.run({}, "foo") == "Foo"
 
 

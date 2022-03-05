@@ -5,9 +5,9 @@ from pathlib import Path
 
 import typer
 
-from clgen.configuration import StrOrCallable
-from clgen.processors import register_builtin
-from clgen.utilities import eval_if_callable
+from generate_changelog.configuration import StrOrCallable
+from generate_changelog.processors import register_builtin
+from generate_changelog.utilities import eval_if_callable
 
 
 @dataclass

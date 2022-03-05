@@ -5,9 +5,9 @@ import re
 import textwrap
 from dataclasses import dataclass
 
-from clgen.configuration import IntOrCallable, StrOrCallable
-from clgen.processors import register_builtin
-from clgen.utilities import eval_if_callable
+from generate_changelog.configuration import IntOrCallable, StrOrCallable
+from generate_changelog.processors import register_builtin
+from generate_changelog.utilities import eval_if_callable
 
 
 @dataclass(frozen=True)

@@ -8,8 +8,8 @@ import pytest
 from faker import Faker
 from pytest import param
 
-from clgen import configuration, templating
-from clgen.configuration import CONFIG, DEFAULT_SECTION_PATTERNS
+from generate_changelog import configuration, templating
+from generate_changelog.configuration import CONFIG, DEFAULT_SECTION_PATTERNS
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 fake = Faker()

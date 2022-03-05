@@ -9,7 +9,7 @@ from dataclasses import dataclass
 
 from git import Repo
 
-from clgen.configuration import CONFIG
+from generate_changelog.configuration import CONFIG
 
 GIT_FORMAT_KEYS = {
     "sha1": "%H",
@@ -116,7 +116,7 @@ def get_tags(repository: Repo) -> list:
 
 def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag: Optional[str] = None) -> list:
     """Group commits by the tags they belong to."""
-    from clgen.utilities import pairs
+    from generate_changelog.utilities import pairs
 
     tags = [tag for tag in get_tags(repository) if re.match(tag_filter_pattern, tag.name)]
     head_commit = repository.commit("HEAD")

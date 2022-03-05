@@ -1,4 +1,4 @@
-"""Command line interface for clgen."""
+"""Command line interface for generate_changelog."""
 from typing import Optional
 
 from pathlib import Path
@@ -6,17 +6,17 @@ from pathlib import Path
 import typer
 from git import Repo
 
-from clgen.configuration import DEFAULT_CONFIG_FILE_NAMES, get_default_config, write_default_config
+from generate_changelog.configuration import DEFAULT_CONFIG_FILE_NAMES, get_default_config, write_default_config
 
 app = typer.Typer()
 
 
 def version_callback(value: bool):
     """Display the version and exit."""
-    import clgen
+    import generate_changelog
 
     if value:
-        typer.echo(clgen.__version__)
+        typer.echo(generate_changelog.__version__)
         raise typer.Exit()
 
 
@@ -45,8 +45,8 @@ def main(
     ),
 ):
     """Generate a change  log from git commits."""
-    from clgen import templating
-    from clgen.pipeline import pipeline_factory
+    from generate_changelog import templating
+    from generate_changelog.pipeline import pipeline_factory
 
     # Load default configuration
     config = get_default_config()

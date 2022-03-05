@@ -13,7 +13,7 @@
 - capitalize
 - dataclass
 - eval_if_callable
-- GetFirstRegExMatch
+- FirstRegExMatch
 - InsertAtRegEx
 - noop
 - Optional

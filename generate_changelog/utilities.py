@@ -14,7 +14,7 @@ def is_pipeline(value: Any) -> bool:
 
 def eval_if_callable(value: Any) -> Any:
     """Return value or the result of calling value."""
-    from clgen.pipeline import pipeline_factory
+    from generate_changelog.pipeline import pipeline_factory
 
     if is_action(value):
         # convert it into a single action and call it

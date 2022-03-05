@@ -3,8 +3,8 @@
 import pytest
 from pytest import param
 
-from clgen import git_ops
-from clgen.configuration import CONFIG
+from generate_changelog import git_ops
+from generate_changelog.configuration import CONFIG
 
 
 @pytest.mark.parametrize(

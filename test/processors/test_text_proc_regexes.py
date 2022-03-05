@@ -4,7 +4,7 @@ import re
 import pytest
 from pytest import param
 
-from clgen.processors import text_processing
+from generate_changelog.processors import text_processing
 
 
 def test_regex_flags():

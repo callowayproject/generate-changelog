@@ -26,7 +26,7 @@ def load_builtins():
     """Import all submodules so the decorated functions get registered."""
     import importlib
 
-    importlib.import_module(".text_processing", "clgen.processors")
-    importlib.import_module(".file_processing", "clgen.processors")
-    importlib.import_module(".shell", "clgen.processors")
-    importlib.import_module(".metadata", "clgen.processors")
+    importlib.import_module(".text_processing", "generate_changelog.processors")
+    importlib.import_module(".file_processing", "generate_changelog.processors")
+    importlib.import_module(".shell", "generate_changelog.processors")
+    importlib.import_module(".metadata", "generate_changelog.processors")

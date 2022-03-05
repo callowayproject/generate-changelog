@@ -5,7 +5,7 @@ import os
 import subprocess
 import tempfile
 
-from clgen.processors import register_builtin
+from generate_changelog.processors import register_builtin
 
 
 @register_builtin

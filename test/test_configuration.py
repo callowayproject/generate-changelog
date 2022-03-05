@@ -4,7 +4,7 @@ from pathlib import Path
 import click.exceptions
 import pytest
 
-from clgen import configuration
+from generate_changelog import configuration
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 

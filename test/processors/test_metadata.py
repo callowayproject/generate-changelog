@@ -1,6 +1,6 @@
 """Test the metadata collectors."""
 
-from clgen.processors import metadata
+from generate_changelog.processors import metadata
 
 sample_msg_1 = """
 This is a message body.

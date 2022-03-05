@@ -3,8 +3,8 @@ from typing import Any, Callable, Optional, Union
 
 from dataclasses import dataclass, field
 
-from clgen.configuration import StrOrCallable
-from clgen.processors import BUILT_INS, load_builtins
+from generate_changelog.configuration import StrOrCallable
+from generate_changelog.processors import BUILT_INS, load_builtins
 
 load_builtins()
 
@@ -87,7 +87,7 @@ class Action:
 
     def run(self, context: dict, input_value: str) -> str:
         """Perform the action on the input."""
-        from clgen.templating import pipeline_env
+        from generate_changelog.templating import pipeline_env
 
         # render string args, and kwarg-values using jinja2
         new_args = [

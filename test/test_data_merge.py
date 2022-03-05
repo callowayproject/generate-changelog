@@ -4,7 +4,7 @@ from typing import Any
 import pytest
 from pytest import param
 
-from clgen import data_merge
+from generate_changelog import data_merge
 
 
 @pytest.mark.parametrize(

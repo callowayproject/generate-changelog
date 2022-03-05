@@ -9,23 +9,23 @@ from dataclasses import dataclass, field
 from git import Actor, Repo
 from jinja2 import ChoiceLoader, Environment, FileSystemLoader, PackageLoader, select_autoescape
 
-from clgen import git_ops
-from clgen.configuration import CONFIG, VALID_AUTHOR_TOKENS, Configuration
-from clgen.pipeline import pipeline_factory
-from clgen.processors import load_builtins
-from clgen.processors.metadata import MetadataCollector
+from generate_changelog import git_ops
+from generate_changelog.configuration import CONFIG, VALID_AUTHOR_TOKENS, Configuration
+from generate_changelog.pipeline import pipeline_factory
+from generate_changelog.processors import load_builtins
+from generate_changelog.processors.metadata import MetadataCollector
 
 load_builtins()
 
 default_env = Environment(
-    loader=ChoiceLoader([FileSystemLoader(CONFIG.template_dirs), PackageLoader("clgen")]),
+    loader=ChoiceLoader([FileSystemLoader(CONFIG.template_dirs), PackageLoader("generate_changelog")]),
     trim_blocks=True,
     lstrip_blocks=True,
     keep_trailing_newline=True,
     autoescape=select_autoescape(),
 )
 pipeline_env = Environment(
-    loader=ChoiceLoader([FileSystemLoader(CONFIG.template_dirs), PackageLoader("clgen")]),
+    loader=ChoiceLoader([FileSystemLoader(CONFIG.template_dirs), PackageLoader("generate_changelog")]),
     autoescape=select_autoescape(),
     variable_start_string="${{",
 )
