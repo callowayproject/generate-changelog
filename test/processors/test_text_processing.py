@@ -6,25 +6,6 @@ from pytest import param
 
 from clgen.processors import text_processing
 
-prefix_lines = "This is first line.\nThis is second line\n"
-prefix_lines2 = "This is first line.\n\nThis is second line\n"
-prefix_lines3 = "This is first line.\nThis is second line"
-
-
-@pytest.mark.parametrize(
-    ["text", "chars", "first_line", "expected"],
-    (
-        param(prefix_lines, "| ", None, "| This is first line.\n| This is second line\n", id="pipe-space"),
-        param(prefix_lines, "  ", "- ", "- This is first line.\n  This is second line\n", id="first-line"),
-        param(prefix_lines2, "  ", "- ", "- This is first line.\n\n  This is second line\n", id="blank-line"),
-        param(prefix_lines, "| ", None, "| This is first line.\n| This is second line\n", id="no-trailing-newline"),
-    ),
-)
-def test_prefix_lines(text, chars, first_line, expected):
-    """Lines get prefixed appropriately."""
-    prefixer = text_processing.PrefixLines(prefix=chars, first_line=first_line)
-    assert prefixer(text) == expected
-
 
 @pytest.mark.parametrize(
     ["text", "default", "expected"],
@@ -90,6 +71,11 @@ def test_strip(text, chars, expected):
     assert strip(text) == expected
 
 
+prefix_lines = "This is first line.\nThis is second line\n"
+prefix_lines2 = "This is first line.\n\nThis is second line\n"
+prefix_lines3 = "This is first line.\nThis is second line"
+
+
 @pytest.mark.parametrize(
     ["text", "prefix", "first_line", "expected"],
     (
@@ -104,6 +90,10 @@ def test_strip(text, chars, expected):
         param(lambda: "This has text", "prefix", None, "prefixThis has text\n", id="callable-text-no-first"),
         param("line1\nline2", "  ", None, "  line1\n  line2\n", id="multiline-no-first"),
         param("line1\nline2", "  ", "- ", "- line1\n  line2\n", id="multiline-w-first"),
+        param(prefix_lines, "| ", None, "| This is first line.\n| This is second line\n", id="pipe-space"),
+        param(prefix_lines, "  ", "- ", "- This is first line.\n  This is second line\n", id="first-line"),
+        param(prefix_lines2, "  ", "- ", "- This is first line.\n\n  This is second line\n", id="blank-line"),
+        param(prefix_lines, "| ", None, "| This is first line.\n| This is second line\n", id="no-trailing-newline"),
     ),
 )
 def test_prefix_lines(text, prefix, first_line, expected):
@@ -127,7 +117,7 @@ def test_paragraph_wrap():
         "tempor est nostrud elit deserunt deserunt consequat amet fugiat cupidatat id cupidatat do in culpa cillum "
         "irure.\n\n\n"
         "Do occaecat proident sint qui sunt in consequat enim non deserunt aute aliqua nulla exercitation cupidatat "
-        "id. Nostrud ea non sint adipiscing culpa tempor commodo proident ullamco laborum occaecat consequat velit ad. "
+        "id. Nostrud ea non sint adipiscing culpa tempor commodo proident ullamco laborum occaecat consequat velitad. "
         "Dolore labore ullamco consequat ea officia commodo excepteur duis nostrud commodo eiusmod et incididunt sit "
         "duis sit."
         ""
@@ -147,3 +137,4 @@ def test_capitalize():
     """The first character of a string should be capitalized."""
     assert text_processing.capitalize("i am a test") == "I am a test"
     assert text_processing.capitalize("[i] am a test") == "[i] am a test"
+    assert text_processing.capitalize("i AM a Test") == "I AM a Test"
