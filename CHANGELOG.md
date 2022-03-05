@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 (2022-03-05)
+
+### Updates
+
+- Changed the package name to `generate_changelog`. [Corey Oordt](coreyoordt@gmail.com)    
+
+- Change the configuration file base name to `.changelog-config`. [Corey Oordt](coreyoordt@gmail.com)    
+
+
 ## 0.2.0 (2022-03-05)
 
 ### New
