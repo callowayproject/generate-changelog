@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased (2022-03-05)
+## 0.2.0 (2022-03-05)
 
 ### New
+
+- Added release tooling in a Makefile. [Corey Oordt](coreyoordt@gmail.com)    
 
 - Added `Slice` and `FirstRegExMatchPosition` actions. [Corey Oordt](coreyoordt@gmail.com)    
   - `Slice` will slice the input text when called
@@ -37,6 +39,8 @@
 - Renamed `GetFirstRegExMatch` to `FirstRegExMatch`. [Corey Oordt](coreyoordt@gmail.com)    
 
 ### Fixes
+
+- Fixed the merge handling in git_ops. [Corey Oordt](coreyoordt@gmail.com)    
 
 - Fixed the `include_merges` setting. [Corey Oordt](coreyoordt@gmail.com)    
   Wasn't hooked up with the git_ops module.
