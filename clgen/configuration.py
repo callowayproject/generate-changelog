@@ -10,6 +10,9 @@ import yaml
 StrOrCallable = Union[str, Callable[[], str]]
 """The type should be either a string or a callable that returns a string."""
 
+IntOrCallable = Union[int, Callable[[], int]]
+"""The type should be either an int or a callable that returns an int."""
+
 DEFAULT_CONFIG_FILE_NAME = ".clgen"
 """Base default configuration file name"""
 
@@ -34,20 +37,18 @@ VALID_AUTHOR_TOKENS = [
 ]
 
 DEFAULT_IGNORE_PATTERNS = [
-    "[@!]minor"
-    "[@!]cosmetic"
-    "[@!]refactor"
-    "[@!]wip"
-    "[Ff]irst commit"
-    "[Ii]nitial commit"
-    "^$"  # ignore commits with empty messages
-    "^Merge branch"
-    "^Merge pull"
+    "[@!]minor",
+    "[@!]cosmetic",
+    "[@!]refactor",
+    "[@!]wip",
+    "^$",  # ignore commits with empty messages
+    "^Merge branch",
+    "^Merge pull",
 ]
 
 DEFAULT_SECTION_PATTERNS = {
     "New": [r"(?i)^(?:new|add)[^\n]*$"],
-    "Updates": [r"(?i)^(?:update|change|rename|remove|delete|improve|refactor)[^\n]*$"],
+    "Updates": [r"(?i)^(?:update|change|rename|remove|delete|improve|refactor|chg)[^\n]*$"],
     "Fixes": [r"(?i)^(?:fix)[^\n]*$"],
     "Other": None,  # Match all lines
 }
@@ -56,9 +57,9 @@ DEFAULT_SECTION_PATTERNS = {
 DEFAULT_STARTING_TAG_PIPELINE = [
     {"action": "ReadFile", "kwargs": {"filename": "CHANGELOG.md"}},
     {
-        "action": "GetFirstRegExMatch",
+        "action": "FirstRegExMatch",
         "kwargs": {
-            "pattern": r"^## (?P<rev>[0-9]+\.[0-9]+(?:\.[0-9]+)?)\s+\([0-9]+-[0-9]{2}-[0-9]{2}\)$",
+            "pattern": r"(?im)^## (?P<rev>\d+\.\d+(?:\.\d+)?)\s+\(\d+-\d{2}-\d{2}\)$",
             "named_subgroup": "rev",
         },
     },
@@ -82,6 +83,16 @@ DEFAULT_BODY_PIPELINE = [
         "comment": "Parse the trailers into metadata.",
         "kwargs": {"commit_metadata": "save_commit_metadata"},
     }
+]
+
+DEFAULT_OUTPUT_PIPELINE = [
+    {
+        "action": "IncrementalFileInsert",
+        "kwargs": {
+            "filename": "CHANGELOG.md",
+            "last_heading_pattern": r"(?im)^## \d+\.\d+(?:\.\d+)?\s+\([0-9]+-[0-9]{2}-[0-9]{2}\)$",
+        },
+    },
 ]
 
 
@@ -128,6 +139,9 @@ class Configuration:
     section_patterns: dict = field(default_factory=dict)
     """Group commits into groups if they match any of these regular expressions."""
 
+    valid_author_tokens: list = field(default_factory=list)
+    """Tokens in git commit trailers that indicate authorship."""
+
     def update_from_file(self, filename: Path):
         """Updates the configuration from a YAML file."""
         file_path = filename.expanduser().resolve()
@@ -156,6 +170,7 @@ def get_default_config() -> Configuration:
         body_pipeline=DEFAULT_BODY_PIPELINE,
         subject_pipeline=DEFAULT_SUBJECT_PIPELINE,
         starting_tag_pipeline=DEFAULT_STARTING_TAG_PIPELINE,
+        output_pipeline=DEFAULT_OUTPUT_PIPELINE,
     )
 
 
