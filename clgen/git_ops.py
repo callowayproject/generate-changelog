@@ -73,8 +73,13 @@ def parse_commits(repository: Repo, starting_rev: Optional[str] = None, ending_r
         revs = ending_rev
     else:
         revs = "HEAD"
-    merges = "--no-merges" if CONFIG.include_merges else ""
-    log_opts = ["-z", "--topo-order", "--pretty=tformat:%H", merges, revs]
+
+    log_opts = ["-z", "--topo-order", "--pretty=tformat:%H"]
+
+    if CONFIG.include_merges:
+        log_opts.append("--no-merges")
+
+    log_opts.append(revs)
     out: str = repository.git.log(*log_opts)
     commits = out.split("\x00")
     return [repository.commit(commit) for commit in commits if commit]
