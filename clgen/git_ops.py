@@ -9,6 +9,8 @@ from dataclasses import dataclass
 
 from git import Repo
 
+from clgen.configuration import CONFIG
+
 GIT_FORMAT_KEYS = {
     "sha1": "%H",
     "sha1_short": "%h",
@@ -71,7 +73,8 @@ def parse_commits(repository: Repo, starting_rev: Optional[str] = None, ending_r
         revs = ending_rev
     else:
         revs = "HEAD"
-    log_opts = ["-z", "--topo-order", "--pretty=tformat:%H", "--no-merges", revs]
+    merges = "--no-merges" if CONFIG.include_merges else ""
+    log_opts = ["-z", "--topo-order", "--pretty=tformat:%H", merges, revs]
     out: str = repository.git.log(*log_opts)
     commits = out.split("\x00")
     return [repository.commit(commit) for commit in commits if commit]
