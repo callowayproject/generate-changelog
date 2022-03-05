@@ -13,12 +13,12 @@ StrOrCallable = Union[str, Callable[[], str]]
 IntOrCallable = Union[int, Callable[[], int]]
 """The type should be either an int or a callable that returns an int."""
 
-DEFAULT_CONFIG_FILE_NAME = ".clgen"
+DEFAULT_CONFIG_FILE_NAME = ".changelog-config"
 """Base default configuration file name"""
 
 DEFAULT_CONFIG_FILE_NAMES = [
-    f"{DEFAULT_CONFIG_FILE_NAME}.yml",
     f"{DEFAULT_CONFIG_FILE_NAME}.yaml",
+    f"{DEFAULT_CONFIG_FILE_NAME}.yml",
     DEFAULT_CONFIG_FILE_NAME,
 ]
 """Valid permutations of the default configuration file name."""
