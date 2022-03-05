@@ -4,7 +4,7 @@
 
 ### Updates
 
-- Chg: modified ``b`` xxx. [Alice](alice@example.com), [Charly](charly@example.com), [Juliet](juliet@example.com)    
+- Chg: modified ``b`` XXX. [Alice](alice@example.com), [Charly](charly@example.com), [Juliet](juliet@example.com)    
 
 ## 0.0.3 (2022-01-05)
 
@@ -35,7 +35,7 @@ as you can see
 
 ### New
 
-- Add ``b`` with non-ascii chars éèàâ§µ and html chars ``&<``. [Alice](alice@example.com)    
+- Add ``b`` with non-ascii chars éèàâ§µ and HTML chars ``&<``. [Alice](alice@example.com)    
   **change-id:** Ic8aaa0728a43936cd4c6e1ed590e01ba8f0fbf5b
 
 

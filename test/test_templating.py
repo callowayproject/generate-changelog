@@ -114,7 +114,7 @@ def test_render_from_tag(default_repo, capsys):
         
         ### Updates
         
-        - Chg: modified ``b`` xxx. [Alice](alice@example.com), [Charly](charly@example.com), [Juliet](juliet@example.com)    
+        - Chg: modified ``b`` XXX. [Alice](alice@example.com), [Charly](charly@example.com), [Juliet](juliet@example.com)    
 
     """
     )
