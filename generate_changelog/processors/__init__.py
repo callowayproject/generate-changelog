@@ -3,6 +3,7 @@
 from typing import Callable, Union
 
 BUILT_INS = {}
+"""The registered actions that are considered to be built-in."""
 
 
 def register_builtin(function_or_name: Union[Callable, str]) -> Callable:

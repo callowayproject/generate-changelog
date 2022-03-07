@@ -1,8 +1,7 @@
 -r prod.txt
-black>=19.10b0
 coverage>=6.1.2
 faker
-flake8>=4.0.1
+furo
 ghp-import
 linkify-it-py
 myst-parser

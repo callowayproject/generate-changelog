@@ -164,3 +164,5 @@ flake8-errors.txt
 RELEASE.txt
 site-packages
 reports
+docsrc/_autosummary/
+/docsrc/_build/
