@@ -9,7 +9,7 @@ from dataclasses import dataclass
 
 from git import Repo
 
-from generate_changelog.configuration import CONFIG
+from generate_changelog.configuration import get_config
 
 GIT_FORMAT_KEYS = {
     "sha1": "%H",
@@ -76,7 +76,7 @@ def parse_commits(repository: Repo, starting_rev: Optional[str] = None, ending_r
 
     log_opts = ["-z", "--topo-order", "--pretty=tformat:%H"]
 
-    if CONFIG.include_merges:
+    if get_config().include_merges:
         log_opts.append("--no-merges")
 
     log_opts.append(revs)

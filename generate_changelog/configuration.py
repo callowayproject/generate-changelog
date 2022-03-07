@@ -1,4 +1,4 @@
-"""Configuration setup for CLGen."""
+"""Configuration for generate_changelog."""
 from typing import Callable, Optional, Union
 
 from dataclasses import asdict, dataclass, field
@@ -98,7 +98,7 @@ DEFAULT_OUTPUT_PIPELINE = [
 
 @dataclass
 class Configuration:
-    """Configuration for CLGen."""
+    """Configuration for generate_changelog."""
 
     variables: dict = field(default_factory=dict)
     """User variables for reference in other parts of the configuration."""
@@ -171,6 +171,7 @@ def get_default_config() -> Configuration:
         subject_pipeline=DEFAULT_SUBJECT_PIPELINE,
         starting_tag_pipeline=DEFAULT_STARTING_TAG_PIPELINE,
         output_pipeline=DEFAULT_OUTPUT_PIPELINE,
+        valid_author_tokens=VALID_AUTHOR_TOKENS,
     )
 
 
@@ -182,4 +183,13 @@ def write_default_config(filename: Path):
         yaml.safe_dump(config, f, sort_keys=False)
 
 
-CONFIG = get_default_config()
+_CONFIG = None
+
+
+def get_config() -> Configuration:
+    """Return the current configuration."""
+    global _CONFIG
+
+    if _CONFIG is None:
+        _CONFIG = get_default_config()
+    return _CONFIG

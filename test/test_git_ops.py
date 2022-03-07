@@ -4,7 +4,7 @@ import pytest
 from pytest import param
 
 from generate_changelog import git_ops
-from generate_changelog.configuration import CONFIG
+from generate_changelog.configuration import get_config
 
 
 @pytest.mark.parametrize(
@@ -37,7 +37,7 @@ def test_get_tags(default_repo):
 
 def test_get_commits_by_all_tags(default_repo):
     """Commits should be grouped by tags and filtered."""
-    grouping = git_ops.get_commits_by_tags(default_repo, CONFIG.tag_pattern)
+    grouping = git_ops.get_commits_by_tags(default_repo, get_config().tag_pattern)
 
     assert len(grouping) == 4
 
@@ -49,7 +49,7 @@ def test_get_commits_by_all_tags(default_repo):
 
 def test_get_commits_since_tag(default_repo):
     """Commits should be grouped by tags and filtered since tag."""
-    grouping = git_ops.get_commits_by_tags(default_repo, CONFIG.tag_pattern, "0.0.2")
+    grouping = git_ops.get_commits_by_tags(default_repo, get_config().tag_pattern, "0.0.2")
 
     assert len(grouping) == 2
 

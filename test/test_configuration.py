@@ -12,15 +12,15 @@ FIXTURES_DIR = Path(__file__).parent / "fixtures"
 def test_update_from_file():
     """A configuration file should update the default configuration."""
     config_file_path = FIXTURES_DIR / "sample_config.yml"
-    configuration.CONFIG.update_from_file(config_file_path)
-    assert configuration.CONFIG.unreleased_label == "Not Done Yet"
-    assert not hasattr(configuration.CONFIG, "not_valid")
+    configuration.get_config().update_from_file(config_file_path)
+    assert configuration.get_config().unreleased_label == "Not Done Yet"
+    assert not hasattr(configuration.get_config(), "not_valid")
 
     with pytest.raises(click.exceptions.Exit):
-        configuration.CONFIG.update_from_file(FIXTURES_DIR / "missing.yml")
+        configuration.get_config().update_from_file(FIXTURES_DIR / "missing.yml")
 
     with pytest.raises(click.exceptions.Exit):
-        configuration.CONFIG.update_from_file(FIXTURES_DIR)
+        configuration.get_config().update_from_file(FIXTURES_DIR)
 
 
 def test_write_default_config(tmp_path):

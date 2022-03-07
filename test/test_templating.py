@@ -9,7 +9,7 @@ from faker import Faker
 from pytest import param
 
 from generate_changelog import configuration, templating
-from generate_changelog.configuration import CONFIG, DEFAULT_SECTION_PATTERNS
+from generate_changelog.configuration import DEFAULT_SECTION_PATTERNS, get_config
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 fake = Faker()
@@ -70,11 +70,11 @@ def test_commit_with_no_email():
 
 def test_get_context_from_tags(default_repo):
     """Get context from tags should return gits correctly filtered."""
-    context = templating.get_context_from_tags(default_repo, CONFIG)
+    context = templating.get_context_from_tags(default_repo, get_config())
     assert len(context) == 4
 
     v = context[0]
-    assert v.label == CONFIG.unreleased_label
+    assert v.label == get_config().unreleased_label
     assert v.date_time.date() == datetime.date(2022, 1, 6)
     assert len(v.sections) == 1
     assert v.sections[0].label == "Updates"

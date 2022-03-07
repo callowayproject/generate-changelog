@@ -6,7 +6,7 @@ from pathlib import Path
 import typer
 from git import Repo
 
-from generate_changelog.configuration import DEFAULT_CONFIG_FILE_NAMES, get_default_config, write_default_config
+from generate_changelog.configuration import DEFAULT_CONFIG_FILE_NAMES, write_default_config
 
 app = typer.Typer()
 
@@ -46,10 +46,11 @@ def main(
 ):
     """Generate a change  log from git commits."""
     from generate_changelog import templating
+    from generate_changelog.configuration import get_config
     from generate_changelog.pipeline import pipeline_factory
 
     # Load default configuration
-    config = get_default_config()
+    config = get_config()
 
     if user_config := config_file or next(
         (Path.cwd() / Path(name) for name in DEFAULT_CONFIG_FILE_NAMES if (Path.cwd() / Path(name)).exists()), None
