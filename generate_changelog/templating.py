@@ -108,6 +108,7 @@ class VersionContext:
     label: str
     date_time: Optional[datetime.datetime] = None
     tag: Optional[str] = None
+    previous_tag: Optional[str] = None
     tagger: Optional[str] = None
     sections: List[SectionContext] = field(default_factory=list)
     metadata: dict = field(default_factory=dict)
@@ -166,6 +167,9 @@ def get_context_from_tags(repository: Repo, config: Configuration, starting_tag:
             tagger = None
 
         version_sections = [SectionContext(label=k, commits=sections[k]) for k in section_order if k in sections]
+        if output:
+            output[-1].previous_tag = tag_name
+
         output.append(
             VersionContext(
                 label=tag_label,

@@ -86,6 +86,7 @@ def test_get_context_from_tags(default_repo):
 
     v = context[1]
     assert v.label == "0.0.3"
+    assert v.previous_tag == "0.0.2"
     assert v.date_time.date() == datetime.date(2022, 1, 5)
     assert len(v.sections) == 1
     assert v.sections[0].label == "New"
