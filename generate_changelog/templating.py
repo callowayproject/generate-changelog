@@ -10,24 +10,30 @@ from git import Actor, Repo
 from jinja2 import ChoiceLoader, Environment, FileSystemLoader, PackageLoader, select_autoescape
 
 from generate_changelog import git_ops
-from generate_changelog.configuration import CONFIG, VALID_AUTHOR_TOKENS, Configuration
+from generate_changelog.configuration import Configuration, get_config
+from generate_changelog.lazy import LazyObject
 from generate_changelog.pipeline import pipeline_factory
 from generate_changelog.processors import load_builtins
 from generate_changelog.processors.metadata import MetadataCollector
 
 load_builtins()
 
-default_env = Environment(
-    loader=ChoiceLoader([FileSystemLoader(CONFIG.template_dirs), PackageLoader("generate_changelog")]),
-    trim_blocks=True,
-    lstrip_blocks=True,
-    keep_trailing_newline=True,
-    autoescape=select_autoescape(),
+
+default_env = LazyObject(
+    lambda: Environment(
+        loader=ChoiceLoader([FileSystemLoader(get_config().template_dirs), PackageLoader("generate_changelog")]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+        keep_trailing_newline=True,
+        autoescape=select_autoescape(),
+    )
 )
-pipeline_env = Environment(
-    loader=ChoiceLoader([FileSystemLoader(CONFIG.template_dirs), PackageLoader("generate_changelog")]),
-    autoescape=select_autoescape(),
-    variable_start_string="${{",
+pipeline_env = LazyObject(
+    lambda: Environment(
+        loader=ChoiceLoader([FileSystemLoader(get_config().template_dirs), PackageLoader("generate_changelog")]),
+        autoescape=select_autoescape(),
+        variable_start_string="${{",
+    )
 )
 
 
@@ -62,7 +68,7 @@ class CommitContext:
 
         raw_authors = [self.committer]
         trailers = self.metadata.get("trailers", collections.defaultdict(list))
-        for token in VALID_AUTHOR_TOKENS:
+        for token in get_config().valid_author_tokens:
             raw_authors.extend(trailers.get(token, []))
         author_regex = re.compile(r"^(?P<name>[^<]+)\s+(?:<(?P<email>[^>]+)>)?$")
 
@@ -122,13 +128,13 @@ def get_context_from_tags(repository: Repo, config: Configuration, starting_tag:
 
             commit_metadata_func = MetadataCollector()
             subject_pipeline = pipeline_factory(
-                action_list=CONFIG.subject_pipeline,
+                action_list=get_config().subject_pipeline,
                 commit_metadata_func=commit_metadata_func,
                 version_metadata_func=version_metadata_func,
             )
             subject = subject_pipeline.run(commit.summary)
             body_pipeline = pipeline_factory(
-                action_list=CONFIG.body_pipeline,
+                action_list=get_config().body_pipeline,
                 commit_metadata_func=commit_metadata_func,
                 version_metadata_func=version_metadata_func,
             )
@@ -179,12 +185,12 @@ def render(repository: Repo, config: Configuration, starting_tag: Optional[str] 
     if starting_tag:
         heading_str = default_env.get_template("heading.md.jinja").render()
         versions_str = default_env.get_template("versions.md.jinja").render(
-            {"versions": context, "VALID_AUTHOR_TOKENS": VALID_AUTHOR_TOKENS}
+            {"versions": context, "VALID_AUTHOR_TOKENS": get_config().valid_author_tokens}
         )
         return "\n".join([heading_str, versions_str])
 
     return default_env.get_template("base.md.jinja").render(
-        {"versions": context, "VALID_AUTHOR_TOKENS": VALID_AUTHOR_TOKENS}
+        {"versions": context, "VALID_AUTHOR_TOKENS": get_config().valid_author_tokens}
     )
 
 
