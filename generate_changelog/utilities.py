@@ -14,13 +14,16 @@ def is_pipeline(value: Any) -> bool:
 
 def eval_if_callable(value: Any) -> Any:
     """Return value or the result of calling value."""
+    from generate_changelog.configuration import get_config
     from generate_changelog.pipeline import pipeline_factory
+
+    config = get_config()
 
     if is_action(value):
         # convert it into a single action and call it
-        return pipeline_factory([value]).run()
+        return pipeline_factory([value], **config.variables).run()
     elif is_pipeline(value):
-        return pipeline_factory(value).run()
+        return pipeline_factory(value, **config.variables).run()
 
     return value() if callable(value) else value
 

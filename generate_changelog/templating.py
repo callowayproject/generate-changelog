@@ -185,17 +185,17 @@ def get_context_from_tags(repository: Repo, config: Configuration, starting_tag:
 
 def render(repository: Repo, config: Configuration, starting_tag: Optional[str] = None) -> str:
     """Render the changelog for the repository to a string."""
-    context = get_context_from_tags(repository, config, starting_tag)
+    version_context = get_context_from_tags(repository, config, starting_tag)
+    context = get_config().variables.copy()
+    context["versions"] = version_context
+    context["VALID_AUTHOR_TOKENS"] = get_config().valid_author_tokens
+
     if starting_tag:
         heading_str = default_env.get_template("heading.md.jinja").render()
-        versions_str = default_env.get_template("versions.md.jinja").render(
-            {"versions": context, "VALID_AUTHOR_TOKENS": get_config().valid_author_tokens}
-        )
+        versions_str = default_env.get_template("versions.md.jinja").render(context)
         return "\n".join([heading_str, versions_str])
 
-    return default_env.get_template("base.md.jinja").render(
-        {"versions": context, "VALID_AUTHOR_TOKENS": get_config().valid_author_tokens}
-    )
+    return default_env.get_template("base.md.jinja").render(context)
 
 
 def first_matching(section_patterns: dict, string: str) -> str:

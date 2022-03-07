@@ -130,6 +130,7 @@ def pipeline_factory(
     action_list: list,
     commit_metadata_func: Optional[Callable] = None,
     version_metadata_func: Optional[Callable] = None,
+    **kwargs,
 ) -> Pipeline:
     """Create a Pipeline from a list of configured actions."""
     action_specs = [ActionSpec(**action) for action in action_list]
@@ -144,4 +145,4 @@ def pipeline_factory(
         )
         for a in action_specs
     ]
-    return Pipeline(actions=actions)
+    return Pipeline(actions=actions, **kwargs)
