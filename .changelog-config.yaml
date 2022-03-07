@@ -1,0 +1,53 @@
+variables:
+  repo_url: https://github.com/coordt/generate-changelog
+starting_tag_pipeline:
+- action: ReadFile
+  kwargs:
+    filename: CHANGELOG.md
+- action: FirstRegExMatch
+  kwargs:
+    pattern: (?im)^## (?P<rev>\d+\.\d+(?:\.\d+)?)\s+\(\d+-\d{2}-\d{2}\)$
+    named_subgroup: rev
+unreleased_label: Unreleased
+subject_pipeline:
+- action: strip_spaces
+- action: Strip
+  comment: Get rid of any periods so we don't get double periods
+  kwargs:
+    chars: .
+- action: SetDefault
+  args:
+  - no commit message
+- action: capitalize
+- action: append_dot
+body_pipeline:
+- action: ParseTrailers
+  comment: Parse the trailers into metadata.
+  kwargs:
+    commit_metadata: save_commit_metadata
+output_pipeline:
+- action: IncrementalFileInsert
+  kwargs:
+    filename: CHANGELOG.md
+    last_heading_pattern: (?im)^## \d+\.\d+(?:\.\d+)?\s+\([0-9]+-[0-9]{2}-[0-9]{2}\)$
+template_dirs:
+  - ".github/changelog_templates/"
+tag_pattern: ^[0-9]+\.[0-9]+(?:\.[0-9]+)?$
+include_merges: false
+ignore_patterns:
+- '[@!]minor'
+- '[@!]cosmetic'
+- '[@!]refactor'
+- '[@!]wip'
+- ^$
+- ^Merge branch
+- ^Merge pull
+- ^Version updated
+section_patterns:
+  New:
+  - (?i)^(?:new|add)[^\n]*$
+  Updates:
+  - (?i)^(?:update|change|rename|remove|delete|improve|refactor|chg)[^\n]*$
+  Fixes:
+  - (?i)^(?:fix)[^\n]*$
+  Other: null
