@@ -1,4 +1,4 @@
-# pyokta's documentation
+# Generate Changelog
 
 ```{toctree}
 ---
@@ -6,7 +6,6 @@ maxdepth: 2
 caption: Contents
 ---
 Introduction <readme>
-cli
 api
 contributing
 releasing
