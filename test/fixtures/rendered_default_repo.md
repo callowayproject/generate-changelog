@@ -4,13 +4,15 @@
 
 ### Updates
 
-- Chg: modified ``b`` XXX. [Alice](alice@example.com), [Charly](charly@example.com), [Juliet](juliet@example.com)    
+- Chg: modified ``b`` XXX.
+    
 
 ## 0.0.3 (2022-01-05)
 
 ### New
 
-- New: add file ``e``, modified ``b``. [Bob](bob@example.com)    
+- New: add file ``e``, modified ``b``.
+    
   This is a message body.
 
   With multi-line content:
@@ -29,13 +31,15 @@
 as you can see
 
 
-- New: add file ``c``. [Charly](charly@example.com)    
+- New: add file ``c``.
+    
 
 ## 0.0.2 (2022-01-02)
 
 ### New
 
-- Add ``b`` with non-ascii chars éèàâ§µ and HTML chars ``&<``. [Alice](alice@example.com)    
+- Add ``b`` with non-ascii chars éèàâ§µ and HTML chars ``&<``.
+    
   **change-id:** Ic8aaa0728a43936cd4c6e1ed590e01ba8f0fbf5b
 
 
@@ -43,4 +47,4 @@ as you can see
 
 ### New
 
-- New: first commit. [Bob](bob@example.com)    
+- New: first commit.    
