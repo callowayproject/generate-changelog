@@ -14,26 +14,6 @@ def noop_func(**kwargs):
     pass
 
 
-@dataclass
-class ActionSpec:
-    """A configured Action."""
-
-    action: StrOrCallable
-    """A python path to a function or name of a built-in action."""
-
-    id: Optional[str] = None
-    """Identifier for the action."""
-
-    comment: Optional[str] = None
-    """A comment about what this action does."""
-
-    args: list = field(default_factory=list)
-    """Arguments to instantiate the action."""
-
-    kwargs: dict = field(default_factory=dict)
-    """Keyword arguments to instantiate the action."""
-
-
 class Pipeline:
     """A collection of actions to perform on an input."""
 
@@ -41,7 +21,7 @@ class Pipeline:
     """The actions to perform on the input."""
 
     context: dict
-    """The current state of the pipeline."""
+    """The current state of the pipeline initialized by keyword arguments."""
 
     def __init__(
         self,
@@ -63,6 +43,24 @@ class Pipeline:
 
 class Action:
     """An action to perform in a pipeline."""
+
+    _action_str: str
+    """A python path to a function or name of a built-in action."""
+
+    id: Optional[str] = None
+    """Identifier for the action."""
+
+    _args: list
+    """Arguments to instantiate the action."""
+
+    _kwargs: dict
+    """Keyword arguments to instantiate the action."""
+
+    commit_metadata_func: Optional[Callable]
+    """Function the action can call to set metadata about the commit."""
+
+    version_metadata_func: Optional[Callable]
+    """Function the action can call to set metadata about the version a commit belongs to."""
 
     def __init__(
         self,
@@ -133,16 +131,15 @@ def pipeline_factory(
     **kwargs,
 ) -> Pipeline:
     """Create a Pipeline from a list of configured actions."""
-    action_specs = [ActionSpec(**action) for action in action_list]
     actions = [
         Action(
-            action=a.action,
-            id_=a.id,
-            args=a.args,
-            kwargs=a.kwargs,
+            action=a["action"],
+            id_=a.get("id"),
+            args=a.get("args"),
+            kwargs=a.get("kwargs"),
             commit_metadata_func=commit_metadata_func,
             version_metadata_func=version_metadata_func,
         )
-        for a in action_specs
+        for a in action_list
     ]
     return Pipeline(actions=actions, **kwargs)
