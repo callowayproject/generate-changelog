@@ -1,5 +1,5 @@
 """Simple pipeline workflow processing."""
-from typing import Any, Callable, Optional, Union
+from typing import Callable, Optional, Union
 
 from generate_changelog.processors import BUILT_INS
 
@@ -26,14 +26,22 @@ class Pipeline:
         self.actions = tuple(actions)
         self.context = kwargs.copy()
 
-    def run(self, input_value: Optional[str] = None):
-        """Run the pipeline using input_value as the starting point."""
-        result = current_input = input_value
+    def run(self, input_value: Optional[str] = None) -> str:
+        """
+        Run the pipeline using ``input_value`` as the starting point.
+
+        Args:
+            input_value: An optional string value to start the pipeline.
+
+        Returns:
+            The processed result of the pipeline.
+        """
+        result = current_input = input_value or ""
         for step, action in enumerate(self.actions):
             result = action.run(self.context.copy(), current_input)
             step_key = action.id or f"result_{step}"
             self.context[step_key] = current_input = result
-        return result
+        return result or ""
 
 
 class Action:
@@ -79,7 +87,16 @@ class Action:
             self.action_function = import_function(action)
 
     def run(self, context: dict, input_value: str) -> str:
-        """Perform the action on the input."""
+        """
+        Perform the action on the input.
+
+        Args:
+            context: The current pipeline context for rendering ``args`` and ``kwargs``
+            input_value: The string to processes
+
+        Returns:
+            The processed string
+        """
         from generate_changelog.templating import pipeline_env
 
         # render string args, and kwarg-values using jinja2
@@ -106,11 +123,24 @@ class Action:
         else:
             action_function = self.action_function
 
-        return action_function(input_value)
+        return action_function(input_value) or ""
 
 
-def import_function(function_path: str) -> Any:
-    """Import a function from a dotted path."""
+def import_function(function_path: str) -> Callable:
+    """
+    Import a function from a dotted path.
+
+    Example:
+
+           >>> import_function("generate_changelog.pipeline.noop_func")
+           <function noop_func at 0x11016d280>
+
+    Args:
+        function_path: A dotted path to a function
+
+    Returns:
+        The callable function
+    """
     from importlib import import_module
 
     bits = function_path.split(".")
@@ -125,7 +155,18 @@ def pipeline_factory(
     version_metadata_func: Optional[Callable] = None,
     **kwargs,
 ) -> Pipeline:
-    """Create a Pipeline from a list of configured actions."""
+    """
+    Create a :py:class:`~Pipeline` from a list of actions specified by dictionaries.
+
+    Args:
+        action_list: A ``list`` of ``dict`` s that specify :py:class:`~Action` attributes
+        commit_metadata_func: Optional callable that actions can use to set commit metadata
+        version_metadata_func: Optional callable that actions can use to set version metadata
+        **kwargs: keyword arguments to pass to the :py:class:`~Pipeline` constructor
+
+    Returns:
+        The instantiated Pipeline
+    """
     actions = [
         Action(
             action=a["action"],
