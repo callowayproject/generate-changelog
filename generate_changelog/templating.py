@@ -13,11 +13,7 @@ from generate_changelog import git_ops
 from generate_changelog.configuration import Configuration, get_config
 from generate_changelog.lazy import LazyObject
 from generate_changelog.pipeline import pipeline_factory
-from generate_changelog.processors import load_builtins
 from generate_changelog.processors.metadata import MetadataCollector
-
-load_builtins()
-
 
 default_env = LazyObject(
     lambda: Environment(

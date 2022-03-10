@@ -1,12 +1,7 @@
 """Simple pipeline workflow processing."""
 from typing import Any, Callable, Optional, Union
 
-from dataclasses import dataclass, field
-
-from generate_changelog.configuration import StrOrCallable
-from generate_changelog.processors import BUILT_INS, load_builtins
-
-load_builtins()
+from generate_changelog.processors import BUILT_INS
 
 
 def noop_func(**kwargs):
