@@ -3,17 +3,25 @@ from typing import Any, Iterable
 
 
 def is_action(value: Any) -> bool:
-    """Is the value an action?"""
+    """Returns ``True`` if the value is an action."""
     return isinstance(value, dict) and "action" in value
 
 
 def is_pipeline(value: Any) -> bool:
-    """Is the value a pipeline?"""
+    """Returns ``True`` if the value is a pipeline."""
     return value and isinstance(value, list) and is_action(value[0])
 
 
 def eval_if_callable(value: Any) -> Any:
-    """Return value or the result of calling value."""
+    """
+    Tries to evaluate ``value`` as an action, a pipeline, or a callable if possible.
+
+    Args:
+        value: A callable, action dictionary, list of action dictionaries, or other.
+
+    Returns:
+        The original value if it can not be evaluated further.
+    """
     from generate_changelog.configuration import get_config
     from generate_changelog.pipeline import pipeline_factory
 
@@ -30,17 +38,19 @@ def eval_if_callable(value: Any) -> Any:
 
 def pairs(iterable) -> Iterable:
     """
-    Like pairwise in 3.10, but will always include the last element by itself.
+    Return successive pairs taken from the input iterable.
+
+    Like :py:func:`itertools.pairwise` in 3.10, but will always include the last element by itself.
 
     Example:
-        ::
+
             >>> list(pairs("ABCD"))
             [("A", "B"), ("B", "C"), ("C", "D"), ("D", None)]
             >>> list(pairs("ABC"))
             [("A", "B"), ("B", "C"), ("C", None)]
 
     Args:
-        iterable: The iterable to iterate over.
+        iterable: The iterable to combine into pairs.
 
     Returns:
         An iterable of pairs.
