@@ -1,5 +1,5 @@
 """Templating functions."""
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 import collections
 import datetime
@@ -24,6 +24,8 @@ default_env = LazyObject(
         autoescape=select_autoescape(),
     )
 )
+"""The default Jinja environment for rendering a changelog."""
+
 pipeline_env = LazyObject(
     lambda: Environment(
         loader=ChoiceLoader([FileSystemLoader(get_config().template_dirs), PackageLoader("generate_changelog")]),
@@ -31,20 +33,33 @@ pipeline_env = LazyObject(
         variable_start_string="${{",
     )
 )
+"""The Jinja environment for rendering actions and pipelines."""
 
 
 @dataclass
 class CommitContext:
-    """A commit for the template context."""
+    """Commit information for the template context."""
 
     sha: str
+    """The full hex SHA of the commit."""
+
     commit_datetime: datetime.datetime
+    """The date and time of the commit with timezone offset."""
+
     subject: str
+    """The first line of the commit message."""
+
     body: str
+    """The commit message sans the first line."""
+
     committer: str
+    """The name and email of the committer as `name <email@ex.com>`."""
+
+    metadata: dict = field(default_factory=dict)
+    """Metadata for this commit parsed from the commit message."""
+
     _authors: Optional[list] = field(init=False)  # list of dicts with name and email keys
     _author_names: Optional[list] = field(init=False)  # list of just the names
-    metadata: dict = field(default_factory=dict)
 
     def __post_init__(self):
         """Set the cached author information to None."""
@@ -58,7 +73,12 @@ class CommitContext:
 
     @property
     def authors(self) -> list:
-        """Return a list of dicts name and emails."""
+        """
+        A list of authors' names and emails.
+
+        Returns:
+            A list of dictionaries with name and email keys.
+        """
         if self._authors is not None:
             return self._authors
 
@@ -80,7 +100,7 @@ class CommitContext:
 
     @property
     def author_names(self) -> list:
-        """Return a list of the author names."""
+        """A list of the authors' names."""
         if self._author_names is not None:
             return self._author_names
 
@@ -91,27 +111,55 @@ class CommitContext:
 
 @dataclass
 class SectionContext:
-    """A section for the template context."""
+    """Section information for the template context."""
 
     label: str
+    """The section label."""
+
     commits: List[CommitContext] = field(default_factory=list)
+    """The commits that belong in this section."""
 
 
 @dataclass
 class VersionContext:
-    """A tagged version for the template context."""
+    """Version information for the template context."""
 
     label: str
+    """The version label."""
+
     date_time: Optional[datetime.datetime] = None
+    """The date and time with timezone offset the version was tagged."""
+
     tag: Optional[str] = None
+    """The tag."""
+
     previous_tag: Optional[str] = None
+    """The previous tag."""
+
     tagger: Optional[str] = None
+    """The name and email of the person who tagged this version in `name <email@ex.com>` format."""
+
     sections: List[SectionContext] = field(default_factory=list)
+    """The sections that group the commits in this version."""
+
     metadata: dict = field(default_factory=dict)
+    """Metadata for this version parsed from commits."""
 
 
-def get_context_from_tags(repository: Repo, config: Configuration, starting_tag: Optional[str] = None):
-    """Get the template context from tags."""
+def get_context_from_tags(
+    repository: Repo, config: Configuration, starting_tag: Optional[str] = None
+) -> List[VersionContext]:
+    """
+    Generate the template context from git tags.
+
+    Args:
+        repository: The git repository to evaluate.
+        config: The current configuration object.
+        starting_tag: Optional starting tag for generating incremental changelogs.
+
+    Returns:
+        A list of VersionContext objects.
+    """
     tags = git_ops.get_commits_by_tags(repository, config.tag_pattern, starting_tag)
     section_order = config.section_patterns.keys()
     output = []
@@ -180,7 +228,17 @@ def get_context_from_tags(repository: Repo, config: Configuration, starting_tag:
 
 
 def render(repository: Repo, config: Configuration, starting_tag: Optional[str] = None) -> str:
-    """Render the changelog for the repository to a string."""
+    """
+    Render the full or incremental changelog for the repository to a string.
+
+    Args:
+        repository: The git repository to evaluate.
+        config: The current configuration object.
+        starting_tag: Optional starting tag for generating incremental changelogs.
+
+    Returns:
+        The full or partial changelog
+    """
     version_context = get_context_from_tags(repository, config, starting_tag)
     context = get_config().variables.copy()
     context["versions"] = version_context
@@ -194,11 +252,20 @@ def render(repository: Repo, config: Configuration, starting_tag: Optional[str] 
     return default_env.get_template("base.md.jinja").render(context)
 
 
-def first_matching(section_patterns: dict, string: str) -> str:
-    """Return the section that either matches the given string."""
+def first_matching(section_patterns: Dict[str, Optional[list]], commit_summary: str) -> str:
+    """
+    Return the first section that matches the given commit summary.
+
+    Args:
+        section_patterns: A mapping of section names to a list of regular expressions for matching.
+        commit_summary: The commit summary to match to a section.
+
+    Returns:
+        The name of the section.
+    """
     for section, patterns in section_patterns.items():
         if patterns is None:
             return section
         for pattern in patterns:
-            if re.search(pattern, string) is not None:
+            if re.search(pattern, commit_summary) is not None:
                 return section
