@@ -1,4 +1,4 @@
-"""Configuration for generate_changelog."""
+"""Configuration management for generate_changelog."""
 from typing import Callable, Optional, Union
 
 from dataclasses import asdict, dataclass, field
@@ -23,7 +23,7 @@ DEFAULT_CONFIG_FILE_NAMES = [
 ]
 """Valid permutations of the default configuration file name."""
 
-VALID_AUTHOR_TOKENS = [
+DEFAULT_VALID_AUTHOR_TOKENS = [
     "author",
     "based-on-a-patch-by",
     "based-on-patch-by",
@@ -52,7 +52,6 @@ DEFAULT_SECTION_PATTERNS = {
     "Fixes": [r"(?i)^(?:fix)[^\n]*$"],
     "Other": None,  # Match all lines
 }
-
 
 DEFAULT_STARTING_TAG_PIPELINE = [
     {"action": "ReadFile", "kwargs": {"filename": "CHANGELOG.md"}},
@@ -98,7 +97,7 @@ DEFAULT_OUTPUT_PIPELINE = [
 
 @dataclass
 class Configuration:
-    """Configuration for generate_changelog."""
+    """Configuration options for generate_changelog."""
 
     variables: dict = field(default_factory=dict)
     """User variables for reference in other parts of the configuration."""
@@ -143,7 +142,15 @@ class Configuration:
     """Tokens in git commit trailers that indicate authorship."""
 
     def update_from_file(self, filename: Path):
-        """Updates the configuration from a YAML file."""
+        """
+        Updates this configuration instance in place from a YAML file.
+
+        Args:
+            filename: Path to the YAML file
+
+        Raises:
+            Exit: if the path does not exist or is a directory
+        """
         file_path = filename.expanduser().resolve()
 
         if not file_path.exists():
@@ -163,7 +170,12 @@ class Configuration:
 
 
 def get_default_config() -> Configuration:
-    """Get the default configuration."""
+    """
+    Create a new :py:class:`Configuration` object with default values.
+
+    Returns:
+        A new Configuration object
+    """
     return Configuration(
         ignore_patterns=DEFAULT_IGNORE_PATTERNS,
         section_patterns=DEFAULT_SECTION_PATTERNS,
@@ -171,12 +183,17 @@ def get_default_config() -> Configuration:
         subject_pipeline=DEFAULT_SUBJECT_PIPELINE,
         starting_tag_pipeline=DEFAULT_STARTING_TAG_PIPELINE,
         output_pipeline=DEFAULT_OUTPUT_PIPELINE,
-        valid_author_tokens=VALID_AUTHOR_TOKENS,
+        valid_author_tokens=DEFAULT_VALID_AUTHOR_TOKENS,
     )
 
 
 def write_default_config(filename: Path):
-    """Write a default configuration file to the specified path."""
+    """
+    Write a default configuration file to the specified path.
+
+    Args:
+        filename: Path to write to
+    """
     file_path = filename.expanduser().resolve()
     config = asdict(get_default_config())
     with file_path.open("w") as f:
@@ -184,10 +201,18 @@ def write_default_config(filename: Path):
 
 
 _CONFIG = None
+"""The global running configuration."""
 
 
 def get_config() -> Configuration:
-    """Return the current configuration."""
+    """
+    Return the current configuration.
+
+    If the configuration has never been initialized, it is instantiated with the defaults.
+
+    Returns:
+        The global configuration object.
+    """
     global _CONFIG
 
     if _CONFIG is None:
