@@ -12,6 +12,7 @@ API Reference
    ~configuration
    ~data_merge
    ~git_ops
+   ~lazy
    ~pipeline
    ~templating
    ~utilities

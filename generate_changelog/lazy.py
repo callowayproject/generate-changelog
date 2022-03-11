@@ -14,16 +14,13 @@ class LazyObject:
     A wrapper for another class that can be used to delay instantiation of the wrapped object.
 
     Example:
-        ::
-            context = LazyObject(lambda: Context())
-
+            >>> context = LazyObject(lambda: Context())
             # Do some other stuff. Context is not evaluated yet.
-            some_other_code()
-
+            >>> some_other_code()
             # Only now is Context instantiated and evaluated,
             # since we attempt to access an attribute on it
             # using __getattr__ which in turn calls _setup().
-            print(context.run_id)
+            >>> print(context.run_id)
     """
 
     _wrapped = None

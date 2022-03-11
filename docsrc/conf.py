@@ -61,6 +61,7 @@ myst_enable_extensions = [
 ]
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
+    "gitpython": ("https://gitpython.readthedocs.io/en/stable/", None),
 }
 
 templates_path = ["_templates"]

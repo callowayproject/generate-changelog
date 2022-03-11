@@ -1,6 +1,6 @@
 """git information access."""
 
-from typing import Optional
+from typing import List, Optional
 
 import datetime
 import os
@@ -85,8 +85,16 @@ def parse_commits(repository: Repo, starting_rev: Optional[str] = None, ending_r
     return [repository.commit(commit) for commit in commits if commit]
 
 
-def get_tags(repository: Repo) -> list:
-    """Get all the tags in a repository."""
+def get_tags(repository: Repo) -> List[TagInfo]:
+    """
+    Get all the tags in a repository.
+
+    Args:
+        repository: The repository object containing the tags
+
+    Returns:
+        A list of TagInfo objects with the most recent first
+    """
     tags = repository.tags
     tags_list = []
 
@@ -114,8 +122,18 @@ def get_tags(repository: Repo) -> list:
     return tags_list
 
 
-def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag: Optional[str] = None) -> list:
-    """Group commits by the tags they belong to."""
+def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag: Optional[str] = None) -> List[dict]:
+    """
+    Group commits by the tags they belong to.
+
+    Args:
+        repository: The git repository object
+        tag_filter_pattern: A regular expression pattern that matches valid tags as versions
+        starting_tag: Only include tags after this one
+
+    Returns:
+        A list of dictionaries with tag information with most recent first
+    """
     from generate_changelog.utilities import pairs
 
     tags = [tag for tag in get_tags(repository) if re.match(tag_filter_pattern, tag.name)]
