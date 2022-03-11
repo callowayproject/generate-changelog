@@ -9,8 +9,10 @@ def deep_merge(*dicts) -> dict:
     """
     Merges dicts deeply.
 
+    Pass the dictionaries to merge as parameters to the function.
+
     Args:
-        dicts: List of dicts to merge with the first one the base
+        *dicts: Dicts to merge with the first one as the base
 
     Returns:
         dict: The merged dict
@@ -56,7 +58,7 @@ def comprehensive_merge(*args) -> Any:
     - dicts are recursively merged
 
     Args:
-        *args: List of dicts to merge with the first one the base
+        *args: Dicts to merge with the first one the base
 
     Returns:
         The merged data
@@ -77,10 +79,7 @@ def comprehensive_merge(*args) -> Any:
             return tuple(merge_iterables(d1, d2))
         elif isinstance(d1, dict):
             for key in d2:
-                if key in d1:
-                    d1[key] = merge_into(d1[key], d2[key])
-                else:
-                    d1[key] = copy.deepcopy(d2[key])
+                d1[key] = merge_into(d1[key], d2[key]) if key in d1 else copy.deepcopy(d2[key])
             return d1
         else:
             return copy.deepcopy(d2)
