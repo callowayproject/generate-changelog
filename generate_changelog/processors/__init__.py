@@ -40,7 +40,31 @@ BUILT_INS = Registry()
 
 
 def register_builtin(function_or_name: Union[Callable, str]) -> Callable:
-    """A decorator that registers a function with an optional name."""
+    """
+    A decorator that registers a function with an optional name.
+
+    Example:
+        The simplest usage is to decorate a callable::
+
+            @register_builtin
+            def do_something(input_text: str) -> str:
+                pass
+
+        That registers the name ``do_something`` as a built-in action. You can
+        also pass in a name to the decorator to change the registered name::
+
+            @register_builtin("good_name")
+            def a_very_bad_name(input_text: str) -> str:
+                pass
+
+        That registers the name ``good_name`` as a built-in action for that function.
+
+    Args:
+        function_or_name: A callable or custom name.
+
+    Returns:
+        The original, but already registered, callable.
+    """
     name = ""
 
     def inner(f: Callable) -> Callable:

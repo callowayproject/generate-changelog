@@ -1,5 +1,11 @@
 """Configuration management for generate_changelog."""
+
 from typing import Callable, Optional, Union
+
+try:
+    from typing import TypeAlias
+except ImportError:
+    from typing_extensions import TypeAlias
 
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -7,10 +13,10 @@ from pathlib import Path
 import typer
 import yaml
 
-StrOrCallable = Union[str, Callable[[], str]]
+StrOrCallable: TypeAlias = Union[str, Callable[[], str]]
 """The type should be either a string or a callable that returns a string."""
 
-IntOrCallable = Union[int, Callable[[], int]]
+IntOrCallable: TypeAlias = Union[int, Callable[[], int]]
 """The type should be either an int or a callable that returns an int."""
 
 DEFAULT_CONFIG_FILE_NAME = ".changelog-config"

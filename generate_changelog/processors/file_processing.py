@@ -10,7 +10,7 @@ from generate_changelog.processors import register_builtin
 from generate_changelog.utilities import eval_if_callable
 
 
-@dataclass
+@dataclass(frozen=True)
 @register_builtin
 class ReadFile:
     """Return a file's contents when called."""
@@ -35,7 +35,7 @@ class ReadFile:
         return filepath.read_text() or ""
 
 
-@dataclass
+@dataclass(frozen=True)
 @register_builtin
 class WriteFile:
     """Write the passed string to a file when called."""
@@ -52,7 +52,7 @@ class WriteFile:
 
 
 @register_builtin
-def stdout(content):
+def stdout(content: str):
     """Write content to stdout."""
     typer.echo(content)
 
@@ -69,7 +69,12 @@ class IncrementalFileInsert:
     """A regular expression to detect the last heading. Content before this position is re-rendered and inserted."""
 
     def __call__(self, input_text: StrOrCallable):
-        """Replace the beigging of the file to last_heading_pattern with input_text."""
+        """
+        Replace the beginning of the file up to ``last_heading_pattern`` with ``input_text`` .
+
+        Args:
+            input_text: The text to insert.
+        """
         filename = Path(eval_if_callable(self.filename))
         pattern = eval_if_callable(self.last_heading_pattern)
         text = eval_if_callable(input_text)

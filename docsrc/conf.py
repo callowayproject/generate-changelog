@@ -41,6 +41,13 @@ autodoc_default_flags = [
     "undoc-members",
     "private-members",
 ]
+autodoc_class_signature = "separated"
+autodoc_member_order = "bysource"
+autodoc_typehints = "description"
+autodoc_type_aliases = {
+    "StrOrCallable": "generate_changelog.configuration.StrOrCallable",
+    "IntOrCallable": "generate_changelog.configuration.IntOrCallable",
+}
 
 autosummary_generate = True
 
@@ -48,6 +55,8 @@ napoleon_attr_annotations = True
 napoleon_include_special_with_doc = True
 napoleon_include_private_with_doc = True
 napoleon_include_init_with_doc = True
+# napolean_use_param = True
+
 myst_enable_extensions = [
     "amsmath",
     "colon_fence",
