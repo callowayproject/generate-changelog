@@ -4,7 +4,7 @@ import re
 import pytest
 from pytest import param
 
-from generate_changelog.processors import text_processing
+from generate_changelog.actions import text_processing
 
 
 @pytest.mark.parametrize(

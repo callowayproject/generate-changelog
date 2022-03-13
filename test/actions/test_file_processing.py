@@ -4,7 +4,7 @@ from pathlib import Path
 import click
 import pytest
 
-from generate_changelog.processors import file_processing
+from generate_changelog.actions import file_processing
 
 fixture_dir = Path(__file__).parent.parent / "fixtures"
 

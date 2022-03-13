@@ -6,8 +6,8 @@ import textwrap
 from collections import defaultdict
 from dataclasses import dataclass, field
 
+from generate_changelog.actions import register_builtin
 from generate_changelog.data_merge import comprehensive_merge
-from generate_changelog.processors import register_builtin
 
 REGEX_RFC822_KEY_VALUE = r"(?:^|\n)(?P<key>[-\w]*)\s*:\s*(?P<value>[^\n]*(?:\n\s+[^\n]*)*)"
 

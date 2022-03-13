@@ -1,12 +1,12 @@
-"""File reading and writing processors."""
+"""File reading and writing actions."""
 import re
 from dataclasses import dataclass
 from pathlib import Path
 
 import typer
 
+from generate_changelog.actions import register_builtin
 from generate_changelog.configuration import StrOrCallable
-from generate_changelog.processors import register_builtin
 from generate_changelog.utilities import eval_if_callable
 
 

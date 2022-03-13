@@ -4,7 +4,7 @@ import re
 import pytest
 from pytest import param
 
-from generate_changelog.processors import text_processing
+from generate_changelog.actions import text_processing
 
 
 def test_regex_flags():
@@ -36,9 +36,7 @@ gfrm_text_1 = """Heading
 )
 def test_get_first_regex_match(text, pattern, named_subgroup, default, expected):
     """Should find the first item in the string."""
-    regex_cmd = text_processing.FirstRegExMatch(
-        pattern=pattern, named_subgroup=named_subgroup, default_value=default
-    )
+    regex_cmd = text_processing.FirstRegExMatch(pattern=pattern, named_subgroup=named_subgroup, default_value=default)
     assert regex_cmd(text) == expected
 
 

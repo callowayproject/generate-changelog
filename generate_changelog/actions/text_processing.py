@@ -5,8 +5,8 @@ import re
 import textwrap
 from dataclasses import dataclass
 
+from generate_changelog.actions import register_builtin
 from generate_changelog.configuration import IntOrCallable, StrOrCallable
-from generate_changelog.processors import register_builtin
 from generate_changelog.utilities import eval_if_callable
 
 

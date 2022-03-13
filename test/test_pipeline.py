@@ -14,7 +14,7 @@ def test_action_builtin():
 
 def test_action_import():
     """Actions run correctly."""
-    action = pipeline.Action("generate_changelog.processors.text_processing.capitalize")
+    action = pipeline.Action("generate_changelog.actions.text_processing.capitalize")
     assert action.run({}, "foo") == "Foo"
 
 

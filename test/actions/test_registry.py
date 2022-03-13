@@ -1,6 +1,6 @@
 """Tests of the registry system."""
 
-from generate_changelog.processors import Registry
+from generate_changelog.actions import Registry
 
 
 def test_registry_get_key_loads_builtins():

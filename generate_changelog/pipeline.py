@@ -1,7 +1,7 @@
 """Simple pipeline workflow processing."""
 from typing import Callable, Optional, Union
 
-from generate_changelog.processors import BUILT_INS
+from generate_changelog.actions import BUILT_INS
 
 
 def noop_func(**kwargs):

@@ -33,10 +33,10 @@ class Registry(UserDict):
         """Import all submodules so the decorated functions get registered."""
         import importlib
 
-        importlib.import_module(".text_processing", "generate_changelog.processors")
-        importlib.import_module(".file_processing", "generate_changelog.processors")
-        importlib.import_module(".shell", "generate_changelog.processors")
-        importlib.import_module(".metadata", "generate_changelog.processors")
+        importlib.import_module(".text_processing", "generate_changelog.actions")
+        importlib.import_module(".file_processing", "generate_changelog.actions")
+        importlib.import_module(".shell", "generate_changelog.actions")
+        importlib.import_module(".metadata", "generate_changelog.actions")
 
         self._loaded = True
 

@@ -10,10 +10,10 @@ from git import Actor, Repo
 from jinja2 import ChoiceLoader, Environment, FileSystemLoader, PackageLoader, select_autoescape
 
 from generate_changelog import git_ops
+from generate_changelog.actions.metadata import MetadataCollector
 from generate_changelog.configuration import Configuration, get_config
 from generate_changelog.lazy import LazyObject
 from generate_changelog.pipeline import pipeline_factory
-from generate_changelog.processors.metadata import MetadataCollector
 
 default_env = LazyObject(
     lambda: Environment(

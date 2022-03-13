@@ -1,5 +1,5 @@
 """Basic shell commands."""
-from generate_changelog.processors import shell
+from generate_changelog.actions import shell
 
 
 def test_shell():
