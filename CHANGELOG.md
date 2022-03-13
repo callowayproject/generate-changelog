@@ -1,10 +1,20 @@
 # Changelog
 
-## Unreleased (2022-03-07)
+## 0.4.0 (2022-03-13)
 
-[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.3.0...HEAD)
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
 
 ### New
+
+- Added support for `__contains__` in registry. [848421d](https://github.com/coordt/generate-changelog/commit/848421d8123738f7c876875301c114f4c8bc1087)
+    
+
+- Added action registry. [a363c25](https://github.com/coordt/generate-changelog/commit/a363c25588f2dff507150776d58fc4d876b1220c)
+    
+  - Accessing the registry ensures the built-in actions are loaded.
+
+- Added changelog configuration and templates. [32f4f23](https://github.com/coordt/generate-changelog/commit/32f4f23635b06839c19b3f811a1e2058dc81764e)
+    
 
 - Added a `previous_tag` attribute to the version context. [5760576](https://github.com/coordt/generate-changelog/commit/576057668dfc90eba19070d6f94d14d60ca9ada6)
     
@@ -19,8 +29,39 @@
 
 ### Updates
 
+- Updated processors doc strings. [9102ec7](https://github.com/coordt/generate-changelog/commit/9102ec757788f3210d381e57d41e64cd57d24718)
+    
+
+- Updated configuration doc strings. [ff818af](https://github.com/coordt/generate-changelog/commit/ff818aff84744fdea955e26f539ad9c8a3a953d2)
+    
+
+- Updated data_merge doc strings. [2840242](https://github.com/coordt/generate-changelog/commit/28402420496a0fb6403e7bed58eb0d74ee237457)
+    
+
+- Updated git_ops and lazy doc strings. [26ecd54](https://github.com/coordt/generate-changelog/commit/26ecd54bb3f2f38c1c2198afde0cedf296a18120)
+    
+
+- Updated pipeline doc strings. [2a2c052](https://github.com/coordt/generate-changelog/commit/2a2c05296541c71373b4f8d59ced3fd0d2fc4f35)
+    
+
+- Updated templating doc strings. [b942302](https://github.com/coordt/generate-changelog/commit/b942302c879f5dabfc0553f103d80864bd7ebadf)
+    
+
+- Updated utility doc strings. [a7ae93f](https://github.com/coordt/generate-changelog/commit/a7ae93f757792ebf4cabf5c51fc353f65d593fef)
+    
+
+- Removed ActionSpec. [29942ac](https://github.com/coordt/generate-changelog/commit/29942acbde3b7e4b9b9a68e2b840b38417643174)
+    
+  - It was unnecessary. Now Action classes are instantiated directly.
+
 - Removed author rendering from commits. [e44de67](https://github.com/coordt/generate-changelog/commit/e44de6784a7e26422679a5597b4e21322ac49f08)
     
+
+### Fixes
+
+- Fixed missing variables in render context. [0bed08e](https://github.com/coordt/generate-changelog/commit/0bed08eab48fd24a55b63b010c7cc8e665447cac)
+    
+
 
 ## 0.3.0 (2022-03-05)
 
