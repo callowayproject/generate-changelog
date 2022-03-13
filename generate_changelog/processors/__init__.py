@@ -23,6 +23,12 @@ class Registry(UserDict):
             self.load_builtins()
         return super().__getitem__(key)
 
+    def __contains__(self, key):
+        """Make sure the built-in actions are loaded before testing containment."""
+        if not self._loaded:
+            self.load_builtins()
+        return super().__contains__(key)
+
     def load_builtins(self):
         """Import all submodules so the decorated functions get registered."""
         import importlib

@@ -8,7 +8,14 @@ def test_registry_get_key_loads_builtins():
     r = Registry()
     r["new_attr"] = "foo"
     assert r.data["new_attr"] == "foo"
-    assert "new_attr" in r
     assert not r._loaded
     assert r["new_attr"] == "foo"
+    assert r._loaded
+
+
+def test_registry_contains_loads_builtins():
+    """Testing for a key in the registry should load the built-ins."""
+    r = Registry()
+    assert not r._loaded
+    assert "foo" not in r
     assert r._loaded
