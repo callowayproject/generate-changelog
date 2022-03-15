@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.5.0 (2022-03-15)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
+
+### New
+
+- Added a minimal readme. [8ba2ec1](https://github.com/coordt/generate-changelog/commit/8ba2ec1133be3515720dbd6a20d2689ef4c96bba)
+    
+
+- Added issue parsing actions. [95e0e35](https://github.com/coordt/generate-changelog/commit/95e0e35dd49ba85b1f5befc327b92c7ac2493ecc)
+    
+  - ParseIssue: base class and generic issue parser
+  - ParseGitHubIssue: parse GitHub issue patterns
+  - ParseJiraIssue: parse Jira issue patterns
+  - ParseAzureBoardIssue: parse Azure board issue patterns
+
+- Added initial documentation for actions. [14ba3be](https://github.com/coordt/generate-changelog/commit/14ba3be844bb2af41c8e14d6d5d90bcfe730da6a)
+    
+
+### Updates
+
+- Renamed processors module to actions. [99284e3](https://github.com/coordt/generate-changelog/commit/99284e3d42a35f91d17d417bae948c35364de49f)
+    
+
+
 ## 0.4.0 (2022-03-13)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
