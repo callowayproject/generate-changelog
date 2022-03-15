@@ -50,3 +50,48 @@ def test_metadata_collector():
 
     mdc(foo=["baz"])
     assert set(mdc.metadata["foo"]) == {"baz", "bar"}
+
+
+def test_parse_issue():
+    """Parsing a pattern puts the match in the commit metadata issue key."""
+
+    mdc = metadata.MetadataCollector()
+    action = metadata.ParseIssue(mdc, r"issue#(\d+)")
+    action("This messsage references issue#123 and issue#234")
+    assert mdc.metadata == {"issue": ["123", "234"]}
+
+
+def test_parse_issue_no_issue():
+    """Parsing a pattern without an issue reference does nothing."""
+
+    mdc = metadata.MetadataCollector()
+    action = metadata.ParseIssue(mdc, r"issue#(\d+)")
+    action("This messsage references contains no references")
+    assert "issue" not in mdc.metadata
+
+
+def test_parse_github_issue():
+    """Github issue references are parsed into commit metadata."""
+
+    mdc = metadata.MetadataCollector()
+    action = metadata.ParseGitHubIssue(mdc)
+    action("This messsage references #123 and #234")
+    assert mdc.metadata == {"issue": ["123", "234"]}
+
+
+def test_parse_jira_issue():
+    """Jira issue references are parsed into commit metadata."""
+
+    mdc = metadata.MetadataCollector()
+    action = metadata.ParseJiraIssue(mdc)
+    action("This messsage references FOO-123 and BAR-234")
+    assert mdc.metadata == {"issue": ["FOO-123", "BAR-234"]}
+
+
+def test_parse_azure_board_issue():
+    """Azure board issue references are parsed into commit metadata."""
+
+    mdc = metadata.MetadataCollector()
+    action = metadata.ParseAzureBoardIssue(mdc)
+    action("This messsage references AB#123 and AB#234")
+    assert mdc.metadata == {"issue": ["123", "234"]}
