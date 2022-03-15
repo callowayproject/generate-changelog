@@ -8,7 +8,7 @@ API Reference
    :nosignatures:
    :recursive:
 
-   ~processors
+   ~actions
    ~configuration
    ~data_merge
    ~git_ops

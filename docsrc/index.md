@@ -6,6 +6,7 @@ maxdepth: 2
 caption: Contents
 ---
 Introduction <readme>
+actions/index
 api
 contributing
 releasing
