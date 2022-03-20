@@ -1,0 +1,5 @@
+section_patterns:
+  "Other": None,  # Match all lines
+output_pipeline:
+  - action: stdout
+starting_tag_pipeline:
