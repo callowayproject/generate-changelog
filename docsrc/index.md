@@ -7,6 +7,7 @@ caption: Contents
 ---
 Introduction <readme>
 actions/index
+recipes/index
 api
 contributing
 releasing

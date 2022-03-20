@@ -24,7 +24,6 @@ Python 3.8 or higher.
 $ pip install generate-changelog
 ```
 
-
 ## Usage
 
 Create a default configuration file.

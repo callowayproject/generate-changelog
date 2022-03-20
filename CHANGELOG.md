@@ -1,8 +1,12 @@
 # Changelog
 
+## Unreleased (2022-03-15)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.5.0...HEAD)
+
 ## 0.5.0 (2022-03-15)
 
-[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.4.0...0.5.0)
 
 ### New
 
@@ -24,10 +28,9 @@
 - Renamed processors module to actions. [99284e3](https://github.com/coordt/generate-changelog/commit/99284e3d42a35f91d17d417bae948c35364de49f)
     
 
-
 ## 0.4.0 (2022-03-13)
 
-[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.3.0...0.4.0)
 
 ### New
 
@@ -86,7 +89,6 @@
 
 - Fixed missing variables in render context. [0bed08e](https://github.com/coordt/generate-changelog/commit/0bed08eab48fd24a55b63b010c7cc8e665447cac)
     
-
 
 ## 0.3.0 (2022-03-05)
 
