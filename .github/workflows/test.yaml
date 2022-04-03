@@ -37,12 +37,19 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Coveralls Upload
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        flag-name: python-${{ matrix.python-version }}
+        parallel: true
 
   coveralls_finish:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Coveralls Finished
-      uses: AndreMiras/coveralls-python-action@develop
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@master
       with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         parallel-finished: true
