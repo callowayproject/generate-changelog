@@ -37,12 +37,14 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+        coverage lcov
     - name: Coveralls Upload
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.github_token }}
         flag-name: python-${{ matrix.python-version }}
         parallel: true
+        path-to-lcov: coverage.lcov
 
   coveralls_finish:
     needs: test
