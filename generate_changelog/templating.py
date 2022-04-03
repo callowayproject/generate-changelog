@@ -30,7 +30,6 @@ pipeline_env = LazyObject(
     lambda: Environment(
         loader=ChoiceLoader([FileSystemLoader(get_config().template_dirs), PackageLoader("generate_changelog")]),
         autoescape=select_autoescape(),
-        variable_start_string="${{",
     )
 )
 """The Jinja environment for rendering actions and pipelines."""
