@@ -34,6 +34,7 @@ repos:
     rev: 3.9.2
     hooks:
       - id: flake8
+        exclude: test.*
   - repo: https://github.com/pycqa/pydocstyle
     rev: 6.1.1
     hooks:
@@ -48,7 +49,7 @@ repos:
           - -v 2
           - "--message-template={path}:{line} in `{obj}`:\n        {msg_id}: {msg}"
           - --strictness=short
-        exclude: "^tests"
+        exclude: test.*
   - repo: https://github.com/econchick/interrogate
     rev: 1.5.0  # or master if you're bold
     hooks:
