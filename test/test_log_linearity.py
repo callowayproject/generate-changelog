@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from configuration import get_default_config
 from git import Actor
 
 from generate_changelog import templating
+from generate_changelog.configuration import get_default_config
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
