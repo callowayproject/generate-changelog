@@ -1,5 +1,7 @@
 # Generate Changelog
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/coordt/generate-changelog/master.svg)](https://results.pre-commit.ci/latest/github/coordt/generate-changelog/master)
+
 Use your commit log to make a beautiful changelog file.
 
 ## Features
