@@ -5,10 +5,10 @@ on:
   # but only for the main branch
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
   # Also trigger on page_build, as well as release created events
   page_build:
   release:
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]
+        python-version: [3.8, 3.9, "3.10"]
 
     steps:
     - uses: actions/checkout@v2
@@ -37,12 +37,21 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+        coverage lcov
+    - name: Coveralls Upload
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        flag-name: python-${{ matrix.python-version }}
+        parallel: true
+        path-to-lcov: coverage.lcov
 
   coveralls_finish:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Coveralls Finished
-      uses: AndreMiras/coveralls-python-action@develop
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@master
       with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         parallel-finished: true
