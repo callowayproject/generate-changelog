@@ -43,17 +43,20 @@ do-release:
 	@if [[ "$(BRANCH_NAME)" == "$(PRIMARY_BRANCH_NAME)" ]]; then \
 		if [[ "$(RELEASE_KIND)" == "dev" ]]; then \
 			echo "Error! Can't bump $(RELEASE_KIND) while on the $(PRIMARY_BRANCH_NAME) branch."; \
+			exit; \
 		fi; \
 	elif [[ "$(RELEASE_KIND)" != "dev" ]]; then \
 		echo "Error! Must be on the $(PRIMARY_BRANCH_NAME) branch to bump $(RELEASE_KIND)."; \
-	else \
-		git fetch -p --all \
-		gitchangelog \
-		$(call EDIT_CHANGELOG) \
-		export BRANCH_NAME=$(SHORT_BRANCH_NAME);bumpversion $(BUMPVERSION_OPTS) $(RELEASE_KIND) --allow-dirty; \
-		git push origin $(BRANCH_NAME); \
-		git push --tags; \
-	fi
+		exit; \
+	fi; \
+	git fetch -p --all; \
+	gitchangelog; \
+	$(call EDIT_CHANGELOG); \
+	./tools/gen-codeowners.sh $(SOURCE_DIR) \
+	git add CODEOWNERS \
+	export BRANCH_NAME=$(SHORT_BRANCH_NAME);bumpversion $(BUMPVERSION_OPTS) $(RELEASE_KIND) --allow-dirty; \
+	git push origin $(BRANCH_NAME); \
+	git push --tags;
 
 get-version:  # Sets the value after release-version to the VERSION
 	$(eval VERSION := $(filter-out release-version,$(MAKECMDGOALS)))
