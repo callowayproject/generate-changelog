@@ -6,7 +6,7 @@ import datetime
 import re
 from dataclasses import dataclass, field
 
-from configuration import get_config
+from generate_changelog.configuration import get_config
 
 
 @dataclass
