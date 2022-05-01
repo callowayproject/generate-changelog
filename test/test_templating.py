@@ -10,6 +10,7 @@ from pytest import param
 
 from generate_changelog import configuration, templating
 from generate_changelog.configuration import DEFAULT_SECTION_PATTERNS, get_config
+from generate_changelog.context import CommitContext
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 fake = Faker()
@@ -39,11 +40,11 @@ def test_first_matching(string, expected):
 def test_commit_context():
     """CommitContexts should properly parse things."""
     commit = conftest.commit_factory()
-    context = templating.CommitContext(
+    context = CommitContext(
         sha=commit.hexsha,
         commit_datetime=commit.committed_datetime,
         committer=f"{commit.committer.name} <{commit.committer.email}>",
-        subject=commit.summary,
+        summary=commit.summary,
         body="\n".join(commit.message.splitlines()[1:]),
     )
     assert commit.hexsha[:7] == context.short_sha
@@ -56,11 +57,11 @@ def test_commit_with_no_email():
     """A trailer without an email should still get parsed."""
     commit = conftest.commit_factory()
     name_only = fake.name()
-    context = templating.CommitContext(
+    context = CommitContext(
         sha=commit.hexsha,
         commit_datetime=commit.committed_datetime,
         committer=f"{commit.committer.name} <{commit.committer.email}>",
-        subject=commit.summary,
+        summary=commit.summary,
         body="\n".join(commit.message.splitlines()[1:]),
         metadata={"trailers": {"co-authored-by": [name_only]}},
     )

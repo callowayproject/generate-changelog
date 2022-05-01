@@ -1,6 +1,10 @@
 # Generate Changelog
 
+<!-- start badges -->
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/coordt/generate-changelog/master.svg)](https://results.pre-commit.ci/latest/github/coordt/generate-changelog/master)
+[![Coverage Status](https://coveralls.io/repos/github/coordt/generate-changelog/badge.svg?branch=master)](https://coveralls.io/github/coordt/generate-changelog?branch=master)
 Use your commit log to make a beautiful changelog file.
+<!-- end badges -->
 
 ## Features
 

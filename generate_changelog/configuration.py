@@ -70,7 +70,7 @@ DEFAULT_STARTING_TAG_PIPELINE = [
     },
 ]
 
-DEFAULT_SUBJECT_PIPELINE = [
+DEFAULT_SUMMARY_PIPELINE = [
     {"action": "strip_spaces"},
     {
         "action": "Strip",
@@ -117,8 +117,8 @@ class Configuration:
     unreleased_label: str = "Unreleased"
     """Used as the section title of the changes since the last valid tag."""
 
-    subject_pipeline: list = field(default_factory=list)
-    """Process the commit's subject for use in the changelog."""
+    summary_pipeline: list = field(default_factory=list)
+    """Process the commit's first line for use in the changelog."""
 
     body_pipeline: list = field(default_factory=list)
     """Process the commit's body for use in the changelog."""
@@ -186,7 +186,7 @@ def get_default_config() -> Configuration:
         ignore_patterns=DEFAULT_IGNORE_PATTERNS,
         section_patterns=DEFAULT_SECTION_PATTERNS,
         body_pipeline=DEFAULT_BODY_PIPELINE,
-        subject_pipeline=DEFAULT_SUBJECT_PIPELINE,
+        summary_pipeline=DEFAULT_SUMMARY_PIPELINE,
         starting_tag_pipeline=DEFAULT_STARTING_TAG_PIPELINE,
         output_pipeline=DEFAULT_OUTPUT_PIPELINE,
         valid_author_tokens=DEFAULT_VALID_AUTHOR_TOKENS,

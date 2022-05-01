@@ -74,7 +74,7 @@ template_dirs:
 Then create a directory in `.github` called `changelog_templates`. Create a file named `commit.md.jinja` with contents similar to:
 
 ```jinja
-- {{ commit.subject }}
+- {{ commit.summary }}
   {{ commit.body|indent(2, first=True) }}
   {% for key, val in commit.metadata["trailers"].items() %}
   {% if key not in VALID_AUTHOR_TOKENS %}
@@ -87,7 +87,7 @@ Then create a directory in `.github` called `changelog_templates`. Create a file
 This will render a commit similar to:
 
 ```markdown
-- This is the subject line.
+- This is the summary line.
     
   This is a message body.
 

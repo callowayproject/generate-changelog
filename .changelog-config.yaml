@@ -9,7 +9,7 @@ starting_tag_pipeline:
     pattern: (?im)^## (?P<rev>\d+\.\d+(?:\.\d+)?)\s+\(\d+-\d{2}-\d{2}\)$
     named_subgroup: rev
 unreleased_label: Unreleased
-subject_pipeline:
+summary_pipeline:
 - action: strip_spaces
 - action: Strip
   comment: Get rid of any periods so we don't get double periods

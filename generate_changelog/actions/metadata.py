@@ -89,7 +89,7 @@ class ParseGitHubIssue(ParseIssue):
     https://github.com/<owner>/<repository>/issues/<issue number>
 
     References:
-        - https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls.
+        - https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls.  # NOQA
     """
 
     issue_pattern = re.compile(r"(?im)(?:#|GH-)(\d+)")
