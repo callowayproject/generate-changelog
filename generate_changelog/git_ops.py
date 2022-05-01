@@ -1,13 +1,13 @@
 """git information access."""
 
-from typing import List, Optional
+from typing import List, Optional, Union
 
 import datetime
 import os
 import re
 from dataclasses import dataclass
 
-from git import Repo
+from git import Actor, Repo
 
 from generate_changelog.configuration import get_config
 
@@ -19,7 +19,7 @@ GIT_FORMAT_KEYS = {
     "author_date_timestamp": "%at",
     "committer_name": "%cn",
     "committer_date_timestamp": "%ct",
-    "subject": "%s",
+    "summary": "%s",
     "body": "%b",
 }
 GIT_FULL_FORMAT_STRING = "%x00".join(GIT_FORMAT_KEYS.values()) + "%x1F"
@@ -31,7 +31,7 @@ class TagInfo:
 
     name: str
     commit: str
-    tagger: str
+    tagger: Union[str, Actor]
     tagged_datetime: datetime.datetime
 
     @property

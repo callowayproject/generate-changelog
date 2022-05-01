@@ -60,12 +60,12 @@ def get_context_from_tags(
                 continue
 
             commit_metadata_func = MetadataCollector()
-            subject_pipeline = pipeline_factory(
-                action_list=get_config().subject_pipeline,
+            summary_pipeline = pipeline_factory(
+                action_list=get_config().summary_pipeline,
                 commit_metadata_func=commit_metadata_func,
                 version_metadata_func=version_metadata_func,
             )
-            subject = subject_pipeline.run(commit.summary)
+            summary = summary_pipeline.run(commit.summary)
             body_pipeline = pipeline_factory(
                 action_list=get_config().body_pipeline,
                 commit_metadata_func=commit_metadata_func,
@@ -80,7 +80,7 @@ def get_context_from_tags(
                     sha=commit.hexsha,
                     commit_datetime=commit.committed_datetime,
                     committer=f"{commit.committer.name} <{commit.committer.email}>",
-                    subject=subject,
+                    summary=summary,
                     body=body,
                     metadata=commit_metadata_func.metadata.copy(),
                 )
@@ -128,9 +128,9 @@ def render(repository: Repo, config: Configuration, starting_tag: Optional[str] 
         The full or partial changelog
     """
     version_context = get_context_from_tags(repository, config, starting_tag)
-    context = get_config().variables.copy()
+    context = config.variables.copy()
     context["versions"] = version_context
-    context["VALID_AUTHOR_TOKENS"] = get_config().valid_author_tokens
+    context["VALID_AUTHOR_TOKENS"] = config.valid_author_tokens
 
     if starting_tag:
         heading_str = default_env.get_template("heading.md.jinja").render()

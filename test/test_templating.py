@@ -44,7 +44,7 @@ def test_commit_context():
         sha=commit.hexsha,
         commit_datetime=commit.committed_datetime,
         committer=f"{commit.committer.name} <{commit.committer.email}>",
-        subject=commit.summary,
+        summary=commit.summary,
         body="\n".join(commit.message.splitlines()[1:]),
     )
     assert commit.hexsha[:7] == context.short_sha
@@ -61,7 +61,7 @@ def test_commit_with_no_email():
         sha=commit.hexsha,
         commit_datetime=commit.committed_datetime,
         committer=f"{commit.committer.name} <{commit.committer.email}>",
-        subject=commit.summary,
+        summary=commit.summary,
         body="\n".join(commit.message.splitlines()[1:]),
         metadata={"trailers": {"co-authored-by": [name_only]}},
     )
