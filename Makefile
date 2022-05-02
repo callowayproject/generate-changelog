@@ -50,7 +50,7 @@ do-release:
 		exit; \
 	fi; \
 	git fetch -p --all; \
-	gitchangelog; \
+	generate-changelog; \
 	$(call EDIT_CHANGELOG); \
 	export BRANCH_NAME=$(SHORT_BRANCH_NAME);bumpversion $(BUMPVERSION_OPTS) $(RELEASE_KIND) --allow-dirty; \
 	git push origin $(BRANCH_NAME); \
