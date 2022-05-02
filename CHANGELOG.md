@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.1 (2022-05-02)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
+
+### Fixes
+
+- Fixed Makefile. [7f4384d](https://github.com/coordt/generate-changelog/commit/7f4384d4a38657ed84ffa7470ea95440c17cb322)
+    
+
+
 ## 0.6.0 (2022-05-02)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
