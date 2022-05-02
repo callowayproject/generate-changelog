@@ -1,8 +1,63 @@
 # Changelog
 
-## Unreleased (2022-03-15)
+## Unreleased (2022-05-02)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.5.0...HEAD)
+
+### New
+
+- Added Github Action CI configs. [4737ce8](https://github.com/coordt/generate-changelog/commit/4737ce800378113848edeef46a600d42850773b1)
+    
+
+- Added a test for cross-branch tags. [b5a523c](https://github.com/coordt/generate-changelog/commit/b5a523c8b58424b1a7bd0ad1339f30e71e9d6c8a)
+    
+
+### Updates
+
+- Updated release script. [44d1b93](https://github.com/coordt/generate-changelog/commit/44d1b937ad41a1c964ef5fa57531a3967ff25814)
+    
+
+- Updated documentation. [9b56b4a](https://github.com/coordt/generate-changelog/commit/9b56b4a0bfe90bfd46eae58aa233abf1db18bc1f)
+    
+
+- Changed pre-commit to exclude tests. [0f9e56d](https://github.com/coordt/generate-changelog/commit/0f9e56dd09bde764583ff832c35b5ff49bada6cf)
+    
+
+- Changed and standardized to term 'summary'. [2bd7634](https://github.com/coordt/generate-changelog/commit/2bd7634b9202407fe55c6e65f67331d6e41602b4)
+    
+
+- Refactored context into new module. [5b1e921](https://github.com/coordt/generate-changelog/commit/5b1e92160c5878a02edf5ae0993ad866322f3e9d)
+    
+
+- Removed variable start string difference from pipeline env. [5dc5903](https://github.com/coordt/generate-changelog/commit/5dc59039da3a8c10fdfd84874da969d7c3f1f188)
+    
+  - Didn't make sense to have a different method of specifying variables in the pipeline from the default.
+
+### Fixes
+
+- Fixed Makefile. [1fa22f9](https://github.com/coordt/generate-changelog/commit/1fa22f9eb37ddf978c9edb71e08c8ae431638155)
+    
+
+- Fixed configuraation import. [23d437b](https://github.com/coordt/generate-changelog/commit/23d437bb22c6269d6b9ac3905a2b1dc35fcebf13)
+    
+
+- Fixed Python 3.10 spec in workflows. [cacd9e2](https://github.com/coordt/generate-changelog/commit/cacd9e2393c8efe45aecd4a0d1b6fa84b5a32764)
+    
+
+- Fixed primary branch name in workflows. [94e4203](https://github.com/coordt/generate-changelog/commit/94e4203f09c33071868b6b8d64f6e7b31c3d4c43)
+    
+
+### Other
+
+- [pre-commit.ci] pre-commit autoupdate. [1e856c7](https://github.com/coordt/generate-changelog/commit/1e856c7ed2be8d1932d80a6b86c4e88ada0022aa)
+    
+  **updates:** - https://github.com/timothycrosley/isort → https://github.com/PyCQA/isort
+
+
+- [pre-commit.ci] pre-commit autoupdate. [373c1dd](https://github.com/coordt/generate-changelog/commit/373c1dd87134a0381ccd19f0cf50ff324248b0b0)
+    
+  **updates:** - https://github.com/timothycrosley/isort → https://github.com/PyCQA/isort
+
 
 ## 0.5.0 (2022-03-15)
 
