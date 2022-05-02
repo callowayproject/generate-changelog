@@ -52,7 +52,6 @@ do-release:
 	git fetch -p --all; \
 	gitchangelog; \
 	$(call EDIT_CHANGELOG); \
-	./tools/gen-codeowners.sh $(SOURCE_DIR) \
 	git add CODEOWNERS \
 	export BRANCH_NAME=$(SHORT_BRANCH_NAME);bumpversion $(BUMPVERSION_OPTS) $(RELEASE_KIND) --allow-dirty; \
 	git push origin $(BRANCH_NAME); \
