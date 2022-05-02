@@ -1,8 +1,8 @@
 # Changelog
 
-## Unreleased (2022-05-02)
+## 0.6.0 (2022-05-02)
 
-[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.5.0...HEAD)
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
 
 ### New
 
@@ -57,6 +57,7 @@
 - [pre-commit.ci] pre-commit autoupdate. [373c1dd](https://github.com/coordt/generate-changelog/commit/373c1dd87134a0381ccd19f0cf50ff324248b0b0)
     
   **updates:** - https://github.com/timothycrosley/isort → https://github.com/PyCQA/isort
+
 
 
 ## 0.5.0 (2022-03-15)
