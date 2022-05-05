@@ -37,6 +37,7 @@ class Registry(UserDict):
         importlib.import_module(".file_processing", "generate_changelog.actions")
         importlib.import_module(".shell", "generate_changelog.actions")
         importlib.import_module(".metadata", "generate_changelog.actions")
+        importlib.import_module(".matching", "generate_changelog.actions")
 
         self._loaded = True
 

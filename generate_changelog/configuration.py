@@ -52,12 +52,17 @@ DEFAULT_IGNORE_PATTERNS = [
     "^Merge pull",
 ]
 
-DEFAULT_SECTION_PATTERNS = {
-    "New": [r"(?i)^(?:new|add)[^\n]*$"],
-    "Updates": [r"(?i)^(?:update|change|rename|remove|delete|improve|refactor|chg)[^\n]*$"],
-    "Fixes": [r"(?i)^(?:fix)[^\n]*$"],
-    "Other": None,  # Match all lines
-}
+DEFAULT_COMMIT_CLASSIFIERS = [
+    {"action": "SummaryRegexMatch", "category": "New", "kwargs": {"pattern": r"(?i)^(?:new|add)[^\n]*$"}},
+    {
+        "action": "SummaryRegexMatch",
+        "category": "Updates",
+        "kwargs": {"pattern": r"(?i)^(?:update|change|rename|remove|delete|improve|refactor|chg)[^\n]*$"},
+    },
+    {"action": "SummaryRegexMatch", "category": "Fixes", "kwargs": {"pattern": r"(?i)^(?:fix)[^\n]*$"}},
+    {"action": None, "category": "Other"},  # Match all lines
+]
+
 
 DEFAULT_STARTING_TAG_PIPELINE = [
     {"action": "ReadFile", "kwargs": {"filename": "CHANGELOG.md"}},
@@ -100,6 +105,10 @@ DEFAULT_OUTPUT_PIPELINE = [
     },
 ]
 
+DEFAULT_GROUP_BY = [
+    "metadata.category",
+]
+
 
 @dataclass
 class Configuration:
@@ -129,6 +138,9 @@ class Configuration:
     template_dirs: list = field(default_factory=list)
     """Paths to look for output generation templates."""
 
+    group_by: list = field(default_factory=list)
+    """Group the commits within a version by commit attributes."""
+
     #
     # Commit filtering
     #
@@ -141,8 +153,8 @@ class Configuration:
     ignore_patterns: list = field(default_factory=list)
     """Ignore commits that match any of these regular expression patterns."""
 
-    section_patterns: dict = field(default_factory=dict)
-    """Group commits into groups if they match any of these regular expressions."""
+    commit_classifiers: list = field(default_factory=list)
+    """Set the commit's category metadata to the first classifier that matches."""
 
     valid_author_tokens: list = field(default_factory=list)
     """Tokens in git commit trailers that indicate authorship."""
@@ -184,12 +196,13 @@ def get_default_config() -> Configuration:
     """
     return Configuration(
         ignore_patterns=DEFAULT_IGNORE_PATTERNS,
-        section_patterns=DEFAULT_SECTION_PATTERNS,
+        commit_classifiers=DEFAULT_COMMIT_CLASSIFIERS,
         body_pipeline=DEFAULT_BODY_PIPELINE,
         summary_pipeline=DEFAULT_SUMMARY_PIPELINE,
         starting_tag_pipeline=DEFAULT_STARTING_TAG_PIPELINE,
         output_pipeline=DEFAULT_OUTPUT_PIPELINE,
         valid_author_tokens=DEFAULT_VALID_AUTHOR_TOKENS,
+        group_by=DEFAULT_GROUP_BY,
     )
 
 
