@@ -1,12 +1,18 @@
 {% for version in versions -%}
 {% include "version_heading.md.jinja" %}
 
-{% for section in version.sections -%}
-{% include "section_heading.md.jinja" %}
+{% for grp_commit in version.grouped_commits -%}
+    {% if loop.previtem is defined %}
+        {% set heading_level = diff_index(loop.previtem, grp_commit.grouping) %}
+    {% else %}
+        {% set heading_level = 0 %}
+    {%- endif %}
+    {% for level in range(heading_level, group_depth) -%}
+        {% include "section_heading.md.jinja" %}
+    {% endfor %}
 
-{% for commit in section.commits -%}
-{% include "commit.md.jinja" %}
-
-{% endfor %}
+    {% for commit in grp_commit.commits %}
+        {% include "commit.md.jinja" %}
+    {%- endfor %}
 {%- endfor %}
 {%- endfor %}

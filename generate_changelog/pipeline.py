@@ -1,5 +1,5 @@
 """Simple pipeline workflow processing."""
-from typing import Callable, Optional, Union
+from typing import Any, Callable, Optional, Union
 
 from generate_changelog.actions import BUILT_INS
 
@@ -86,13 +86,13 @@ class Action:
         else:
             self.action_function = import_function(action)
 
-    def run(self, context: dict, input_value: str) -> str:
+    def run(self, context: dict, input_value: Any) -> str:
         """
         Perform the action on the input.
 
         Args:
             context: The current pipeline context for rendering ``args`` and ``kwargs``
-            input_value: The string to processes
+            input_value: The value to processes
 
         Returns:
             The processed string

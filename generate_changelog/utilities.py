@@ -1,5 +1,5 @@
 """Utility methods."""
-from typing import Any, Iterable
+from typing import Any, Iterable, Optional
 
 
 def is_action(value: Any) -> bool:
@@ -60,3 +60,59 @@ def pairs(iterable) -> Iterable:
     a, b = tee(iterable)
     next(b, None)
     return zip_longest(a, b)
+
+
+def resolve_name(obj: Any, name: str, default=None) -> Any:
+    """
+    Get a key or attr ``name`` from obj or default value.
+
+    Copied and modified from Django Template variable resolutions
+
+    Resolution methods:
+
+    - Mapping key lookup
+    - Attribute lookup
+    - Sequence index
+
+    Args:
+        obj: The object to access
+        name: A dotted name to the value, such as ``mykey.0.name``
+        default: If the name cannot be resolved from the object, return this value
+
+    Returns:
+        The value at the resolved name or the default value.
+
+    # noqa: DAR401
+    """
+    lookups = name.split(".")
+    current = obj
+    try:  # catch-all for unexpected failures
+        for bit in lookups:
+            try:  # dictionary lookup
+                current = current[bit]
+                # ValueError/IndexError are for numpy.array lookup on
+                # numpy < 1.9 and 1.9+ respectively
+            except (TypeError, AttributeError, KeyError, ValueError, IndexError):
+                try:  # attribute lookup
+                    current = getattr(current, bit)
+                except (TypeError, AttributeError):
+                    # Reraise if the exception was raised by a @property
+                    if bit in dir(current):
+                        raise
+                    try:  # list-index lookup
+                        current = current[int(bit)]
+                    except (
+                        IndexError,  # list index out of range
+                        ValueError,  # invalid literal for int()
+                        KeyError,  # current is a dict without `int(bit)` key
+                        TypeError,
+                    ):  # un-subscript-able object
+                        return default
+        return current
+    except Exception:  # NOQA
+        return default
+
+
+def diff_index(iterable1, iterable2) -> Optional[int]:
+    """Return the index where iterable2 is different from iterable1."""
+    return next((index for index, (item1, item2) in enumerate(zip(iterable1, iterable2)) if item1 != item2), None)
