@@ -1,4 +1,6 @@
 """Test the metadata collectors."""
+import pytest
+from pytest import param
 
 from generate_changelog.actions import metadata
 
@@ -95,3 +97,106 @@ def test_parse_azure_board_issue():
     action = metadata.ParseAzureBoardIssue(mdc)
     action("This messsage references AB#123 and AB#234")
     assert mdc.metadata == {"issue": ["123", "234"]}
+
+
+brk_chg_msg_with_other_footers = """
+This is a message body.
+
+Bug: #42
+Change-Id: Ic8aaa0728a43936cd4c6e1ed590e01ba8f0fbf5b
+Signed-off-by: A. U. Thor <committer@example.com>
+BREAKING_CHANGE: This is a breaking change.
+CC: R. E. Viewer <reviewer@example.com>
+Subject: This is a fake subject spanning to several lines
+  as you can see
+"""
+
+brk_chg_msg_with_other_footers_expected = """
+This is a message body.
+
+Bug: #42
+Change-Id: Ic8aaa0728a43936cd4c6e1ed590e01ba8f0fbf5b
+Signed-off-by: A. U. Thor <committer@example.com>
+CC: R. E. Viewer <reviewer@example.com>
+Subject: This is a fake subject spanning to several lines
+  as you can see
+"""
+
+
+def test_parse_breaking_change_footer_with_other_footers():
+    """Test parsing out the breaking change footer."""
+    mdc = metadata.MetadataCollector()
+    action = metadata.ParseBreakingChangeFooter(mdc)
+    msg = action(brk_chg_msg_with_other_footers)
+    assert mdc.metadata == {"has_breaking_change": True, "breaking_changes": "This is a breaking change."}
+    assert msg == brk_chg_msg_with_other_footers_expected
+
+
+multiple_brk_chg_msg_with_other_footers = """
+This is a message body.
+
+Bug: #42
+Change-Id: Ic8aaa0728a43936cd4c6e1ed590e01ba8f0fbf5b
+Signed-off-by: A. U. Thor <committer@example.com>
+BREAKING_CHANGE: This is a breaking change.
+CC: R. E. Viewer <reviewer@example.com>
+BREAKING_CHANGE: This is another breaking change.
+Subject: This is a fake subject spanning to several lines
+  as you can see
+"""
+
+
+def test_parse_breaking_change_footer_with_multiple():
+    """Test parsing out the breaking change footer."""
+    mdc = metadata.MetadataCollector()
+    action = metadata.ParseBreakingChangeFooter(mdc)
+    msg = action(multiple_brk_chg_msg_with_other_footers)
+    assert mdc.metadata == {
+        "has_breaking_change": True,
+        "breaking_changes": "This is a breaking change. This is another breaking change.",
+    }
+    assert msg == brk_chg_msg_with_other_footers_expected
+
+
+@pytest.mark.parametrize(
+    ["message", "expected_metadata", "desc"],
+    [
+        param(
+            "feat: Message with only commit type",
+            {"commit_type": "feat", "scope": []},
+            "Message with only commit type",
+        ),
+        param(
+            "feat!: Message with commit type and a breaking change",
+            {"commit_type": "feat", "scope": [], "has_breaking_change": True},
+            "Message with commit type and a breaking change",
+        ),
+        param(
+            "deploy(ingress): Message with commit type and scope",
+            {"commit_type": "deploy", "scope": ["ingress"]},
+            "Message with commit type and scope",
+        ),
+        param(
+            "fix(rule,api): Message with commit type and multiple scopes",
+            {"commit_type": "fix", "scope": ["rule", "api"]},
+            "Message with commit type and multiple scopes",
+        ),
+        param(
+            "fix(rule/api)!: Message with commit type, multiple scopes and breaking change",
+            {"commit_type": "fix", "scope": ["rule", "api"], "has_breaking_change": True},
+            "Message with commit type, multiple scopes and breaking change",
+        ),
+        param(
+            "Message that doesn't match",
+            {},
+            "Message that doesn't match",
+        ),
+    ],
+)
+def test_parse_conventional_commit(message, expected_metadata, desc):
+    """Parse subject lines and correctly parse it."""
+    mdc = metadata.MetadataCollector()
+    action = metadata.ParseConventionalCommit(mdc)
+    msg = action(message)
+    assert mdc.metadata == expected_metadata
+    assert msg == desc
