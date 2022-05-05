@@ -1,4 +1,5 @@
 GitPython
 jinja2
+more-itertools
 pyyaml
 typer
