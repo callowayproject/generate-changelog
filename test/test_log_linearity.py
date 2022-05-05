@@ -80,14 +80,14 @@ def test_tags_on_multiple_branches(bare_git_repo, capsys):
     ver003 = context[2]
     ver002 = context[3]
     ver001 = context[4]
-    assert len(unreleased.sections) == 0
-    assert len(ver004.sections[0].commits) == 3
-    assert ver004.sections[0].commits[0].summary == "Commit 5 on master."
-    assert ver004.sections[0].commits[1].summary == "Commit 3 on develop."
-    assert ver004.sections[0].commits[2].summary == "Commit 2 on develop."
-    assert len(ver003.sections[0].commits) == 1
-    assert ver003.sections[0].commits[0].summary == "Commit 4 on master."
-    assert len(ver002.sections[0].commits) == 1
-    assert ver002.sections[0].commits[0].summary == "Commit 2 on develop."
-    assert len(ver001.sections[0].commits) == 1
-    assert ver001.sections[0].commits[0].summary == "Commit 1 on master."
+    assert len(unreleased.grouped_commits) == 0
+    assert len(ver004.grouped_commits[0].commits) == 3
+    assert ver004.grouped_commits[0].commits[0].summary == "Commit 5 on master."
+    assert ver004.grouped_commits[0].commits[1].summary == "Commit 3 on develop."
+    assert ver004.grouped_commits[0].commits[2].summary == "Commit 2 on develop."
+    assert len(ver003.grouped_commits[0].commits) == 1
+    assert ver003.grouped_commits[0].commits[0].summary == "Commit 4 on master."
+    assert len(ver002.grouped_commits[0].commits) == 1
+    assert ver002.grouped_commits[0].commits[0].summary == "Commit 2 on develop."
+    assert len(ver001.grouped_commits[0].commits) == 1
+    assert ver001.grouped_commits[0].commits[0].summary == "Commit 1 on master."

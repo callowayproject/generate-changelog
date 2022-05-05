@@ -5,11 +5,12 @@ from pathlib import Path
 from test import conftest
 
 import pytest
+from conftest import commit_factory
 from faker import Faker
 from pytest import param
 
 from generate_changelog import configuration, templating
-from generate_changelog.configuration import DEFAULT_SECTION_PATTERNS, get_config
+from generate_changelog.configuration import DEFAULT_COMMIT_CLASSIFIERS, get_config
 from generate_changelog.context import CommitContext
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
@@ -19,22 +20,22 @@ fake = Faker()
 @pytest.mark.parametrize(
     ["string", "expected"],
     (
-        param("Newly added something", "New"),
-        param("added something new", "New"),
-        param("changed something new", "Updates"),
-        param("Updates something old", "Updates"),
-        param("renamed something I didn't like.", "Updates"),
-        param("Removed something old", "Updates"),
-        param("deletes something old", "Updates"),
-        param("improved something old", "Updates"),
-        param("refactored something old", "Updates"),
-        param("fixed an error or something", "Fixes"),
-        param("I don't know what this does", "Other"),
+        param(commit_factory(summary="Newly added something"), "New"),
+        param(commit_factory(summary="added something new"), "New"),
+        param(commit_factory(summary="changed something new"), "Updates"),
+        param(commit_factory(summary="Updates something old"), "Updates"),
+        param(commit_factory(summary="renamed something I didn't like."), "Updates"),
+        param(commit_factory(summary="Removed something old"), "Updates"),
+        param(commit_factory(summary="deletes something old"), "Updates"),
+        param(commit_factory(summary="improved something old"), "Updates"),
+        param(commit_factory(summary="refactored something old"), "Updates"),
+        param(commit_factory(summary="fixed an error or something"), "Fixes"),
+        param(commit_factory(summary="I don't know what this does"), "Other"),
     ),
 )
 def test_first_matching(string, expected):
     """The first matching function should properly categorize a string."""
-    assert templating.first_matching(DEFAULT_SECTION_PATTERNS, string) == expected
+    assert templating.first_matching(DEFAULT_COMMIT_CLASSIFIERS, string) == expected
 
 
 def test_commit_context():
@@ -45,6 +46,7 @@ def test_commit_context():
         commit_datetime=commit.committed_datetime,
         committer=f"{commit.committer.name} <{commit.committer.email}>",
         summary=commit.summary,
+        grouping=("a", "b"),
         body="\n".join(commit.message.splitlines()[1:]),
     )
     assert commit.hexsha[:7] == context.short_sha
@@ -62,6 +64,7 @@ def test_commit_with_no_email():
         commit_datetime=commit.committed_datetime,
         committer=f"{commit.committer.name} <{commit.committer.email}>",
         summary=commit.summary,
+        grouping=(None,),
         body="\n".join(commit.message.splitlines()[1:]),
         metadata={"trailers": {"co-authored-by": [name_only]}},
     )
@@ -77,10 +80,10 @@ def test_get_context_from_tags(default_repo):
     v = context[0]
     assert v.label == get_config().unreleased_label
     assert v.date_time.date() == datetime.date(2022, 1, 6)
-    assert len(v.sections) == 1
-    assert v.sections[0].label == "Updates"
-    assert len(v.sections[0].commits) == 1
-    assert v.sections[0].commits[0].metadata["trailers"]["co-committed-by"] == [
+    assert len(v.grouped_commits) == 1
+    assert v.grouped_commits[0].grouping == ("Updates",)
+    assert len(v.grouped_commits[0].commits) == 1
+    assert v.grouped_commits[0].commits[0].metadata["trailers"]["co-committed-by"] == [
         "Juliet <juliet@example.com>",
         "Charly <charly@example.com>",
     ]
@@ -89,11 +92,11 @@ def test_get_context_from_tags(default_repo):
     assert v.label == "0.0.3"
     assert v.previous_tag == "0.0.2"
     assert v.date_time.date() == datetime.date(2022, 1, 5)
-    assert len(v.sections) == 1
-    assert v.sections[0].label == "New"
-    assert len(v.sections[0].commits) == 2
-    assert len(v.sections[0].commits[0].metadata["trailers"]) == 5
-    assert len(v.sections[0].commits[1].metadata["trailers"]) == 0
+    assert len(v.grouped_commits) == 1
+    assert v.grouped_commits[0].grouping == ("New",)
+    assert len(v.grouped_commits[0].commits) == 2
+    assert len(v.grouped_commits[0].commits[0].metadata["trailers"]) == 5
+    assert len(v.grouped_commits[0].commits[1].metadata["trailers"]) == 0
 
 
 def test_render(default_repo, capsys):
