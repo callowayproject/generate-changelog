@@ -10,7 +10,7 @@ from faker import Faker
 from pytest import param
 
 from generate_changelog import configuration, templating
-from generate_changelog.configuration import DEFAULT_COMMIT_CLASSIFIERS, get_config
+from generate_changelog.configuration import DEFAULT_COMMIT_CLASSIFIERS, get_default_config
 from generate_changelog.context import CommitContext
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
@@ -74,11 +74,11 @@ def test_commit_with_no_email():
 
 def test_get_context_from_tags(default_repo):
     """Get context from tags should return gits correctly filtered."""
-    context = templating.get_context_from_tags(default_repo, get_config())
+    config = get_default_config()
+    context = templating.get_context_from_tags(default_repo, config)
     assert len(context) == 4
-
     v = context[0]
-    assert v.label == get_config().unreleased_label
+    assert v.label == config.unreleased_label
     assert v.date_time.date() == datetime.date(2022, 1, 6)
     assert len(v.grouped_commits) == 1
     assert v.grouped_commits[0].grouping == ("Updates",)

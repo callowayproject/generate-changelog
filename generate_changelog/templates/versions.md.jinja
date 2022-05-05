@@ -3,7 +3,7 @@
 
 {% for grp_commit in version.grouped_commits -%}
     {% if loop.previtem is defined %}
-        {% set heading_level = diff_index(loop.previtem, grp_commit.grouping) %}
+        {% set heading_level = diff_index(loop.previtem.grouping, grp_commit.grouping) %}
     {% else %}
         {% set heading_level = 0 %}
     {%- endif %}
@@ -13,6 +13,6 @@
 
     {% for commit in grp_commit.commits %}
         {% include "commit.md.jinja" %}
-    {%- endfor %}
+    {% endfor %}
 {%- endfor %}
 {%- endfor %}

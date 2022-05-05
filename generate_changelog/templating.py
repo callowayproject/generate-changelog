@@ -4,7 +4,7 @@ from typing import List, Optional
 import collections
 import re
 
-from git import Actor, Commit, Repo
+from git import Actor, Repo
 from jinja2 import ChoiceLoader, Environment, FileSystemLoader, PackageLoader, select_autoescape
 from utilities import diff_index, resolve_name
 
@@ -109,20 +109,18 @@ def generate_commit_context(commit, config, version_metadata_func) -> CommitCont
     """
     commit_metadata_func = MetadataCollector()
     summary_pipeline = pipeline_factory(
-        action_list=get_config().summary_pipeline,
+        action_list=config.summary_pipeline,
         commit_metadata_func=commit_metadata_func,
         version_metadata_func=version_metadata_func,
     )
     summary = summary_pipeline.run(commit.summary)
     body_pipeline = pipeline_factory(
-        action_list=get_config().body_pipeline,
+        action_list=config.body_pipeline,
         commit_metadata_func=commit_metadata_func,
         version_metadata_func=version_metadata_func,
     )
     body_text = "\n".join(commit.message.splitlines()[1:])
     body = body_pipeline.run(body_text)
-    category = first_matching(config.commit_classifiers, commit)
-    commit_metadata_func(category=category)
 
     commit_ctx = CommitContext(
         sha=commit.hexsha,
@@ -133,6 +131,8 @@ def generate_commit_context(commit, config, version_metadata_func) -> CommitCont
         grouping=(),
         metadata=commit_metadata_func.metadata.copy(),
     )
+    category = first_matching(config.commit_classifiers, commit_ctx)
+    commit_ctx.metadata["category"] = category
 
     # The grouping is a tuple of the appropriate values according to the group_by configuration
     # We can sort commits later and grouped by this.
@@ -153,7 +153,12 @@ def sort_group_commits(commit_groups: dict) -> list:
     """
     # Props to this sorting method goes to:
     # https://scipython.com/book2/chapter-4-the-core-python-language-ii/questions/sorting-a-list-containing-none/
-    sorted_groups = sorted(commit_groups.items(), key=lambda x: tuple((i is None, i) for i in x))
+
+    def key_func(input_value) -> tuple:
+        """Generate the sortable key for tuples that may contain None."""
+        return tuple((i is not None, i) for i in input_value[0])
+
+    sorted_groups = sorted(commit_groups.items(), key=key_func)
     return [GroupedCommit(*item) for item in sorted_groups]
 
 
@@ -184,13 +189,13 @@ def render(repository: Repo, config: Configuration, starting_tag: Optional[str] 
     return default_env.get_template("base.md.jinja").render(context)
 
 
-def first_matching(actions: list, commit: Commit) -> str:
+def first_matching(actions: list, commit: CommitContext) -> str:
     """
     Return the first section that matches the given commit summary.
 
     Args:
         actions: A mapping of section names to a list of regular expressions for matching.
-        commit: The commit summary to match to a section.
+        commit: The commit context to evaluate
 
     Returns:
         The name of the section.

@@ -57,7 +57,7 @@ DEFAULT_COMMIT_CLASSIFIERS = [
     {
         "action": "SummaryRegexMatch",
         "category": "Updates",
-        "kwargs": {"pattern": r"(?i)^(?:update|change|rename|remove|delete|improve|refactor|chg)[^\n]*$"},
+        "kwargs": {"pattern": r"(?i)^(?:update|change|rename|remove|delete|improve|refactor|chg|modif)[^\n]*$"},
     },
     {"action": "SummaryRegexMatch", "category": "Fixes", "kwargs": {"pattern": r"(?i)^(?:fix)[^\n]*$"}},
     {"action": None, "category": "Other"},  # Match all lines

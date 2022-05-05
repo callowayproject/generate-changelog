@@ -43,7 +43,7 @@ class MetadataMatch:
     Examples:
         To group breaking changes::
 
-            - action: commit_metadata_matches
+            - action: MetadataMatch
               category: Breaking Changes
               kwargs:
                 attribute: has_breaking_change
@@ -52,7 +52,7 @@ class MetadataMatch:
 
         To match a specific value::
 
-            - action: CommitMetadata
+            - action: MetadataMatch
               category: Feature
               kwargs:
                 attribute: commit_type
@@ -61,7 +61,7 @@ class MetadataMatch:
 
         To match multiple values::
 
-            - action: CommitMetadata
+            - action: MetadataMatch
               category: Updates
               kwargs:
                 attribute: commit_type
@@ -104,6 +104,7 @@ class MetadataMatch:
             )
         self.operator = self.operator_map[operator]
         self.value = value
+        self.swap_operands = operator in {"in", "not in"}
 
     def __call__(self, commit: CommitContext) -> bool:
         """Does the commit metadata attribute meet the conditional?"""
@@ -111,4 +112,6 @@ class MetadataMatch:
             return False
 
         attr_value = commit.metadata[self.attribute]
+        if self.swap_operands:
+            return self.operator(self.value, attr_value)
         return self.operator(attr_value, self.value)
