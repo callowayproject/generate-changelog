@@ -1,5 +1,5 @@
 """Context definitions."""
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import collections
 import datetime
@@ -27,6 +27,9 @@ class CommitContext:
 
     committer: str
     """The name and email of the committer as `name <email@ex.com>`."""
+
+    grouping: tuple = field(default_factory=tuple)
+    """The values to group this commit based on the ``group_by`` configuration."""
 
     metadata: dict = field(default_factory=dict)
     """Metadata for this commit parsed from the commit message."""
@@ -84,14 +87,11 @@ class CommitContext:
 
 
 @dataclass
-class SectionContext:
-    """Section information for the template context."""
+class GroupedCommit:
+    """A combination of a tuple of the sorted values and a list of the CommitContexts in that group."""
 
-    label: str
-    """The section label."""
-
-    commits: List[CommitContext] = field(default_factory=list)
-    """The commits that belong in this section."""
+    grouping: Tuple[str]
+    commits: List[CommitContext]
 
 
 @dataclass
@@ -113,7 +113,7 @@ class VersionContext:
     tagger: Optional[str] = None
     """The name and email of the person who tagged this version in `name <email@ex.com>` format."""
 
-    sections: List[SectionContext] = field(default_factory=list)
+    grouped_commits: List[GroupedCommit] = field(default_factory=list)
     """The sections that group the commits in this version."""
 
     metadata: dict = field(default_factory=dict)
