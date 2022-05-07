@@ -22,11 +22,18 @@ def version_callback(value: bool):
 
 def generate_config_callback(value: bool):
     """Generate a default configuration file."""
-    if value:  # pragma: no cover
-        f = Path.cwd() / Path(DEFAULT_CONFIG_FILE_NAMES[0])
-        write_default_config(f)
-        typer.echo(f"The configuration file was written to {f}.")
-        raise typer.Exit()
+    if not value:  # pragma: no cover
+        return
+    f = Path.cwd() / Path(DEFAULT_CONFIG_FILE_NAMES[0])
+    file_path = f.expanduser().resolve()
+    if file_path.exists():
+        overwrite = typer.confirm(f"{file_path} already exists. Overwrite it?")
+        if not overwrite:
+            typer.echo("Aborting configuration file generation.")
+            typer.Abort()
+    write_default_config(f)
+    typer.echo(f"The configuration file was written to {f}.")
+    raise typer.Exit()
 
 
 @app.command()
