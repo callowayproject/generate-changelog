@@ -247,13 +247,21 @@ def conv_commit_repo(bare_git_repo, faker):
     master = bare_git_repo.heads.master  # right-hand side is ahead of us, in the future
     merge_base = bare_git_repo.merge_base(branch5, master)  # allows for a three-way merge
     idx.merge_tree(master, base=merge_base)  # write the merge result into index
-    idx.commit("Merge branch branch5 into master", parent_commits=(branch5.commit, master.commit))
+    idx.commit(
+        "Merge branch branch5 into master",
+        parent_commits=(branch5.commit, master.commit),
+        commit_date="2020-07-20 07:58:00",
+    )
 
     # merge branch branch7 into master
     master = bare_git_repo.heads.master  # right-hand side is ahead of us, in the future
     merge_base = bare_git_repo.merge_base(branch7, master)  # allows for a three-way merge
     idx.merge_tree(master, base=merge_base)  # write the merge result into index
-    idx.commit("Merge branch branch7 into master", parent_commits=(branch7.commit, master.commit))
+    idx.commit(
+        "Merge branch branch7 into master",
+        parent_commits=(branch7.commit, master.commit),
+        commit_date="2020-07-20 07:58:00",
+    )
 
     return bare_git_repo
 

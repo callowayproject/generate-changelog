@@ -109,7 +109,7 @@ def resolve_name(obj: Any, name: str, default=None) -> Any:
                     ):  # un-subscript-able object
                         return default
         return current
-    except Exception:  # NOQA
+    except Exception:  # NOQA  # pragma: no cover
         return default
 
 
