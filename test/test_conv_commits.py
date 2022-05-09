@@ -270,6 +270,8 @@ def test_conventional_commits(conv_commit_repo):
     config_file_path = FIXTURES_DIR / "conventional-commit.yaml"
     config = configuration.get_default_config()
     config.update_from_file(config_file_path)
+    config.template_dirs = []
+
     output = templating.render(conv_commit_repo, config, None)
     expected = (FIXTURES_DIR / "rendered_conv_commit_repo.md").read_text()
     assert output.strip() == expected.strip()

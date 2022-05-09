@@ -102,6 +102,7 @@ def test_get_context_from_tags(default_repo):
 def test_render(default_repo, capsys):
     """Render should render the changelog."""
     config = configuration.get_default_config()
+    config.template_dirs = []
     output = templating.render(default_repo, config, None)
     expected = (FIXTURES_DIR / "rendered_default_repo.md").read_text()
     assert output.strip() == expected.strip()
@@ -110,6 +111,7 @@ def test_render(default_repo, capsys):
 def test_render_from_tag(default_repo, capsys):
     """Render should render the changelog."""
     config = configuration.get_default_config()
+    config.template_dirs = []
     output = templating.render(default_repo, config, "0.0.3")
     expected = textwrap.dedent(
         """
