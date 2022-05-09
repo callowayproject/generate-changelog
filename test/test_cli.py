@@ -16,16 +16,19 @@ def test_app_version():
     assert generate_changelog.__version__ in result.stdout
 
 
-def test_app_generate_config():
+def test_app_generate_config(mocker):
+    func = mocker.patch("generate_changelog.cli.write_default_config")
     result = runner.invoke(app, ["--generate-config"])
     if result.exit_code != 0:
         print(result.stdout)
+        traceback.print_exception(*result.exc_info)
     assert result.exit_code == 0
+    func.assert_called()
     assert "The configuration file was written to" in result.stdout
 
 
 def test_app_generate_changelog(default_repo):
-    config = Path(__file__).parent / "fixtures" / "sample_config.yml"
+    config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
     result = runner.invoke(app, ["-r", default_repo.git_dir, "-c", str(config)])
     if result.exit_code != 0:
         print(result.stdout)

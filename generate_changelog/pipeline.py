@@ -97,16 +97,16 @@ class Action:
         Returns:
             The processed string
         """
-        from generate_changelog.templating import pipeline_env
+        from generate_changelog.templating import get_pipeline_env
 
         # render string args, and kwarg-values using jinja2
         new_args = [
-            pipeline_env.from_string(arg, globals=context).render() if isinstance(arg, str) else arg
+            get_pipeline_env().from_string(arg, globals=context).render() if isinstance(arg, str) else arg
             for arg in self._args
         ]
 
         new_kwargs = {
-            key: pipeline_env.from_string(val, globals=context).render() if isinstance(val, str) else val
+            key: get_pipeline_env().from_string(val, globals=context).render() if isinstance(val, str) else val
             for key, val in self._kwargs.items()
         }
 

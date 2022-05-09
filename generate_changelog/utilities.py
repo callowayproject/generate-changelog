@@ -29,9 +29,9 @@ def eval_if_callable(value: Any) -> Any:
 
     if is_action(value):
         # convert it into a single action and call it
-        return pipeline_factory([value], **config.variables).run()
+        return pipeline_factory([value], **config.rendered_variables).run()
     elif is_pipeline(value):
-        return pipeline_factory(value, **config.variables).run()
+        return pipeline_factory(value, **config.rendered_variables).run()
 
     return value() if callable(value) else value
 

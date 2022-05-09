@@ -76,8 +76,12 @@ def main(
         repository = Repo(search_parent_directories=True)
 
     # get starting tag based on configuration
-    start_tag_pipeline = pipeline_factory(config.starting_tag_pipeline, **config.variables)
-    starting_tag = start_tag_pipeline.run()
+    if config.starting_tag_pipeline:
+        start_tag_pipeline = pipeline_factory(config.starting_tag_pipeline, **config.variables)
+        starting_tag = start_tag_pipeline.run()
+    else:
+        starting_tag = None
+
     if not starting_tag:
         typer.echo("No starting tag found. Generating entire change log.")
     else:
