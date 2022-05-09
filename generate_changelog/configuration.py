@@ -1,6 +1,7 @@
 """Configuration management for generate_changelog."""
-
 from typing import Callable, Optional, Union
+
+from functools import cached_property
 
 try:
     from typing import TypeAlias
@@ -28,6 +29,10 @@ DEFAULT_CONFIG_FILE_NAMES = [
     DEFAULT_CONFIG_FILE_NAME,
 ]
 """Valid permutations of the default configuration file name."""
+
+DEFAULT_VARIABLES = {
+    "changelog_filename": "CHANGELOG.md",
+}
 
 DEFAULT_VALID_AUTHOR_TOKENS = [
     "author",
@@ -63,9 +68,8 @@ DEFAULT_COMMIT_CLASSIFIERS = [
     {"action": None, "category": "Other"},  # Match all lines
 ]
 
-
 DEFAULT_STARTING_TAG_PIPELINE = [
-    {"action": "ReadFile", "kwargs": {"filename": "CHANGELOG.md"}},
+    {"action": "ReadFile", "kwargs": {"filename": "{{ changelog_filename }}"}},
     {
         "action": "FirstRegExMatch",
         "kwargs": {
@@ -99,7 +103,7 @@ DEFAULT_OUTPUT_PIPELINE = [
     {
         "action": "IncrementalFileInsert",
         "kwargs": {
-            "filename": "CHANGELOG.md",
+            "filename": "{{ changelog_filename }}",
             "last_heading_pattern": r"(?im)^## \d+\.\d+(?:\.\d+)?\s+\([0-9]+-[0-9]{2}-[0-9]{2}\)$",
         },
     },
@@ -109,22 +113,25 @@ DEFAULT_GROUP_BY = [
     "metadata.category",
 ]
 
+DEFAULT_TEMPLATE_DIRS = [".github/changelog_templates/"]
+
 
 @dataclass
 class Configuration:
-    """Configuration options for generate_changelog."""
+    """Configuration options for generate-changelog."""
 
     variables: dict = field(default_factory=dict)
     """User variables for reference in other parts of the configuration."""
 
     starting_tag_pipeline: Optional[list] = field(default_factory=list)
-    """Generate the changelog from this tag. ``None`` means start at first commit."""
+    """Pipeline to find the most recent tag for incremental changelog generation.
+    Leave empty to always start at first commit."""
 
     #
     # Output
     #
     unreleased_label: str = "Unreleased"
-    """Used as the section title of the changes since the last valid tag."""
+    """Used as the version title of the changes since the last valid tag."""
 
     summary_pipeline: list = field(default_factory=list)
     """Process the commit's first line for use in the changelog."""
@@ -133,13 +140,13 @@ class Configuration:
     """Process the commit's body for use in the changelog."""
 
     output_pipeline: list = field(default_factory=list)
-    """Pipeline to do something with the full or partial changelog."""
+    """Process and store the full or partial changelog."""
 
     template_dirs: list = field(default_factory=list)
-    """Paths to look for output generation templates."""
+    """Full or relative paths to look for output generation templates."""
 
     group_by: list = field(default_factory=list)
-    """Group the commits within a version by commit attributes."""
+    """Group the commits within a version by these commit attributes."""
 
     #
     # Commit filtering
@@ -148,16 +155,27 @@ class Configuration:
     """Only tags matching this regular expression are used for the changelog."""
 
     include_merges: bool = False
-    """Tells git-log whether to include merge commits in the log."""
+    """Tells ``git-log`` whether to include merge commits in the log."""
 
     ignore_patterns: list = field(default_factory=list)
-    """Ignore commits that match any of these regular expression patterns."""
+    """Ignore commits whose summary line matches any of these regular expression patterns."""
 
     commit_classifiers: list = field(default_factory=list)
-    """Set the commit's category metadata to the first classifier that matches."""
+    """Set the commit's category metadata to the first classifier that returns ``True``."""
 
     valid_author_tokens: list = field(default_factory=list)
     """Tokens in git commit trailers that indicate authorship."""
+
+    @cached_property
+    def rendered_variables(self) -> dict:
+        """Render each variable value using the previous variables as the context."""
+        from .templating import get_pipeline_env
+
+        context = {}
+        for key, value in self.variables.items():
+            context[key] = get_pipeline_env(self).from_string(value, globals=context).render()
+
+        return context
 
     def update_from_file(self, filename: Path):
         """
@@ -183,7 +201,9 @@ class Configuration:
         values = yaml.safe_load(content)
 
         for key, val in values.items():
-            if hasattr(self, key):
+            if key == "variables" and isinstance(val, dict):
+                self.variables.update(val)
+            elif hasattr(self, key):
                 setattr(self, key, val)
 
 
@@ -195,6 +215,7 @@ def get_default_config() -> Configuration:
         A new Configuration object
     """
     return Configuration(
+        variables=DEFAULT_VARIABLES,
         ignore_patterns=DEFAULT_IGNORE_PATTERNS,
         commit_classifiers=DEFAULT_COMMIT_CLASSIFIERS,
         body_pipeline=DEFAULT_BODY_PIPELINE,
@@ -203,6 +224,7 @@ def get_default_config() -> Configuration:
         output_pipeline=DEFAULT_OUTPUT_PIPELINE,
         valid_author_tokens=DEFAULT_VALID_AUTHOR_TOKENS,
         group_by=DEFAULT_GROUP_BY,
+        template_dirs=DEFAULT_TEMPLATE_DIRS,
     )
 
 
