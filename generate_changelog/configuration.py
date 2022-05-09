@@ -12,7 +12,10 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 import typer
-import yaml
+from ruamel.yaml import YAML
+
+yaml = YAML()
+yaml.indent(mapping=2, sequence=4, offset=2)
 
 StrOrCallable: TypeAlias = Union[str, Callable[[], str]]
 """The type should be either a string or a callable that returns a string."""
@@ -198,7 +201,7 @@ class Configuration:
             raise typer.Exit(1)
 
         content = file_path.read_text()
-        values = yaml.safe_load(content)
+        values = yaml.load(content)
 
         for key, val in values.items():
             if key == "variables" and isinstance(val, dict):
@@ -235,14 +238,37 @@ def write_default_config(filename: Path):
     Args:
         filename: Path to write to
     """
+    from ruamel.yaml.comments import CommentedMap
+
+    from ._attr_docs import attribute_docstrings
+
     file_path = filename.expanduser().resolve()
-    config = asdict(get_default_config())
-    with file_path.open("w") as f:
-        yaml.safe_dump(config, f, sort_keys=False)
+    default_config = get_default_config()
+
+    config_docstrings = attribute_docstrings(Configuration)
+
+    yaml_config = CommentedMap(**asdict(default_config))
+    yaml_config.yaml_set_start_comment(
+        "For more configuration information, please see https://coordt.github.io/generate-changelog/"
+    )
+    for attr, doc in config_docstrings.items():
+        yaml_config.yaml_set_comment_before_after_key(key=attr, before="")
+        yaml_config.yaml_set_comment_before_after_key(key=attr, before=doc)
+    yaml.dump(yaml_config, file_path)
 
 
 _CONFIG = None
 """The global running configuration."""
+
+
+def set_config(key, value):
+    """Set a configuration key to a value."""
+    global _CONFIG
+
+    if _CONFIG is None:
+        _CONFIG = get_default_config()
+    setattr(_CONFIG, key, value)
+    return _CONFIG
 
 
 def get_config() -> Configuration:

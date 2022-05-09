@@ -1,5 +1,5 @@
 GitPython
 jinja2
 more-itertools
-pyyaml
+ruamel.yaml
 typer

@@ -34,3 +34,12 @@ def test_write_default_config(tmp_path):
 
     test_config.update_from_file(test_config_file)
     assert default_config == test_config
+
+
+def test_rendered_variables():
+    """Variables can contain templates to other variables."""
+    config = configuration.get_default_config()
+
+    config.variables = {"root_url": "https://www.example.com/", "sub_url": "{{ root_url }}sub_path/2"}
+
+    assert config.rendered_variables["sub_url"] == "https://www.example.com/sub_path/2"
