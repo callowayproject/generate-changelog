@@ -18,7 +18,7 @@ class SummaryRegexMatch:
     Example:
         In ``.changelog-config.yaml`` ::
 
-            section_classifiers:
+            commit_classifiers:
             - action: SummaryRegexMatch
               category: New
               kwargs:
