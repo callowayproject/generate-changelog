@@ -80,7 +80,7 @@ color_output = true
 
 [tool.pydocstyle]
 convention = "google"
-add-ignore = ["D107", "D200", "D212"]
+add-ignore = ["D105", "D107", "D200", "D212"]
 match = "(?!test_).*\\.py"
 
 [tool.black]
