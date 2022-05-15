@@ -1,7 +1,7 @@
 - {{ commit.summary }}
   {{ commit.body|indent(2, first=True) }}
   {% for key, val in commit.metadata["trailers"].items() %}
-  {% if key not in VALID_AUTHOR_TOKENS %}
+  {% if key not in valid_author_tokens %}
   **{{ key }}:** {{ val|join(", ") }}
 
   {% endif %}

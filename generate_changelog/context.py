@@ -1,12 +1,13 @@
-"""Context definitions."""
-from typing import List, Optional, Tuple
+"""Context definitions used in templates."""
+from typing import Callable, List, Optional, Tuple
 
 import collections
 import datetime
 import re
 from dataclasses import dataclass, field
 
-from generate_changelog.configuration import get_config
+from generate_changelog.configuration import Configuration, get_config
+from generate_changelog.utilities import diff_index
 
 
 @dataclass
@@ -87,7 +88,7 @@ class CommitContext:
 
 
 @dataclass
-class GroupedCommit:
+class GroupingContext:
     """A combination of a tuple of the sorted values and a list of the CommitContexts in that group."""
 
     grouping: Tuple[str]
@@ -113,8 +114,49 @@ class VersionContext:
     tagger: Optional[str] = None
     """The name and email of the person who tagged this version in `name <email@ex.com>` format."""
 
-    grouped_commits: List[GroupedCommit] = field(default_factory=list)
+    grouped_commits: List[GroupingContext] = field(default_factory=list)
     """The sections that group the commits in this version."""
 
     metadata: dict = field(default_factory=dict)
     """Metadata for this version parsed from commits."""
+
+
+@dataclass
+class ChangelogContext:
+    """The primary context used when rendering a changelog."""
+
+    config: Configuration
+    """The changelog generation configuration."""
+
+    versions: List[VersionContext] = field(default_factory=list)
+    """The version contexts to render in the changelog."""
+
+    # Fields generated from the configuration post init
+
+    unreleased_label: str = field(init=False)
+    """The configured label used as the version title of the changes since the last valid tag."""
+
+    valid_author_tokens: List[str] = field(init=False, default_factory=list)
+    """The configured tokens in git commit trailers that indicate authorship."""
+
+    group_by: list[str] = field(init=False, default_factory=list)
+    """The configured grouping aspects for commits within a version."""
+
+    group_depth: int = field(init=False)
+    """The number of levels version commits are grouped by."""
+
+    diff_index: Callable = field(init=False)
+
+    def __post_init__(self):
+        self.unreleased_label = self.config.unreleased_label
+        self.valid_author_tokens = self.config.valid_author_tokens
+        self.group_by = self.config.group_by
+        self.group_depth = len(self.config.group_by)
+        self.diff_index = diff_index
+
+        for var, val in self.config.rendered_variables.items():
+            setattr(self, var, val)
+
+    def as_dict(self):
+        """Safely generate a dict version of this object."""
+        return self.__dict__

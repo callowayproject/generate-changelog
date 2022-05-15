@@ -10,10 +10,10 @@ from jinja2 import ChoiceLoader, Environment, FileSystemLoader, PackageLoader, s
 from generate_changelog import git_ops
 from generate_changelog.actions.metadata import MetadataCollector
 from generate_changelog.configuration import Configuration, get_config
-from generate_changelog.context import CommitContext, GroupedCommit, VersionContext
+from generate_changelog.context import ChangelogContext, CommitContext, GroupingContext, VersionContext
 from generate_changelog.pipeline import Action, pipeline_factory
 
-from .utilities import diff_index, resolve_name
+from .utilities import resolve_name
 
 
 def get_default_env(config: Optional[Configuration] = None):
@@ -163,7 +163,7 @@ def sort_group_commits(commit_groups: dict) -> list:
         return tuple((i is not None, i) for i in input_value[0])
 
     sorted_groups = sorted(commit_groups.items(), key=key_func)
-    return [GroupedCommit(*item) for item in sorted_groups]
+    return [GroupingContext(*item) for item in sorted_groups]
 
 
 def render(repository: Repo, config: Configuration, starting_tag: Optional[str] = None) -> str:
@@ -179,18 +179,13 @@ def render(repository: Repo, config: Configuration, starting_tag: Optional[str] 
         The full or partial changelog
     """
     version_context = get_context_from_tags(repository, config, starting_tag)
-    context = config.variables.copy()
-    context["versions"] = version_context
-    context["VALID_AUTHOR_TOKENS"] = config.valid_author_tokens
-    context["diff_index"] = diff_index
-    context["group_depth"] = len(config.group_by)
-
+    context = ChangelogContext(config=config, versions=version_context)
     if starting_tag:
         heading_str = get_default_env(config).get_template("heading.md.jinja").render()
-        versions_str = get_default_env(config).get_template("versions.md.jinja").render(context)
+        versions_str = get_default_env(config).get_template("versions.md.jinja").render(context.as_dict())
         return "\n".join([heading_str, versions_str])
 
-    return get_default_env(config).get_template("base.md.jinja").render(context)
+    return get_default_env(config).get_template("base.md.jinja").render(context.as_dict())
 
 
 def first_matching(actions: list, commit: CommitContext) -> str:
