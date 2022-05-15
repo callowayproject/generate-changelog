@@ -1,75 +1,102 @@
 # Changelog
 
+## Unreleased (2022-05-07)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.6.1...HEAD)
+
+### New
+
+- Added existence check for configuration file during generation. [9e00e1c](https://github.com/coordt/generate-changelog/commit/9e00e1c67390b2ed414dca2fa28ac87cb6b3d765)
+    
+  - Asks if you want to overwrite existing configuration
+- Added tests for command line interface. [12837b6](https://github.com/coordt/generate-changelog/commit/12837b6e0ed4c5f1815bf25c667cd0a86351886e)
+    
+- Added tests for conventional commits. [6bac10b](https://github.com/coordt/generate-changelog/commit/6bac10b31c925eb9b40e5f228d19a92d0b32c8de)
+    
+- Added tests for matching and metadata. [7dac045](https://github.com/coordt/generate-changelog/commit/7dac04502081302fdd7893feab9d55dc627340ef)
+    
+- Added conventional commit actions. [34615cd](https://github.com/coordt/generate-changelog/commit/34615cd974ab0175acf09496490a00a447a4718e)
+    
+  - ParseConventionalCommit
+  - ParseBreakingChangeFooter
+### Other
+
+- - Updated tests to use new contexts. [b222e96](https://github.com/coordt/generate-changelog/commit/b222e96b70145a3f0485d7d21bb92d5b2edec7cf)
+    
+### Updates
+
+- Updated the rendering for new grouping method. [16dd292](https://github.com/coordt/generate-changelog/commit/16dd292d9a042842f6bcbcb0b0623b49ad1b1b1b)
+    
+  - Added `resolve_name` and `diff_index` utility methods
+  - refactored the `get_context_from_tags` function
+  - added `diff_index` function to template context
+  - added `group_depth` variable to template context
+  - refactored `first_matching` to use the commit_classifiers
+  - Updated the `versions.md.jinja`, `section_heading.md.jinja`, and `commit.md.jinja` templates
+- Changed the template contexts. [71d4e01](https://github.com/coordt/generate-changelog/commit/71d4e01cb8c0caed81bef91eead948f57c9f04f1)
+    
+  - `CommitContext` now has a `grouping` tuple
+  - Replaced `SectionContext` with `GroupedCommmit`
+  - Replaced `VersionContext.sections` with `VersionContext.grouped_commits`
+- Changed method of grouping commits within versions. [78d9813](https://github.com/coordt/generate-changelog/commit/78d98136dfb791c420309d239faadcb7b73f803c)
+    
+  - added `group_by` to configuration
+  - added `commit_classifiers` to configuration
+  - added `SummaryRegexMatch` as a commit classifier to emulate previous functionality
+  - added `MetadataMatch` to use commit metadata to assign to groups
 ## 0.6.1 (2022-05-02)
 
-[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.6.0...0.6.1)
 
 ### Fixes
 
 - Fixed Makefile. [7f4384d](https://github.com/coordt/generate-changelog/commit/7f4384d4a38657ed84ffa7470ea95440c17cb322)
     
-
-
 ## 0.6.0 (2022-05-02)
 
-[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
-
-### New
-
-- Added Github Action CI configs. [4737ce8](https://github.com/coordt/generate-changelog/commit/4737ce800378113848edeef46a600d42850773b1)
-    
-
-- Added a test for cross-branch tags. [b5a523c](https://github.com/coordt/generate-changelog/commit/b5a523c8b58424b1a7bd0ad1339f30e71e9d6c8a)
-    
-
-### Updates
-
-- Updated release script. [44d1b93](https://github.com/coordt/generate-changelog/commit/44d1b937ad41a1c964ef5fa57531a3967ff25814)
-    
-
-- Updated documentation. [9b56b4a](https://github.com/coordt/generate-changelog/commit/9b56b4a0bfe90bfd46eae58aa233abf1db18bc1f)
-    
-
-- Changed pre-commit to exclude tests. [0f9e56d](https://github.com/coordt/generate-changelog/commit/0f9e56dd09bde764583ff832c35b5ff49bada6cf)
-    
-
-- Changed and standardized to term 'summary'. [2bd7634](https://github.com/coordt/generate-changelog/commit/2bd7634b9202407fe55c6e65f67331d6e41602b4)
-    
-
-- Refactored context into new module. [5b1e921](https://github.com/coordt/generate-changelog/commit/5b1e92160c5878a02edf5ae0993ad866322f3e9d)
-    
-
-- Removed variable start string difference from pipeline env. [5dc5903](https://github.com/coordt/generate-changelog/commit/5dc59039da3a8c10fdfd84874da969d7c3f1f188)
-    
-  - Didn't make sense to have a different method of specifying variables in the pipeline from the default.
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.5.0...0.6.0)
 
 ### Fixes
 
 - Fixed Makefile. [1fa22f9](https://github.com/coordt/generate-changelog/commit/1fa22f9eb37ddf978c9edb71e08c8ae431638155)
     
-
 - Fixed configuraation import. [23d437b](https://github.com/coordt/generate-changelog/commit/23d437bb22c6269d6b9ac3905a2b1dc35fcebf13)
     
-
 - Fixed Python 3.10 spec in workflows. [cacd9e2](https://github.com/coordt/generate-changelog/commit/cacd9e2393c8efe45aecd4a0d1b6fa84b5a32764)
     
-
 - Fixed primary branch name in workflows. [94e4203](https://github.com/coordt/generate-changelog/commit/94e4203f09c33071868b6b8d64f6e7b31c3d4c43)
     
+### New
 
+- Added Github Action CI configs. [4737ce8](https://github.com/coordt/generate-changelog/commit/4737ce800378113848edeef46a600d42850773b1)
+    
+- Added a test for cross-branch tags. [b5a523c](https://github.com/coordt/generate-changelog/commit/b5a523c8b58424b1a7bd0ad1339f30e71e9d6c8a)
+    
 ### Other
 
 - [pre-commit.ci] pre-commit autoupdate. [1e856c7](https://github.com/coordt/generate-changelog/commit/1e856c7ed2be8d1932d80a6b86c4e88ada0022aa)
     
   **updates:** - https://github.com/timothycrosley/isort → https://github.com/PyCQA/isort
 
-
 - [pre-commit.ci] pre-commit autoupdate. [373c1dd](https://github.com/coordt/generate-changelog/commit/373c1dd87134a0381ccd19f0cf50ff324248b0b0)
     
   **updates:** - https://github.com/timothycrosley/isort → https://github.com/PyCQA/isort
 
+### Updates
 
-
+- Updated release script. [44d1b93](https://github.com/coordt/generate-changelog/commit/44d1b937ad41a1c964ef5fa57531a3967ff25814)
+    
+- Updated documentation. [9b56b4a](https://github.com/coordt/generate-changelog/commit/9b56b4a0bfe90bfd46eae58aa233abf1db18bc1f)
+    
+- Changed pre-commit to exclude tests. [0f9e56d](https://github.com/coordt/generate-changelog/commit/0f9e56dd09bde764583ff832c35b5ff49bada6cf)
+    
+- Changed and standardized to term 'summary'. [2bd7634](https://github.com/coordt/generate-changelog/commit/2bd7634b9202407fe55c6e65f67331d6e41602b4)
+    
+- Refactored context into new module. [5b1e921](https://github.com/coordt/generate-changelog/commit/5b1e92160c5878a02edf5ae0993ad866322f3e9d)
+    
+- Removed variable start string difference from pipeline env. [5dc5903](https://github.com/coordt/generate-changelog/commit/5dc59039da3a8c10fdfd84874da969d7c3f1f188)
+    
+  - Didn't make sense to have a different method of specifying variables in the pipeline from the default.
 ## 0.5.0 (2022-03-15)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.4.0...0.5.0)
@@ -78,84 +105,64 @@
 
 - Added a minimal readme. [8ba2ec1](https://github.com/coordt/generate-changelog/commit/8ba2ec1133be3515720dbd6a20d2689ef4c96bba)
     
-
 - Added issue parsing actions. [95e0e35](https://github.com/coordt/generate-changelog/commit/95e0e35dd49ba85b1f5befc327b92c7ac2493ecc)
     
   - ParseIssue: base class and generic issue parser
   - ParseGitHubIssue: parse GitHub issue patterns
   - ParseJiraIssue: parse Jira issue patterns
   - ParseAzureBoardIssue: parse Azure board issue patterns
-
 - Added initial documentation for actions. [14ba3be](https://github.com/coordt/generate-changelog/commit/14ba3be844bb2af41c8e14d6d5d90bcfe730da6a)
     
-
 ### Updates
 
 - Renamed processors module to actions. [99284e3](https://github.com/coordt/generate-changelog/commit/99284e3d42a35f91d17d417bae948c35364de49f)
     
-
 ## 0.4.0 (2022-03-13)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.3.0...0.4.0)
-
-### New
-
-- Added support for `__contains__` in registry. [848421d](https://github.com/coordt/generate-changelog/commit/848421d8123738f7c876875301c114f4c8bc1087)
-    
-
-- Added action registry. [a363c25](https://github.com/coordt/generate-changelog/commit/a363c25588f2dff507150776d58fc4d876b1220c)
-    
-  - Accessing the registry ensures the built-in actions are loaded.
-
-- Added changelog configuration and templates. [32f4f23](https://github.com/coordt/generate-changelog/commit/32f4f23635b06839c19b3f811a1e2058dc81764e)
-    
-
-- Added a `previous_tag` attribute to the version context. [5760576](https://github.com/coordt/generate-changelog/commit/576057668dfc90eba19070d6f94d14d60ca9ada6)
-    
-
-- Added lazy evaluation of Jinja environments. [f57d007](https://github.com/coordt/generate-changelog/commit/f57d007f71105f4f4d6e6d1a005f39e71f816dfe)
-    
-  - This allows for proper setup of the configuration.
-
-- Added accessor for current configuration. [83a728f](https://github.com/coordt/generate-changelog/commit/83a728f6c09bf7c618f031820e35267504f5f866)
-    
-  - `get_config()` will instantiate a new configuration or return the existing configuration.
-
-### Updates
-
-- Updated processors doc strings. [9102ec7](https://github.com/coordt/generate-changelog/commit/9102ec757788f3210d381e57d41e64cd57d24718)
-    
-
-- Updated configuration doc strings. [ff818af](https://github.com/coordt/generate-changelog/commit/ff818aff84744fdea955e26f539ad9c8a3a953d2)
-    
-
-- Updated data_merge doc strings. [2840242](https://github.com/coordt/generate-changelog/commit/28402420496a0fb6403e7bed58eb0d74ee237457)
-    
-
-- Updated git_ops and lazy doc strings. [26ecd54](https://github.com/coordt/generate-changelog/commit/26ecd54bb3f2f38c1c2198afde0cedf296a18120)
-    
-
-- Updated pipeline doc strings. [2a2c052](https://github.com/coordt/generate-changelog/commit/2a2c05296541c71373b4f8d59ced3fd0d2fc4f35)
-    
-
-- Updated templating doc strings. [b942302](https://github.com/coordt/generate-changelog/commit/b942302c879f5dabfc0553f103d80864bd7ebadf)
-    
-
-- Updated utility doc strings. [a7ae93f](https://github.com/coordt/generate-changelog/commit/a7ae93f757792ebf4cabf5c51fc353f65d593fef)
-    
-
-- Removed ActionSpec. [29942ac](https://github.com/coordt/generate-changelog/commit/29942acbde3b7e4b9b9a68e2b840b38417643174)
-    
-  - It was unnecessary. Now Action classes are instantiated directly.
-
-- Removed author rendering from commits. [e44de67](https://github.com/coordt/generate-changelog/commit/e44de6784a7e26422679a5597b4e21322ac49f08)
-    
 
 ### Fixes
 
 - Fixed missing variables in render context. [0bed08e](https://github.com/coordt/generate-changelog/commit/0bed08eab48fd24a55b63b010c7cc8e665447cac)
     
+### New
 
+- Added support for `__contains__` in registry. [848421d](https://github.com/coordt/generate-changelog/commit/848421d8123738f7c876875301c114f4c8bc1087)
+    
+- Added action registry. [a363c25](https://github.com/coordt/generate-changelog/commit/a363c25588f2dff507150776d58fc4d876b1220c)
+    
+  - Accessing the registry ensures the built-in actions are loaded.
+- Added changelog configuration and templates. [32f4f23](https://github.com/coordt/generate-changelog/commit/32f4f23635b06839c19b3f811a1e2058dc81764e)
+    
+- Added a `previous_tag` attribute to the version context. [5760576](https://github.com/coordt/generate-changelog/commit/576057668dfc90eba19070d6f94d14d60ca9ada6)
+    
+- Added lazy evaluation of Jinja environments. [f57d007](https://github.com/coordt/generate-changelog/commit/f57d007f71105f4f4d6e6d1a005f39e71f816dfe)
+    
+  - This allows for proper setup of the configuration.
+- Added accessor for current configuration. [83a728f](https://github.com/coordt/generate-changelog/commit/83a728f6c09bf7c618f031820e35267504f5f866)
+    
+  - `get_config()` will instantiate a new configuration or return the existing configuration.
+### Updates
+
+- Updated processors doc strings. [9102ec7](https://github.com/coordt/generate-changelog/commit/9102ec757788f3210d381e57d41e64cd57d24718)
+    
+- Updated configuration doc strings. [ff818af](https://github.com/coordt/generate-changelog/commit/ff818aff84744fdea955e26f539ad9c8a3a953d2)
+    
+- Updated data_merge doc strings. [2840242](https://github.com/coordt/generate-changelog/commit/28402420496a0fb6403e7bed58eb0d74ee237457)
+    
+- Updated git_ops and lazy doc strings. [26ecd54](https://github.com/coordt/generate-changelog/commit/26ecd54bb3f2f38c1c2198afde0cedf296a18120)
+    
+- Updated pipeline doc strings. [2a2c052](https://github.com/coordt/generate-changelog/commit/2a2c05296541c71373b4f8d59ced3fd0d2fc4f35)
+    
+- Updated templating doc strings. [b942302](https://github.com/coordt/generate-changelog/commit/b942302c879f5dabfc0553f103d80864bd7ebadf)
+    
+- Updated utility doc strings. [a7ae93f](https://github.com/coordt/generate-changelog/commit/a7ae93f757792ebf4cabf5c51fc353f65d593fef)
+    
+- Removed ActionSpec. [29942ac](https://github.com/coordt/generate-changelog/commit/29942acbde3b7e4b9b9a68e2b840b38417643174)
+    
+  - It was unnecessary. Now Action classes are instantiated directly.
+- Removed author rendering from commits. [e44de67](https://github.com/coordt/generate-changelog/commit/e44de6784a7e26422679a5597b4e21322ac49f08)
+    
 ## 0.3.0 (2022-03-05)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.2.0...0.3.0)
@@ -164,40 +171,46 @@
 
 - Changed the package name to `generate_changelog`. [1e4945a](https://github.com/coordt/generate-changelog/commit/1e4945adc762c20b9c450cd7234d9791897459e2)
     
-
 - Change the configuration file base name to `.changelog-config`. [ac3fc2e](https://github.com/coordt/generate-changelog/commit/ac3fc2e2fb4fd609b9f0a995a7ef95f7b77d53dd)
     
-
 ## 0.2.0 (2022-03-05)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.1.0...0.2.0)
 
+### Fixes
+
+- Fixed the merge handling in git_ops. [e9666f5](https://github.com/coordt/generate-changelog/commit/e9666f519fd2edea9c2b8e3fa97b4b9ee1d10042)
+    
+- Fixed the `include_merges` setting. [cf6c4f2](https://github.com/coordt/generate-changelog/commit/cf6c4f2bba26f3e50010fbf424ad4326d1fe45bc)
+    
+  Wasn't hooked up with the git_ops module.
+- Fixed a bug in the capitalize action. [8fee744](https://github.com/coordt/generate-changelog/commit/8fee744bfedfea5850f7fa61d36f202815514210)
+    
+  Used to capitalize the first letter but also convert all other characters to lowercase.
 ### New
 
 - Added release tooling in a Makefile. [8064d3d](https://github.com/coordt/generate-changelog/commit/8064d3de42435b65a61b9686231973240f80f558)
     
-
 - Added `Slice` and `FirstRegExMatchPosition` actions. [19cf66e](https://github.com/coordt/generate-changelog/commit/19cf66ebacc275c4b15fb1b5371ca9190a4b85f7)
     
   - `Slice` will slice the input text when called
   - `FirstRegExMatchPosition` will return the position of the first match of the regular expression.
-
 - Added `IncrementalFileInsert` action. [d40ba36](https://github.com/coordt/generate-changelog/commit/d40ba3624ae01350b63ec15613838c8d81825dd0)
     
   Simplifies incremental change log generation for the output action.
-
 - Added `create_if_missing` option to `ReadFile`. [8d1eaef](https://github.com/coordt/generate-changelog/commit/8d1eaefaa3868d3322453ceeafa2a416a95e3a7a)
     
   Allows for the creation of an empty file when trying to read from a non-existent file.
-
 - Added MIT license and entry point config for CLI. [579134b](https://github.com/coordt/generate-changelog/commit/579134bd497362c88e82593eb7fd2fe83a04718c)
     
+### Other
 
+- Moved `VALID_AUTHOR_TOKENS` from templating to configuration. [dc93fc3](https://github.com/coordt/generate-changelog/commit/dc93fc324a02cfda0aed53d2648726c6be130074)
+    
 ### Updates
 
 - Updated command line interface. [d8abd8d](https://github.com/coordt/generate-changelog/commit/d8abd8d3a8b1ab6d112423ee4ea2408f36a8b802)
     
-
 - Updated configuration. [a8ded3f](https://github.com/coordt/generate-changelog/commit/a8ded3f3c8c20f5117f95ca3d0020f326d112db9)
     
   - Fixed `DEFAULT_IGNORE_PATTERNS` with commas
@@ -205,38 +218,15 @@
   - Added `chg` to ``DEFAULT_SECTION_PATTERNS`
   - Added `DEFAULT_OUTPUT_PIPELINE` for incremental changes
   - Added `valid_author_tokens` to configuration
-
 - Updated tests for pipelines. [e280fb8](https://github.com/coordt/generate-changelog/commit/e280fb863d98450f48c35d7f2382770813271210)
     
-
 - Updates the commit template and rendering. [e76fd3a](https://github.com/coordt/generate-changelog/commit/e76fd3ace753fc3244c38af89adcf589354e5b0f)
     
-
 - Updated `eval_if_callable`. [ebab2cf](https://github.com/coordt/generate-changelog/commit/ebab2cf34f98cb06bfb485a8eb2c44717aa4f0be)
     
   - Will now instantiate actions or pipelines and run them.
-
 - Renamed `GetFirstRegExMatch` to `FirstRegExMatch`. [82b907f](https://github.com/coordt/generate-changelog/commit/82b907faf481f1c7218cc29c82d7072a0014314f)
     
-
-### Fixes
-
-- Fixed the merge handling in git_ops. [e9666f5](https://github.com/coordt/generate-changelog/commit/e9666f519fd2edea9c2b8e3fa97b4b9ee1d10042)
-    
-
-- Fixed the `include_merges` setting. [cf6c4f2](https://github.com/coordt/generate-changelog/commit/cf6c4f2bba26f3e50010fbf424ad4326d1fe45bc)
-    
-  Wasn't hooked up with the git_ops module.
-
-- Fixed a bug in the capitalize action. [8fee744](https://github.com/coordt/generate-changelog/commit/8fee744bfedfea5850f7fa61d36f202815514210)
-    
-  Used to capitalize the first letter but also convert all other characters to lowercase.
-
-### Other
-
-- Moved `VALID_AUTHOR_TOKENS` from templating to configuration. [dc93fc3](https://github.com/coordt/generate-changelog/commit/dc93fc324a02cfda0aed53d2648726c6be130074)
-    
-
 ## 0.1.0 (2022-03-01)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...0.1.0)
