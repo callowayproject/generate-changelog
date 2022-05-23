@@ -69,6 +69,7 @@ myst_enable_extensions = [
     "tasklist",
     "fieldlist",
 ]
+myst_heading_anchors = 2
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "gitpython": ("https://gitpython.readthedocs.io/en/stable/", None),

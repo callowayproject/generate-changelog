@@ -1,14 +1,20 @@
 # Configuring Your Changelog Generation
 
-- Focused on parsing commits from a starting tag.
-- 
-- 
-- looks for `.changelog-config.yaml` in the root directory of your repository for the configuration file.
-- Only needs to contain the differences from the default values.
+## The configuration file
 
-All configuration string values are treated as Jinja templates, except for the `variables` section.
+`generate-changelog` uses its default configuration as a base, and then updates it with your configuration file. This allows you to keep your configuration file small and only override what you need.
 
-Some values accept pipelines, which are a chain of actions to transform an input.
+You simply put a `.changelog-config.yaml` file in the root directory of your repository for the configuration file. You can dump the defaults with:
+
+```console
+$ generate-changelog --generate-config
+```
+
+Since your configuration only needs to contain the differences from the default values, you can delete the default configurations you like and keep your changes.
+
+All configuration string values are treated as Jinja templates, except for the `variables` section. 
+
+Some values accept pipelines, which are a chain of actions that transform an input.
 
 ## General Configuration Options
 
@@ -17,24 +23,45 @@ Some values accept pipelines, which are a chain of actions to transform an input
 :YAML type: [`mapping`](https://yaml.org/spec/1.2.2/#21-collections)
 
 :Description:
-  Variables are key-value pairs for use in other parts of the configuration and in template rendering.
- 
+  Variables are key-value pairs for use in other parts of the configuration and in template rendering. Variable values can include references to previous variables.
+
   Each configuration string value is treated as a Jinja template. You can reference your variables using `{{ my_variable }}` markup.
 
 :Default: `{}`
 
 :Example:
-  If the configuration file contains:
+
+  Referencing variables within variables:
+
+  ```yaml
+  variables:
+    root_url: https://www.example.com/
+    sub_url: {{ root_url }}sub_path/2
+  ```
+
+  You can use variables in the rendering of your changelog templates. If the configuration file contains:
 
   ```yaml
   variables:
     repo_url: https://github.com/coordt/generate-changelog
   ```
-  
+
   You can reference it in your `commit.md.jinja` template like:
 
   ```jinja
   [{{ commit.short_sha }}]({{ repo_url }}/commit/{{ commit.sha }})
+  ```
+
+  You can also use variables in `args` and `kwargs` values in your configuration:
+
+  ```yaml
+  variables:
+    changelog_file: CHANGELOG.md
+  
+  starting_tag_pipeline:
+    - action: ReadFile
+      kwargs:
+        filename: {{ changelog_file }} 
   ```
 
 ### starting_tag_pipeline
@@ -51,13 +78,13 @@ Some values accept pipelines, which are a chain of actions to transform an input
 :Default:
   ```yaml
   starting_tag_pipeline:
-  - action: ReadFile
-    kwargs:
-      filename: CHANGELOG.md
-  - action: FirstRegExMatch
-    kwargs:
-      pattern: (?im)^## (?P<rev>\d+\.\d+(?:\.\d+)?)\s+\(\d+-\d{2}-\d{2}\)$
-      named_subgroup: rev
+    - action: ReadFile
+      kwargs:
+        filename: CHANGELOG.md
+    - action: FirstRegExMatch
+      kwargs:
+        pattern: (?im)^## (?P<rev>\d+\.\d+(?:\.\d+)?)\s+\(\d+-\d{2}-\d{2}\)$
+        named_subgroup: rev
   ```
 
 ## Output Configuration Options
@@ -70,27 +97,6 @@ Some values accept pipelines, which are a chain of actions to transform an input
     This value is used as the section title of the changes since the last valid tag, instead of the version number.
 
 :Default: `Unreleased`
-
-### section_patterns
-
-:YAML type: [`mapping`](https://yaml.org/spec/1.2.2/#21-collections)
-
-:Description:
-  Group commits into categories if they match any of these regular expressions.
-
-  The default uses categories of `New` for commits that add new things; `Updates` for commits that change things; `Fixes` for commits that fix things; and `Other` for commits that aren't matched by other sections.
-
-:Default:
-  ```yaml
-  section_patterns:
-    New:
-    - (?i)^(?:new|add)[^\n]*$
-    Updates:
-    - (?i)^(?:update|change|rename|remove|delete|improve|refactor|chg)[^\n]*$
-    Fixes:
-    - (?i)^(?:fix)[^\n]*$
-    Other: null
-  ```
 
 ### tag_pattern
 
@@ -118,10 +124,10 @@ Some values accept pipelines, which are a chain of actions to transform an input
 :Default:
   ```yaml
   output_pipeline:
-  - action: IncrementalFileInsert
-    kwargs:
-      filename: CHANGELOG.md
-      last_heading_pattern: (?im)^## \d+\.\d+(?:\.\d+)?\s+\([0-9]+-[0-9]{2}-[0-9]{2}\)$
+    - action: IncrementalFileInsert
+      kwargs:
+        filename: CHANGELOG.md
+        last_heading_pattern: (?im)^## \d+\.\d+(?:\.\d+)?\s+\([0-9]+-[0-9]{2}-[0-9]{2}\)$
   ```
 
 ### template_dirs
@@ -131,11 +137,18 @@ Some values accept pipelines, which are a chain of actions to transform an input
 :Description:
   Paths to look for output generation templates.
 
-:Default: `[]`
+:Default:
+
+  ```yaml
+  template_dirs:
+    - .github/changelog_templates/
+  ```
+
+
 
 ## Commit Parsing Options
 
-### subject_pipeline
+### summary_pipeline
 
 :YAML type: [`sequence` of `mapping`](https://yaml.org/spec/1.2.2/#21-collections)
 
@@ -152,17 +165,17 @@ Some values accept pipelines, which are a chain of actions to transform an input
 
 :Default:
   ```yaml
-  subject_pipeline:
-  - action: strip_spaces
-  - action: Strip
-    comment: Get rid of any periods so we don't get double periods
-    kwargs:
-      chars: .
-  - action: SetDefault
-    args:
-    - no commit message
-  - action: capitalize
-  - action: append_dot
+  summary_pipeline:
+    - action: strip_spaces
+    - action: Strip
+      comment: Get rid of any periods so we don't get double periods
+      kwargs:
+        chars: .
+    - action: SetDefault
+      args:
+      - no commit message
+    - action: capitalize
+    - action: append_dot
   ```
 
 ### body_pipeline
@@ -177,10 +190,10 @@ Some values accept pipelines, which are a chain of actions to transform an input
 :Default:
   ```yaml
   body_pipeline:
-  - action: ParseTrailers
-    comment: Parse the trailers into metadata.
-    kwargs:
-      commit_metadata: save_commit_metadata
+    - action: ParseTrailers
+      comment: Parse the trailers into metadata.
+      kwargs:
+        commit_metadata: save_commit_metadata
   ```
 
 ### include_merges
@@ -201,13 +214,35 @@ Some values accept pipelines, which are a chain of actions to transform an input
 :Default:
   ```yaml
   ignore_patterns:
-  - '[@!]minor'
-  - '[@!]cosmetic'
-  - '[@!]refactor'
-  - '[@!]wip'
-  - ^$
-  - ^Merge branch
-  - ^Merge pull
+    - '[@!]minor'
+    - '[@!]cosmetic'
+    - '[@!]refactor'
+    - '[@!]wip'
+    - ^$
+    - ^Merge branch
+    - ^Merge pull
+  ```
+
+### commit_classifiers
+
+:YAML type: [`sequence` of `mapping`](https://yaml.org/spec/1.2.2/#21-collections)
+
+:Description:
+  Group commits into categories if they match any of these regular expressions.
+
+  The default uses categories of `New` for commits that add new things; `Updates` for commits that change things; `Fixes` for commits that fix things; and `Other` for commits that aren't matched by other sections.
+
+:Default:
+
+  ```yaml
+section_patterns:
+  New:
+  - (?i)^(?:new|add)[^\n]*$
+  Updates:
+  - (?i)^(?:update|change|rename|remove|delete|improve|refactor|chg)[^\n]*$
+  Fixes:
+  - (?i)^(?:fix)[^\n]*$
+  Other: null
   ```
 
 ### valid_author_tokens
