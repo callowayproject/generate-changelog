@@ -94,6 +94,10 @@ def get_context_from_tags(
                 metadata=version_metadata_func.metadata,
             )
         )
+
+    if starting_tag and output and output[-1].previous_tag is None:
+        output[-1].previous_tag = starting_tag
+
     return output
 
 
