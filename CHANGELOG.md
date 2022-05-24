@@ -1,5 +1,99 @@
 # Changelog
 
+## 0.7.3 (2022-05-24)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.2...HEAD)
+
+### Fixes
+
+- Fixes a bug when generating an incremental changelog. [7cc3c16](https://github.com/coordt/generate-changelog/commit/7cc3c16d46ba64520d4d693c6866d984e588d272)
+    
+
+## 0.7.2 (2022-05-24)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.1...0.7.2)
+
+### Updates
+
+- Updates the publish package workflow again. [4434571](https://github.com/coordt/generate-changelog/commit/44345711fca328760f2afcae5bcf702185656b91)
+    
+## 0.7.1 (2022-05-24)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.0...0.7.1)
+
+### Fixes
+
+- Fixes the publish package workflow. [26743f0](https://github.com/coordt/generate-changelog/commit/26743f0bac632c581e90f4e1186d276298002234)
+    
+## 0.7.0 (2022-05-24)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.6.1...0.7.0)
+
+### New
+
+- Added Python 3.7 compatibility. [263c3d6](https://github.com/coordt/generate-changelog/commit/263c3d656653ca834b224c9e109cc6cff091abbe)
+    
+- Added existence check for configuration file during generation. [9e00e1c](https://github.com/coordt/generate-changelog/commit/9e00e1c67390b2ed414dca2fa28ac87cb6b3d765)
+    
+  - Asks if you want to overwrite existing configuration
+- Added tests for command line interface. [12837b6](https://github.com/coordt/generate-changelog/commit/12837b6e0ed4c5f1815bf25c667cd0a86351886e)
+    
+- Added tests for conventional commits. [6bac10b](https://github.com/coordt/generate-changelog/commit/6bac10b31c925eb9b40e5f228d19a92d0b32c8de)
+    
+- Added tests for matching and metadata. [7dac045](https://github.com/coordt/generate-changelog/commit/7dac04502081302fdd7893feab9d55dc627340ef)
+    
+- Added conventional commit actions. [34615cd](https://github.com/coordt/generate-changelog/commit/34615cd974ab0175acf09496490a00a447a4718e)
+    
+  - ParseConventionalCommit
+  - ParseBreakingChangeFooter
+### Other
+
+- Reformatted the changelog output. [b7d0f61](https://github.com/coordt/generate-changelog/commit/b7d0f61a211c687e53c72e6f9f6b8c3db21b989e)
+    
+- - Updated tests to use new contexts. [b222e96](https://github.com/coordt/generate-changelog/commit/b222e96b70145a3f0485d7d21bb92d5b2edec7cf)
+    
+### Updates
+
+- Updated documentation. [ec5dc40](https://github.com/coordt/generate-changelog/commit/ec5dc40839c11f853b5550c187d0f9ead33cc06d)
+    
+- Refactored the template contexts. [c5fbf68](https://github.com/coordt/generate-changelog/commit/c5fbf682752703d510be4442d80dd9cb800d3923)
+    
+  - Changed `GroupedCommit` to `GroupingContext`
+  - Added `ChangelogContext` as a root context for templates.
+- Removed the lazy objects. [abd0c96](https://github.com/coordt/generate-changelog/commit/abd0c96586105e210a954267e5901e5730462b2b)
+    
+- Removed the lazy objects. [75b2d35](https://github.com/coordt/generate-changelog/commit/75b2d3552fd976bf633d7797e2f62fd6ff9eb47f)
+    
+- Updated write_default_config to write comments. [60e66cd](https://github.com/coordt/generate-changelog/commit/60e66cdb45c4185636ca369868ae3f4b3011b13d)
+    
+- Updated configuration. [3c288d2](https://github.com/coordt/generate-changelog/commit/3c288d29cb4f1d55172578f25ce3946fef61c32c)
+    
+  - added `rendered_variables` property
+  - added a default variable
+  - updated docstrings
+  - added default template directory
+- Updated changelog configuration. [92d0a43](https://github.com/coordt/generate-changelog/commit/92d0a432a4d560b9588c825720af0f6cd8031b5a)
+    
+- Updated the rendering for new grouping method. [16dd292](https://github.com/coordt/generate-changelog/commit/16dd292d9a042842f6bcbcb0b0623b49ad1b1b1b)
+    
+  - Added `resolve_name` and `diff_index` utility methods
+  - refactored the `get_context_from_tags` function
+  - added `diff_index` function to template context
+  - added `group_depth` variable to template context
+  - refactored `first_matching` to use the commit_classifiers
+  - Updated the `versions.md.jinja`, `section_heading.md.jinja`, and `commit.md.jinja` templates
+- Changed the template contexts. [71d4e01](https://github.com/coordt/generate-changelog/commit/71d4e01cb8c0caed81bef91eead948f57c9f04f1)
+    
+  - `CommitContext` now has a `grouping` tuple
+  - Replaced `SectionContext` with `GroupedCommmit`
+  - Replaced `VersionContext.sections` with `VersionContext.grouped_commits`
+- Changed method of grouping commits within versions. [78d9813](https://github.com/coordt/generate-changelog/commit/78d98136dfb791c420309d239faadcb7b73f803c)
+    
+  - added `group_by` to configuration
+  - added `commit_classifiers` to configuration
+  - added `SummaryRegexMatch` as a commit classifier to emulate previous functionality
+  - added `MetadataMatch` to use commit metadata to assign to groups
+
 ## 0.6.1 (2022-05-02)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.6.0...0.6.1)
