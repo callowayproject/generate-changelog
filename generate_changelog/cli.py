@@ -22,11 +22,18 @@ def version_callback(value: bool):
 
 def generate_config_callback(value: bool):
     """Generate a default configuration file."""
-    if value:
-        f = Path.cwd() / Path(DEFAULT_CONFIG_FILE_NAMES[0])
-        write_default_config(f)
-        typer.echo(f"The configuration file was written to {f}.")
-        raise typer.Exit()
+    if not value:  # pragma: no cover
+        return
+    f = Path.cwd() / Path(DEFAULT_CONFIG_FILE_NAMES[0])
+    file_path = f.expanduser().resolve()
+    if file_path.exists():
+        overwrite = typer.confirm(f"{file_path} already exists. Overwrite it?")
+        if not overwrite:
+            typer.echo("Aborting configuration file generation.")
+            typer.Abort()
+    write_default_config(f)
+    typer.echo(f"The configuration file was written to {f}.")
+    raise typer.Exit()
 
 
 @app.command()
@@ -43,6 +50,9 @@ def main(
     config_file: Optional[Path] = typer.Option(
         None, "--config", "-c", help="Path to the config file.", envvar="CLGEN_CONFIG_FILE"
     ),
+    repository_path: Optional[Path] = typer.Option(
+        None, "--repo-path", "-r", help="Path to the repository, if not within the current directory"
+    ),
 ):
     """Generate a change  log from git commits."""
     from generate_changelog import templating
@@ -51,20 +61,27 @@ def main(
 
     # Load default configuration
     config = get_config()
-
-    if user_config := config_file or next(
+    user_config = config_file or next(
         (Path.cwd() / Path(name) for name in DEFAULT_CONFIG_FILE_NAMES if (Path.cwd() / Path(name)).exists()), None
-    ):
+    )
+    if user_config:
         typer.echo(f"Using configuration file: {user_config}")
         config.update_from_file(user_config)
     else:
         typer.echo("No configuration file found. Using default configuration.")
 
-    repository = Repo(search_parent_directories=True)
+    if repository_path:  # pragma: no cover
+        repository = Repo(repository_path)
+    else:
+        repository = Repo(search_parent_directories=True)
 
     # get starting tag based on configuration
-    start_tag_pipeline = pipeline_factory(config.starting_tag_pipeline, **config.variables)
-    starting_tag = start_tag_pipeline.run()
+    if config.starting_tag_pipeline:
+        start_tag_pipeline = pipeline_factory(config.starting_tag_pipeline, **config.variables)
+        starting_tag = start_tag_pipeline.run()
+    else:
+        starting_tag = None
+
     if not starting_tag:
         typer.echo("No starting tag found. Generating entire change log.")
     else:
@@ -73,6 +90,8 @@ def main(
     # use the output pipeline to deal with the rendered change log.
     output_pipeline = pipeline_factory(config.output_pipeline, **config.variables)
     output_pipeline.run(templating.render(repository, config, starting_tag))
+    typer.echo("Done.")
+    raise typer.Exit()
 
 
 if __name__ == "__main__":

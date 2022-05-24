@@ -9,10 +9,12 @@ API Reference
    :recursive:
 
    ~actions
+   ~cli
    ~configuration
+   ~context
    ~data_merge
    ~git_ops
-   ~lazy
    ~pipeline
    ~templating
    ~utilities
+   ~_attr_docs

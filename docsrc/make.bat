@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=bin_pyokta
+set SPHINXPROJ=clgen
 
 if "%1" == "" goto help
 

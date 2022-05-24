@@ -1,0 +1,53 @@
+summary_pipeline:
+- action: strip_spaces
+  id: strip-spaces
+- action: Strip
+  id: strip-periods
+  comment: Get rid of any periods so we don't get double periods
+  kwargs:
+    chars: .
+- action: ParseConventionalCommit
+  id: parse-conventional-commit
+  kwargs:
+    commit_metadata: save_commit_metadata
+- action: SetDefault
+  id: set-default-message
+  args:
+  - no commit message
+- action: capitalize
+  id: capitalize
+- action: append_dot
+  id: add-period
+body_pipeline:
+- action: ParseBreakingChangeFooter
+  comment: Parse for a breaking change first so it doesn't get stripped out in the next step
+  kwargs:
+    commit_metadata: save_commit_metadata
+- action: ParseTrailers
+  comment: Parse the trailers into metadata.
+  kwargs:
+    commit_metadata: save_commit_metadata
+group_by:
+  - metadata.category
+  - metadata.scope.0
+commit_classifiers:
+  - action: MetadataMatch
+    category: Breaking Changes
+    kwargs:
+      attribute: has_breaking_change
+      operator: is
+      value: True
+  - action: MetadataMatch
+    category: New Features
+    kwargs:
+      attribute: commit_type
+      operator: ==
+      value: feat
+  - action: MetadataMatch
+    category: Updates
+    kwargs:
+      attribute: commit_type
+      operator: in
+      value: ["fix", "Fix", "refactor", "Refactor", "update", "Update"]
+  - action: null
+    category: Other

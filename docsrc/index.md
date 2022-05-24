@@ -16,6 +16,7 @@ hidden: true
 ---
 Introduction <readme>
 configuration
+templating/index
 actions/index
 recipes/index
 api

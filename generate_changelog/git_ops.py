@@ -151,14 +151,15 @@ def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag:
     tags.insert(0, head)
     groups = []
     for end_tag, start_tag in pairs(tags):
+        start_tag_name = getattr(start_tag, "name", None)
         groups.append(
             {
                 "tag_name": end_tag.name,
                 "tag_info": end_tag,
-                "commits": parse_commits(repository, getattr(start_tag, "name", None), end_tag.name),
+                "commits": parse_commits(repository, start_tag_name, end_tag.name),
             }
         )
-        if starting_tag and start_tag.name == starting_tag:
+        if starting_tag and start_tag_name == starting_tag:
             break
 
     return groups

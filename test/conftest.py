@@ -66,32 +66,39 @@ class FakeCommit:
     trailers: Optional[dict] = None
 
 
-def commit_factory():
+def commit_factory(
+    committer_name: Optional[str] = None,
+    committer_email: Optional[str] = None,
+    summary: Optional[str] = None,
+    body: Optional[str] = None,
+    trailers: Optional[dict] = None,
+):
     """Generate commits."""
-    committer = FakeCommitter(name=fake.name(), email=fake.ascii_email())
-    summary = fake.sentence(nb_words=8, variable_nb_words=True)
-    body = (
+    committer = FakeCommitter(name=committer_name or fake.name(), email=committer_email or fake.ascii_email())
+    summary = summary or fake.sentence(nb_words=8, variable_nb_words=True)
+    body = body or "\n".join(
         [summary, fake.text(max_nb_chars=160), ""]
         + [f"* {line}" for line in fake.sentences(nb=fake.random_int(max=5))]
         + [
             "",
         ]
     )
+    body_list = [body]
     trailer_tokens = fake.random_elements(elements=trailer_weighting, length=fake.random_int(max=3))
-    trailers = collections.defaultdict(list)
-    for token in trailer_tokens:
-        trailers[token].append((fake.name(), fake.ascii_email()))
+    if trailers is None:
+        trailers = collections.defaultdict(list)
+        for token in trailer_tokens:
+            trailers[token].append((fake.name(), fake.ascii_email()))
 
     for token, items in trailers.items():
-        for name, email in items:
-            body.append(f"{token}: {name} <{email}>")
+        body_list.extend(f"{token}: {name} <{email}>" for name, email in items)
 
     return FakeCommit(
         hexsha=fake.sha1(),
         committed_datetime=fake.past_datetime(tzinfo=fake.pytimezone()),
         committer=committer,
         summary=summary,
-        message="\n".join(body),
+        message="\n".join(body_list),
         trailers=trailers,
     )
 

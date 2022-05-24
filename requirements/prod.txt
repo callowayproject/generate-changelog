@@ -1,4 +1,6 @@
+backports.cached-property;python_version<"3.8"
 GitPython
 jinja2
-pyyaml
+more-itertools
+ruamel.yaml
 typer

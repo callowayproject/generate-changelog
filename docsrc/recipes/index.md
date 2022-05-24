@@ -103,5 +103,20 @@ This will render a commit similar to:
 as you can see
 ```
 
+## Showing authors
+
+You can use this in the template like:
+
+```jinja
+<ul>{% for author in commit.authors %}
+  <li>{{ author.name }} [{{ author.email }}]</li>
+{% endfor %}</ul>
+```
+
+or:
+
+```jinja
+Author{% if commit.author_names|length > 1 %}s{% endif %}: {{ commit.author_names|join(", ") }}
+```
 
 ## Using variables
