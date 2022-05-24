@@ -139,7 +139,7 @@ class ChangelogContext:
     valid_author_tokens: List[str] = field(init=False, default_factory=list)
     """The configured tokens in git commit trailers that indicate authorship."""
 
-    group_by: list[str] = field(init=False, default_factory=list)
+    group_by: List[str] = field(init=False, default_factory=list)
     """The configured grouping aspects for commits within a version."""
 
     group_depth: int = field(init=False)
