@@ -1,11 +1,13 @@
 # Changelog
 
-## Unreleased (2022-05-07)
+## 0.7.0 (2022-05-24)
 
-[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.6.1...HEAD)
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
 
 ### New
 
+- Added Python 3.7 compatibility. [263c3d6](https://github.com/coordt/generate-changelog/commit/263c3d656653ca834b224c9e109cc6cff091abbe)
+    
 - Added existence check for configuration file during generation. [9e00e1c](https://github.com/coordt/generate-changelog/commit/9e00e1c67390b2ed414dca2fa28ac87cb6b3d765)
     
   - Asks if you want to overwrite existing configuration
@@ -21,10 +23,32 @@
   - ParseBreakingChangeFooter
 ### Other
 
+- Reformatted the changelog output. [b7d0f61](https://github.com/coordt/generate-changelog/commit/b7d0f61a211c687e53c72e6f9f6b8c3db21b989e)
+    
 - - Updated tests to use new contexts. [b222e96](https://github.com/coordt/generate-changelog/commit/b222e96b70145a3f0485d7d21bb92d5b2edec7cf)
     
 ### Updates
 
+- Updated documentation. [ec5dc40](https://github.com/coordt/generate-changelog/commit/ec5dc40839c11f853b5550c187d0f9ead33cc06d)
+    
+- Refactored the template contexts. [c5fbf68](https://github.com/coordt/generate-changelog/commit/c5fbf682752703d510be4442d80dd9cb800d3923)
+    
+  - Changed `GroupedCommit` to `GroupingContext`
+  - Added `ChangelogContext` as a root context for templates.
+- Removed the lazy objects. [abd0c96](https://github.com/coordt/generate-changelog/commit/abd0c96586105e210a954267e5901e5730462b2b)
+    
+- Removed the lazy objects. [75b2d35](https://github.com/coordt/generate-changelog/commit/75b2d3552fd976bf633d7797e2f62fd6ff9eb47f)
+    
+- Updated write_default_config to write comments. [60e66cd](https://github.com/coordt/generate-changelog/commit/60e66cdb45c4185636ca369868ae3f4b3011b13d)
+    
+- Updated configuration. [3c288d2](https://github.com/coordt/generate-changelog/commit/3c288d29cb4f1d55172578f25ce3946fef61c32c)
+    
+  - added `rendered_variables` property
+  - added a default variable
+  - updated docstrings
+  - added default template directory
+- Updated changelog configuration. [92d0a43](https://github.com/coordt/generate-changelog/commit/92d0a432a4d560b9588c825720af0f6cd8031b5a)
+    
 - Updated the rendering for new grouping method. [16dd292](https://github.com/coordt/generate-changelog/commit/16dd292d9a042842f6bcbcb0b0623b49ad1b1b1b)
     
   - Added `resolve_name` and `diff_index` utility methods
@@ -44,6 +68,7 @@
   - added `commit_classifiers` to configuration
   - added `SummaryRegexMatch` as a commit classifier to emulate previous functionality
   - added `MetadataMatch` to use commit metadata to assign to groups
+
 ## 0.6.1 (2022-05-02)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.6.0...0.6.1)
