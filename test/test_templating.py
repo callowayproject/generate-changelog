@@ -126,3 +126,28 @@ def test_render_from_tag(default_repo, capsys):
     """
     )
     assert output.strip() == expected.strip()
+
+
+def test_incremental_context(default_repo, capsys):
+    """Make sure the incremental changelog includes the previous version."""
+    config = configuration.get_default_config()
+    config.template_dirs = [FIXTURES_DIR / "templates"]
+    output = templating.render(default_repo, config, "0.0.2")
+    expected = textwrap.dedent(
+        """
+        # Changelog
+        
+        ## Unreleased (2022-01-06) 0.0.3...HEAD
+        
+        ### Updates
+        
+        commit
+        ## 0.0.3 (2022-01-05) 0.0.2...0.0.3
+        
+        ### New
+        
+        commit
+        commit
+        """
+    )
+    assert output.strip() == expected.strip()
