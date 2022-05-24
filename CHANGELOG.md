@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.1 (2022-05-24)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
+
+### Fixes
+
+- Fixes the publish package workflow. [26743f0](https://github.com/coordt/generate-changelog/commit/26743f0bac632c581e90f4e1186d276298002234)
+    
+
 ## 0.7.0 (2022-05-24)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
