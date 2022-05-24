@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.2 (2022-05-24)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
+
+### Updates
+
+- Updates the publish package workflow again. [4434571](https://github.com/coordt/generate-changelog/commit/44345711fca328760f2afcae5bcf702185656b91)
+    
+
 ## 0.7.1 (2022-05-24)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/None...HEAD)
