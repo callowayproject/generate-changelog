@@ -1,8 +1,24 @@
 # Changelog
 
+## 0.7.4 (2022-05-24)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.3...0.7.4)
+
+### Fixes
+
+- Fixed manifest file. [7a2c8a5](https://github.com/coordt/generate-changelog/commit/7a2c8a582586b23664db76480e609e457dc5e11d)
+    
+### Updates
+
+- Updated setup.cfg. [fca1d10](https://github.com/coordt/generate-changelog/commit/fca1d101392991e11b9dff851d45369083a990fc)
+    
+  - Replaces `...HEAD` with appropriate version
+  - Sets the minimum required version of Python to 3.7
+  - Improved package discovery
+
 ## 0.7.3 (2022-05-24)
 
-[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.2...HEAD)
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.2...0.7.3)
 
 ### Fixes
 
