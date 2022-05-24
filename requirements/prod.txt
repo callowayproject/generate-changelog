@@ -1,3 +1,4 @@
+backports.cached-property;Python<"3.8"
 GitPython
 jinja2
 more-itertools
