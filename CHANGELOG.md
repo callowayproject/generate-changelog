@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.5 (2022-05-24)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.4...0.7.5)
+
+### Updates
+
+- Updated setup.cfg. [0a13c61](https://github.com/coordt/generate-changelog/commit/0a13c614d37d37ffee5b3da01baa8a9e92b2f4b5)
+    
+
 ## 0.7.4 (2022-05-24)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.3...0.7.4)
