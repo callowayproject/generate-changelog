@@ -4,3 +4,4 @@ jinja2
 more-itertools
 ruamel.yaml
 typer
+typing_extensions;python_version<"3.10"
