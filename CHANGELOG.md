@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.6 (2022-05-25)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.5...0.7.6)
+
+### Fixes
+
+- Fixes packaging. Now includes the templates!. [e298c03](https://github.com/coordt/generate-changelog/commit/e298c03d685a48266c7562efb912244295fec168)
+    
+
 ## 0.7.5 (2022-05-24)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.4...0.7.5)
