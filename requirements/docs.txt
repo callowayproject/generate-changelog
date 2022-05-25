@@ -1,0 +1,8 @@
+furo
+ghp-import
+linkify-it-py
+myst-parser
+Sphinx
+sphinx-autodoc-typehints
+sphinx-click
+sphinx-copybutton
