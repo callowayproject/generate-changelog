@@ -1,31 +1,49 @@
 # Conventional Commits
 
-- https://www.conventionalcommits.org
-- How to group breaking changes?
+## Configuration
 
-Commit classifiers:
-- list of actions that set the commit type
-- first one that matches, sets the commit type
+Add the {class}`~.actions.metadata.ParseConventionalCommit` action to the `summary_pipeline` configuration.
 
+```{literalinclude} ../../test/fixtures/conventional-commit.yaml
+:language: yaml
+:lines: 1-20
+:emphasize-lines: 9-12
+```
 
-Change the organization of the commits to be version
+Add the {class}`~.actions.metadata.ParseBreakingChangeFooter` action to the `body_pipeline` configuration.
 
-Have a version-commit sorting configuration
+```{literalinclude} ../../test/fixtures/conventional-commit.yaml
+:language: yaml
+:lines: 21-29
+:emphasize-lines: 2-5
+```
 
+Update the `group_by` configuration. This example orders it by the category (set by the [`commit_classifiers`](configuration-commit_classifiers)) and then by the first scope, if it exists.
 
+```{literalinclude} ../../test/fixtures/conventional-commit.yaml
+:language: yaml
+:lines: 30-32
+:emphasize-lines: 2-3
+```
 
-Add metadata to each commit
-    - type
-    - scope (optional)
-    - has_breaking_change (optional)
-    - breaking_changes (optional)
+Set the [`commit_classifiers`](configuration-commit_classifiers) configuration.
 
-- subject_pipeline
+```{literalinclude} ../../test/fixtures/conventional-commit.yaml
+:language: yaml
+:lines: 33-53
+:emphasize-lines: 2-21
+```
 
-type
-opt scope (multi-delimiter: "/", "\", ",")
-description
+The commit is classsified by the first rule that matches. So the rules in this example are:
 
-- body_pipeline
+1. "Breaking Changes" if the commit's metadata includes `has_breaking_change` and it is `True`
+2. "New Features" if the commit's metadata includes `commit_type` and it is `feat`
+3. "Updates" if the commit's metadata includes `commit_type` and it is `fix`, `refactor`, or `update`
+4. "Other" if there are no other matches
 
-parse BREAKING CHANGE: to metadata as a trailer
+To filter out some commit types, use `ignore_patterns`:
+
+```yaml
+ignore_patterns:
+  - (?i)^(?:build|chore|ci|docs|style|perf|test):
+```
