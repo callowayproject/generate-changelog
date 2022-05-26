@@ -118,5 +118,3 @@ or:
 ```jinja
 Author{% if commit.author_names|length > 1 %}s{% endif %}: {{ commit.author_names|join(", ") }}
 ```
-
-## Using variables
