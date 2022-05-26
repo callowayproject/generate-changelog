@@ -144,7 +144,19 @@ Some values accept pipelines, which are a chain of actions that transform an inp
     - .github/changelog_templates/
   ```
 
+### group_by
 
+:YAML type: [`sequence` of `str`](https://yaml.org/spec/1.2.2/#21-collections)
+
+:Description:
+  Group the commits within a version by these commit attributes. Valid values are any attributes of a [Commit Context](templating/commit-context.md). Use dot notation to specify dictionary keys, object attributes or sequence indexes. For example, `authors.0.name` references the first author's `name` key in the `authors` list.
+
+:Default:
+
+  ```yaml
+  group_by:
+    - metadata.category
+  ```
 
 ## Commit Parsing Options
 
