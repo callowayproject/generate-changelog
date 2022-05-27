@@ -11,7 +11,7 @@ All regular expression actions have the following boolean parameters:
 - [dotall_flag](https://docs.python.org/3/library/re.html#re.DOTALL)
 - [verbose_flag](https://docs.python.org/3/library/re.html#re.VERBOSE)
 
-For example, this sets the multi-line flag and the ignore case flag:
+For example, this sets the `multiline_flag` and the `ignorecase_flag`:
 
 ```yaml
 - action: FirstRegExMatch
@@ -24,7 +24,7 @@ For example, this sets the multi-line flag and the ignore case flag:
 
 You can also use inline notation `(?<flags>)` where `<flags>` is one or more of `a` (ASCII), `i` (ignore case), `l` (locale), `m` (multi-line), `s` (dot matches all), or `x` (verbose). 
 
-This is equivalent to the above example, with `(?im)` setting the multi-line and ignore case flags:
+This is equivalent to the above example, with `(?im)` setting the `multiline_flag` and `ignorecase_flag`:
 
 ```yaml
 - action: FirstRegExMatch
@@ -56,6 +56,70 @@ output_pipeline:
   kwargs:
     filename: CHANGELOG.md
     last_heading_pattern: (?im)^## \d+\.\d+(?:\.\d+)?\s+\([0-9]+-[0-9]{2}-[0-9]{2}\)$
+```
+
+## Providing links to commits and version diffs
+
+With a bit of configuration and custom templating, you can provide a link to each commit and a diff between versions on your git repository.
+
+Add the link to your repository as a [configuration variable](configuration-variables):
+
+```yaml
+variables:
+  repo_url: https://github.com/coordt/generate-changelog
+```
+
+Then create a `version_heading.md.jinja` file in `.github/changelog_templates/` or other [configured template directory](configuration-template_dirs). Its contents should be similar to the following:
+
+```jinja
+## {{ version.label }} ({{ version.date_time.strftime("%Y-%m-%d") }})
+
+[Compare the full difference.]({{ repo_url }}/compare/{{ version.previous_tag }}...{{ version.tag }})
+```
+
+```{note}
+If you use this pattern and generate the changelog before tagging the commit, the `version.tag` will always be `HEAD`.
+
+You will need to either manually change this or use an automated method such as [bump2version](https://github.com/c4urself/bump2version). [See below for more information.](#incremental-changelog-with-bump2version)
+```
+
+For showing a specific commit link, create a `commit.md.jinja` file in `.github/changelog_templates/ or other [configured template directory](configuration-template_dirs). Its contents should include something like 
+```jinja
+[{{ commit.short_sha }}]({{ repo_url }}/commit/{{ commit.sha }})
+```
+
+For example:
+
+```jinja
+- {{ commit.summary }} [{{ commit.short_sha }}]({{ repo_url }}/commit/{{ commit.sha }})
+  {{ commit.body|indent(2, first=True) }}
+  {% for key, val in commit.metadata["trailers"].items() %}
+  {% if key not in VALID_AUTHOR_TOKENS %}
+  **{{ key }}:** {{ val|join(", ") }}
+
+  {% endif %}
+{% endfor %}
+```
+
+## Incremental changelog with bump2version
+
+You can generate the incremental changelog just before using [bump2version](https://github.com/c4urself/bump2version) to bump the version of your project.
+
+First, follow the steps for configuring generate-changelog for [incremental change logs](#incremental-change-logs).
+
+Then configure bump2version to modify the CHANGELOG.md file:
+
+```ini
+[bumpversion:file(version heading):CHANGELOG.md]
+search = Unreleased
+```
+
+If you are including links to [version diffs](#providing-links-to-commits-and-version-diffs), also add:
+
+```ini
+[bumpversion:file(diff link):CHANGELOG.md]
+search = {current_version}...HEAD
+replace = {current_version}...{new_version}
 ```
 
 ## Parsing commit trailers
