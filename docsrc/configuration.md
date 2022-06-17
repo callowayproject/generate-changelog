@@ -18,6 +18,7 @@ Some values accept pipelines, which are a chain of actions that transform an inp
 
 ## General Configuration Options
 
+(configuration-variables)=
 ### variables
 
 :YAML type: [`mapping`](https://yaml.org/spec/1.2.2/#21-collections)
@@ -64,6 +65,7 @@ Some values accept pipelines, which are a chain of actions that transform an inp
         filename: {{ changelog_file }} 
   ```
 
+(configuration-starting_tag_pipeline)=
 ### starting_tag_pipeline
 
 :YAML type: [`sequence` of `mapping`](https://yaml.org/spec/1.2.2/#21-collections)
@@ -89,6 +91,7 @@ Some values accept pipelines, which are a chain of actions that transform an inp
 
 ## Output Configuration Options
 
+(configuration-unreleased_label)=
 ### unreleased_label
 
 :YAML type: `str`
@@ -98,6 +101,7 @@ Some values accept pipelines, which are a chain of actions that transform an inp
 
 :Default: `Unreleased`
 
+(configuration-tag_pattern)=
 ### tag_pattern
 
 :YAML type: `str`
@@ -111,7 +115,7 @@ Some values accept pipelines, which are a chain of actions that transform an inp
 
 :Default: `^[0-9]+\.[0-9]+(?:\.[0-9]+)?$`
 
-
+(configuration-output_pipeline)=
 ### output_pipeline
 
 :YAML type: [`sequence` of `mapping`](https://yaml.org/spec/1.2.2/#21-collections)
@@ -130,6 +134,7 @@ Some values accept pipelines, which are a chain of actions that transform an inp
         last_heading_pattern: (?im)^## \d+\.\d+(?:\.\d+)?\s+\([0-9]+-[0-9]{2}-[0-9]{2}\)$
   ```
 
+(configuration-template_dirs)=
 ### template_dirs
 
 :YAML type: [`sequence` of `str`](https://yaml.org/spec/1.2.2/#21-collections)
@@ -144,9 +149,24 @@ Some values accept pipelines, which are a chain of actions that transform an inp
     - .github/changelog_templates/
   ```
 
+(configuration-group_by)=
+### group_by
 
+:YAML type: [`sequence` of `str`](https://yaml.org/spec/1.2.2/#21-collections)
+
+:Description:
+  Group the commits within a version by these commit attributes. Valid values are any attributes of a [Commit Context](templating/commit-context.md). Use dot notation to specify dictionary keys, object attributes or sequence indexes. For example, `authors.0.name` references the first author's `name` key in the `authors` list.
+
+:Default:
+
+  ```yaml
+  group_by:
+    - metadata.category
+  ```
 
 ## Commit Parsing Options
+
+(configuration-summary_pipeline)=
 
 ### summary_pipeline
 
@@ -178,6 +198,8 @@ Some values accept pipelines, which are a chain of actions that transform an inp
     - action: append_dot
   ```
 
+(configuration-body_pipeline)=
+
 ### body_pipeline
 
 :YAML type: [`sequence` of `mapping`](https://yaml.org/spec/1.2.2/#21-collections)
@@ -196,6 +218,8 @@ Some values accept pipelines, which are a chain of actions that transform an inp
         commit_metadata: save_commit_metadata
   ```
 
+(configuration-include_merges)=
+
 ### include_merges
 :YAML type: bool = False
 
@@ -204,6 +228,8 @@ Some values accept pipelines, which are a chain of actions that transform an inp
 
 :Default: `false`
 
+
+(configuration-ignore_patterns)=
 
 ### ignore_patterns
 :YAML type: [`sequence` of `str`](https://yaml.org/spec/1.2.2/#21-collections)
@@ -223,6 +249,8 @@ Some values accept pipelines, which are a chain of actions that transform an inp
     - ^Merge pull
   ```
 
+(configuration-commit_classifiers)=
+
 ### commit_classifiers
 
 :YAML type: [`sequence` of `mapping`](https://yaml.org/spec/1.2.2/#21-collections)
@@ -235,15 +263,17 @@ Some values accept pipelines, which are a chain of actions that transform an inp
 :Default:
 
   ```yaml
-section_patterns:
-  New:
-  - (?i)^(?:new|add)[^\n]*$
-  Updates:
-  - (?i)^(?:update|change|rename|remove|delete|improve|refactor|chg)[^\n]*$
-  Fixes:
-  - (?i)^(?:fix)[^\n]*$
-  Other: null
+  section_patterns:
+    New:
+    - (?i)^(?:new|add)[^\n]*$
+    Updates:
+    - (?i)^(?:update|change|rename|remove|delete|improve|refactor|chg)[^\n]*$
+    Fixes:
+    - (?i)^(?:fix)[^\n]*$
+    Other: null
   ```
+
+(configuration-valid_author_tokens)=
 
 ### valid_author_tokens
 :YAML type: [`sequence` of `str`](https://yaml.org/spec/1.2.2/#21-collections)

@@ -19,6 +19,7 @@ configuration
 templating/index
 actions/index
 recipes/index
+recipes/conventional-commits
 api
 ```
 ```{toctree}

@@ -52,9 +52,10 @@ class WriteFile:
 
 
 @register_builtin
-def stdout(content: str):
+def stdout(content: str) -> str:
     """Write content to stdout."""
     typer.echo(content)
+    return content
 
 
 @dataclass(frozen=True)
@@ -68,12 +69,15 @@ class IncrementalFileInsert:
     last_heading_pattern: StrOrCallable
     """A regular expression to detect the last heading. Content before this position is re-rendered and inserted."""
 
-    def __call__(self, input_text: StrOrCallable):
+    def __call__(self, input_text: StrOrCallable) -> str:
         """
         Replace the beginning of the file up to ``last_heading_pattern`` with ``input_text`` .
 
         Args:
             input_text: The text to insert.
+
+        Returns:
+            The same ``input_text``
         """
         filename = Path(eval_if_callable(self.filename))
         pattern = eval_if_callable(self.last_heading_pattern)
@@ -87,3 +91,4 @@ class IncrementalFileInsert:
             new_text = text
 
         filename.write_text(new_text)
+        return input_text
