@@ -53,8 +53,9 @@ def main(
     repository_path: Optional[Path] = typer.Option(
         None, "--repo-path", "-r", help="Path to the repository, if not within the current directory"
     ),
+    starting_tag: Optional[str] = typer.Option(None, "--starting-tag", "-t", help="Tag to generate a changelog from."),
 ):
-    """Generate a change  log from git commits."""
+    """Generate a change log from git commits."""
     from generate_changelog import templating
     from generate_changelog.configuration import get_config
     from generate_changelog.pipeline import pipeline_factory
@@ -75,12 +76,10 @@ def main(
     else:
         repository = Repo(search_parent_directories=True)
 
-    # get starting tag based on configuration
-    if config.starting_tag_pipeline:
+    # get starting tag based configuration if not passed in
+    if not starting_tag and config.starting_tag_pipeline:
         start_tag_pipeline = pipeline_factory(config.starting_tag_pipeline, **config.variables)
         starting_tag = start_tag_pipeline.run()
-    else:
-        starting_tag = None
 
     if not starting_tag:
         typer.echo("No starting tag found. Generating entire change log.")
