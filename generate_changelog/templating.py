@@ -33,7 +33,7 @@ def get_pipeline_env(config: Optional[Configuration] = None):
     )
 
 
-def render(repository: Repo, config: Configuration, starting_tag: Optional[str] = None) -> str:
+def render_changelog(repository: Repo, config: Configuration, starting_tag: Optional[str] = None) -> str:
     """
     Render the full or incremental changelog for the repository to a string.
 

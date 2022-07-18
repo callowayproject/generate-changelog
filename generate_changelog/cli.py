@@ -89,7 +89,7 @@ def main(
 
     # use the output pipeline to deal with the rendered change log.
     output_pipeline = pipeline_factory(config.output_pipeline, **config.variables)
-    output_pipeline.run(templating.render(repository, config, starting_tag))
+    output_pipeline.run(templating.render_changelog(repository, config, starting_tag))
     typer.echo("Done.")
     raise typer.Exit()
 

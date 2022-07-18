@@ -104,7 +104,7 @@ def test_render(default_repo, capsys):
     """Render should render the changelog."""
     config = configuration.get_default_config()
     config.template_dirs = []
-    output = templating.render(default_repo, config, None)
+    output = templating.render_changelog(default_repo, config, None)
     expected = (FIXTURES_DIR / "rendered_default_repo.md").read_text()
     assert output.strip() == expected.strip()
 
@@ -113,7 +113,7 @@ def test_render_from_tag(default_repo, capsys):
     """Render should render the changelog."""
     config = configuration.get_default_config()
     config.template_dirs = []
-    output = templating.render(default_repo, config, "0.0.3")
+    output = templating.render_changelog(default_repo, config, "0.0.3")
     expected = textwrap.dedent(
         """
         # Changelog
@@ -133,7 +133,7 @@ def test_incremental_context(default_repo, capsys):
     """Make sure the incremental changelog includes the previous version."""
     config = configuration.get_default_config()
     config.template_dirs = [FIXTURES_DIR / "templates"]
-    output = templating.render(default_repo, config, "0.0.2")
+    output = templating.render_changelog(default_repo, config, "0.0.2")
     expected = textwrap.dedent(
         """
         # Changelog
