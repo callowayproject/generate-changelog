@@ -7,6 +7,7 @@ import pytest
 from faker import Faker
 from pytest import param
 
+import generate_changelog.commits
 from generate_changelog import configuration, templating
 from generate_changelog.configuration import DEFAULT_COMMIT_CLASSIFIERS, get_default_config
 from generate_changelog.context import CommitContext
@@ -35,7 +36,7 @@ fake = Faker()
 )
 def test_first_matching(string, expected):
     """The first matching function should properly categorize a string."""
-    assert templating.first_matching(DEFAULT_COMMIT_CLASSIFIERS, string) == expected
+    assert generate_changelog.commits.first_matching(DEFAULT_COMMIT_CLASSIFIERS, string) == expected
 
 
 def test_commit_context():
@@ -75,7 +76,7 @@ def test_commit_with_no_email():
 def test_get_context_from_tags(default_repo):
     """Get context from tags should return gits correctly filtered."""
     config = get_default_config()
-    context = templating.get_context_from_tags(default_repo, config)
+    context = generate_changelog.commits.get_context_from_tags(default_repo, config)
     assert len(context) == 4
     v = context[0]
     assert v.label == config.unreleased_label
