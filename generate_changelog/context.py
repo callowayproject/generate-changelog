@@ -35,6 +35,9 @@ class CommitContext:
     metadata: dict = field(default_factory=dict)
     """Metadata for this commit parsed from the commit message."""
 
+    files: set = field(default_factory=set)
+    """The files modified by this commit."""
+
     _authors: Optional[list] = field(init=False)  # list of dicts with name and email keys
     _author_names: Optional[list] = field(init=False)  # list of just the names
 
