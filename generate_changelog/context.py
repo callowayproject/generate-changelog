@@ -94,7 +94,7 @@ class CommitContext:
 class GroupingContext:
     """A combination of a tuple of the sorted values and a list of the CommitContexts in that group."""
 
-    grouping: Tuple[str]
+    grouping: Tuple[str, ...]
     commits: List[CommitContext]
 
 

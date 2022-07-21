@@ -68,7 +68,7 @@ def test_commit_with_no_email():
 
 
 def test_get_context_from_tags(default_repo):
-    """Get context from tags should return gits correctly filtered."""
+    """Get context from tags should return commits correctly filtered."""
     config = get_default_config()
     context = generate_changelog.commits.get_context_from_tags(default_repo, config)
     assert len(context) == 4

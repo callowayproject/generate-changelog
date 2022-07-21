@@ -1,10 +1,10 @@
 """Templating functions."""
-from typing import Optional
+from typing import List, Optional
 
 from jinja2 import ChoiceLoader, Environment, FileSystemLoader, PackageLoader, select_autoescape
 
 from generate_changelog.configuration import Configuration, get_config
-from generate_changelog.context import ChangelogContext
+from generate_changelog.context import ChangelogContext, VersionContext
 
 
 def get_default_env(config: Optional[Configuration] = None):
@@ -30,7 +30,7 @@ def get_pipeline_env(config: Optional[Configuration] = None):
     )
 
 
-def render_changelog(version_context, config, incremental=False) -> str:
+def render_changelog(version_context: List[VersionContext], config: Configuration, incremental: bool = False) -> str:
     """
     Render the full or incremental changelog for the repository to a string.
 
