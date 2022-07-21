@@ -5,11 +5,44 @@ import pytest
 from faker import Faker
 from pytest import param
 
-from generate_changelog import release_hint
-from generate_changelog.context import CommitContext
+from generate_changelog import configuration, release_hint
+from generate_changelog.context import CommitContext, GroupingContext, VersionContext
 from generate_changelog.release_hint import InvalidRuleError
 
 fake = Faker()
+
+TEST_RULES = [
+    {
+        "match_result": "patch",
+        "no_match_result": None,
+        "grouping": "Other",
+        "path": "src/*",
+    },
+    {
+        "match_result": "patch",
+        "no_match_result": None,
+        "grouping": "Fixes",
+        "path": "src/*",
+    },
+    {
+        "match_result": "minor",
+        "no_match_result": None,
+        "grouping": "Updates",
+        "path": "src/*",
+    },
+    {
+        "match_result": "minor",
+        "no_match_result": None,
+        "grouping": "New",
+        "path": "src/*",
+    },
+    {
+        "match_result": "unknown",
+        "no_match_result": None,
+        "grouping": "New",
+        "path": "unknown/*",
+    },
+]
 
 
 def commit_context_factory(grouping: Union[str, tuple, None] = None, files: Optional[set] = None):
@@ -178,38 +211,103 @@ def test_releaserule_match_invalid():
 )
 def test_ruleprocessor(commit_grouping, commit_path, expected):
     """RuleProcessor should return the best match."""
-    rules = [
-        {
-            "match_result": "patch",
-            "no_match_result": None,
-            "grouping": "Other",
-            "path": "src/*",
-        },
-        {
-            "match_result": "patch",
-            "no_match_result": None,
-            "grouping": "Fixes",
-            "path": "src/*",
-        },
-        {
-            "match_result": "minor",
-            "no_match_result": None,
-            "grouping": "Updates",
-            "path": "src/*",
-        },
-        {
-            "match_result": "minor",
-            "no_match_result": None,
-            "grouping": "New",
-            "path": "src/*",
-        },
-        {
-            "match_result": "unknown",
-            "no_match_result": None,
-            "grouping": "New",
-            "path": "unknown/*",
-        },
-    ]
-    rule_processor = release_hint.RuleProcessor(rule_list=rules)
+    rule_processor = release_hint.RuleProcessor(rule_list=TEST_RULES)
     commit = commit_context_factory(commit_grouping, commit_path)
     assert rule_processor(commit) == expected
+
+
+def test_suggest_release_type_no_commits():
+    """No commits in an unreleased version should suggest no-release."""
+    config = configuration.get_default_config()
+    config.release_hint_rules = TEST_RULES
+
+    version_contexts = [
+        VersionContext(
+            label=config.unreleased_label, grouped_commits=[GroupingContext(grouping=("ignored",), commits=[])]
+        )
+    ]
+
+    assert release_hint.suggest_release_type(version_contexts, config) == "no-release"
+
+
+def test_suggest_release_type_no_unrelease():
+    """No unreleased version should suggest no-release."""
+    config = configuration.get_default_config()
+    config.release_hint_rules = TEST_RULES
+
+    version_contexts = [
+        VersionContext(label="1.0.0", grouped_commits=[GroupingContext(grouping=("ignored",), commits=[])])
+    ]
+
+    assert release_hint.suggest_release_type(version_contexts, config) == "no-release"
+
+
+def test_suggest_release_type_minor():
+    """Minor release should win out over other types."""
+    config = configuration.get_default_config()
+    config.release_hint_rules = TEST_RULES
+
+    version_contexts = [
+        VersionContext(
+            label=config.unreleased_label,
+            grouped_commits=[
+                GroupingContext(
+                    grouping=("ignored",),
+                    commits=[
+                        commit_context_factory(("Fixes",), {"docs/file.py"}),  # "no-release"
+                        commit_context_factory(("Fixes",), {"src/file.py"}),  # "patch"
+                        commit_context_factory(("New",), {"src/file.py"}),  # "minor"
+                    ],
+                ),
+            ],
+        )
+    ]
+
+    assert release_hint.suggest_release_type(version_contexts, config) == "minor"
+
+
+def test_suggest_release_type_multi_groups():
+    """Multiple groupings should suggest a release."""
+    config = configuration.get_default_config()
+    config.release_hint_rules = TEST_RULES
+
+    version_contexts = [
+        VersionContext(
+            label=config.unreleased_label,
+            grouped_commits=[
+                GroupingContext(
+                    grouping=("ignored",), commits=[commit_context_factory(("Fixes",), {"src/file.py"})]  # "patch"
+                ),
+                GroupingContext(
+                    grouping=("ignored", "forsure"),
+                    commits=[commit_context_factory(("Fixes",), {"src/file.py"})],  # "patch"
+                ),
+            ],
+        )
+    ]
+
+    assert release_hint.suggest_release_type(version_contexts, config) == "patch"
+
+
+def test_suggest_release_type_all_nones():
+    """If all the release types are None, return no-release."""
+    config = configuration.get_default_config()
+    config.release_hint_rules = TEST_RULES
+
+    version_contexts = [
+        VersionContext(
+            label=config.unreleased_label,
+            grouped_commits=[
+                GroupingContext(
+                    grouping=("ignored",),
+                    commits=[
+                        commit_context_factory(("Fixes",), {"docs/file.py"}),  # "no-release"
+                        commit_context_factory(("Fixes",), {"foo/file.py"}),  # "no-release"
+                        commit_context_factory(("New",), {"bar/file.py"}),  # "no-release"
+                    ],
+                ),
+            ],
+        )
+    ]
+
+    assert release_hint.suggest_release_type(version_contexts, config) == "no-release"

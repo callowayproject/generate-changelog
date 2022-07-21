@@ -4,8 +4,8 @@ from typing import List, Optional, Union
 import fnmatch
 import re
 
-from generate_changelog.configuration import RELEASE_TYPE_ORDER
-from generate_changelog.context import CommitContext
+from generate_changelog.configuration import RELEASE_TYPE_ORDER, Configuration
+from generate_changelog.context import CommitContext, VersionContext
 
 
 class InvalidRuleError(Exception):
@@ -127,3 +127,31 @@ class RuleProcessor:
 
         sorted_suggestions = sorted(suggestions, key=lambda s: RELEASE_TYPE_ORDER.index(s))
         return sorted_suggestions[-1]
+
+
+def suggest_release_type(version_contexts: List[VersionContext], config: Configuration) -> str:
+    """
+    Suggest the type of release based on the unreleased commits.
+
+    Args:
+        version_contexts: The processed commits to process
+        config: The current configuration
+
+    Returns:
+        The type of release based on the rules, or ``no-release``
+    """
+    rule_processor = RuleProcessor(rule_list=config.release_hint_rules)
+
+    # If the latest release is not "unreleased", there is no need for a release
+    if version_contexts[0].label != config.unreleased_label:
+        return "no-release"
+
+    suggestions = set()
+    for commit_group in version_contexts[0].grouped_commits:
+        suggestions |= {rule_processor(commit) for commit in commit_group.commits}
+
+    if not suggestions:
+        return "no-release"
+
+    sorted_suggestions = sorted(suggestions, key=lambda s: RELEASE_TYPE_ORDER.index(s))
+    return sorted_suggestions[-1] or "no-release"
