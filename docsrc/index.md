@@ -15,6 +15,7 @@ caption: Contents
 hidden: true
 ---
 Introduction <readme>
+Command Line Interface <cli>
 configuration
 templating/index
 actions/index
