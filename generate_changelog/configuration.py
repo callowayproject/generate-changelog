@@ -211,9 +211,6 @@ class Configuration:
     #
     # Release Hinting
     #
-    release_hint_default: Optional[str] = None
-    """If no hint rule matches, this is the result. ``None`` means no release necessary."""
-
     release_hint_rules: list = field(default_factory=list)
     """Rules applied to commits to determine the type of release to suggest."""
 
