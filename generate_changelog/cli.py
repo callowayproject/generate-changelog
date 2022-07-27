@@ -1,6 +1,7 @@
 """Command line interface for generate_changelog."""
-from typing import Optional
+from typing import Callable, Optional
 
+import functools
 import json
 from enum import Enum
 from pathlib import Path
@@ -9,7 +10,7 @@ import typer
 from git import Repo
 
 from generate_changelog.commits import get_context_from_tags
-from generate_changelog.configuration import DEFAULT_CONFIG_FILE_NAMES, write_default_config
+from generate_changelog.configuration import DEFAULT_CONFIG_FILE_NAMES, Configuration, write_default_config
 from generate_changelog.release_hint import suggest_release_type
 
 app = typer.Typer()
@@ -60,7 +61,7 @@ def main(
         callback=generate_config_callback,
     ),
     config_file: Optional[Path] = typer.Option(
-        None, "--config", "-c", help="Path to the config file.", envvar="CLGEN_CONFIG_FILE"
+        None, "--config", "-c", help="Path to the config file.", envvar="CHANGELOG_CONFIG_FILE"
     ),
     repository_path: Optional[Path] = typer.Option(
         None, "--repo-path", "-r", help="Path to the repository, if not within the current directory"
@@ -73,20 +74,10 @@ def main(
 ):
     """Generate a change log from git commits."""
     from generate_changelog import templating
-    from generate_changelog.configuration import get_config
     from generate_changelog.pipeline import pipeline_factory
 
-    # Load default configuration
-    config = get_config()
-    user_config = config_file or next(
-        (Path.cwd() / Path(name) for name in DEFAULT_CONFIG_FILE_NAMES if (Path.cwd() / Path(name)).exists()), None
-    )
-    if user_config:
-        if not output:
-            typer.echo(f"Using configuration file: {user_config}")
-        config.update_from_file(user_config)
-    elif not output:
-        typer.echo("No configuration file found. Using default configuration.")
+    echo_func = functools.partial(echo, quiet=bool(output))
+    config = get_user_config(config_file, echo_func)
 
     if repository_path:  # pragma: no cover
         repository = Repo(repository_path)
@@ -98,11 +89,10 @@ def main(
         start_tag_pipeline = pipeline_factory(config.starting_tag_pipeline, **config.variables)
         starting_tag = start_tag_pipeline.run()
 
-    if not output:
-        if not starting_tag:
-            typer.echo("No starting tag found. Generating entire change log.")
-        else:
-            typer.echo(f"Generating change log from tag: '{starting_tag}'.")
+    if not starting_tag:
+        echo_func("No starting tag found. Generating entire change log.")
+    else:
+        echo_func(f"Generating change log from tag: '{starting_tag}'.")
 
     version_contexts = get_context_from_tags(repository, config, starting_tag)
 
@@ -112,8 +102,7 @@ def main(
     notes = templating.render_changelog(version_contexts, config, not starting_tag)
 
     if not skip_output_pipeline:
-        if not output:
-            typer.echo("Executing output pipeline.")
+        echo_func("Executing output pipeline.")
         output_pipeline = pipeline_factory(config.output_pipeline, **config.variables)
         output_pipeline.run(notes)
 
@@ -128,6 +117,46 @@ def main(
         typer.echo("Done.")
 
     raise typer.Exit()
+
+
+def get_user_config(config_file: Optional[Path], echo_func: Callable) -> Configuration:
+    """
+    Get the default configuration and update it with the user's config file.
+
+    Args:
+        config_file: The path to the user's configuration file
+        echo_func: The function to call to echo output
+
+    Returns:
+        The configuration object
+    """
+    from generate_changelog.configuration import get_config
+
+    config = get_config()
+    user_config = config_file or next(
+        (Path.cwd() / Path(name) for name in DEFAULT_CONFIG_FILE_NAMES if (Path.cwd() / Path(name)).exists()), None
+    )
+    if user_config:
+        echo_func(f"Using configuration file: {user_config}")
+        config.update_from_file(user_config)
+    else:
+        echo_func("No configuration file found. Using default configuration.")
+    return config
+
+
+def echo(message: str, quiet: bool = False):
+    """
+    Display a message to the user.
+
+    Args:
+        message: The message to send to the user
+        quiet: Do it quietly
+    """
+    if not quiet:
+        typer.echo(message)
+
+
+typer_click_object = typer.main.get_command(app)
 
 
 if __name__ == "__main__":
