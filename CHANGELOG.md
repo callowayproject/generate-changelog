@@ -1,5 +1,82 @@
 # Changelog
 
+## 0.8.0 (2022-07-29)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.6...0.8.0)
+
+### Fixes
+
+- Fixed the return values of several actions. [f679d62](https://github.com/coordt/generate-changelog/commit/f679d6203ffed04015e438e64422d958d239d038)
+    
+  - stdout now returns the input string
+  - IncrementalFileInsert now returns the input string
+### New
+
+- Added release hinting functionality to CLI. [49eccc7](https://github.com/coordt/generate-changelog/commit/49eccc7159a8d046ec38503bb94fc9d56afcb09e)
+    
+- Added release hinting for commits. [ae4ade8](https://github.com/coordt/generate-changelog/commit/ae4ade88627ded694f515823c331d7c81aa9911c)
+    
+- Added ability to specify starting tag on the CLI. [ca4928e](https://github.com/coordt/generate-changelog/commit/ca4928ec588ff7956b62770dfbff82058b43a1d2)
+    
+- Added file processing action docs. [17123a4](https://github.com/coordt/generate-changelog/commit/17123a464a376e0149ca8e8c8ba5dfb6dbce4f43)
+    
+- Added diff linking and bump2version docs. [6178d2d](https://github.com/coordt/generate-changelog/commit/6178d2dda93fedabdca47f150bbfc3b50847cfa2)
+    
+- Added group_by configuration docs. [637a91e](https://github.com/coordt/generate-changelog/commit/637a91e55f3b7684879fe58ce8d1dd37a9d22326)
+    
+- Added typing_extensions requirement. [8abd74a](https://github.com/coordt/generate-changelog/commit/8abd74aa015e1e8082f4ec429531d6d8b10e0ca0)
+    
+- Added action to publish documentation on tagging. [30c8deb](https://github.com/coordt/generate-changelog/commit/30c8debdc3ca4a0e771c28707baf2f40eed4e03b)
+    
+### Other
+
+- [pre-commit.ci] pre-commit autoupdate. [9b6c246](https://github.com/coordt/generate-changelog/commit/9b6c246854a3db1ca2eff534399f30c3965278ee)
+    
+  **updates:** - [github.com/psf/black: 22.3.0 → 22.6.0](https://github.com/psf/black/compare/22.3.0...22.6.0)
+
+- [pre-commit.ci] pre-commit autoupdate. [d77419c](https://github.com/coordt/generate-changelog/commit/d77419c323a91fda00dc804f5c8ae6ca56e52da6)
+    
+  **updates:** - [github.com/pre-commit/pre-commit-hooks: v4.2.0 → v4.3.0](https://github.com/pre-commit/pre-commit-hooks/compare/v4.2.0...v4.3.0)
+
+- Moved documentation requirements into requirements/docs.txt. [29382e5](https://github.com/coordt/generate-changelog/commit/29382e52648c13304905e5e2a7e4120900c3d71c)
+    
+- Create codeql-analysis workflow. [0982149](https://github.com/coordt/generate-changelog/commit/09821491f70f7f34fbfb489eae0fc9cec2543643)
+    
+### Updates
+
+- Updated the readme. [9739ffb](https://github.com/coordt/generate-changelog/commit/9739ffb71b243602b4b19efc6c7dfd06cbb1e170)
+    
+- Updated the documentation for release hinting. [2302a26](https://github.com/coordt/generate-changelog/commit/2302a269338562c939f75a4dcc78f56278788eb0)
+    
+- Refactored how the user config and output. [84b54f9](https://github.com/coordt/generate-changelog/commit/84b54f92ed253e57200e0c2625be3d848f5af50b)
+    
+  - Added new method for getting the user config
+  - Added generic output method that is aware of if output should be generated based on the -o flag
+- Updated docs. [1bd0f12](https://github.com/coordt/generate-changelog/commit/1bd0f1234492545603f638b72e577cf2fede9e80)
+    
+- Removed unused configuration setting. [70a6d27](https://github.com/coordt/generate-changelog/commit/70a6d2711df0fbbbcffa50102d82806107515bd5)
+    
+  - release_hint_default ended up not being used
+- Refactored templating to accept a version context. [094fa94](https://github.com/coordt/generate-changelog/commit/094fa94dd4d1aa4d3a8ef73fbf81a013199c673e)
+    
+- Refactored commit tests into new file. [d21c035](https://github.com/coordt/generate-changelog/commit/d21c03577999b5c5015fc684dd1b150924421ac4)
+    
+- Renamed render to render_changelog for clarity. [357ba9a](https://github.com/coordt/generate-changelog/commit/357ba9a28fee6d8bb001fa60e567c7fadb4477d9)
+    
+- Refactored commit processing to its own module. [e285ea5](https://github.com/coordt/generate-changelog/commit/e285ea590ae430881d591c2f4c3e77ecd2317c81)
+    
+  - All commit processing moved from the templating module to the commits module.
+- Refactored a dict into a dataclass. [81c54de](https://github.com/coordt/generate-changelog/commit/81c54ded6268dc0610e216670074bcf462153b6b)
+    
+  - `get_commits_by_tag` now returns a list of `GitTag` objects
+- Updated conventional commit docs. [af237cd](https://github.com/coordt/generate-changelog/commit/af237cd089ecdf1bf42faa81078fa4d47d97af59)
+    
+- Updated template docs. [ece7da5](https://github.com/coordt/generate-changelog/commit/ece7da5f8e5c4e7a60d7bcd5c45b83125a87979a)
+    
+- Renamed publish-docs workflow. [549703b](https://github.com/coordt/generate-changelog/commit/549703bdf81fa18762c8cf80af1637da48a63f6a)
+    
+
+
 ## 0.7.6 (2022-05-25)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.5...0.7.6)
