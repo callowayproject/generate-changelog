@@ -20,7 +20,7 @@ TEST_RULES = [
     },
     {
         "match_result": "patch",
-        "no_match_result": None,
+        "no_match_result": "no-release",
         "grouping": "Fixes",
         "path": "src/*",
     },

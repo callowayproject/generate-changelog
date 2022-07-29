@@ -20,7 +20,7 @@ class ReleaseRule:
     def __init__(
         self,
         match_result: Optional[str],
-        no_match_result: Optional[str] = None,
+        no_match_result: Optional[str] = "no-release",
         grouping: Union[str, tuple, list, None] = None,
         path: Optional[str] = None,
     ):

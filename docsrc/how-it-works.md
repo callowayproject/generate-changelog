@@ -1,29 +1,49 @@
-# How it works
+# How Generate Changelog works
 
-Assumes versions, or releases, are tags in the git repository.
+Generate Changelog requires a git tag to indicate each version, or release, in the git repository.
 
-1. **Get last release:** Obtain the version number corresponding to the last release.
-   1. Uses `--starting-tag` command line option or `starting_tag_pipeline` configuration to determine starting tag
-   2. If no starting tag is found, it starts at the beginning
-2. **Process commits:** Filter and process commits since a starting point, setting metadata and normalizing information.
-   1. Uses `tag_pattern` configuration to filter tags since starting commit
-   2. Groups commits according to their tag or the next tag in the timeline in 
-   3. Commits since the last tag are grouped under a tag placeholder named `HEAD`
-   4. Each tag is converted to a `VersionContext`. The `HEAD` placeholder is renamed to the `unreleased_label` configuration
-   5. Each commit within the tag are processed
-      1. Filtered using `ignore_patterns` configuration
-      2. The commit's `summary` line is run through the `summary_pipeline` configuration
-      3. The commit's `body` is run through the `body_pipeline` configuration
-      4. The commit is assigned a `category` based on the first matching item in the `commit_classifiers` configuration
-      5. The commit is assigned a `grouping` based on the `group_by` configuration
-      6. Each commit is converted to a `CommitContext`
-   6. The processed commits are sorted by their `grouping` attribute
-3. **Suggest release hint:** Applies rules to every `CommitContext` in the `unreleased_label` `VersionContext`. If there is not an `unreleased_label` version, or if its commits are empty, a hint of `no-release` is returned
-   1. Each rule in the `release_hint_rules` configuration is applied to each `CommitContext` in the unreleased `VersionContext` and collected in a unique set of possible release types
-   2. The commit's possible release types are sorted according to `major` > `minor` > `patch` > `no-release`.
-   3. The highest possible release type for each commit is assigned to a unique set for the unreleased version
-   4. The release hint is the maximum release type in the unique set of possible release types
-4. **Render changelog and release notes:** Render the `VersionContext`(s) into a document.
-   1. Create a `ChangelogContext` from the configuration and `VersionContext`(s)
-   2. For incremental change logs (those with a starting tag), only the `heading.md.jinja` and `versions.md.jinja` are rendered and returned
-   3. For full change logs, the `base.md.jinja` is rendered and returned
+The two foundational functions are getting the starting tag and processing the commits from that starting point. From the result of the foundational functions we can suggest a release hint and render a change log and release notes.
+
+## Getting the starting tag
+
+This step uses the {option}`--starting-tag` command line option or the {ref}`configuration-starting_tag_pipeline` configuration to determine the starting point for processing. If no starting tag is found, it starts at the first commit.
+
+## Processing commits
+
+This step filters and processes each commit since a starting point. 
+
+For each commit since the starting point:
+
+1. Discard the commit if it matches the {ref}`configuration-ignore_patterns` configuration.
+2. Run the `summary` line through the {ref}`configuration-summary_pipeline` configuration.
+3. Run the `body` through the {ref}`configuration-body_pipeline` configuration.
+4. Assign the commit a `category` based on the first matching item in the {ref}`configuration-commit_classifiers` configuration.
+5. Assign the commit a `grouping` based on the {ref}`configuration-group_by` configuration.
+6. Create a {class}`~.context.CommitContext` from the commit's processed attributes.
+
+Then we must process the tags and create {class}`~.context.VersionContext`s. This involves gathering the list of tags since the starting point and using the {ref}`configuration-tag_pattern` configuration to filter out unwanted tags. Tags are converted to {class}`~.context.VersionContext`s.
+
+Each {class}`~.context.CommitContext` is assigned a version according to the next valid tag in the timeline (or their own tag, if the underlying commit itself is tagged). {class}`~.context.CommitContext`s since the last tag assigned a version named {ref}`configuration-unreleased_label`.
+
+Each {class}`~.context.VersionContext` sorts its assigned {class}`~.context.CommitContext`s by its `grouping` attribute.
+
+## Suggesting a release type
+
+This optional step applies rules to every {class}`~.context.CommitContext` in the {class}`~.context.VersionContext` labeled {ref}`configuration-unreleased_label` to determine what type of release (e.g. `patch`, `minor`, or `major`) to suggest. A `no-release` suggestion means that no release is warranted. This can happen if there is not an {ref}`configuration-unreleased_label` version, if {ref}`configuration-unreleased_label` version has no commit, or all the rules returned `no-release`.
+
+Essentially this is a map-reduce function where each rule in the {ref}`configuration-release_hint_rules` configuration maps a release hint to each {class}`~.context.CommitContext` in the unreleased {class}`~.context.VersionContext`. The resulting values are reduced to the maximum value according to:
+
+1. no-release
+2. alpha
+3. beta
+4. dev
+5. pre-release
+6. release-candidate
+7. patch
+8. minor
+9. major
+
+
+## Rendering the changelog
+
+This involves rendering a complete or partial changelog using [Jinja templates](https://jinja.palletsprojects.com). For incremental change logs (those with a starting tag), only the `heading.md.jinja` and `versions.md.jinja` templates are rendered and returned. For full change logs, the `base.md.jinja` template is rendered and returned.

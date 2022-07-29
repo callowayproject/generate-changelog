@@ -297,3 +297,32 @@ Some values accept pipelines, which are a chain of actions that transform an inp
   - improved-by
   - original-patch-by
   ```
+
+## Release Hinting Options
+
+(configuration-release_hint_rules)=
+
+### release_hint_rules
+:YAML type: [`sequence` of `mapping`](https://yaml.org/spec/1.2.2/#21-collections)
+
+:Description: Rules applied to unreleased commits to determine the type of release to suggest.
+
+:Default:
+  ```YAML
+  release_hint_rules:
+    - match_result: "patch"
+      no_match_result: "no-release"
+      grouping: "Other"
+    - match_result: "patch"
+      no_match_result: "no-release"
+      grouping: "Fixes"
+    - match_result: "minor"
+      no_match_result: "no-release"
+      grouping: "Updates"
+    - match_result: "minor"
+      no_match_result: "no-release"
+      grouping: "New"
+    - match_result: "major"
+      no_match_result: "no-release"
+      grouping: "Breaking Changes"
+  ```

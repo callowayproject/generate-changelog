@@ -28,6 +28,7 @@ IntOrCallable: TypeAlias = Union[int, Callable[[], int]]
 
 RELEASE_TYPE_ORDER = (
     None,
+    "no-release",
     "alpha",
     "beta",
     "dev",
@@ -137,23 +138,28 @@ DEFAULT_TEMPLATE_DIRS = [".github/changelog_templates/"]
 DEFAULT_RELEASE_RULES = [
     {
         "match_result": "patch",
-        "no_match_result": None,
+        "no_match_result": "no-release",
         "grouping": "Other",
     },
     {
         "match_result": "patch",
-        "no_match_result": None,
+        "no_match_result": "no-release",
         "grouping": "Fixes",
     },
     {
         "match_result": "minor",
-        "no_match_result": None,
+        "no_match_result": "no-release",
         "grouping": "Updates",
     },
     {
         "match_result": "minor",
         "no_match_result": None,
         "grouping": "New",
+    },
+    {
+        "match_result": "major",
+        "no_match_result": None,
+        "grouping": "Breaking Changes",
     },
 ]
 
