@@ -2,6 +2,7 @@ from pathlib import Path
 
 from git import Actor
 
+import generate_changelog.commits
 from generate_changelog import templating
 from generate_changelog.configuration import get_default_config
 
@@ -73,7 +74,7 @@ def test_tags_on_multiple_branches(bare_git_repo, capsys):
 
     changelog_config = get_default_config()
     changelog_config.update_from_file(FIXTURES_DIR / "std-out-config.yaml")
-    context = templating.get_context_from_tags(bare_git_repo, changelog_config)
+    context = generate_changelog.commits.get_context_from_tags(bare_git_repo, changelog_config)
     assert len(context) == 5
     unreleased = context[0]
     ver004 = context[1]

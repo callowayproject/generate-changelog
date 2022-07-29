@@ -15,6 +15,9 @@ caption: Contents
 hidden: true
 ---
 Introduction <readme>
+how-it-works
+Command Line Interface <cli>
+release-hinting
 configuration
 templating/index
 actions/index

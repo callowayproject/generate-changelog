@@ -5,6 +5,7 @@ import pytest
 from git import Actor
 
 from generate_changelog import configuration, templating
+from generate_changelog.commits import get_context_from_tags
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
@@ -271,7 +272,7 @@ def test_conventional_commits(conv_commit_repo):
     config = configuration.get_default_config()
     config.update_from_file(config_file_path)
     config.template_dirs = []
-
-    output = templating.render(conv_commit_repo, config, None)
+    version_context = get_context_from_tags(conv_commit_repo, config, None)
+    output = templating.render_changelog(version_context, config)
     expected = (FIXTURES_DIR / "rendered_conv_commit_repo.md").read_text()
     assert output.strip() == expected.strip()

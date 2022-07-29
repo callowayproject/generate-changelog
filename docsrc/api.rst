@@ -10,11 +10,13 @@ API Reference
 
    ~actions
    ~cli
+   ~commits
    ~configuration
    ~context
    ~data_merge
    ~git_ops
    ~pipeline
+   ~release_hint
    ~templating
    ~utilities
    ~_attr_docs

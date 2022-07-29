@@ -1,4 +1,5 @@
 """Tests of the command line interface."""
+import json
 import traceback
 from pathlib import Path
 
@@ -35,3 +36,39 @@ def test_app_generate_changelog(default_repo):
         traceback.print_exception(*result.exc_info)
     assert result.exit_code == 0
     assert f"Using configuration file: {config}" in result.stdout
+
+
+def test_app_generate_release_hint(default_repo):
+    config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
+    result = runner.invoke(
+        app, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "release-hint"]
+    )
+    if result.exit_code != 0:
+        print(result.stdout)
+        traceback.print_exception(*result.exc_info)
+    assert result.exit_code == 0
+    assert "minor" in result.stdout
+
+
+def test_app_generate_notes(default_repo):
+    config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
+    result = runner.invoke(
+        app, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "notes"]
+    )
+    if result.exit_code != 0:
+        print(result.stdout)
+        traceback.print_exception(*result.exc_info)
+    assert result.exit_code == 0
+    assert result.stdout.startswith("# Changelog")
+
+
+def test_app_generate_all(default_repo):
+    config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
+    result = runner.invoke(app, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "all"])
+    if result.exit_code != 0:
+        print(result.stdout)
+        traceback.print_exception(*result.exc_info)
+    assert result.exit_code == 0
+    output = json.loads(result.stdout)
+    assert output["notes"].startswith("# Changelog")
+    assert "minor" == output["release_hint"]

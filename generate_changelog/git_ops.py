@@ -7,7 +7,7 @@ import os
 import re
 from dataclasses import dataclass
 
-from git import Actor, Repo
+from git import Actor, Commit, Repo
 
 from generate_changelog.configuration import get_config
 
@@ -38,6 +38,15 @@ class TagInfo:
     def date_string(self) -> str:
         """Convenience method to return an ISO8601 date string."""
         return self.tagged_datetime.strftime("%Y-%m-%d")
+
+
+@dataclass(frozen=True)
+class GitTag:
+    """A git tag with information and commits."""
+
+    tag_name: str
+    tag_info: TagInfo
+    commits: List[Commit]
 
 
 def get_repo(repo_path: Optional[str] = None) -> Repo:
@@ -122,7 +131,7 @@ def get_tags(repository: Repo) -> List[TagInfo]:
     return tags_list
 
 
-def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag: Optional[str] = None) -> List[dict]:
+def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag: Optional[str] = None) -> List[GitTag]:
     """
     Group commits by the tags they belong to.
 
@@ -153,11 +162,11 @@ def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag:
     for end_tag, start_tag in pairs(tags):
         start_tag_name = getattr(start_tag, "name", None)
         groups.append(
-            {
-                "tag_name": end_tag.name,
-                "tag_info": end_tag,
-                "commits": parse_commits(repository, start_tag_name, end_tag.name),
-            }
+            GitTag(
+                tag_name=end_tag.name,
+                tag_info=end_tag,
+                commits=parse_commits(repository, start_tag_name, end_tag.name),
+            )
         )
         if starting_tag and start_tag_name == starting_tag:
             break

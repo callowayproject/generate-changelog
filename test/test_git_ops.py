@@ -43,8 +43,8 @@ def test_get_commits_by_all_tags(default_repo):
 
     expected = [("HEAD", 1), ("0.0.3", 3), ("0.0.2", 1), ("0.0.1", 1)]
     for group, expect in zip(grouping, expected):
-        assert group["tag_name"] == expect[0]
-        assert len(group["commits"]) == expect[1]
+        assert group.tag_name == expect[0]
+        assert len(group.commits) == expect[1]
 
 
 def test_get_commits_since_tag(default_repo):
@@ -58,5 +58,5 @@ def test_get_commits_since_tag(default_repo):
         ("0.0.3", 3),
     ]
     for group, expect in zip(grouping, expected):
-        assert group["tag_name"] == expect[0]
-        assert len(group["commits"]) == expect[1]
+        assert group.tag_name == expect[0]
+        assert len(group.commits) == expect[1]

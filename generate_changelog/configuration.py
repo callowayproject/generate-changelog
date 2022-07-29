@@ -26,6 +26,20 @@ StrOrCallable: TypeAlias = Union[str, Callable[[], str]]
 IntOrCallable: TypeAlias = Union[int, Callable[[], int]]
 """The type should be either an int or a callable that returns an int."""
 
+RELEASE_TYPE_ORDER = (
+    None,
+    "no-release",
+    "alpha",
+    "beta",
+    "dev",
+    "pre-release",
+    "release-candidate",
+    "patch",
+    "minor",
+    "major",
+)
+"""The sort order of the release types."""
+
 DEFAULT_CONFIG_FILE_NAME = ".changelog-config"
 """Base default configuration file name"""
 
@@ -121,6 +135,34 @@ DEFAULT_GROUP_BY = [
 
 DEFAULT_TEMPLATE_DIRS = [".github/changelog_templates/"]
 
+DEFAULT_RELEASE_RULES = [
+    {
+        "match_result": "patch",
+        "no_match_result": "no-release",
+        "grouping": "Other",
+    },
+    {
+        "match_result": "patch",
+        "no_match_result": "no-release",
+        "grouping": "Fixes",
+    },
+    {
+        "match_result": "minor",
+        "no_match_result": "no-release",
+        "grouping": "Updates",
+    },
+    {
+        "match_result": "minor",
+        "no_match_result": None,
+        "grouping": "New",
+    },
+    {
+        "match_result": "major",
+        "no_match_result": None,
+        "grouping": "Breaking Changes",
+    },
+]
+
 
 @dataclass
 class Configuration:
@@ -171,6 +213,12 @@ class Configuration:
 
     valid_author_tokens: list = field(default_factory=list)
     """Tokens in git commit trailers that indicate authorship."""
+
+    #
+    # Release Hinting
+    #
+    release_hint_rules: list = field(default_factory=list)
+    """Rules applied to commits to determine the type of release to suggest."""
 
     @cached_property
     def rendered_variables(self) -> dict:
@@ -231,6 +279,7 @@ def get_default_config() -> Configuration:
         valid_author_tokens=DEFAULT_VALID_AUTHOR_TOKENS,
         group_by=DEFAULT_GROUP_BY,
         template_dirs=DEFAULT_TEMPLATE_DIRS,
+        release_hint_rules=DEFAULT_RELEASE_RULES,
     )
 
 

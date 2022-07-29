@@ -35,6 +35,9 @@ class CommitContext:
     metadata: dict = field(default_factory=dict)
     """Metadata for this commit parsed from the commit message."""
 
+    files: set = field(default_factory=set)
+    """The file paths (relative to the repository root) modified by this commit."""
+
     _authors: Optional[list] = field(init=False)  # list of dicts with name and email keys
     _author_names: Optional[list] = field(init=False)  # list of just the names
 
@@ -91,7 +94,7 @@ class CommitContext:
 class GroupingContext:
     """A combination of a tuple of the sorted values and a list of the CommitContexts in that group."""
 
-    grouping: Tuple[str]
+    grouping: Tuple[str, ...]
     commits: List[CommitContext]
 
 
