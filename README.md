@@ -6,21 +6,44 @@
 Use your commit log to make a beautiful changelog file.
 <!-- end badges -->
 
+- [Documentation](https://coordt.github.io/generate-changelog/)
+- [GitHub](https://github.com/coordt/generate-changelog)
+
+`generate-changelog` does what it says: it generates a full changelog, or updates an existing one. Git tags and commits are the inputs by which `generate-changelog` performs its task.
+
+The primary goal of this tool was to provide the benefits of [conventional commits](https://www.conventionalcommits.org/) without requiring a strict syntax. `generate-changelog` accomplishes this using configurable regular expressions or commit metadata matching. The thought is natural language is easier for developers to remember and requires less tooling to enforce.
+
 ## Features
 
-- Configurable to adapt to your changelog preferences.
+### Commit and tag processing
+
 - Filter out commits and tags based on regular expression matching.
-- Classify commit messages into sections such as "New", "Fixes", and "Changes".
-- Templated using [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) templates.
+- Classify commit messages into sections such as "New", "Fixes", and "Changes" using configurable regular expressions, metadata, or custom criteria.
 - Rewrite commit summary or commit body using pipelines of actions.
-- Supports your merge or rebase workflows and complicated git histories.
+- Extract parts of the commit summary or body into metadata available for templates and filters.
+- Built-in issue parsers for Jira, GitHub, Azure DevOps Board.
+- Built-in conventional commit parser
+
+### Changelog rendering
+
+- Templated using [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) templates.
+- Each template has a large amount of metadata that allows linking to a commit, a version diff, and issue trackers.
+- Easily customize just the template you want.
 - Supports full or incremental changelog generation.
-- Parses [trailers key values](https://zerokspot.com/weblog/2020/10/24/git-commit-messages-with-attributes/)
-- Supports of multi-authors for one commit through configurable [trailers key values](https://git.wiki.kernel.org/index.php/CommitMessageConventions)
+
+### Release hints
+
+- Can use user-defined rules to suggest a release type for use in another part of your CI pipeline.
+
+### Git support
+
+- Supports your merge or rebase workflows and complicated git histories.
+- Supports of multi-authors for one commit through configurable [trailers key values](https://git.wiki.kernel.org/index.php/CommitMessageConventions).
+- Built-in parser for turning [trailers key values](https://zerokspot.com/weblog/2020/10/24/git-commit-messages-with-attributes/) into metadata.
 
 ## Requirements
 
-Python 3.8 or higher.
+Python 3.7 or higher.
 
 ## Installation
 
