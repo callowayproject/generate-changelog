@@ -31,7 +31,7 @@ repos:
         args: ["--remove"]
       - id: requirements-txt-fixer
   - repo: https://github.com/PyCQA/flake8
-    rev: 4.0.1
+    rev: 5.0.2
     hooks:
       - id: flake8
         exclude: test.*
