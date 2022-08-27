@@ -1,5 +1,5 @@
 """Metadata callback and processing functions."""
-from typing import Callable, Optional
+from typing import Any, Callable, Dict, Optional
 
 import re
 import textwrap
@@ -208,7 +208,7 @@ class ParseConventionalCommit:
             return message
 
         grp_dict = match.groupdict()
-        metadata = {
+        metadata: Dict[str, Any] = {
             "commit_type": grp_dict["type"],
             "scope": [],
         }

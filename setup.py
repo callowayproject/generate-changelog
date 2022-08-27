@@ -33,7 +33,7 @@ def parse_reqs(filepath: str) -> list:
         elif line.startswith("-r") or line.startswith("--requirement"):
             _, new_filename = line.split()
             new_file_path = path.parent / new_filename
-            reqs.extend(parse_reqs(new_file_path))
+            reqs.extend(parse_reqs(str(new_file_path)))
         elif line.startswith("-f") or line.startswith("-i") or line.startswith("--"):
             continue
         elif line.startswith("-Z") or line.startswith("--always-unzip"):

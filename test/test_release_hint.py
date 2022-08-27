@@ -13,34 +13,44 @@ fake = Faker()
 
 TEST_RULES = [
     {
+        "match_result": "dev",
+        "no_match_result": "no-release",
+        "branch": "^((?!master|main).)*$",
+    },
+    {
         "match_result": "patch",
         "no_match_result": None,
         "grouping": "Other",
         "path": "src/*",
+        "branch": "master|main",
     },
     {
         "match_result": "patch",
         "no_match_result": "no-release",
         "grouping": "Fixes",
         "path": "src/*",
+        "branch": "master|main",
     },
     {
         "match_result": "minor",
         "no_match_result": None,
         "grouping": "Updates",
         "path": "src/*",
+        "branch": "master|main",
     },
     {
         "match_result": "minor",
         "no_match_result": None,
         "grouping": "New",
         "path": "src/*",
+        "branch": "master|main",
     },
     {
         "match_result": "unknown",
         "no_match_result": None,
         "grouping": "New",
         "path": "unknown/*",
+        "branch": "master|main",
     },
 ]
 
@@ -56,6 +66,7 @@ def commit_context_factory(grouping: Union[str, tuple, None] = None, files: Opti
         ]
     )
     committer = f"{fake.name()} <{fake.ascii_email()}>"
+    grouping = (grouping,) if isinstance(grouping, str) else grouping
     return CommitContext(
         sha=fake.sha1(),
         commit_datetime=fake.past_datetime(tzinfo=fake.pytimezone()),
@@ -109,7 +120,7 @@ def test_releaserule_match_grouping(commit_grouping, rule_grouping):
     """ReleaseRule should return the match_result if the commit matches."""
     rule = release_hint.ReleaseRule(match_result="success", grouping=rule_grouping)
     commit_ctx = commit_context_factory(grouping=commit_grouping)
-    assert rule(commit_ctx) == "success"
+    assert rule(commit_ctx, "master") == "success"
 
 
 @pytest.mark.parametrize(
@@ -132,7 +143,7 @@ def test_releaserule_match_grouping_failures(commit_grouping, rule_grouping):
     """Test expected failures."""
     rule = release_hint.ReleaseRule(match_result="success", no_match_result="fail", grouping=rule_grouping)
     commit_ctx = commit_context_factory(grouping=commit_grouping)
-    assert rule(commit_ctx) == "fail"
+    assert rule(commit_ctx, "master") == "fail"
 
 
 @pytest.mark.parametrize(
@@ -144,11 +155,11 @@ def test_releaserule_match_grouping_failures(commit_grouping, rule_grouping):
         param({"foo/bar/baz/huh.txt"}, "foo/**/*.txt", id="recursive match really nested file"),
     ],
 )
-def test_releaserule_match_path(commit_paths, rule_path):
+def test_releaserule_match_path(commit_paths: set, rule_path: str):
     """ReleaseRule should return the match_result if the commit matches."""
     rule = release_hint.ReleaseRule(match_result="success", path=rule_path)
     commit_ctx = commit_context_factory(files=commit_paths)
-    assert rule(commit_ctx) == "success"
+    assert rule(commit_ctx, "master") == "success"
 
 
 @pytest.mark.parametrize(
@@ -158,11 +169,11 @@ def test_releaserule_match_path(commit_paths, rule_path):
         param({"foo/bar/baz.txt"}, "bar/*", id="mismatched directories"),
     ],
 )
-def test_releaserule_match_path_failures(commit_paths, rule_path):
+def test_releaserule_match_path_failures(commit_paths: set, rule_path: str):
     """ReleaseRule should return the match_result if the commit matches."""
     rule = release_hint.ReleaseRule(match_result="success", no_match_result="failure", path=rule_path)
     commit_ctx = commit_context_factory(files=commit_paths)
-    assert rule(commit_ctx) == "failure"
+    assert rule(commit_ctx, "master") == "failure"
 
 
 @pytest.mark.parametrize(
@@ -183,11 +194,28 @@ def test_releaserule_match_path_failures(commit_paths, rule_path):
         param({"foo/bar/baz/huh.txt"}, "foo/**/*.txt", ("new",), "new", id="recursive match really nested file"),
     ],
 )
-def test_releaserule_match_path_and_grouping(commit_paths, rule_path, commit_grouping, rule_grouping):
+def test_releaserule_match_path_and_grouping(commit_paths: set, rule_path: str, commit_grouping, rule_grouping):
     """ReleaseRule should return the match_result if the commit matches."""
-    rule = release_hint.ReleaseRule(match_result="success", path=rule_path)
-    commit_ctx = commit_context_factory(files=commit_paths)
-    assert rule(commit_ctx) == "success"
+    rule = release_hint.ReleaseRule(match_result="success", path=rule_path, grouping=rule_grouping)
+    commit_ctx = commit_context_factory(grouping=commit_grouping, files=commit_paths)
+    assert rule(commit_ctx, "master") == "success"
+
+
+def test_releaserule_match_path_grouping_and_branch():
+    """The branch should affect the release hint."""
+    commit_paths = {"foo/bar.txt"}
+    rule_path = "foo/*"
+    commit_grouping = ("new",)
+    rule_grouping = "new"
+    master_rule = release_hint.ReleaseRule(
+        match_result="success", path=rule_path, grouping=rule_grouping, branch="master"
+    )
+    dev_rule = release_hint.ReleaseRule(match_result="success", path=rule_path, grouping=rule_grouping, branch="dev")
+    commit_ctx = commit_context_factory(grouping=commit_grouping, files=commit_paths)
+    assert master_rule(commit_ctx, "master") == "success"
+    assert master_rule(commit_ctx, "dev") == "no-release"
+    assert dev_rule(commit_ctx, "master") == "no-release"
+    assert dev_rule(commit_ctx, "dev") == "success"
 
 
 def test_releaserule_match_invalid():
@@ -196,7 +224,7 @@ def test_releaserule_match_invalid():
     rule = release_hint.ReleaseRule(match_result="success", no_match_result="failure")
 
     with pytest.raises(InvalidRuleError):
-        rule(commit_ctx)
+        rule(commit_ctx, "master")
 
 
 @pytest.mark.parametrize(
@@ -209,11 +237,11 @@ def test_releaserule_match_invalid():
         param(("New",), {"unknown/file.py"}, "unknown", id="unknown release type"),
     ],
 )
-def test_ruleprocessor(commit_grouping, commit_path, expected):
+def test_ruleprocessor(commit_grouping: tuple, commit_path: set, expected: str):
     """RuleProcessor should return the best match."""
     rule_processor = release_hint.RuleProcessor(rule_list=TEST_RULES)
     commit = commit_context_factory(commit_grouping, commit_path)
-    assert rule_processor(commit) == expected
+    assert rule_processor(commit, "master") == expected
 
 
 def test_suggest_release_type_no_commits():
@@ -227,7 +255,7 @@ def test_suggest_release_type_no_commits():
         )
     ]
 
-    assert release_hint.suggest_release_type(version_contexts, config) == "no-release"
+    assert release_hint.suggest_release_type("master", version_contexts, config) == "no-release"
 
 
 def test_suggest_release_type_no_unrelease():
@@ -239,7 +267,7 @@ def test_suggest_release_type_no_unrelease():
         VersionContext(label="1.0.0", grouped_commits=[GroupingContext(grouping=("ignored",), commits=[])])
     ]
 
-    assert release_hint.suggest_release_type(version_contexts, config) == "no-release"
+    assert release_hint.suggest_release_type("master", version_contexts, config) == "no-release"
 
 
 def test_suggest_release_type_minor():
@@ -263,7 +291,7 @@ def test_suggest_release_type_minor():
         )
     ]
 
-    assert release_hint.suggest_release_type(version_contexts, config) == "minor"
+    assert release_hint.suggest_release_type("master", version_contexts, config) == "minor"
 
 
 def test_suggest_release_type_multi_groups():
@@ -286,7 +314,7 @@ def test_suggest_release_type_multi_groups():
         )
     ]
 
-    assert release_hint.suggest_release_type(version_contexts, config) == "patch"
+    assert release_hint.suggest_release_type("master", version_contexts, config) == "patch"
 
 
 def test_suggest_release_type_all_nones():
@@ -310,4 +338,4 @@ def test_suggest_release_type_all_nones():
         )
     ]
 
-    assert release_hint.suggest_release_type(version_contexts, config) == "no-release"
+    assert release_hint.suggest_release_type("master", version_contexts, config) == "no-release"

@@ -84,6 +84,8 @@ def main(
     else:
         repository = Repo(search_parent_directories=True)
 
+    current_branch = repository.active_branch
+
     # get starting tag based configuration if not passed in
     if not starting_tag and config.starting_tag_pipeline:
         start_tag_pipeline = pipeline_factory(config.starting_tag_pipeline, **config.variables)
@@ -96,7 +98,7 @@ def main(
 
     version_contexts = get_context_from_tags(repository, config, starting_tag)
 
-    release_hint = suggest_release_type(version_contexts, config)
+    release_hint = suggest_release_type(current_branch.name, version_contexts, config)
 
     # use the output pipeline to deal with the rendered change log.
     notes = templating.render_changelog(version_contexts, config, not starting_tag)

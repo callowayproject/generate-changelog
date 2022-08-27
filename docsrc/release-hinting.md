@@ -19,15 +19,15 @@ patch
 
 ## Release rules
 
-There are four parts to a release rule: `match_result`, `no_match_result`, `grouping` and `path`. Only `match_result` is required, but without a `grouping` or `path` value, the rule is ignored. `no_match_result` defaults to `no-release`.
+There are five parts to a release rule: `match_result`, `no_match_result`, `grouping`, `path`, and `branch`. Only `match_result` is required, but without a `grouping`, `path`, or `branch` value, the rule is ignored. `no_match_result` defaults to `no-release`.
 
 ### Match result
 
-This is the hint returned if both the `grouping` and `path` values match. This is required.
+This is the hint returned if the `grouping`, `path` and `branch` evaluations return `True`. This is required.
 
 ### No match result
 
-This is the hint returned if either the `grouping` or `path` values do not match. By default, this is `no-release`.
+This is the hint returned if any of the `grouping`, `path`, or `branch` evaluations return `False`. By default, this is `no-release`.
 
 ### Grouping
 
@@ -51,13 +51,32 @@ The value of {attr}`.ReleaseHint.grouping` will match the {attr}`.CommitContext.
 
 The {attr}`.CommitContext.files` attribute is a `set` of paths relative to the repository root. The {attr}`.ReleaseHint.path` uses [globbing patterns](https://www.malikbrowne.com/blog/a-beginners-guide-glob-patterns) to match against {attr}`.CommitContext.files`.
 
+### Branch
+
+The {attr}`.ReleaseHint.branch` is a regular expression matched against the current branch. You can limit some release types to your primary branch, and others to non-primary branches.
+
 ## Examples
 
-This will provide a "patch" hint if the grouping contains "Other", but only when a modified file is within the `src` directory. Otherwise it will provide a "no-release" hint.
+This will provide a `patch` hint if the grouping contains "Other", but only when a modified file is within the `src` directory and the current branch is either `master` or `main`. Otherwise, it will provide a "no-release" hint.
 
 ```yaml
-- match_result: "patch"
-  no_match_result: "no-release"
-  grouping: "Other"
+- match_result: patch
+  no_match_result: no-release
+  grouping: Other
   path: src/*
+  branch: master|main
+```
+This will provide a `dev` hint if the current branch is not `master` or `main`. For this to work all other rules must also specify a `branch` attribute. For example, `branch: master|main`.
+
+```yaml
+- match_result: dev
+  no_match_result: no-release
+  branch: ^((?!master|main).)*$
+```
+This will prevent any type of release if the current branch is not `master` or `main`. For this to work all other rules must also specify a `branch` attribute. For example, `branch: master|main`.
+
+```yaml
+- match_result: no-release
+  no_match_result: no-release
+  branch: ^((?!master|main).)*$
 ```

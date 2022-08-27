@@ -69,7 +69,7 @@ class Action:
         self,
         action: str,
         id_: Optional[str] = None,
-        args: Optional[Union[list, tuple]] = None,
+        args: Optional[list] = None,
         kwargs: Optional[dict] = None,
         commit_metadata_func: Optional[Callable] = None,
         version_metadata_func: Optional[Callable] = None,
