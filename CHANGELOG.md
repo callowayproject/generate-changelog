@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.9.0 (2022-08-27)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.8.0...0.9.0)
+
+### Fixes
+
+- Fixed a typing error that impacted tests. [4de2cf7](https://github.com/coordt/generate-changelog/commit/4de2cf78b94461ba4a53b6ea220a601f7fd38dc4)
+    
+- Fixed typing issues raised by mypy. [7479bb0](https://github.com/coordt/generate-changelog/commit/7479bb05a3082fb50a551ceca207ccbe292f6308)
+    
+### New
+
+- Added ability to use the current branch in release hint rules. [0965dec](https://github.com/coordt/generate-changelog/commit/0965dec12a93f0fa45ef75a1890e92db4d932b0b)
+    
+### Other
+
+- [pre-commit.ci] pre-commit autoupdate. [076d1a1](https://github.com/coordt/generate-changelog/commit/076d1a1c16ab2e50fc0f3d190d12407ca5e8691b)
+    
+  **updates:** - [github.com/PyCQA/flake8: 5.0.2 → 5.0.4](https://github.com/PyCQA/flake8/compare/5.0.2...5.0.4)
+
+- [pre-commit.ci] pre-commit autoupdate. [eb7e105](https://github.com/coordt/generate-changelog/commit/eb7e105876c70be083cc34dc312e58798ba8d6c1)
+    
+  **updates:** - [github.com/PyCQA/flake8: 4.0.1 → 5.0.2](https://github.com/PyCQA/flake8/compare/4.0.1...5.0.2)
+
+
+
 ## 0.8.0 (2022-07-29)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.7.6...0.8.0)
