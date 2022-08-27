@@ -69,14 +69,14 @@ class Action:
         self,
         action: str,
         id_: Optional[str] = None,
-        args: Optional[Union[list, tuple]] = None,
+        args: Optional[list] = None,
         kwargs: Optional[dict] = None,
         commit_metadata_func: Optional[Callable] = None,
         version_metadata_func: Optional[Callable] = None,
     ):
         self._action_str = action
         self.id = id_
-        self._args = list(args) or []
+        self._args = args or []
         self._kwargs = kwargs or {}
         self.commit_metadata_func = commit_metadata_func or noop_func
         self.version_metadata_func = version_metadata_func or noop_func
