@@ -10,8 +10,8 @@ from generate_changelog.configuration import StrOrCallable
 from generate_changelog.utilities import eval_if_callable
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class ReadFile:
     """Return a file's contents when called."""
 
@@ -35,15 +35,15 @@ class ReadFile:
         return filepath.read_text() or ""
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class WriteFile:
     """Write the passed string to a file when called."""
 
     filename: StrOrCallable
     """The file name to write when called."""
 
-    def __call__(self, input_text: StrOrCallable) -> str:
+    def __call__(self, input_text: StrOrCallable) -> StrOrCallable:
         """Writes input_text to the pre-configured file."""
         filepath = Path(eval_if_callable(self.filename))
         text = eval_if_callable(input_text)
@@ -58,8 +58,8 @@ def stdout(content: str) -> str:
     return content
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class IncrementalFileInsert:
     """Replace the start of a file with text."""
 
@@ -69,7 +69,7 @@ class IncrementalFileInsert:
     last_heading_pattern: StrOrCallable
     """A regular expression to detect the last heading. Content before this position is re-rendered and inserted."""
 
-    def __call__(self, input_text: StrOrCallable) -> str:
+    def __call__(self, input_text: StrOrCallable) -> StrOrCallable:
         """
         Replace the beginning of the file up to ``last_heading_pattern`` with ``input_text`` .
 

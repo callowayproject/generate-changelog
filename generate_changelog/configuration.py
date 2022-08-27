@@ -1,10 +1,10 @@
 """Configuration management for generate_changelog."""
-from typing import Callable, Optional, Union
+from typing import Any, Callable, Dict, Optional, Union
 
 try:
     from functools import cached_property
 except ImportError:
-    from backports.cached_property import cached_property  # NOQA
+    from backports.cached_property import cached_property  # type: ignore
 
 try:
     from typing import TypeAlias
@@ -235,7 +235,7 @@ class Configuration:
         """Render each variable value using the previous variables as the context."""
         from .templating import get_pipeline_env
 
-        context = {}
+        context: Dict[Any, Any] = {}
         for key, value in self.variables.items():
             context[key] = get_pipeline_env(self).from_string(value, globals=context).render()
 

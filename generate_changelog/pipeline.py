@@ -76,7 +76,7 @@ class Action:
     ):
         self._action_str = action
         self.id = id_
-        self._args = args or []
+        self._args = list(args) or []
         self._kwargs = kwargs or {}
         self.commit_metadata_func = commit_metadata_func or noop_func
         self.version_metadata_func = version_metadata_func or noop_func

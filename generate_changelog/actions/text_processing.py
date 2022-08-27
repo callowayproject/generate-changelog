@@ -10,8 +10,8 @@ from generate_changelog.configuration import IntOrCallable, StrOrCallable
 from generate_changelog.utilities import eval_if_callable
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class SetDefault:
     """Return a default value when called with an empty value."""
 
@@ -24,8 +24,8 @@ class SetDefault:
         return text or default
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class PrefixString:
     """Prefix a string to the input when called."""
 
@@ -39,8 +39,8 @@ class PrefixString:
         return f"{prefix}{text}"
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class AppendString:
     """Create a callable that can append a string to the input."""
 
@@ -55,8 +55,8 @@ class AppendString:
         return f"{text}{postfix}"
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class Strip:
     """Create a callable that will strip a string from the ends of an input."""
 
@@ -70,8 +70,8 @@ class Strip:
         return text.strip(chars)
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class RegExCommand:
     """A base class to hold regular expression information."""
 
@@ -98,11 +98,11 @@ class RegExCommand:
             (self.dotall_flag, re.DOTALL),
             (self.verbose_flag, re.VERBOSE),
         ]
-        return reduce(lambda x, y: x | y, [value for use, value in flags if use], 0)  # NOQA
+        return reduce(lambda x, y: x | y, [value for use, value in flags if use], re.RegexFlag(0))  # NOQA
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class FirstRegExMatch(RegExCommand):
     """When called, returns the first match in a string using a predefined regex."""
 
@@ -127,8 +127,8 @@ class FirstRegExMatch(RegExCommand):
         return match.group(0)
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class FirstRegExMatchPosition(RegExCommand):
     """When called, returns the position of the first match in a string using a predefined regex."""
 
@@ -140,8 +140,8 @@ class FirstRegExMatchPosition(RegExCommand):
         return match.start() if match else 0
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class RegexSub(RegExCommand):
     """Create a callable that will make substitutions using regular expressions."""
 
@@ -158,8 +158,8 @@ class RegexSub(RegExCommand):
         return re.sub(pattern, replacement, text, flags=self.flags)
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class PrefixLines:
     """Creates a callable to prefix lines to input text."""
 
@@ -187,8 +187,8 @@ class PrefixLines:
         return "\n".join(prefixed_lines) + "\n"
 
 
-@dataclass(frozen=True)
 @register_builtin
+@dataclass(frozen=True)
 class WrapParagraphs:
     """Create a callable to wrap the paragraphs of a string."""
 

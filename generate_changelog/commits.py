@@ -30,7 +30,7 @@ def get_context_from_tags(
         A list of VersionContext objects.
     """
     tags = git_ops.get_commits_by_tags(repository, config.tag_pattern, starting_tag)
-    output = []
+    output: List[VersionContext] = []
 
     for tag in tags:
         version_context = create_version_context(config, tag)
@@ -163,7 +163,7 @@ def sort_group_commits(commit_groups: dict) -> list:
     return [GroupingContext(*item) for item in sorted_groups]
 
 
-def first_matching(actions: list, commit: CommitContext) -> str:
+def first_matching(actions: list, commit: CommitContext) -> Optional[str]:
     """
     Return the first section that matches the given commit summary.
 
@@ -186,3 +186,4 @@ def first_matching(actions: list, commit: CommitContext) -> str:
         )
         if act.run(context={}, input_value=commit):
             return action.get("category", None)
+    return None

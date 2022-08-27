@@ -66,6 +66,7 @@ def commit_context_factory(grouping: Union[str, tuple, None] = None, files: Opti
         ]
     )
     committer = f"{fake.name()} <{fake.ascii_email()}>"
+    grouping = (grouping,) if isinstance(grouping, str) else grouping
     return CommitContext(
         sha=fake.sha1(),
         commit_datetime=fake.past_datetime(tzinfo=fake.pytimezone()),
