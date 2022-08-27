@@ -23,6 +23,7 @@ class ReleaseRule:
         no_match_result: Optional[str] = "no-release",
         grouping: Union[str, tuple, list, None] = None,
         path: Optional[str] = None,
+        branch: Optional[str] = None,
     ):
         """
         Initialize the callable rule.
@@ -32,12 +33,14 @@ class ReleaseRule:
             no_match_result: Release type if a commit context doesn't match the rule.
             grouping: The partial or exact grouping of the commit context
             path: A globbing pattern that matches against files included in the commit
+            branch: A regular expression pattern to match against the branch
         """
         self.match_result = match_result
         self.no_match_result = no_match_result
         self.grouping = grouping if grouping != "*" else None
         self.path = path if path != "*" else None
-        self.is_valid = any([self.path, self.grouping])
+        self.branch = branch or None
+        self.is_valid = any([self.path, self.grouping, self.branch])
 
     def matches_grouping(self, commit: CommitContext) -> bool:
         """
@@ -88,14 +91,27 @@ class ReleaseRule:
         re_pattern = fnmatch.translate(self.path)
         return any(re.match(re_pattern, p) for p in commit.files)
 
-    def __call__(self, commit: CommitContext) -> Optional[str]:
+    def matches_branch(self, current_branch: str) -> bool:
+        """
+        Does the current branch match the rule?
+
+        Args:
+            current_branch: The name of the current branch
+
+        Returns:
+            ``True`` if the current branch matches or if ``self.branch`` is ``None``
+        """
+        return bool(re.match(self.branch, current_branch)) if self.branch else True
+
+    def __call__(self, commit: CommitContext, current_branch: str) -> Optional[str]:
         """Evaluate the commit using this rule."""
         if not self.is_valid:
             raise InvalidRuleError()
 
         matches_grouping = self.matches_grouping(commit)
         matches_path = self.matches_path(commit)
-        return self.match_result if matches_grouping and matches_path else self.no_match_result
+        matches_branch = self.matches_branch(current_branch)
+        return self.match_result if all([matches_grouping, matches_path, matches_branch]) else self.no_match_result
 
 
 class RuleProcessor:
@@ -110,17 +126,18 @@ class RuleProcessor:
         """
         self.rules = [ReleaseRule(**kwargs) for kwargs in rule_list]
 
-    def __call__(self, commit: CommitContext) -> Optional[str]:
+    def __call__(self, commit: CommitContext, current_branch: str) -> Optional[str]:
         """
         Return the result of applying all the rules to a commit.
 
         Args:
             commit: The commit context to apply rules to
+            current_branch: The name of the current branch
 
         Returns:
             The release hint
         """
-        suggestions = {rule(commit) for rule in self.rules}
+        suggestions = {rule(commit, current_branch) for rule in self.rules}
         unknown_suggestions = suggestions - set(RELEASE_TYPE_ORDER)
         if unknown_suggestions:
             return unknown_suggestions.pop()  # Return a random value from the unknowns
@@ -129,11 +146,12 @@ class RuleProcessor:
         return sorted_suggestions[-1]
 
 
-def suggest_release_type(version_contexts: List[VersionContext], config: Configuration) -> str:
+def suggest_release_type(current_branch: str, version_contexts: List[VersionContext], config: Configuration) -> str:
     """
     Suggest the type of release based on the unreleased commits.
 
     Args:
+        current_branch: The name of the current branch
         version_contexts: The processed commits to process
         config: The current configuration
 
@@ -148,7 +166,7 @@ def suggest_release_type(version_contexts: List[VersionContext], config: Configu
 
     suggestions = set()
     for commit_group in version_contexts[0].grouped_commits:
-        suggestions |= {rule_processor(commit) for commit in commit_group.commits}
+        suggestions |= {rule_processor(commit, current_branch) for commit in commit_group.commits}
 
     if not suggestions:
         return "no-release"

@@ -137,29 +137,39 @@ DEFAULT_TEMPLATE_DIRS = [".github/changelog_templates/"]
 
 DEFAULT_RELEASE_RULES = [
     {
+        "match_result": "dev",
+        "no_match_result": "no-release",
+        "branch": "^((?!master|main).)*$",
+    },
+    {
         "match_result": "patch",
         "no_match_result": "no-release",
         "grouping": "Other",
+        "branch": "master|main",
     },
     {
         "match_result": "patch",
         "no_match_result": "no-release",
         "grouping": "Fixes",
+        "branch": "master|main",
     },
     {
         "match_result": "minor",
         "no_match_result": "no-release",
         "grouping": "Updates",
+        "branch": "master|main",
     },
     {
         "match_result": "minor",
         "no_match_result": None,
         "grouping": "New",
+        "branch": "master|main",
     },
     {
         "match_result": "major",
         "no_match_result": None,
         "grouping": "Breaking Changes",
+        "branch": "master|main",
     },
 ]
 

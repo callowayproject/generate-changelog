@@ -106,7 +106,7 @@ def commit_factory(
 @pytest.fixture
 def bare_git_repo(tmp_path):
     """Create a temporary bare git repository."""
-    return Repo.init(tmp_path / "bare-repo", bare=True)
+    return Repo.init(tmp_path / "bare-repo", bare=True, initial_branch="master")
 
 
 @pytest.fixture
