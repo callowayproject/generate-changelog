@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.9.1 (2022-10-20)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.9.0...0.9.1)
+
+### Fixes
+
+- Fixed the notes including the header. [292a6b2](https://github.com/coordt/generate-changelog/commit/292a6b2154a9c4829d5c8aaa3ebe6ee44a37f590)
+    
+### Other
+
+- [pre-commit.ci] pre-commit autoupdate. [17f5074](https://github.com/coordt/generate-changelog/commit/17f50747b6605e6334ff8791d6a636d53d0b8275)
+    
+  **updates:** - [github.com/psf/black: 22.6.0 → 22.10.0](https://github.com/psf/black/compare/22.6.0...22.10.0)
+
+
+
 ## 0.9.0 (2022-08-27)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.8.0...0.9.0)
