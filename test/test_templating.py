@@ -15,7 +15,7 @@ def test_render(default_repo, capsys):
     version_context = get_context_from_tags(default_repo, config, None)
     output = templating.render_changelog(version_context, config, False)
     expected = (FIXTURES_DIR / "rendered_default_repo.md").read_text()
-    assert output.strip() == expected.strip()
+    assert output.full.strip() == expected.strip()
 
 
 def test_render_from_tag(default_repo, capsys):
@@ -36,7 +36,7 @@ def test_render_from_tag(default_repo, capsys):
 
     """
     )
-    assert output.strip() == expected.strip()
+    assert output.full.strip() == expected.strip()
 
 
 def test_incremental_context(default_repo, capsys):
@@ -62,4 +62,4 @@ def test_incremental_context(default_repo, capsys):
         commit
         """
     )
-    assert output.strip() == expected.strip()
+    assert output.full.strip() == expected.strip()
