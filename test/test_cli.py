@@ -59,7 +59,7 @@ def test_app_generate_notes(default_repo):
         print(result.stdout)
         traceback.print_exception(*result.exc_info)
     assert result.exit_code == 0
-    assert result.stdout.startswith("## Unreleased")
+    assert result.stdout.startswith("# Changelog")
 
 
 def test_app_generate_all(default_repo):
@@ -70,5 +70,5 @@ def test_app_generate_all(default_repo):
         traceback.print_exception(*result.exc_info)
     assert result.exit_code == 0
     output = json.loads(result.stdout)
-    assert output["notes"].startswith("## Unreleased")
+    assert output["notes"].startswith("# Changelog")
     assert "minor" == output["release_hint"]

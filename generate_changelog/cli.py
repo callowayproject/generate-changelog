@@ -101,7 +101,8 @@ def main(
     release_hint = suggest_release_type(current_branch.name, version_contexts, config)
 
     # use the output pipeline to deal with the rendered change log.
-    rendered_chglog = templating.render_changelog(version_contexts, config, not starting_tag)
+    has_starting_tag = bool(starting_tag)
+    rendered_chglog = templating.render_changelog(version_contexts, config, has_starting_tag)
 
     if not skip_output_pipeline:
         echo_func("Executing output pipeline.")
