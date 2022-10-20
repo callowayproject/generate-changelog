@@ -101,18 +101,22 @@ def main(
     release_hint = suggest_release_type(current_branch.name, version_contexts, config)
 
     # use the output pipeline to deal with the rendered change log.
-    notes = templating.render_changelog(version_contexts, config, not starting_tag)
+    rendered_chglog = templating.render_changelog(version_contexts, config, not starting_tag)
 
     if not skip_output_pipeline:
         echo_func("Executing output pipeline.")
         output_pipeline = pipeline_factory(config.output_pipeline, **config.variables)
-        output_pipeline.run(notes)
+        output_pipeline.run(rendered_chglog.full)
 
     if output == OutputOption.release_hint:
         typer.echo(release_hint)
     elif output == OutputOption.notes:
-        typer.echo(notes)
+        if rendered_chglog.notes:
+            typer.echo(rendered_chglog.notes)
+        else:
+            typer.echo(rendered_chglog.full)
     elif output == OutputOption.all:
+        notes = rendered_chglog.notes or rendered_chglog.full
         out = {"release_hint": release_hint, "notes": notes}
         typer.echo(json.dumps(out))
     else:

@@ -1,10 +1,27 @@
 """Templating functions."""
 from typing import List, Optional
 
+from dataclasses import dataclass
+
 from jinja2 import ChoiceLoader, Environment, FileSystemLoader, PackageLoader, select_autoescape
 
 from generate_changelog.configuration import Configuration, get_config
 from generate_changelog.context import ChangelogContext, VersionContext
+
+
+@dataclass
+class RenderedChangelog:
+    r"""
+    The output of rendering a changelog.
+
+    If it is an incremental changelog, ``full`` contains ``{heading}\n{notes}``
+
+    If it is a full changelog, ``heading`` and ``notes`` are empty.
+    """
+
+    heading: Optional[str] = None
+    notes: Optional[str] = None
+    full: Optional[str] = None
 
 
 def get_default_env(config: Optional[Configuration] = None):
@@ -30,7 +47,9 @@ def get_pipeline_env(config: Optional[Configuration] = None):
     )
 
 
-def render_changelog(version_context: List[VersionContext], config: Configuration, incremental: bool = False) -> str:
+def render_changelog(
+    version_context: List[VersionContext], config: Configuration, incremental: bool = False
+) -> RenderedChangelog:
     """
     Render the full or incremental changelog for the repository to a string.
 
@@ -46,6 +65,7 @@ def render_changelog(version_context: List[VersionContext], config: Configuratio
     if incremental:
         heading_str = get_default_env(config).get_template("heading.md.jinja").render()
         versions_str = get_default_env(config).get_template("versions.md.jinja").render(context.as_dict())
-        return "\n".join([heading_str, versions_str])
+        return RenderedChangelog(heading=heading_str, notes=versions_str, full=f"{heading_str}\n{versions_str}")
 
-    return get_default_env(config).get_template("base.md.jinja").render(context.as_dict())
+    chglog = get_default_env(config).get_template("base.md.jinja").render(context.as_dict())
+    return RenderedChangelog(full=chglog)

@@ -275,4 +275,4 @@ def test_conventional_commits(conv_commit_repo):
     version_context = get_context_from_tags(conv_commit_repo, config, None)
     output = templating.render_changelog(version_context, config)
     expected = (FIXTURES_DIR / "rendered_conv_commit_repo.md").read_text()
-    assert output.strip() == expected.strip()
+    assert output.full.strip() == expected.strip()
