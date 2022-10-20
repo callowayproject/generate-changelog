@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.2 (2022-10-20)
+
+[Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.9.1...0.9.2)
+
+### Fixes
+
+- Fixed a logic error when generating incremental changelogs. [c6781b8](https://github.com/coordt/generate-changelog/commit/c6781b820a822881b6366a740e1e56a412814aa6)
+    
+
 ## 0.9.1 (2022-10-20)
 
 [Compare the full difference.](https://github.com/coordt/generate-changelog/compare/0.9.0...0.9.1)
