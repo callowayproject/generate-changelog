@@ -1,13 +1,14 @@
 # Generate Changelog
 
 <!-- start badges -->
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/coordt/generate-changelog/master.svg)](https://results.pre-commit.ci/latest/github/coordt/generate-changelog/master)
-[![Coverage Status](https://coveralls.io/repos/github/coordt/generate-changelog/badge.svg?branch=master)](https://coveralls.io/github/coordt/generate-changelog?branch=master)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/callowayproject/generate-changelog/master.svg)](https://results.pre-commit.ci/latest/github/callowayproject/generate-changelog/master)
+[![codecov](https://codecov.io/gh/callowayproject/generate-changelog/branch/master/graph/badge.svg?token=IPRMV15D17)](https://codecov.io/gh/callowayproject/generate-changelog)
+
 Use your commit log to make a beautiful changelog file.
 <!-- end badges -->
 
-- [Documentation](https://coordt.github.io/generate-changelog/)
-- [GitHub](https://github.com/coordt/generate-changelog)
+- [Documentation](https://callowayproject.github.io/generate-changelog/)
+- [GitHub](https://github.com/callowayproject/generate-changelog)
 
 `generate-changelog` does what it says: it generates a full changelog, or updates an existing one. Git tags and commits are the inputs by which `generate-changelog` performs its task.
 

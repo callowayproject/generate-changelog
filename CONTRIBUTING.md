@@ -10,7 +10,7 @@ Run the following in a terminal:
 
 1. Clone the repository
     ```console
-    git clone https://github.com/coordt/generate-changelog.git
+    git clone https://github.com/callowayproject/generate-changelog.git
     ```
 2. Enter the repository
    ```console

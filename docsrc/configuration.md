@@ -44,7 +44,7 @@ Some values accept pipelines, which are a chain of actions that transform an inp
 
   ```yaml
   variables:
-    repo_url: https://github.com/coordt/generate-changelog
+    repo_url: https://github.com/callowayproject/generate-changelog
   ```
 
   You can reference it in your `commit.md.jinja` template like:

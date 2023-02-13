@@ -311,7 +311,7 @@ def write_default_config(filename: Path):
 
     yaml_config = CommentedMap(**asdict(default_config))
     yaml_config.yaml_set_start_comment(
-        "For more configuration information, please see https://coordt.github.io/generate-changelog/"
+        "For more configuration information, please see https://callowayproject.github.io/generate-changelog/"
     )
     for attr, doc in config_docstrings.items():
         yaml_config.yaml_set_comment_before_after_key(key=attr, before="")
