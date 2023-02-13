@@ -1,8 +1,8 @@
-# For more configuration information, please see https://coordt.github.io/generate-changelog/
+# For more configuration information, please see https://callowayproject.github.io/generate-changelog/
 
 # User variables for reference in other parts of the configuration.
 variables:
-  repo_url: https://github.com/coordt/generate-changelog
+  repo_url: https://github.com/callowayproject/generate-changelog
 
 # Pipeline to find the most recent tag for incremental changelog generation.
 # Leave empty to always start at first commit.
