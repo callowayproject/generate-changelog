@@ -1,8 +1,7 @@
 """Methods for generating a release hint."""
-from typing import List, Optional, Union
-
 import fnmatch
 import re
+from typing import List, Optional, Union
 
 from generate_changelog.configuration import RELEASE_TYPE_ORDER, Configuration
 from generate_changelog.context import CommitContext, VersionContext
@@ -15,7 +14,16 @@ class InvalidRuleError(Exception):
 
 
 class ReleaseRule:
-    """A commit evaluation rule for hinting at the level of change."""
+    """
+    A commit evaluation rule for hinting at the level of change.
+
+    Args:
+        match_result: Release type if a commit context matches the rule.
+        no_match_result: Release type if a commit context doesn't match the rule.
+        grouping: The partial or exact grouping of the commit context
+        path: A globbing pattern that matches against files included in the commit
+        branch: A regular expression pattern to match against the branch
+    """
 
     def __init__(
         self,
@@ -25,16 +33,6 @@ class ReleaseRule:
         path: Optional[str] = None,
         branch: Optional[str] = None,
     ):
-        """
-        Initialize the callable rule.
-
-        Args:
-            match_result: Release type if a commit context matches the rule.
-            no_match_result: Release type if a commit context doesn't match the rule.
-            grouping: The partial or exact grouping of the commit context
-            path: A globbing pattern that matches against files included in the commit
-            branch: A regular expression pattern to match against the branch
-        """
         self.match_result = match_result
         self.no_match_result = no_match_result
         self.grouping = grouping if grouping != "*" else None
@@ -115,15 +113,14 @@ class ReleaseRule:
 
 
 class RuleProcessor:
-    """Process a commit through all the rules and return the suggestion."""
+    """
+    Process a commit through all the rules and return the suggestion.
+
+    Args:
+        rule_list: The list of dictionaries representing release rules
+    """
 
     def __init__(self, rule_list: List[dict]):
-        """
-        Set up the :class:`RuleProcessor`.
-
-        Args:
-            rule_list: The list of dictionaries representing release rules
-        """
         self.rules = [ReleaseRule(**kwargs) for kwargs in rule_list]
 
     def __call__(self, commit: CommitContext, current_branch: str) -> Optional[str]:

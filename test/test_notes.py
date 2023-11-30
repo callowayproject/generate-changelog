@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 from generate_changelog import configuration, notes
-from generate_changelog.notes import MissingConfiguration
+from generate_changelog.notes import MissingConfigurationError
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
@@ -29,13 +29,13 @@ def test_get_section_pattern():
     assert notes.get_section_pattern() == r"(?im)^## (?P<rev>\d+\.\d+(?:\.\d+)?)\s+\(\d+-\d{2}-\d{2}\)$"
 
     configuration._CONFIG.starting_tag_pipeline = []
-    with pytest.raises(MissingConfiguration):
+    with pytest.raises(MissingConfigurationError):
         notes.get_section_pattern()
 
     configuration._CONFIG.starting_tag_pipeline = [
         {"action": "ReadFile", "kwargs": {"filename": "{{ changelog_filename }}"}},
     ]
-    with pytest.raises(MissingConfiguration):
+    with pytest.raises(MissingConfigurationError):
         notes.get_section_pattern()
 
 
@@ -45,13 +45,13 @@ def test_get_changelog_path():
     assert notes.get_changelog_path() == Path("{{ changelog_filename }}")
 
     configuration._CONFIG.starting_tag_pipeline = []
-    with pytest.raises(MissingConfiguration):
+    with pytest.raises(MissingConfigurationError):
         notes.get_changelog_path()
 
     configuration._CONFIG.starting_tag_pipeline = [
         {"action": "NoAction", "kwargs": {"filename": "{{ changelog_filename }}"}},
     ]
-    with pytest.raises(MissingConfiguration):
+    with pytest.raises(MissingConfigurationError):
         notes.get_changelog_path()
 
 

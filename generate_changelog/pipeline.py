@@ -4,7 +4,7 @@ from typing import Any, Callable, Optional, Union
 from generate_changelog.actions import BUILT_INS
 
 
-def noop_func(**kwargs):
+def noop_func(**kwargs) -> None:
     """A function that does nothing when called."""
     pass
 
@@ -131,7 +131,6 @@ def import_function(function_path: str) -> Callable:
     Import a function from a dotted path.
 
     Example:
-
            >>> import_function("generate_changelog.pipeline.noop_func")
            <function noop_func at 0x11016d280>
 

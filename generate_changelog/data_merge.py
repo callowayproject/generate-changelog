@@ -1,11 +1,10 @@
 """Tools for merging data."""
-from typing import Any, Iterable
-
 import copy
 from functools import reduce
+from typing import Any, Iterable
 
 
-def deep_merge(*dicts) -> dict:
+def deep_merge(*dicts: dict) -> dict:
     """
     Merges dicts deeply.
 
@@ -18,7 +17,7 @@ def deep_merge(*dicts) -> dict:
         dict: The merged dict
     """
 
-    def merge_into(d1, d2):
+    def merge_into(d1: dict, d2: dict) -> dict:
         for key in d2:
             if key not in d1 or not isinstance(d1[key], dict):
                 d1[key] = copy.deepcopy(d2[key])
@@ -47,7 +46,7 @@ def merge_iterables(iter1: Iterable, iter2: Iterable) -> set:
     return set(chain(iter1, iter2))
 
 
-def comprehensive_merge(*args) -> Any:
+def comprehensive_merge(*args: Any) -> Any:  # NOQA: C901
     """
     Merges data comprehensively.
 
@@ -62,12 +61,9 @@ def comprehensive_merge(*args) -> Any:
 
     Returns:
         The merged data
-
-    Raises:
-        ValueError: If the values are not of the same type
     """
 
-    def merge_into(d1, d2):
+    def merge_into(d1: Any, d2: Any) -> Any:
         if type(d1) != type(d2):
             raise ValueError(f"Cannot merge {type(d2)} into {type(d1)}.")
 
@@ -87,7 +83,7 @@ def comprehensive_merge(*args) -> Any:
     if isinstance(args[0], list):
         return reduce(merge_into, args, [])
     elif isinstance(args[0], tuple):
-        return reduce(merge_into, args, tuple())
+        return reduce(merge_into, args, ())
     elif isinstance(args[0], set):
         return reduce(merge_into, args, set())
     elif isinstance(args[0], dict):

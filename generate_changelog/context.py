@@ -1,10 +1,9 @@
 """Context definitions used in templates."""
-from typing import Callable, List, Optional, Tuple
-
 import collections
 import datetime
 import re
 from dataclasses import dataclass, field
+from typing import Callable, List, Optional, Tuple
 
 from generate_changelog.configuration import Configuration, get_config
 from generate_changelog.utilities import diff_index
@@ -160,6 +159,6 @@ class ChangelogContext:
         for var, val in self.config.rendered_variables.items():
             setattr(self, var, val)
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         """Safely generate a dict version of this object."""
         return self.__dict__

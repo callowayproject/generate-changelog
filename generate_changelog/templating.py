@@ -1,7 +1,6 @@
 """Templating functions."""
-from typing import List, Optional
-
 from dataclasses import dataclass
+from typing import List, Optional
 
 from jinja2 import ChoiceLoader, Environment, FileSystemLoader, PackageLoader, select_autoescape
 
@@ -24,7 +23,7 @@ class RenderedChangelog:
     full: Optional[str] = None
 
 
-def get_default_env(config: Optional[Configuration] = None):
+def get_default_env(config: Optional[Configuration] = None) -> Environment:
     """The default Jinja environment for rendering a changelog."""
     if config is None:
         config = get_config()
@@ -37,7 +36,7 @@ def get_default_env(config: Optional[Configuration] = None):
     )
 
 
-def get_pipeline_env(config: Optional[Configuration] = None):
+def get_pipeline_env(config: Optional[Configuration] = None) -> Environment:
     """The Jinja environment for rendering actions and pipelines."""
     if config is None:
         config = get_config()

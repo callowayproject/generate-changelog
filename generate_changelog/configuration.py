@@ -4,7 +4,7 @@ from typing import Any, Callable, Dict, Optional, Union
 try:
     from functools import cached_property
 except ImportError:
-    from backports.cached_property import cached_property  # type: ignore
+    from backports.cached_property import cached_property  # type: ignore[no-redef]
 
 try:
     from typing import TypeAlias
@@ -138,36 +138,30 @@ DEFAULT_TEMPLATE_DIRS = [".github/changelog_templates/"]
 DEFAULT_RELEASE_RULES = [
     {
         "match_result": "dev",
-        "no_match_result": "no-release",
         "branch": "^((?!master|main).)*$",
     },
     {
         "match_result": "patch",
-        "no_match_result": "no-release",
         "grouping": "Other",
         "branch": "master|main",
     },
     {
         "match_result": "patch",
-        "no_match_result": "no-release",
         "grouping": "Fixes",
         "branch": "master|main",
     },
     {
         "match_result": "minor",
-        "no_match_result": "no-release",
         "grouping": "Updates",
         "branch": "master|main",
     },
     {
         "match_result": "minor",
-        "no_match_result": None,
         "grouping": "New",
         "branch": "master|main",
     },
     {
         "match_result": "major",
-        "no_match_result": None,
         "grouping": "Breaking Changes",
         "branch": "master|main",
     },
@@ -241,7 +235,7 @@ class Configuration:
 
         return context
 
-    def update_from_file(self, filename: Path):
+    def update_from_file(self, filename: Path) -> None:
         """
         Updates this configuration instance in place from a YAML file.
 
@@ -293,7 +287,7 @@ def get_default_config() -> Configuration:
     )
 
 
-def write_default_config(filename: Path):
+def write_default_config(filename: Path) -> None:
     """
     Write a default configuration file to the specified path.
 
@@ -319,16 +313,12 @@ def write_default_config(filename: Path):
     yaml.dump(yaml_config, file_path)
 
 
-_CONFIG = None
+_CONFIG: Configuration = get_default_config()
 """The global running configuration."""
 
 
-def set_config(key, value):
+def set_config(key: str, value: Any) -> Configuration:
     """Set a configuration key to a value."""
-    global _CONFIG
-
-    if _CONFIG is None:
-        _CONFIG = get_default_config()
     setattr(_CONFIG, key, value)
     return _CONFIG
 
@@ -342,8 +332,4 @@ def get_config() -> Configuration:
     Returns:
         The global configuration object.
     """
-    global _CONFIG
-
-    if _CONFIG is None:
-        _CONFIG = get_default_config()
     return _CONFIG

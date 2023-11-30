@@ -1,11 +1,10 @@
 """git information access."""
 
-from typing import List, Optional, Union
-
 import datetime
 import os
 import re
 from dataclasses import dataclass
+from typing import List, Optional, Union
 
 from git import Actor, Commit, Repo
 

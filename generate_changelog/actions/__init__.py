@@ -1,7 +1,9 @@
 """Processing module for changelog generation."""
-from typing import Callable, Union
 
 from collections import UserDict
+from typing import TYPE_CHECKING, Callable, MutableMapping, Optional, Union
+
+RegistryDict = UserDict[str, Callable] if TYPE_CHECKING else UserDict
 
 
 class Registry(UserDict):
@@ -13,23 +15,23 @@ class Registry(UserDict):
     getting the key.
     """
 
-    def __init__(self, initialdata=None):
+    def __init__(self, initialdata: Optional[MutableMapping[str, Callable]] = None):
         super().__init__(initialdata)
         self._loaded = False
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: str) -> Callable:
         """Make sure the built-in actions are loaded."""
         if not self._loaded:
             self.load_builtins()
         return super().__getitem__(key)
 
-    def __contains__(self, key):
+    def __contains__(self, key: object) -> bool:
         """Make sure the built-in actions are loaded before testing containment."""
         if not self._loaded:
             self.load_builtins()
         return super().__contains__(key)
 
-    def load_builtins(self):
+    def load_builtins(self) -> None:
         """Import all submodules so the decorated functions get registered."""
         import importlib
 
