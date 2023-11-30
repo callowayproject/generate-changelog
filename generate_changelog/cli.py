@@ -1,10 +1,9 @@
 """Command line interface for generate_changelog."""
-from typing import Callable, Optional
-
 import functools
 import json
 from enum import Enum
 from pathlib import Path
+from typing import Callable, Optional
 
 import typer
 from git import Repo
@@ -24,7 +23,7 @@ class OutputOption(str, Enum):
     all = "all"
 
 
-def version_callback(value: bool):
+def version_callback(value: bool) -> None:
     """Display the version and exit."""
     import generate_changelog
 
@@ -33,7 +32,7 @@ def version_callback(value: bool):
         raise typer.Exit()
 
 
-def generate_config_callback(value: bool):
+def generate_config_callback(value: bool) -> None:
     """Generate a default configuration file."""
     if not value:  # pragma: no cover
         return
@@ -71,7 +70,10 @@ def main(
     skip_output_pipeline: bool = typer.Option(
         False, "--skip-output-pipeline", help="Do not execute the output pipeline in the configuration."
     ),
-):
+    branch_override: Optional[str] = typer.Option(
+        None, "--branch-override", "-b", help="Override the current branch for release hint decisions."
+    ),
+) -> None:
     """Generate a change log from git commits."""
     from generate_changelog import templating
     from generate_changelog.pipeline import pipeline_factory
@@ -98,7 +100,8 @@ def main(
 
     version_contexts = get_context_from_tags(repository, config, starting_tag)
 
-    release_hint = suggest_release_type(current_branch.name, version_contexts, config)
+    branch_name = branch_override or current_branch.name
+    release_hint = suggest_release_type(branch_name, version_contexts, config)
 
     # use the output pipeline to deal with the rendered change log.
     has_starting_tag = bool(starting_tag)
@@ -151,7 +154,7 @@ def get_user_config(config_file: Optional[Path], echo_func: Callable) -> Configu
     return config
 
 
-def echo(message: str, quiet: bool = False):
+def echo(message: str, quiet: bool = False) -> None:
     """
     Display a message to the user.
 
