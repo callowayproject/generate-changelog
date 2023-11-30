@@ -1,9 +1,0 @@
--r prod.txt
-coverage>=6.1.2
-faker
-pre-commit>=2.15.0
-pytest>=6.0.0
-pytest-cov>=3.0.0
-pytest-mock>=3.6.1
-twine>=3.6.0
-wheel>=0.37.0
