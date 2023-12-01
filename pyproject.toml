@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Software Development :: Version Control :: Git",
 ]
 keywords = ["changelog", "change", "git", "commit"]
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 dynamic = ["version"]
 dependencies = [
     'backports.cached-property;python_version<"3.8"',
