@@ -86,7 +86,10 @@ def main(
     else:
         repository = Repo(search_parent_directories=True)
 
-    current_branch = repository.active_branch
+    if repository.head.is_detached:
+        current_branch = repository.head
+    else:
+        current_branch = repository.active_branch
 
     # get starting tag based configuration if not passed in
     if not starting_tag and config.starting_tag_pipeline:
