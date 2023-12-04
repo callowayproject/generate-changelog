@@ -46,7 +46,7 @@ jobs:
           export PR_NUMBER REVISION
           case "$RELEASE_KIND" in
             major|minor|patch)
-              bump-my-version bump "$RELEASE_KIND"
+              bump-my-version bump --allow-dirty --verbose "$RELEASE_KIND"
               git push
               git push --tags
               echo "PACKAGE=true" >> $GITHUB_ENV

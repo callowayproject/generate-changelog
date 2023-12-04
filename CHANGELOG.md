@@ -1,5 +1,63 @@
 # Changelog
 
+## 0.10.0 (2023-12-04)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.9.2...0.10.0)
+
+### Fixes
+
+- Fixed bug when in a detatched head state. [1d47e41](https://github.com/callowayproject/generate-changelog/commit/1d47e4198a6f197c9f7287076f62eadbc7a1e7c5)
+    
+- Fixed the release automation. [2207ed3](https://github.com/callowayproject/generate-changelog/commit/2207ed33f85d832ced98d06b8bf4cef826a10d8f)
+    
+- Fixed test automation. [be6e77d](https://github.com/callowayproject/generate-changelog/commit/be6e77d3d4f5a4e7f42c4a82252acceec05d8878)
+    
+- Fixed incorrect URLs. [7e87375](https://github.com/callowayproject/generate-changelog/commit/7e8737523e0379201387c7846fb0ef81e2d23846)
+    
+### New
+
+- Added `--branch-override` option. [1f1d68b](https://github.com/callowayproject/generate-changelog/commit/1f1d68b5278031ceff29cca7847b60663ad3bbf4)
+    
+  This allows the release hint to use the overridden branch name instead of the current branch
+- Added codecov to Workflows. [afd33fd](https://github.com/callowayproject/generate-changelog/commit/afd33fd3990a2286e981303840097033f317475f)
+    
+- Added changelog parsing for retrieving notes for a specific version. [75bc35d](https://github.com/callowayproject/generate-changelog/commit/75bc35d76386e305305565f11e3f552cfebe6b9b)
+    
+### Other
+
+- [pre-commit.ci] pre-commit autoupdate. [ba75e09](https://github.com/callowayproject/generate-changelog/commit/ba75e090da9ed93053dfff5720fc120fb243e1e0)
+    
+  **updates:** - [github.com/psf/black: 23.3.0 → 23.7.0](https://github.com/psf/black/compare/23.3.0...23.7.0)
+
+- [pre-commit.ci] pre-commit autoupdate. [248544a](https://github.com/callowayproject/generate-changelog/commit/248544a7368b59f59a9748bd2604ff66cb825cf7)
+    
+  **updates:** - [github.com/pre-commit/mirrors-mypy: v1.2.0 → v1.3.0](https://github.com/pre-commit/mirrors-mypy/compare/v1.2.0...v1.3.0)
+
+- [pre-commit.ci] pre-commit autoupdate. [ce00736](https://github.com/callowayproject/generate-changelog/commit/ce007366ad4f862eb74655661407485093b94b40)
+    
+  **updates:** - [github.com/psf/black: 23.1.0 → 23.3.0](https://github.com/psf/black/compare/23.1.0...23.3.0)
+
+- Moved dependency management to pyproject.toml. [03c9242](https://github.com/callowayproject/generate-changelog/commit/03c92421d622b0e4017a8e99cb4387fa6da0e278)
+    
+- [pre-commit.ci] pre-commit autoupdate. [b815e58](https://github.com/callowayproject/generate-changelog/commit/b815e58b4ec72850a1ed83d1716d384311c4704a)
+    
+  **updates:** - [github.com/PyCQA/isort: 5.10.1 → 5.11.4](https://github.com/PyCQA/isort/compare/5.10.1...5.11.4)
+
+- [pre-commit.ci] pre-commit autoupdate. [1ea58d2](https://github.com/callowayproject/generate-changelog/commit/1ea58d2f6aa0ae66e25806a8605932024e589d4e)
+    
+  **updates:** - [github.com/pre-commit/pre-commit-hooks: v4.3.0 → v4.4.0](https://github.com/pre-commit/pre-commit-hooks/compare/v4.3.0...v4.4.0)
+
+- [pre-commit.ci] pre-commit autoupdate. [a188f99](https://github.com/callowayproject/generate-changelog/commit/a188f990009ed0d7e62013d57f00415ea2568713)
+    
+  **updates:** - [github.com/pre-commit/mirrors-mypy: v0.982 → v0.990](https://github.com/pre-commit/mirrors-mypy/compare/v0.982...v0.990)
+
+### Updates
+
+- Updated the github action versions. [c353b17](https://github.com/callowayproject/generate-changelog/commit/c353b17b85921ad9820568b264f4a2885859a1cf)
+    
+- Updated pre-commit. [ff668af](https://github.com/callowayproject/generate-changelog/commit/ff668af68f77cb9e78cc80e690f44c6d59c1996f)
+    
+
 ## 0.9.2 (2022-10-20)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.9.1...0.9.2)

@@ -222,7 +222,8 @@ check-return-types = false
 quiet = true
 
 [tool.bumpversion]
-current_version = "0.9.2"
+allow_dirty = true
+current_version = "0.10.0"
 commit = true
 commit_args = "--no-verify"
 tag = true
