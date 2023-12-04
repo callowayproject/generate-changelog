@@ -1,0 +1,36 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.matching
+
+matching
+========
+
+.. currentmodule:: generate_changelog.actions.matching
+
+.. automodule:: generate_changelog.actions.matching
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: matching
+   
+      MetadataMatch
+      SummaryRegexMatch
+   
+   
+
+   
+   
+   
+   
+   

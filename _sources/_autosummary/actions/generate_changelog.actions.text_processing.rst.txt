@@ -1,0 +1,53 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.text_processing
+
+text\_processing
+================
+
+.. currentmodule:: generate_changelog.actions.text_processing
+
+.. automodule:: generate_changelog.actions.text_processing
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: text_processing
+   
+      capitalize
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: text_processing
+   
+      AppendString
+      FirstRegExMatch
+      FirstRegExMatchPosition
+      PrefixLines
+      PrefixString
+      RegExCommand
+      RegexSub
+      SetDefault
+      Slice
+      Strip
+      WrapParagraphs
+   
+   
+
+   
+   
+   
+   
+   

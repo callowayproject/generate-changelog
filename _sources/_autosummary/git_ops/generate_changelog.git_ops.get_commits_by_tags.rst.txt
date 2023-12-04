@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.git_ops.get_commits_by_tags
+
+get\_commits\_by\_tags
+======================
+
+.. currentmodule:: generate_changelog.git_ops
+
+.. autofunction:: get_commits_by_tags

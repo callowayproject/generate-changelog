@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.matching.SummaryRegexMatch
+
+SummaryRegexMatch
+=================
+
+.. currentmodule:: generate_changelog.actions.matching
+
+.. autoclass:: SummaryRegexMatch
+   :members:
+   :undoc-members:

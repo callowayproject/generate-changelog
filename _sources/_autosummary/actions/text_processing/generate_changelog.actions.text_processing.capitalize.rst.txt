@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.text_processing.capitalize
+
+capitalize
+==========
+
+.. currentmodule:: generate_changelog.actions.text_processing
+
+.. autofunction:: capitalize

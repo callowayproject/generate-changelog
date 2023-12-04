@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.utilities.is_action
+
+is\_action
+==========
+
+.. currentmodule:: generate_changelog.utilities
+
+.. autofunction:: is_action

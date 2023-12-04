@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.utilities.resolve_name
+
+resolve\_name
+=============
+
+.. currentmodule:: generate_changelog.utilities
+
+.. autofunction:: resolve_name

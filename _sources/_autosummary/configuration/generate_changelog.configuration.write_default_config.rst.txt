@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.configuration.write_default_config
+
+write\_default\_config
+======================
+
+.. currentmodule:: generate_changelog.configuration
+
+.. autofunction:: write_default_config

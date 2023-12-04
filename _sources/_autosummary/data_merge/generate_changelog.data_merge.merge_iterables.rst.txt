@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.data_merge.merge_iterables
+
+merge\_iterables
+================
+
+.. currentmodule:: generate_changelog.data_merge
+
+.. autofunction:: merge_iterables

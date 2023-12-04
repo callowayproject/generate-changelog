@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.metadata.ParseBreakingChangeFooter
+
+ParseBreakingChangeFooter
+=========================
+
+.. currentmodule:: generate_changelog.actions.metadata
+
+.. autoclass:: ParseBreakingChangeFooter
+   :members:
+   :undoc-members:

@@ -1,0 +1,35 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.shell
+
+shell
+=====
+
+.. currentmodule:: generate_changelog.actions.shell
+
+.. automodule:: generate_changelog.actions.shell
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: shell
+   
+      bash
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+   
+   

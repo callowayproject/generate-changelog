@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.pipeline.import_function
+
+import\_function
+================
+
+.. currentmodule:: generate_changelog.pipeline
+
+.. autofunction:: import_function

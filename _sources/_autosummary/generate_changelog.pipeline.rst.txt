@@ -1,0 +1,46 @@
+﻿.. rst-class:: subheading
+
+generate_changelog.pipeline
+
+pipeline
+========
+
+.. currentmodule:: generate_changelog.pipeline
+
+.. automodule:: generate_changelog.pipeline
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: pipeline
+   
+      import_function
+      noop_func
+      pipeline_factory
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: pipeline
+   
+      Action
+      Pipeline
+   
+   
+
+   
+   
+   
+   
+   

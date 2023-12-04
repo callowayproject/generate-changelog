@@ -1,0 +1,35 @@
+﻿.. rst-class:: subheading
+
+generate_changelog._attr_docs
+
+\_attr\_docs
+============
+
+.. currentmodule:: generate_changelog._attr_docs
+
+.. automodule:: generate_changelog._attr_docs
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: _attr_docs
+   
+      attribute_docstrings
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+   
+   

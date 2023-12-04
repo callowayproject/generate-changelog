@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.matching.MetadataMatch
+
+MetadataMatch
+=============
+
+.. currentmodule:: generate_changelog.actions.matching
+
+.. autoclass:: MetadataMatch
+   :members:
+   :undoc-members:

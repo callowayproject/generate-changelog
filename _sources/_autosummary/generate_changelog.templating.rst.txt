@@ -1,0 +1,45 @@
+﻿.. rst-class:: subheading
+
+generate_changelog.templating
+
+templating
+==========
+
+.. currentmodule:: generate_changelog.templating
+
+.. automodule:: generate_changelog.templating
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: templating
+   
+      get_default_env
+      get_pipeline_env
+      render_changelog
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: templating
+   
+      RenderedChangelog
+   
+   
+
+   
+   
+   
+   
+   

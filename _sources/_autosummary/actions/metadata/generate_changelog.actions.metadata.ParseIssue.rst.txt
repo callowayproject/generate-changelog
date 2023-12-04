@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.metadata.ParseIssue
+
+ParseIssue
+==========
+
+.. currentmodule:: generate_changelog.actions.metadata
+
+.. autoclass:: ParseIssue
+   :members:
+   :undoc-members:

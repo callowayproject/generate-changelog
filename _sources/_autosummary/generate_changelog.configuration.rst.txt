@@ -1,0 +1,57 @@
+﻿.. rst-class:: subheading
+
+generate_changelog.configuration
+
+configuration
+=============
+
+.. currentmodule:: generate_changelog.configuration
+
+.. automodule:: generate_changelog.configuration
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :nosignatures:
+   
+      StrOrCallable
+      IntOrCallable
+      RELEASE_TYPE_ORDER
+      DEFAULT_CONFIG_FILE_NAME
+      DEFAULT_CONFIG_FILE_NAMES
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: configuration
+   
+      get_config
+      get_default_config
+      set_config
+      write_default_config
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: configuration
+   
+      Configuration
+   
+   
+
+   
+   
+   
+   
+   

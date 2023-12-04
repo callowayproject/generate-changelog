@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.Registry
+
+Registry
+========
+
+.. currentmodule:: generate_changelog.actions
+
+.. autoclass:: Registry
+   :members:
+   :undoc-members:

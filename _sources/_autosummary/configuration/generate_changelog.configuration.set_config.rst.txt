@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.configuration.set_config
+
+set\_config
+===========
+
+.. currentmodule:: generate_changelog.configuration
+
+.. autofunction:: set_config

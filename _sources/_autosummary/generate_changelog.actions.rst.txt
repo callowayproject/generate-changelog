@@ -1,0 +1,63 @@
+﻿.. rst-class:: subheading
+
+generate_changelog.actions
+
+actions
+=======
+
+.. currentmodule:: generate_changelog.actions
+
+.. automodule:: generate_changelog.actions
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :nosignatures:
+   
+      BUILT_INS
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: actions
+   
+      register_builtin
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: actions
+   
+      Registry
+   
+   
+
+   
+   
+   
+   
+
+   .. rubric:: Modules
+
+   .. autosummary::
+      :toctree: actions
+      :recursive:
+   
+      generate_changelog.actions.file_processing
+      generate_changelog.actions.matching
+      generate_changelog.actions.metadata
+      generate_changelog.actions.shell
+      generate_changelog.actions.text_processing
+   
+   

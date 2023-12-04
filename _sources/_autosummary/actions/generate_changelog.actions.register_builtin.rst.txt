@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.register_builtin
+
+register\_builtin
+=================
+
+.. currentmodule:: generate_changelog.actions
+
+.. autofunction:: register_builtin

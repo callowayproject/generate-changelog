@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.text_processing.WrapParagraphs
+
+WrapParagraphs
+==============
+
+.. currentmodule:: generate_changelog.actions.text_processing
+
+.. autoclass:: WrapParagraphs
+   :members:
+   :undoc-members:

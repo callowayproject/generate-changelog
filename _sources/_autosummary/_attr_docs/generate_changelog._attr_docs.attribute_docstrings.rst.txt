@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog._attr_docs.attribute_docstrings
+
+attribute\_docstrings
+=====================
+
+.. currentmodule:: generate_changelog._attr_docs
+
+.. autofunction:: attribute_docstrings

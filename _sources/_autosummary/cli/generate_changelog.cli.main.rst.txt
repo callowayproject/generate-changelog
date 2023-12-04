@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.cli.main
+
+main
+====
+
+.. currentmodule:: generate_changelog.cli
+
+.. autofunction:: main

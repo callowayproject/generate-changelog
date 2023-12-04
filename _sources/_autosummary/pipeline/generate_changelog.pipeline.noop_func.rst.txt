@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.pipeline.noop_func
+
+noop\_func
+==========
+
+.. currentmodule:: generate_changelog.pipeline
+
+.. autofunction:: noop_func

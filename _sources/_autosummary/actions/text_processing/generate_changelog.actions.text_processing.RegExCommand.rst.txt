@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.text_processing.RegExCommand
+
+RegExCommand
+============
+
+.. currentmodule:: generate_changelog.actions.text_processing
+
+.. autoclass:: RegExCommand
+   :members:
+   :undoc-members:

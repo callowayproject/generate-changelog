@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.data_merge.deep_merge
+
+deep\_merge
+===========
+
+.. currentmodule:: generate_changelog.data_merge
+
+.. autofunction:: deep_merge

@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.cli.version_callback
+
+version\_callback
+=================
+
+.. currentmodule:: generate_changelog.cli
+
+.. autofunction:: version_callback

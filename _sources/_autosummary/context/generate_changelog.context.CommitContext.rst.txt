@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.context.CommitContext
+
+CommitContext
+=============
+
+.. currentmodule:: generate_changelog.context
+
+.. autoclass:: CommitContext
+   :members:
+   :undoc-members:

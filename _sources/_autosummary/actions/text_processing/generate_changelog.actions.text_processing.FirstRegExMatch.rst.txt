@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.text_processing.FirstRegExMatch
+
+FirstRegExMatch
+===============
+
+.. currentmodule:: generate_changelog.actions.text_processing
+
+.. autoclass:: FirstRegExMatch
+   :members:
+   :undoc-members:

@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.utilities.eval_if_callable
+
+eval\_if\_callable
+==================
+
+.. currentmodule:: generate_changelog.utilities
+
+.. autofunction:: eval_if_callable

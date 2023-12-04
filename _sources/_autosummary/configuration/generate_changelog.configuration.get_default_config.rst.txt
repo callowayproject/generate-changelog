@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.configuration.get_default_config
+
+get\_default\_config
+====================
+
+.. currentmodule:: generate_changelog.configuration
+
+.. autofunction:: get_default_config

@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.pipeline.pipeline_factory
+
+pipeline\_factory
+=================
+
+.. currentmodule:: generate_changelog.pipeline
+
+.. autofunction:: pipeline_factory

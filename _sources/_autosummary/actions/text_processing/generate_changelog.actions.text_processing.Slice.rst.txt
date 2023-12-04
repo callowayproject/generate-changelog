@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.text_processing.Slice
+
+Slice
+=====
+
+.. currentmodule:: generate_changelog.actions.text_processing
+
+.. autoclass:: Slice
+   :members:
+   :undoc-members:

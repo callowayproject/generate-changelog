@@ -1,0 +1,42 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.metadata
+
+metadata
+========
+
+.. currentmodule:: generate_changelog.actions.metadata
+
+.. automodule:: generate_changelog.actions.metadata
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: metadata
+   
+      MetadataCollector
+      ParseAzureBoardIssue
+      ParseBreakingChangeFooter
+      ParseConventionalCommit
+      ParseGitHubIssue
+      ParseIssue
+      ParseJiraIssue
+      ParseTrailers
+   
+   
+
+   
+   
+   
+   
+   

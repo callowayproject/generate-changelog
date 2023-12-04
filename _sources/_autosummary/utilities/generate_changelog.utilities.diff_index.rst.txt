@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.utilities.diff_index
+
+diff\_index
+===========
+
+.. currentmodule:: generate_changelog.utilities
+
+.. autofunction:: diff_index

@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.templating.RenderedChangelog
+
+RenderedChangelog
+=================
+
+.. currentmodule:: generate_changelog.templating
+
+.. autoclass:: RenderedChangelog
+   :members:
+   :undoc-members:

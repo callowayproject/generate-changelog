@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.metadata.ParseTrailers
+
+ParseTrailers
+=============
+
+.. currentmodule:: generate_changelog.actions.metadata
+
+.. autoclass:: ParseTrailers
+   :members:
+   :undoc-members:

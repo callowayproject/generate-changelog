@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.pipeline.Pipeline
+
+Pipeline
+========
+
+.. currentmodule:: generate_changelog.pipeline
+
+.. autoclass:: Pipeline
+   :members:
+   :undoc-members:

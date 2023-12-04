@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.metadata.ParseGitHubIssue
+
+ParseGitHubIssue
+================
+
+.. currentmodule:: generate_changelog.actions.metadata
+
+.. autoclass:: ParseGitHubIssue
+   :members:
+   :undoc-members:

@@ -1,0 +1,40 @@
+﻿.. rst-class:: subheading
+
+generate_changelog.utilities
+
+utilities
+=========
+
+.. currentmodule:: generate_changelog.utilities
+
+.. automodule:: generate_changelog.utilities
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: utilities
+   
+      diff_index
+      eval_if_callable
+      is_action
+      is_pipeline
+      pairs
+      resolve_name
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+   
+   

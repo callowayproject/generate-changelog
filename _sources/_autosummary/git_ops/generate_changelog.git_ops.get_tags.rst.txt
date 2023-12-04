@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.git_ops.get_tags
+
+get\_tags
+=========
+
+.. currentmodule:: generate_changelog.git_ops
+
+.. autofunction:: get_tags

@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.text_processing.PrefixString
+
+PrefixString
+============
+
+.. currentmodule:: generate_changelog.actions.text_processing
+
+.. autoclass:: PrefixString
+   :members:
+   :undoc-members:

@@ -1,0 +1,37 @@
+﻿.. rst-class:: subheading
+
+generate_changelog.data_merge
+
+data\_merge
+===========
+
+.. currentmodule:: generate_changelog.data_merge
+
+.. automodule:: generate_changelog.data_merge
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: data_merge
+   
+      comprehensive_merge
+      deep_merge
+      merge_iterables
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+   
+   

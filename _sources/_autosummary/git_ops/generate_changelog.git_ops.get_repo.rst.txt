@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.git_ops.get_repo
+
+get\_repo
+=========
+
+.. currentmodule:: generate_changelog.git_ops
+
+.. autofunction:: get_repo

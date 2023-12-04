@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.file_processing.stdout
+
+stdout
+======
+
+.. currentmodule:: generate_changelog.actions.file_processing
+
+.. autofunction:: stdout

@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.templating.get_pipeline_env
+
+get\_pipeline\_env
+==================
+
+.. currentmodule:: generate_changelog.templating
+
+.. autofunction:: get_pipeline_env

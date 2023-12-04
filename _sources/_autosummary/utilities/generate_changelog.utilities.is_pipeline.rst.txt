@@ -1,0 +1,10 @@
+.. rst-class:: subheading
+
+generate_changelog.utilities.is_pipeline
+
+is\_pipeline
+============
+
+.. currentmodule:: generate_changelog.utilities
+
+.. autofunction:: is_pipeline

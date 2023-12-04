@@ -1,0 +1,12 @@
+.. rst-class:: subheading
+
+generate_changelog.actions.file_processing.IncrementalFileInsert
+
+IncrementalFileInsert
+=====================
+
+.. currentmodule:: generate_changelog.actions.file_processing
+
+.. autoclass:: IncrementalFileInsert
+   :members:
+   :undoc-members:
