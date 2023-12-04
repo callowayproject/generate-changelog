@@ -8,26 +8,14 @@ jobs:
   version-hint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.PAT }}
-
-      - uses: actions/setup-python@v4
+      - name: Checkout and setup Python
+        uses: ./.github/actions/checkout-and-setup-python
         with:
           python-version: '3.11'
-          cache: 'pip' # caching pip dependencies
 
       - name: Install requirements
         run: |
           python -m pip install . bump-my-version
-
-      - name: Git check
-        run: |
-          git config --global user.email "bump-my-version@github.actions"
-          git config --global user.name "Testing Git"
-          git --version
-          git config --list
 
       - name: Generate the changelog and get the release hint
         id: generate-changelog
@@ -38,7 +26,8 @@ jobs:
           echo "release-kind=$RELEASE_KIND" >> $GITHUB_OUTPUT
           echo "PACKAGE=false" >> $GITHUB_ENV
 
-      - name: Bump Version auto
+      - name: Bump version
+        if: ${{ env.RELEASE_KIND != 'no-release' }}
         shell: bash
         run: |
           PR_NUMBER=$(gh pr view --json number -q .number || echo "")

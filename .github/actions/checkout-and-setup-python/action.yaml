@@ -1,0 +1,34 @@
+name: checkout-and-setup-python
+description: 'Checkout the repository and setup Python'
+inputs:
+  python-version:
+    description: 'Python version to use'
+    required: false
+    default: '3.11'
+  git-ref:
+    description: 'Git ref to checkout'
+    required: false
+    default: ""
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+      name: Checkout the repository
+      with:
+        fetch-depth: 0
+        ref: ${{ inputs.git-ref }}
+        token: ${{ secrets.PAT }}
+
+    - uses: actions/setup-python@v4
+      name: Setup Python
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: 'pip' # caching pip dependencies
+
+    - name: Git check
+      run: |
+        git config --global user.email "bump-my-version@github.actions"
+        git config --global user.name "Testing Git"
+        git --version
+        git config --list
+      shell: bash
