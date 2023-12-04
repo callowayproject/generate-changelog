@@ -103,25 +103,24 @@ valid_author_tokens:
 # Rules applied to commits to determine the type of release to suggest.
 release_hint_rules:
   - match_result: dev
-    no_match_result: no-release
     branch: ^((?!master|main).)*$
   - match_result: patch
-    no_match_result: no-release
     grouping: Other
     branch: master|main
+    paths: generate_changelog/
   - match_result: patch
-    no_match_result: no-release
     grouping: Fixes
     branch: master|main
+    paths: generate_changelog/
   - match_result: minor
-    no_match_result: no-release
     grouping: Updates
     branch: master|main
+    paths: generate_changelog/
   - match_result: minor
-    no_match_result:
     grouping: New
+    paths: generate_changelog/
     branch: master|main
   - match_result: major
-    no_match_result:
     grouping: Breaking Changes
+    paths: generate_changelog/
     branch: master|main
