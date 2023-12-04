@@ -107,20 +107,20 @@ release_hint_rules:
   - match_result: patch
     grouping: Other
     branch: master|main
-    path: generate_changelog/
+    path: generate_changelog/*
   - match_result: patch
     grouping: Fixes
     branch: master|main
-    path: generate_changelog/
+    path: generate_changelog/*
   - match_result: minor
     grouping: Updates
     branch: master|main
-    path: generate_changelog/
+    path: generate_changelog/*
   - match_result: minor
     grouping: New
-    path: generate_changelog/
+    path: generate_changelog/*
     branch: master|main
   - match_result: major
     grouping: Breaking Changes
-    path: generate_changelog/
+    path: generate_changelog/*
     branch: master|main
