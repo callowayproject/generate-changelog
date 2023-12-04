@@ -1,9 +1,8 @@
 """Text functions."""
-from typing import Optional
-
 import re
 import textwrap
 from dataclasses import dataclass
+from typing import Optional
 
 from generate_changelog.actions import register_builtin
 from generate_changelog.configuration import IntOrCallable, StrOrCallable
@@ -98,7 +97,7 @@ class RegExCommand:
             (self.dotall_flag, re.DOTALL),
             (self.verbose_flag, re.VERBOSE),
         ]
-        return reduce(lambda x, y: x | y, [value for use, value in flags if use], re.RegexFlag(0))  # NOQA
+        return reduce(lambda x, y: x | y, [value for use, value in flags if use], re.RegexFlag(0))
 
 
 @register_builtin
@@ -216,7 +215,7 @@ class WrapParagraphs:
 
 register_builtin("prefix_caret")(PrefixString("^"))
 register_builtin("append_dot")(AppendString("."))
-register_builtin("noop")(lambda txt: txt)  # NOQA
+register_builtin("noop")(lambda txt: txt)
 register_builtin("strip_spaces")(Strip())
 
 

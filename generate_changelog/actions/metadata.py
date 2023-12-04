@@ -1,10 +1,9 @@
 """Metadata callback and processing functions."""
-from typing import Any, Callable, Dict, Optional
-
 import re
 import textwrap
 from collections import defaultdict
 from dataclasses import dataclass, field
+from typing import Any, Callable, Dict, Optional
 
 from generate_changelog.actions import register_builtin
 from generate_changelog.data_merge import comprehensive_merge
@@ -20,7 +19,7 @@ class MetadataCollector:
 
     metadata: dict = field(default_factory=dict)
 
-    def __call__(self, **kwargs):
+    def __call__(self, **kwargs: dict):
         """
         Put keyword arguments into metadata storage.
 
@@ -94,7 +93,8 @@ class ParseGitHubIssue(ParseIssue):
     https://github.com/<owner>/<repository>/issues/<issue number>
 
     References:
-        - https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls.  # NOQA
+      - https://docs.github.com/en/\
+        get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls
     """
 
     issue_pattern = re.compile(r"(?im)(?:#|GH-)(\d+)")

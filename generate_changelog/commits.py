@@ -1,10 +1,9 @@
 """Filter and process commits into contexts."""
-from typing import List, Optional
-
 import collections
 import re
+from typing import Callable, List, Optional
 
-from git import Actor, Repo
+from git import Actor, Commit, Repo
 
 from generate_changelog import git_ops
 from generate_changelog.actions.metadata import MetadataCollector
@@ -93,7 +92,9 @@ def create_version_context(config: Configuration, tag: GitTag) -> VersionContext
     )
 
 
-def generate_commit_context(commit, config, version_metadata_func) -> CommitContext:
+def generate_commit_context(
+    commit: Commit, config: Configuration, version_metadata_func: Optional[Callable]
+) -> CommitContext:
     """
     Create the renderable context for this commit.
 
@@ -155,7 +156,7 @@ def sort_group_commits(commit_groups: dict) -> list:
     # Props to this sorting method goes to:
     # https://scipython.com/book2/chapter-4-the-core-python-language-ii/questions/sorting-a-list-containing-none/
 
-    def key_func(input_value) -> tuple:
+    def key_func(input_value: tuple) -> tuple:
         """Generate the sortable key for tuples that may contain None."""
         return tuple((i is not None, i) for i in input_value[0])
 

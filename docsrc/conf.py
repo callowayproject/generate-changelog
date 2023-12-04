@@ -7,7 +7,7 @@ from datetime import date
 
 sys.path.insert(0, os.path.abspath(".."))
 
-import generate_changelog  # NOQA
+import generate_changelog  # noqa: E402
 
 project = "generate-changelog"
 copyright = f"{date.today():%Y}, Corey Oordt"

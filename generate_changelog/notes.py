@@ -1,25 +1,23 @@
 """Parse the changelog and return the release notes."""
-from typing import Any, Iterator, List, Optional, Tuple
-
 import re
 from itertools import islice, tee, zip_longest
 from pathlib import Path
+from typing import Any, Iterable, Iterator, List, Optional, Tuple
 
 from generate_changelog.configuration import get_config
 
 
-class MissingConfiguration(Exception):
+class MissingConfigurationError(Exception):
     """An optional part of the configuration is missing for this operation."""
 
     pass
 
 
-def pairs(iterable) -> Iterator[Tuple[Any, Any]]:
+def pairs(iterable: Iterable) -> Iterator[Tuple[Any, Any]]:
     """
     Return successive non-overlapping pairs taken from the input iterable.
 
     Example:
-
         >>> list(pairs('ABCDEFG'))
         [('A', 'B'), ('C', 'D'), ('E', 'F'), ('G', None)]
 
@@ -41,10 +39,6 @@ def split_changelog(contents: str, section_pattern: Optional[str] = None) -> Lis
         contents: The contents of the changelog.
         section_pattern: A regex pattern to split the changelog into sections. If ``None``, the pattern
             is derived from the ``starting_tag_pipeline`` configuration option.
-
-    Raises:
-        MissingConfiguration: If ``section_pattern`` is ``None`` and the ``starting_tag_pipeline``
-            configuration is missing.
 
     Returns:
         A list of version and note sections.
@@ -73,9 +67,9 @@ def get_section_pattern() -> str:
         The version section pattern.
     """
     config = get_config()
-    print(config)
+
     if not config.starting_tag_pipeline:
-        raise MissingConfiguration(
+        raise MissingConfigurationError(
             "The 'starting_tag_pipeline' configuration is is required for parsing the changelog."
         )
 
@@ -88,7 +82,7 @@ def get_section_pattern() -> str:
         None,
     )
     if not regex:
-        raise MissingConfiguration(
+        raise MissingConfigurationError(
             "The 'starting_tag_pipeline' configuration is missing a 'FirstRegExMatch' "
             "action to indicate the version sections."
         )
@@ -109,7 +103,7 @@ def get_changelog_path() -> Path:
     config = get_config()
 
     if not config.starting_tag_pipeline:
-        raise MissingConfiguration(
+        raise MissingConfigurationError(
             "The 'starting_tag_pipeline' configuration is is required for parsing the changelog."
         )
 
@@ -123,7 +117,7 @@ def get_changelog_path() -> Path:
     )
 
     if not changelog_path:
-        raise MissingConfiguration(
+        raise MissingConfigurationError(
             "The 'starting_tag_pipeline' configuration is missing a 'ReadFile' action to indicate the changelog file."
         )
 

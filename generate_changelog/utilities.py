@@ -36,14 +36,13 @@ def eval_if_callable(value: Any) -> Any:
     return value() if callable(value) else value
 
 
-def pairs(iterable) -> Iterable:
+def pairs(iterable: Iterable) -> Iterable:
     """
     Return successive pairs taken from the input iterable.
 
     Like :py:func:`itertools.pairwise` in 3.10, but will always include the last element by itself.
 
     Example:
-
             >>> list(pairs("ABCD"))
             [("A", "B"), ("B", "C"), ("C", "D"), ("D", None)]
             >>> list(pairs("ABC"))
@@ -62,7 +61,7 @@ def pairs(iterable) -> Iterable:
     return zip_longest(a, b)
 
 
-def resolve_name(obj: Any, name: str, default=None) -> Any:
+def resolve_name(obj: Any, name: str, default: Any = None) -> Any:
     """
     Get a key or attr ``name`` from obj or default value.
 
@@ -82,7 +81,8 @@ def resolve_name(obj: Any, name: str, default=None) -> Any:
     Returns:
         The value at the resolved name or the default value.
 
-    # noqa: DAR401
+    Raises:
+        TypeError, AttributeError: If accessing the property raises one of these exceptions.
     """
     lookups = name.split(".")
     current = obj
@@ -109,10 +109,10 @@ def resolve_name(obj: Any, name: str, default=None) -> Any:
                     ):  # un-subscript-able object
                         return default
         return current
-    except Exception:  # NOQA  # pragma: no cover
+    except Exception:  #  NOQA: BLE001 pragma: no cover
         return default
 
 
-def diff_index(iterable1, iterable2) -> Optional[int]:
+def diff_index(iterable1: Iterable, iterable2: Iterable) -> Optional[int]:
     """Return the index where iterable2 is different from iterable1."""
     return next((index for index, (item1, item2) in enumerate(zip(iterable1, iterable2)) if item1 != item2), None)

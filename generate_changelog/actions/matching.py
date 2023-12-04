@@ -1,8 +1,7 @@
 """Commit matching functions."""
-from typing import Any, Optional
-
 import operator as op
 import re
+from typing import Any, Callable, ClassVar, Dict, Optional
 
 from generate_changelog.actions import register_builtin
 from generate_changelog.context import CommitContext
@@ -23,6 +22,9 @@ class SummaryRegexMatch:
               category: New
               kwargs:
                 pattern: (?i)^(?:new|add)[^\n]*$
+
+    Args:
+        pattern: The pattern to match against the commit summary
     """
 
     def __init__(self, pattern: Optional[str] = None):
@@ -67,9 +69,20 @@ class MetadataMatch:
                 attribute: commit_type
                 operator: in
                 value: ["fix", "refactor", "update"]
+
+    Valid operators: ``==``,  ``!=``, ``<``, ``>``, ``>=``, ``<=``, ``is``, ``is not``, ``in``, ``not in``
+
+    Args:
+        attribute: The name of the metadata key whose value will be evaluated
+        operator: One of the valid operators described above
+        value: The value to evaluate the against the metadata
+
+    Raises:
+        ValueError: If the operator value is not recognized
+
     """
 
-    operator_map: dict = {
+    operator_map: ClassVar[Dict[str, Callable]] = {
         "==": op.eq,
         "!=": op.ne,
         "<": op.lt,
@@ -84,19 +97,6 @@ class MetadataMatch:
     """Mapping of operator strings to functions for evaluation."""
 
     def __init__(self, attribute: str, operator: str, value: Any):
-        """
-        Set up the matcher.
-
-        Valid operators: ``==``,  ``!=``, ``<``, ``>``, ``>=``, ``<=``, ``is``, ``is not``, ``in``, ``not in``
-
-        Args:
-            attribute: The name of the metadata key whose value will be evaluated
-            operator: One of the valid operators described above
-            value: The value to evaluate the against the metadata
-
-        Raises:
-            ValueError: If the operator value is not recognized
-        """
         self.attribute = attribute
         if operator not in self.operator_map:
             raise ValueError(

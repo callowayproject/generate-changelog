@@ -1,15 +1,14 @@
 """Shell commands for processing."""
-from typing import Optional
-
 import os
 import subprocess
 import tempfile
+from typing import Optional
 
 from generate_changelog.actions import register_builtin
 
 
 @register_builtin
-def bash(script: str, environment: Optional[dict] = None):
+def bash(script: str, environment: Optional[dict] = None) -> str:
     """Runs command-line programs using the bash's shell."""
     handle, script_path = tempfile.mkstemp(suffix=".sh")
     try:
@@ -19,10 +18,11 @@ def bash(script: str, environment: Optional[dict] = None):
         command = ["bash", "--noprofile", "--norc", "-eo", "pipefail", script_path]
 
         result = subprocess.run(
-            command,
+            command,  # NOQA: S603
             env=environment,
             encoding="utf-8",
             capture_output=True,
+            check=True,
         )
     finally:
         if script_path:
