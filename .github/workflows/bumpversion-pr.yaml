@@ -38,6 +38,7 @@ jobs:
           echo "release-kind=$RELEASE_KIND" >> $GITHUB_OUTPUT
 
       - name: Bump Version dry run
+        if: ${{ env.RELEASE_KIND != 'no-release' }}
         shell: bash
         run: |
           PR_NUMBER=$(gh pr view --json number -q .number || echo "")
@@ -51,6 +52,12 @@ jobs:
           VERSION_INFO=$(bump-my-version show --format json --increment "$RELEASE_KIND" current_version new_version)
           echo "CURRENT_VERSION=$(echo $VERSION_INFO | jq -r .current_version)" >> $GITHUB_ENV
           echo "NEW_VERSION=$(echo $VERSION_INFO | jq -r .new_version)" >> $GITHUB_ENV
+
+      - name: Set no-release information
+        if: ${{ env.RELEASE_KIND == 'no-release' }}
+        run: |
+          echo "CURRENT_VERSION=$(bump-my-version show current_version)" >> $GITHUB_ENV
+          echo "NEW_VERSION=$(bump-my-version show current_version)" >> $GITHUB_ENV
 
       - name: Display the version hint
         uses: s-gehring/singleton-comment@v1
