@@ -9,26 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        name: Checkout the repository
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
           token: ${{ secrets.PAT }}
 
-      - uses: actions/setup-python@v4
+      - name: Setup Python and Git
+        uses: ./.github/actions/setup-python-and-git
         with:
           python-version: '3.11'
-          cache: 'pip' # caching pip dependencies
 
       - name: Install requirements
         run: |
           python -m pip install . bump-my-version
-
-      - name: Git check
-        run: |
-          git config --global user.email "no-reply@github.actions"
-          git config --global user.name "Testing Git"
-          git --version
-          git config --list
 
       - name: Get the release hint
         id: generate-changelog
@@ -38,7 +32,7 @@ jobs:
           echo "RELEASE_KIND=$RELEASE_KIND" >> $GITHUB_ENV
           echo "release-kind=$RELEASE_KIND" >> $GITHUB_OUTPUT
 
-      - name: Bump Version dry run
+      - name: Bump version dry run
         if: ${{ env.RELEASE_KIND != 'no-release' }}
         shell: bash
         run: |
