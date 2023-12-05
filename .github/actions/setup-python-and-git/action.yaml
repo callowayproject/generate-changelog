@@ -5,20 +5,9 @@ inputs:
     description: 'Python version to use'
     required: false
     default: '3.11'
-  git-ref:
-    description: 'Git ref to checkout'
-    required: false
-    default: ""
 runs:
   using: 'composite'
   steps:
-    - uses: actions/checkout@v4
-      name: Checkout the repository
-      with:
-        fetch-depth: 0
-        ref: ${{ inputs.git-ref }}
-        token: ${{ secrets.PAT }}
-
     - uses: actions/setup-python@v4
       name: Setup Python
       with:

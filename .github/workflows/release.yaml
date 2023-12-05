@@ -9,10 +9,17 @@ jobs:
     name: Create a GitHub release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout and setup Python
-        uses: ./.github/actions/checkout-and-setup-python
+      - uses: actions/checkout@v4
+        name: Checkout the repository
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT }}
+
+      - name: Setup Python and Git
+        uses: ./.github/actions/setup-python-and-git
         with:
           python-version: '3.11'
+
       - name: Parse changelog
         shell: bash
         run: |
