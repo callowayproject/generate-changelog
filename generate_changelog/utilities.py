@@ -1,4 +1,5 @@
 """Utility methods."""
+
 from typing import Any, Iterable, Optional
 
 

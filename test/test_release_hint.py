@@ -1,4 +1,5 @@
 """Tests of the release_hint module."""
+
 from typing import Optional, Union
 
 import pytest

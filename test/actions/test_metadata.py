@@ -1,4 +1,5 @@
 """Test the metadata collectors."""
+
 import pytest
 from pytest import param
 

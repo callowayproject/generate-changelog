@@ -1,4 +1,5 @@
 """Context definitions used in templates."""
+
 import collections
 import datetime
 import re

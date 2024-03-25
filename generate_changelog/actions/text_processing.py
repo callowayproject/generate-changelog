@@ -1,4 +1,5 @@
 """Text functions."""
+
 import re
 import textwrap
 from dataclasses import dataclass

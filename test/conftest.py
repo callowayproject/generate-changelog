@@ -1,4 +1,5 @@
 """Testing fixtures."""
+
 from typing import Optional
 
 import collections

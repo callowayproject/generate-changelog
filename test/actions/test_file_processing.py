@@ -1,4 +1,5 @@
 """Tests of the file readers and writers."""
+
 from pathlib import Path
 
 import click

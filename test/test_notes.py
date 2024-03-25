@@ -1,4 +1,5 @@
 """Test the retrieval of release notes from the changelog."""
+
 from pathlib import Path
 
 import pytest

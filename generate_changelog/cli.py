@@ -1,4 +1,5 @@
 """Command line interface for generate_changelog."""
+
 import functools
 import json
 from enum import Enum

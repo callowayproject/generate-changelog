@@ -1,4 +1,5 @@
 """Tests of temmplating functions."""
+
 import textwrap
 from pathlib import Path
 
