@@ -1,4 +1,5 @@
 """Filter and process commits into contexts."""
+
 import collections
 import re
 from typing import Callable, List, Optional

@@ -1,4 +1,5 @@
 """Parse the changelog and return the release notes."""
+
 import re
 from itertools import islice, tee, zip_longest
 from pathlib import Path

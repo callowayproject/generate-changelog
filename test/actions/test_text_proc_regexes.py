@@ -1,4 +1,5 @@
 """Regular Expression command testing."""
+
 import re
 
 import pytest

@@ -1,4 +1,5 @@
 """Test configuration."""
+
 from pathlib import Path
 
 import click.exceptions

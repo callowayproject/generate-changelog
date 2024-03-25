@@ -1,4 +1,5 @@
 """Methods for generating a release hint."""
+
 import fnmatch
 import re
 from typing import List, Optional, Union

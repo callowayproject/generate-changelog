@@ -1,4 +1,5 @@
 """Get the attribute documentation for a class."""
+
 import ast
 import inspect
 

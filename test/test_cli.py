@@ -1,4 +1,5 @@
 """Tests of the command line interface."""
+
 import json
 import traceback
 from pathlib import Path

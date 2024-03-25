@@ -1,4 +1,5 @@
 """Tests for the utilities module."""
+
 from dataclasses import dataclass
 
 import pytest
