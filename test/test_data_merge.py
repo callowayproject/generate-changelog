@@ -1,4 +1,5 @@
 """Test the merge_files.helpers functions."""
+
 from typing import Any
 
 import pytest

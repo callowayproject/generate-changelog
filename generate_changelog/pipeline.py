@@ -1,4 +1,5 @@
 """Simple pipeline workflow processing."""
+
 from typing import Any, Callable, Optional, Union
 
 from generate_changelog.actions import BUILT_INS

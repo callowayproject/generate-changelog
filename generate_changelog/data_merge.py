@@ -1,4 +1,5 @@
 """Tools for merging data."""
+
 import copy
 from functools import reduce
 from typing import Any, Iterable
