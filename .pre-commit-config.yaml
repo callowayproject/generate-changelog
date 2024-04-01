@@ -1,13 +1,13 @@
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
-    rev: 'v0.1.6'
+    rev: 'v0.3.5'
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
         exclude: test.*
   - repo: https://github.com/psf/black
-    rev: 23.11.0
+    rev: 24.3.0
     hooks:
       - id: black
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -39,13 +39,13 @@ repos:
 #        args: ['--baseline', '.secrets.baseline']
         additional_dependencies: ["gibberish-detector"]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.7.1
+    rev: v1.9.0
     hooks:
       - id: mypy
         args: [--no-strict-optional, --ignore-missing-imports]
         additional_dependencies: ["toml", "types-all"]
   - repo: https://github.com/jsh9/pydoclint
-    rev: 0.3.8
+    rev: 0.4.1
     hooks:
       - id: pydoclint
         args:
