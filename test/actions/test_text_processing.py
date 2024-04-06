@@ -1,4 +1,5 @@
 """Tests for the text processing module."""
+
 import re
 
 import pytest

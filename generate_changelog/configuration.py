@@ -1,4 +1,5 @@
 """Configuration management for generate_changelog."""
+
 from typing import Any, Callable, Dict, Optional, Union
 
 try:

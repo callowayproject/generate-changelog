@@ -1,4 +1,5 @@
 """Templating functions."""
+
 from dataclasses import dataclass
 from typing import List, Optional
 

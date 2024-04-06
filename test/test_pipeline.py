@@ -1,4 +1,5 @@
 """Testing pipelines and actions."""
+
 from pathlib import Path
 
 from generate_changelog import pipeline

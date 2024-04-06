@@ -1,4 +1,5 @@
 """Basic shell commands."""
+
 from generate_changelog.actions import shell
 
 

@@ -1,4 +1,5 @@
 """Metadata callback and processing functions."""
+
 import re
 import textwrap
 from collections import defaultdict

@@ -1,4 +1,5 @@
 """Commit matching functions."""
+
 import operator as op
 import re
 from typing import Any, Callable, ClassVar, Dict, Optional
