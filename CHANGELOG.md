@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.10.1 (2024-04-06)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.10.0...0.10.1)
+
+### Fixes
+
+- Fixed version hint display triggers. [d013300](https://github.com/callowayproject/generate-changelog/commit/d0133007d82741512af0d644c98f58aa508cd05e)
+    
+### Other
+
+- [pre-commit.ci] auto fixes from pre-commit.com hooks. [4a41aa9](https://github.com/callowayproject/generate-changelog/commit/4a41aa92c7539fdb10fdcc4a76b3aa031d02e49b)
+    
+  for more information, see https://pre-commit.ci
+- [pre-commit.ci] pre-commit autoupdate. [b964e83](https://github.com/callowayproject/generate-changelog/commit/b964e83dd04c9aa0415d96a4670510f61d544ef3)
+    
+  **updates:** - [github.com/astral-sh/ruff-pre-commit: v0.1.6 → v0.3.5](https://github.com/astral-sh/ruff-pre-commit/compare/v0.1.6...v0.3.5)
+
+- [pre-commit.ci] pre-commit autoupdate. [59030cd](https://github.com/callowayproject/generate-changelog/commit/59030cdcede27f8b0ebc96925b90c187c8f39918)
+    
+  **updates:** - [github.com/astral-sh/ruff-pre-commit: v0.1.5 → v0.1.6](https://github.com/astral-sh/ruff-pre-commit/compare/v0.1.5...v0.1.6)
+
+- Updating the automation. [ee3299e](https://github.com/callowayproject/generate-changelog/commit/ee3299e3c6ba1088d0807361fcdfaa4b8bcaea31)
+    
+- Only run tests if it is a change to Python code. [a665442](https://github.com/callowayproject/generate-changelog/commit/a6654425e9284f1885f17d8ed34819cc80f8202d)
+    
+### Updates
+
+- Updated the makefile and the doc automation. [b6da42e](https://github.com/callowayproject/generate-changelog/commit/b6da42e9647024123171d33e1379658950110577)
+    
+
 ## 0.10.0 (2023-12-04)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.9.2...0.10.0)
