@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.2 (2024-07-23)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.10.1...0.10.2)
+
+### Other
+
+- [pre-commit.ci] auto fixes from pre-commit.com hooks. [11bf6de](https://github.com/callowayproject/generate-changelog/commit/11bf6de5bd70c47e9a1fa7efc2ae383031bdb281)
+    
+  for more information, see https://pre-commit.ci
+- [pre-commit.ci] pre-commit autoupdate. [b37195b](https://github.com/callowayproject/generate-changelog/commit/b37195bf1259e7438035aa855480398e051160d4)
+    
+  **updates:** - [github.com/astral-sh/ruff-pre-commit: v0.3.5 → v0.5.4](https://github.com/astral-sh/ruff-pre-commit/compare/v0.3.5...v0.5.4)
+
+
 ## 0.10.1 (2024-04-06)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.10.0...0.10.1)
