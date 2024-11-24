@@ -260,7 +260,7 @@ quiet = true
 
 [tool.bumpversion]
 allow_dirty = true
-current_version = "0.10.2"
+current_version = "0.11.0"
 commit = true
 commit_args = "--no-verify"
 tag = true

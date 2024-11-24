@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.11.0 (2024-11-24)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.10.2...0.11.0)
+
+### Fixes
+
+- Fixed typo in release hint option. [31ad577](https://github.com/callowayproject/generate-changelog/commit/31ad577b5d9d3db0117dad830870e608721a30f7)
+    
+### Other
+
+- [pre-commit.ci] pre-commit autoupdate. [5fb1154](https://github.com/callowayproject/generate-changelog/commit/5fb1154a49ce4918f43b58d3e11bb8dcb74e643c)
+    
+  **updates:** - [github.com/astral-sh/ruff-pre-commit: v0.5.4 → v0.7.4](https://github.com/astral-sh/ruff-pre-commit/compare/v0.5.4...v0.7.4)
+
+- Bump actions/download-artifact from 3 to 4.1.7 in /.github/workflows. [83fc29a](https://github.com/callowayproject/generate-changelog/commit/83fc29aecef68c52f23b8e56ac12f7ea29e41aa7)
+    
+  Bumps [actions/download-artifact](https://github.com/actions/download-artifact) from 3 to 4.1.7.
+  - [Release notes](https://github.com/actions/download-artifact/releases)
+  - [Commits](https://github.com/actions/download-artifact/compare/v3...v4.1.7)
+
+  ---
+  **updated-dependencies:** - dependency-name: actions/download-artifact
+dependency-type: direct:production
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+### Updates
+
+- Update Python versions in CI workflow. [4b32198](https://github.com/callowayproject/generate-changelog/commit/4b321983463a8e1ee8449e02ebac7c6b41a9c29a)
+    
+  Removed support for Python 3.8 and added support for Python 3.13 in the test workflow. This ensures compatibility with the latest Python releases and drops an older version that is now less commonly used.
+- Changed framework from Typer to Click. [f08d922](https://github.com/callowayproject/generate-changelog/commit/f08d922c83e17d9c0b6ec4bfb164f3c7d1179238)
+    
+- Refactored test locations. [06d7a45](https://github.com/callowayproject/generate-changelog/commit/06d7a458fd14416835563d3fe64974e3fc3bab92)
+    
+
 ## 0.10.2 (2024-07-23)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.10.1...0.10.2)
