@@ -107,7 +107,7 @@ def cli(
         output_pipeline = pipeline_factory(configuration.output_pipeline, **configuration.variables)
         output_pipeline.run(rendered_chglog.full)
 
-    if output == "release_hint":
+    if output == "release-hint":
         click.echo(release_hint)
     elif output == "notes":
         if rendered_chglog.notes:
@@ -120,8 +120,6 @@ def cli(
         click.echo(json.dumps(out))
     else:
         click.echo("Done.")
-
-    # raise click.Exit()
 
 
 def get_user_config(config_file: Optional[Path], echo_func: Callable) -> Configuration:
