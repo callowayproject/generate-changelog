@@ -1,5 +1,5 @@
 import datetime
-from test.conftest import commit_factory
+from tests.conftest import commit_factory
 
 import pytest
 from faker import Faker

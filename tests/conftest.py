@@ -1,5 +1,8 @@
 """Testing fixtures."""
 
+from collections.abc import Generator
+from contextlib import contextmanager
+from pathlib import Path
 from typing import Optional
 
 import collections
@@ -176,3 +179,24 @@ def default_repo(bare_git_repo):
     )
 
     return bare_git_repo
+
+
+@contextmanager
+def inside_dir(dirpath: Path) -> Generator[None, None, None]:
+    """
+    Temporarily switch to a specific directory.
+
+    Args:
+        dirpath: Path of the directory to switch to
+
+    Yields:
+        None
+    """
+    import os
+
+    old_path = os.getcwd()
+    try:
+        os.chdir(dirpath)
+        yield
+    finally:
+        os.chdir(old_path)

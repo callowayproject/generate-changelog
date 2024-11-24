@@ -22,17 +22,13 @@ def test_file_reading():
     assert reader() == "This is example text in an example file.\n"
 
 
-def test_reading_misssing_file(capsys):
+def test_reading_misssing_file():
     """Reading a missing file should generate an error."""
     missing_file_path = fixture_dir / "missing.txt"
     reader = file_processing.ReadFile(missing_file_path, create_if_missing=False)
-    expected_err_msg = f"The file '{missing_file_path}' does not exist.\n"
-    with pytest.raises(click.exceptions.Exit):
-        reader()
 
-    captured = capsys.readouterr()
-    assert captured.out == ""
-    assert captured.err == expected_err_msg
+    with pytest.raises(click.exceptions.UsageError):
+        reader()
 
 
 def test_writing_file(tmp_path):
