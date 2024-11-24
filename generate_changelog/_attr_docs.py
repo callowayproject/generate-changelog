@@ -16,10 +16,7 @@ def attribute_docstrings(obj: type) -> dict:
     nodes = list(ast_class.body)
     docstrings = {}
 
-    for (
-        a,
-        b,
-    ) in pairs(nodes):
+    for a, b in pairs(nodes):
         if isinstance(a, ast.AnnAssign) and isinstance(a.target, ast.Name) and a.simple:
             name = a.target.id
         elif isinstance(a, ast.Assign) and len(a.targets) == 1 and isinstance(a.targets[0], ast.Name):

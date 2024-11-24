@@ -71,7 +71,10 @@ class MetadataMatch:
                 operator: in
                 value: ["fix", "refactor", "update"]
 
-    Valid operators: ``==``,  ``!=``, ``<``, ``>``, ``>=``, ``<=``, ``is``, ``is not``, ``in``, ``not in``
+    Valid operators: `==`, `!=`, `<`, `>`, `>=`, `<=`, `is`, `is not`, `in`, `not in`
+
+    Attributes:
+        operator_map: A map of operator names to operators
 
     Args:
         attribute: The name of the metadata key whose value will be evaluated

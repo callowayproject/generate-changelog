@@ -15,7 +15,7 @@ except ImportError:
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-import typer
+import rich_click as click
 from ruamel.yaml import YAML
 
 yaml = YAML()
@@ -244,17 +244,15 @@ class Configuration:
             filename: Path to the YAML file
 
         Raises:
-            Exit: if the path does not exist or is a directory
+            click.UsageError: if the path does not exist or is a directory
         """
         file_path = filename.expanduser().resolve()
 
         if not file_path.exists():
-            typer.echo(f"'{filename}' does not exist.", err=True)
-            raise typer.Exit(1)
+            raise click.UsageError(f"'{filename}' does not exist.")
 
         if not file_path.is_file():
-            typer.echo(f"'{filename}' is not a file.", err=True)
-            raise typer.Exit(1)
+            raise click.UsageError(f"'{filename}' is not a file.")
 
         content = file_path.read_text()
         values = yaml.load(content)
@@ -297,7 +295,7 @@ def write_default_config(filename: Path) -> None:
     """
     from ruamel.yaml.comments import CommentedMap
 
-    from ._attr_docs import attribute_docstrings
+    from generate_changelog._attr_docs import attribute_docstrings
 
     file_path = filename.expanduser().resolve()
     default_config = get_default_config()
