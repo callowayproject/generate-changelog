@@ -4,7 +4,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-import typer
+import rich_click as click
 
 from generate_changelog.actions import register_builtin
 from generate_changelog.configuration import StrOrCallable
@@ -30,8 +30,7 @@ class ReadFile:
             filepath.touch()
 
         if not filepath.exists():
-            typer.echo(f"The file '{filepath}' does not exist.", err=True)
-            raise typer.Exit(1)
+            raise click.UsageError(f"The file '{filepath}' does not exist.")
 
         return filepath.read_text() or ""
 
@@ -55,7 +54,7 @@ class WriteFile:
 @register_builtin
 def stdout(content: str) -> str:
     """Write content to stdout."""
-    typer.echo(content)
+    click.echo(content)
     return content
 
 

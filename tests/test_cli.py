@@ -4,23 +4,25 @@ import json
 import traceback
 from pathlib import Path
 
-from typer.testing import CliRunner
+from click.testing import CliRunner
 
 import generate_changelog
-from generate_changelog.cli import app
+from generate_changelog.configuration import write_default_config
+from tests.conftest import inside_dir
+from generate_changelog.cli import cli
 
 runner = CliRunner()
 
 
 def test_app_version():
-    result = runner.invoke(app, ["--version"])
+    result = runner.invoke(cli, ["--version"])
     assert result.exit_code == 0
     assert generate_changelog.__version__ in result.stdout
 
 
 def test_app_generate_config(mocker):
     func = mocker.patch("generate_changelog.cli.write_default_config")
-    result = runner.invoke(app, ["--generate-config"])
+    result = runner.invoke(cli, ["--generate-config"])
     if result.exit_code != 0:
         print(result.stdout)
         traceback.print_exception(*result.exc_info)
@@ -31,7 +33,7 @@ def test_app_generate_config(mocker):
 
 def test_app_generate_changelog(default_repo):
     config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
-    result = runner.invoke(app, ["-r", default_repo.git_dir, "-c", str(config)])
+    result = runner.invoke(cli, ["-r", default_repo.git_dir, "-c", str(config)])
     if result.exit_code != 0:
         print(result.stdout)
         traceback.print_exception(*result.exc_info)
@@ -42,7 +44,7 @@ def test_app_generate_changelog(default_repo):
 def test_app_generate_release_hint(default_repo):
     config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
     result = runner.invoke(
-        app, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "release-hint"]
+        cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "release-hint"]
     )
     if result.exit_code != 0:
         print(result.stdout)
@@ -59,7 +61,7 @@ def test_app_generate_release_hint_branch_override(default_repo):
 
     # Check that the default behavior returns a "dev" release hint
     result = runner.invoke(
-        app, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "release-hint"]
+        cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "release-hint"]
     )
     if result.exit_code != 0:
         print(result.stdout)
@@ -69,7 +71,7 @@ def test_app_generate_release_hint_branch_override(default_repo):
 
     # Check that the override returns a "minor" release hint
     result = runner.invoke(
-        app,
+        cli,
         [
             "-r",
             default_repo.git_dir,
@@ -92,7 +94,7 @@ def test_app_generate_release_hint_branch_override(default_repo):
 def test_app_generate_notes(default_repo):
     config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
     result = runner.invoke(
-        app, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "notes"]
+        cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "notes"]
     )
     if result.exit_code != 0:
         print(result.stdout)
@@ -103,7 +105,7 @@ def test_app_generate_notes(default_repo):
 
 def test_app_generate_all(default_repo):
     config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
-    result = runner.invoke(app, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "all"])
+    result = runner.invoke(cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "all"])
     if result.exit_code != 0:
         print(result.stdout)
         traceback.print_exception(*result.exc_info)
@@ -111,3 +113,30 @@ def test_app_generate_all(default_repo):
     output = json.loads(result.stdout)
     assert output["notes"].startswith("# Changelog")
     assert "minor" == output["release_hint"]
+
+
+def test_alternative_changelog_path(default_repo):
+    """You should be able to specify an alternative changelog path."""
+    # Assemble
+    working_dir = Path(default_repo.working_dir)
+    changelog_path = working_dir / "somedir" / "CHANGELOG.md"
+    changelog_path.parent.mkdir(exist_ok=True)
+    # changelog_path.write_text("# Changelog\n\n## 0.1.0 (2024-07-23)")
+
+    settings_path = working_dir / ".changelog-config.yaml"
+    write_default_config(settings_path)
+    config_text = settings_path.read_text()
+    config_text = config_text.replace("  changelog_filename: CHANGELOG.md", f"  changelog_filename: {changelog_path}")
+    settings_path.write_text(config_text)
+
+    with inside_dir(default_repo.working_dir):
+        result = runner.invoke(cli, ["-r", default_repo.git_dir, "-c", str(settings_path)])
+
+    if result.exit_code != 0:
+        print(result.stdout)
+        traceback.print_exception(*result.exc_info)
+    assert result.exit_code == 0
+    assert f"Using configuration file: {settings_path}" in result.stdout
+
+    assert changelog_path.exists()
+    assert not Path(working_dir / "CHANGELOG.md").exists()

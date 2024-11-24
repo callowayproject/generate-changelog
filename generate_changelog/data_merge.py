@@ -19,11 +19,11 @@ def deep_merge(*dicts: dict) -> dict:
     """
 
     def merge_into(d1: dict, d2: dict) -> dict:
-        for key in d2:
+        for key, val in d2.items():
             if key not in d1 or not isinstance(d1[key], dict):
-                d1[key] = copy.deepcopy(d2[key])
+                d1[key] = copy.deepcopy(val)
             else:
-                d1[key] = merge_into(d1[key], d2[key])
+                d1[key] = merge_into(d1[key], val)
         return d1
 
     return reduce(merge_into, dicts, {})
@@ -65,7 +65,7 @@ def comprehensive_merge(*args: Any) -> Any:  # NOQA: C901
     """
 
     def merge_into(d1: Any, d2: Any) -> Any:
-        if type(d1) != type(d2):
+        if type(d1) is not type(d2):
             raise ValueError(f"Cannot merge {type(d2)} into {type(d1)}.")
 
         if isinstance(d1, list):

@@ -83,7 +83,8 @@ def resolve_name(obj: Any, name: str, default: Any = None) -> Any:
         The value at the resolved name or the default value.
 
     Raises:
-        TypeError, AttributeError: If accessing the property raises one of these exceptions.
+        TypeError: If accessing the property raises one of these exceptions.
+        AttributeError: If accessing the property raises one of these exceptions.
     """
     lookups = name.split(".")
     current = obj
@@ -110,7 +111,7 @@ def resolve_name(obj: Any, name: str, default: Any = None) -> Any:
                     ):  # un-subscript-able object
                         return default
         return current
-    except Exception:  #  NOQA: BLE001 pragma: no cover
+    except Exception:  # NOQA: BLE001 pragma: no cover
         return default
 
 

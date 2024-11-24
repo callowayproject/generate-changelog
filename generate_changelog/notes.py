@@ -62,7 +62,7 @@ def get_section_pattern() -> str:
     Get the version section pattern for the changelog.
 
     Raises:
-        MissingConfiguration: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
+        MissingConfigurationError: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
 
     Returns:
         The version section pattern.
@@ -96,7 +96,7 @@ def get_changelog_path() -> Path:
     Return the path to the changelog.
 
     Raises:
-        MissingConfiguration: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
+        MissingConfigurationError: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
 
     Returns:
         The path to the changelog.

@@ -18,7 +18,7 @@ def bash(script: str, environment: Optional[dict] = None) -> str:
 
         command = ["bash", "--noprofile", "--norc", "-eo", "pipefail", script_path]
 
-        result = subprocess.run(
+        result = subprocess.run(  # NOQA: S603
             command,
             env=environment,
             encoding="utf-8",

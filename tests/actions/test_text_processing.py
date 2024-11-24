@@ -136,6 +136,6 @@ def test_paragraph_wrap():
 
 def test_capitalize():
     """The first character of a string should be capitalized."""
-    assert text_processing.capitalize("i am a test") == "I am a test"
-    assert text_processing.capitalize("[i] am a test") == "[i] am a test"
+    assert text_processing.capitalize("i am a tests") == "I am a tests"
+    assert text_processing.capitalize("[i] am a tests") == "[i] am a tests"
     assert text_processing.capitalize("i AM a Test") == "I AM a Test"

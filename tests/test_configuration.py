@@ -17,10 +17,10 @@ def test_update_from_file():
     assert configuration.get_config().unreleased_label == "Not Done Yet"
     assert not hasattr(configuration.get_config(), "not_valid")
 
-    with pytest.raises(click.exceptions.Exit):
+    with pytest.raises(click.exceptions.UsageError):
         configuration.get_config().update_from_file(FIXTURES_DIR / "missing.yml")
 
-    with pytest.raises(click.exceptions.Exit):
+    with pytest.raises(click.exceptions.UsageError):
         configuration.get_config().update_from_file(FIXTURES_DIR)
 
 
