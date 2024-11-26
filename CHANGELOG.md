@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.12.0 (2024-11-26)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.11.0...0.12.0)
+
+### New
+
+- Added additional files to documentation. [6836603](https://github.com/callowayproject/generate-changelog/commit/68366035abff38e98d79f501bc9aeab233da890e)
+    
+### Updates
+
+- Changed the documentation generator from Sphinx to MkDocs. [770c70d](https://github.com/callowayproject/generate-changelog/commit/770c70dd5587c032a434b1cceb49e3ae6a5bf727)
+    
+
 ## 0.11.0 (2024-11-24)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.10.2...0.11.0)
