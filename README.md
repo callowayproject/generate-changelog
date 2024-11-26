@@ -10,6 +10,8 @@ Use your commit log to make a beautiful changelog file.
 - [Documentation](https://callowayproject.github.io/generate-changelog/)
 - [GitHub](https://github.com/callowayproject/generate-changelog)
 
+<!--start-->
+
 `generate-changelog` does what it says: it generates a full changelog, or updates an existing one. Git tags and commits are the inputs by which `generate-changelog` performs its task.
 
 The primary goal of this tool was to provide the benefits of [conventional commits](https://www.conventionalcommits.org/) without requiring a strict syntax. `generate-changelog` accomplishes this using configurable regular expressions or commit metadata matching. The thought is natural language is easier for developers to remember and requires less tooling to enforce.
@@ -44,7 +46,7 @@ The primary goal of this tool was to provide the benefits of [conventional commi
 
 ## Requirements
 
-Python 3.7 or higher.
+Python 3.9 or higher.
 
 ## Installation
 
@@ -67,3 +69,4 @@ Generate your changelog via:
 ```bash
 $ generate-changelog
 ```
+<!--end-->

@@ -153,7 +153,7 @@ def pipeline_factory(
     action_list: list,
     commit_metadata_func: Optional[Callable] = None,
     version_metadata_func: Optional[Callable] = None,
-    **kwargs,
+    **kwargs: Any,
 ) -> Pipeline:
     """
     Create a :py:class:`~Pipeline` from a list of actions specified by dictionaries.
