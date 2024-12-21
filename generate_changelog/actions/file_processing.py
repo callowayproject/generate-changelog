@@ -47,7 +47,7 @@ class WriteFile:
         """Writes input_text to the pre-configured file."""
         filepath = Path(eval_if_callable(self.filename))
         text = eval_if_callable(input_text)
-        filepath.write_text(text)
+        filepath.write_text(text, encoding="utf-8")
         return input_text
 
 
@@ -90,5 +90,5 @@ class IncrementalFileInsert:
         else:
             new_text = text
 
-        filename.write_text(new_text)
+        filename.write_text(new_text, encoding="utf-8")
         return input_text
