@@ -1,7 +1,7 @@
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
-    rev: 'v0.8.0'
+    rev: 'v0.8.6'
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
@@ -38,13 +38,13 @@ repos:
 #        args: ['--baseline', '.secrets.baseline']
         additional_dependencies: ["gibberish-detector"]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.13.0
+    rev: v1.14.1
     hooks:
       - id: mypy
         args: [--no-strict-optional, --ignore-missing-imports]
         additional_dependencies: ["toml"]
   - repo: https://github.com/jsh9/pydoclint
-    rev: 0.5.9
+    rev: 0.5.14
     hooks:
       - id: pydoclint
         args:
