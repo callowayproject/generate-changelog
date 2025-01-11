@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.12.1 (2025-01-11)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.12.0...0.12.1)
+
+### Fixes
+
+- Fix: add encoding="utf-8" in file_processing.py. [4b0eda7](https://github.com/callowayproject/generate-changelog/commit/4b0eda7140c406af645895a4ad2d30264c49644d)
+    
+### Other
+
+- [pre-commit.ci] pre-commit autoupdate. [8c5c6d1](https://github.com/callowayproject/generate-changelog/commit/8c5c6d1365e8d41b754005ed510a6889f56b7c3a)
+    
+  **updates:** - [github.com/astral-sh/ruff-pre-commit: v0.8.0 → v0.8.6](https://github.com/astral-sh/ruff-pre-commit/compare/v0.8.0...v0.8.6)
+
+
 ## 0.12.0 (2024-11-26)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.11.0...0.12.0)
