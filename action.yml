@@ -1,0 +1,29 @@
+name: "Run Generate Changelog"
+description: "Run generate-changelog to create or update a changelog."
+author: "Corey Oordt"
+inputs:
+  config_file:
+    description: "Path to the config file if it is not one of the defaults."
+    required: false
+    default: ""
+  starting_tag:
+    description: "Tag to generate a changelog from."
+    required: false
+    default: ""
+  skip_output_pipeline:
+    description: "Do not generate or update the CHANGELOG, but still return the release hint."
+    required: false
+    default: "false"
+  branch_override:
+    description: "Override the current branch for release hint decisions."
+    required: false
+    default: ""
+outputs:
+  release_hint:
+    description: "The suggested type of release to generate."
+branding:
+  color: "black"
+  icon: "file-text"
+runs:
+  using: "docker"
+  image: "Dockerfile"
