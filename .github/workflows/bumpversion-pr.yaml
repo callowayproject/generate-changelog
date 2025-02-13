@@ -24,6 +24,13 @@ jobs:
         run: |
           python -m pip install . bump-my-version
 
+      - name: Get the changelog and release hint
+        id: changelog
+        uses: ./
+        with:
+          branch_override: ${{ github.base_ref }}
+          skip_output_pipeline: True
+
       - name: Get the release hint
         id: generate-changelog
         run: |
