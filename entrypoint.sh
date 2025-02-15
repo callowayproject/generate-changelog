@@ -29,8 +29,11 @@ if [[ -n ${INPUT_BRANCH_OVERRIDE} ]]; then
   changelog_args+=("-b" "${INPUT_BRANCH_OVERRIDE}")
 fi
 
+mkdir -p /github/workspace
+cd /github/workspace
+
 echo "[action-generate-changelog] Generating the changelog with arguments '${changelog_args[*]}'"
 
-RELEASE_HINT=$(/venv/bin/generate-changelog "${changelog_args[*]}")
+RELEASE_HINT=$(generate-changelog ${changelog_args[*]})
 echo "::notice::Suggested release type for this branch is: ${RELEASE_HINT}"
 echo "release_hint=$RELEASE_HINT" >> $GITHUB_OUTPUT
