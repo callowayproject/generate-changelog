@@ -30,7 +30,7 @@ if [[ -n ${INPUT_BRANCH_OVERRIDE} ]]; then
 fi
 
 cd /github/workspace
-
+tree .
 echo "[action-generate-changelog] Generating the changelog with arguments '${changelog_args[*]}'"
 
 RELEASE_HINT=$(generate-changelog ${changelog_args[*]})
