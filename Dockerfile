@@ -20,6 +20,12 @@ RUN apt update \
   && apt clean \
   && rm -rf /var/lib/apt/lists/*
 
+RUN git config --global --add safe.directory /github/workspace \
+  && git config --global user.email "generate-changelog@github.actions" \
+  && git config --global user.name "Generate Changelog"
+
+RUN mkdir -p /github/workspace
+
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
