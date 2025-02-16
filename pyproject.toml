@@ -287,9 +287,6 @@ values = ["release", "post"]
 filename = "generate_changelog/__init__.py"
 
 [[tool.bumpversion.files]]
-filename = "Dockerfile"
-
-[[tool.bumpversion.files]]
 filename = "CHANGELOG.md"
 search = "Unreleased"
 
