@@ -2,7 +2,7 @@
 
 import fnmatch
 import re
-from typing import List, Optional, Union
+from typing import List, Optional, Sequence, Union
 
 from generate_changelog.configuration import RELEASE_TYPE_ORDER, Configuration
 from generate_changelog.context import CommitContext, VersionContext
@@ -31,13 +31,17 @@ class ReleaseRule:
         match_result: Optional[str],
         no_match_result: Optional[str] = "no-release",
         grouping: Union[str, tuple, list, None] = None,
-        path: Optional[str] = None,
+        path: Optional[Union[str, Sequence[str]]] = None,
         branch: Optional[str] = None,
     ):
         self.match_result = match_result
         self.no_match_result = no_match_result
         self.grouping = grouping if grouping != "*" else None
-        self.path = path if path != "*" else None
+        normalized_path = path if path != "*" else None
+        if isinstance(normalized_path, str):
+            self.path: Union[str, Sequence[str]] = [normalized_path]
+        else:
+            self.path = normalized_path or []
         self.branch = branch or None
         self.is_valid = any([self.path, self.grouping, self.branch])
 
@@ -79,16 +83,19 @@ class ReleaseRule:
         Do any of the paths in the commit match the rule?
 
         Args:
-            commit:  The commit context whose files should match
+            commit: The commit context whose files should match
 
         Returns:
-            ``True`` if any file in the commit context matches the pattern or if ``self.path`` is ``None``
+            `True` if any file in the commit context matches the pattern or if ``self.path`` is ``None``
         """
         if not self.path:
             return True
 
-        re_pattern = fnmatch.translate(self.path)
-        return any(re.match(re_pattern, p) for p in commit.files)
+        results = []
+        for path in self.path:
+            re_pattern = fnmatch.translate(path)
+            results.append(any(re.match(re_pattern, p) for p in commit.files))
+        return any(results)
 
     def matches_branch(self, current_branch: str) -> bool:
         """

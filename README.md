@@ -69,4 +69,44 @@ Generate your changelog via:
 ```bash
 $ generate-changelog
 ```
+
+## GitHub Action
+
+### Inputs
+
+- `config_file` Path to the config file if it is not one of the defaults.
+- `starting_tag` Starting tag to generate a changelog from. Default is to start from the last tag in the current change log.
+- `skip_output_pipeline` Do not generate or update the CHANGELOG, but still return the release hint.
+- `branch_override` Override the current branch for release hint decisions.
+
+### Outputs
+
+- `release_hint` The suggested release type for the current or `branch_override` branch.
+
+### Generated files
+
+The changelog file is written based on the configuration and value of the `branch_override` input.
+This file is not added to your Git repo. 
+You must add and commit it if you want to keep it.
+
+### Example usage
+
+```yaml
+on: [push]
+
+jobs:
+  sample_job:
+    runs-on: ubuntu-latest
+    name: Just an example
+    steps:
+      - name: Generate changelog and release hint
+        id: changelog
+        uses: callowayproject/generate-changelog@v1
+        with:
+          config_file: .changelog-config.yaml
+      - name: Use the release hint
+        run: echo "The release hint was ${{ steps.changelog.outputs.release_hint }}"
+```
+
+
 <!--end-->

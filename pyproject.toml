@@ -48,7 +48,7 @@ Source = "https://github.com/callowayproject/generate-changelog"
 [project.scripts]
 generate-changelog = "generate_changelog.cli:cli"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "bump-my-version",
     "generate-changelog",

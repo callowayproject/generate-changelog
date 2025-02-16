@@ -1,6 +1,6 @@
 """Tests of the release_hint module."""
 
-from typing import Optional, Union
+from typing import Optional, Union, List
 
 import pytest
 from faker import Faker
@@ -12,7 +12,7 @@ from generate_changelog.release_hint import InvalidRuleError
 
 fake = Faker()
 
-TEST_RULES = [
+TEST_RULES: List[dict] = [
     {
         "match_result": "dev",
         "no_match_result": "no-release",
@@ -50,7 +50,7 @@ TEST_RULES = [
         "match_result": "unknown",
         "no_match_result": None,
         "grouping": "New",
-        "path": "unknown/*",
+        "path": ["unknown/*", "docs/*"],
         "branch": "master|main",
     },
 ]
@@ -79,127 +79,144 @@ def commit_context_factory(grouping: Union[str, tuple, None] = None, files: Opti
     )
 
 
-@pytest.mark.parametrize(
-    ["commit_grouping", "rule_grouping"],
-    [
-        param(("foo",), "foo", id="string matches simple tuple"),
-        param(
-            (
-                "bar",
+class TestReleaseRule:
+    """Tests for the ReleaseRule class."""
+
+    @pytest.mark.parametrize(
+        ["commit_grouping", "rule_grouping"],
+        [
+            param(("foo",), "foo", id="string matches simple tuple"),
+            param(
+                (
+                    "bar",
+                    "foo",
+                ),
                 "foo",
+                id="string matches in a tuple",
             ),
-            "foo",
-            id="string matches in a tuple",
-        ),
-        param(
-            (
-                "foo",
-                "bar",
+            param(
+                (
+                    "foo",
+                    "bar",
+                ),
+                ("foo", "bar"),
+                id="tuple matches tuple exactly",
             ),
-            ("foo", "bar"),
-            id="tuple matches tuple exactly",
-        ),
-        param(
-            (
-                "foo",
-                "bar",
+            param(
+                (
+                    "foo",
+                    "bar",
+                ),
+                ("foo", "bar", "*"),
+                id="tuple with star matches tuple 1",
             ),
-            ("foo", "bar", "*"),
-            id="tuple with star matches tuple 1",
-        ),
-        param(
-            (
-                "foo",
-                "bar",
+            param(
+                (
+                    "foo",
+                    "bar",
+                ),
+                ("foo", "*"),
+                id="tuple with star matches tuple 2",
             ),
-            ("foo", "*"),
-            id="tuple with star matches tuple 2",
-        ),
-    ],
-)
-def test_releaserule_match_grouping(commit_grouping, rule_grouping):
-    """ReleaseRule should return the match_result if the commit matches."""
-    rule = release_hint.ReleaseRule(match_result="success", grouping=rule_grouping)
-    commit_ctx = commit_context_factory(grouping=commit_grouping)
-    assert rule(commit_ctx, "master") == "success"
+        ],
+    )
+    def test_returns_match_result_if_matches_grouping(self, commit_grouping: tuple, rule_grouping: tuple):
+        """ReleaseRule should return the match_result if the commit matches."""
+        # Assemble
+        rule = release_hint.ReleaseRule(match_result="success", grouping=rule_grouping)
+        commit_ctx = commit_context_factory(grouping=commit_grouping)
 
+        # Act and Assert
+        assert rule(commit_ctx, "master") == "success"
 
-@pytest.mark.parametrize(
-    ["commit_grouping", "rule_grouping"],
-    [
-        param(("foo",), "bar", id="string not in tuple"),
-        param(("foo",), ("bar",), id="tuples don't match"),
-        param(
-            (
-                "foo",
-                "bar",
+    @pytest.mark.parametrize(
+        ["commit_grouping", "rule_grouping"],
+        [
+            param(("foo",), "bar", id="string not in tuple"),
+            param(("foo",), ("bar",), id="tuples don't match"),
+            param(
+                (
+                    "foo",
+                    "bar",
+                ),
+                ("bar", "*"),
+                id="tuple with star doesn't match tuple",
             ),
-            ("bar", "*"),
-            id="tuple with star doesn't match tuple",
-        ),
-        param(("foo",), 1, id="non-string or iterable in rule fails"),
-    ],
-)
-def test_releaserule_match_grouping_failures(commit_grouping, rule_grouping):
-    """Test expected failures."""
-    rule = release_hint.ReleaseRule(match_result="success", no_match_result="fail", grouping=rule_grouping)
-    commit_ctx = commit_context_factory(grouping=commit_grouping)
-    assert rule(commit_ctx, "master") == "fail"
+            param(("foo",), 1, id="non-string or iterable in rule fails"),
+        ],
+    )
+    def test_return_no_match_result_when_match_grouping_fails(self, commit_grouping: tuple, rule_grouping: tuple):
+        """Test expected failures."""
+        # Assemble
+        rule = release_hint.ReleaseRule(match_result="success", no_match_result="fail", grouping=rule_grouping)
+        commit_ctx = commit_context_factory(grouping=commit_grouping)
 
+        # Act and Assemble
+        assert rule(commit_ctx, "master") == "fail"
 
-@pytest.mark.parametrize(
-    ["commit_paths", "rule_path"],
-    [
-        param({"foo/bar.txt"}, "foo/*", id="star matches subdirectory"),
-        param({"foo/bar/baz.txt"}, "foo/*", id="star matches nested subdirectory"),
-        param({"foo/bar/baz/huh.txt"}, "foo/*", id="star matches really nested subdirectory"),
-        param({"foo/bar/baz/huh.txt"}, "foo/**/*.txt", id="recursive match really nested file"),
-    ],
-)
-def test_releaserule_match_path(commit_paths: set, rule_path: str):
-    """ReleaseRule should return the match_result if the commit matches."""
-    rule = release_hint.ReleaseRule(match_result="success", path=rule_path)
-    commit_ctx = commit_context_factory(files=commit_paths)
-    assert rule(commit_ctx, "master") == "success"
+    @pytest.mark.parametrize(
+        ["commit_paths", "rule_path"],
+        [
+            param({"foo/bar.txt"}, "foo/*", id="star matches subdirectory"),
+            param({"foo/bar/baz.txt"}, "foo/*", id="star matches nested subdirectory"),
+            param({"foo/bar/baz/huh.txt"}, "foo/*", id="star matches really nested subdirectory"),
+            param({"foo/bar/baz/huh.txt"}, "foo/**/*.txt", id="recursive match really nested file"),
+            param({"readme.md"}, ["foo/*", "readme.md"], id="matches multiple paths"),
+        ],
+    )
+    def test_returns_match_result_when_matches_path(self, commit_paths: set, rule_path: Union[str, list[str]]):
+        """ReleaseRule should return the match_result if the path matches."""
+        # Assemble
+        rule = release_hint.ReleaseRule(match_result="success", path=rule_path)
+        commit_ctx = commit_context_factory(files=commit_paths)
 
+        # Act and Assemble
+        assert rule(commit_ctx, "master") == "success"
 
-@pytest.mark.parametrize(
-    ["commit_paths", "rule_path"],
-    [
-        param({"foo/bar.txt"}, "foo/*.xml", id="mismatched file extensions"),
-        param({"foo/bar/baz.txt"}, "bar/*", id="mismatched directories"),
-    ],
-)
-def test_releaserule_match_path_failures(commit_paths: set, rule_path: str):
-    """ReleaseRule should return the match_result if the commit matches."""
-    rule = release_hint.ReleaseRule(match_result="success", no_match_result="failure", path=rule_path)
-    commit_ctx = commit_context_factory(files=commit_paths)
-    assert rule(commit_ctx, "master") == "failure"
+    @pytest.mark.parametrize(
+        ["commit_paths", "rule_path"],
+        [
+            param({"foo/bar.txt"}, "foo/*.xml", id="mismatched file extensions"),
+            param({"foo/bar/baz.txt"}, "bar/*", id="mismatched directories"),
+        ],
+    )
+    def test_returns_no_match_result_when_match_path_fails(self, commit_paths: set, rule_path: str):
+        """ReleaseRule should return the no_match_result if the path doesn't match."""
+        # Assemble
+        rule = release_hint.ReleaseRule(match_result="success", no_match_result="failure", path=rule_path)
+        commit_ctx = commit_context_factory(files=commit_paths)
 
+        # Act and Assert
+        assert rule(commit_ctx, "master") == "failure"
 
-@pytest.mark.parametrize(
-    ["commit_paths", "rule_path", "commit_grouping", "rule_grouping"],
-    [
-        param({"foo/bar.txt"}, "foo/*", ("new",), "new", id="star matches subdirectory"),
-        param({"foo/bar/baz.txt"}, "foo/*", ("foo",), ("foo",), id="star matches nested subdirectory"),
-        param(
-            {"foo/bar/baz/huh.txt"},
-            "foo/*",
-            (
-                "foo",
-                "bar",
+    @pytest.mark.parametrize(
+        ["commit_paths", "rule_path", "commit_grouping", "rule_grouping"],
+        [
+            param({"foo/bar.txt"}, "foo/*", ("new",), "new", id="star matches subdirectory"),
+            param({"foo/bar/baz.txt"}, "foo/*", ("foo",), ("foo",), id="star matches nested subdirectory"),
+            param(
+                {"foo/bar/baz/huh.txt"},
+                "foo/*",
+                (
+                    "foo",
+                    "bar",
+                ),
+                ("foo", "bar", "*"),
+                id="star matches really nested subdirectory",
             ),
-            ("foo", "bar", "*"),
-            id="star matches really nested subdirectory",
-        ),
-        param({"foo/bar/baz/huh.txt"}, "foo/**/*.txt", ("new",), "new", id="recursive match really nested file"),
-    ],
-)
-def test_releaserule_match_path_and_grouping(commit_paths: set, rule_path: str, commit_grouping, rule_grouping):
-    """ReleaseRule should return the match_result if the commit matches."""
-    rule = release_hint.ReleaseRule(match_result="success", path=rule_path, grouping=rule_grouping)
-    commit_ctx = commit_context_factory(grouping=commit_grouping, files=commit_paths)
-    assert rule(commit_ctx, "master") == "success"
+            param({"foo/bar/baz/huh.txt"}, "foo/**/*.txt", ("new",), "new", id="recursive match really nested file"),
+        ],
+    )
+    def test_returns_match_path_when_matches_path_and_grouping(
+        self, commit_paths: set, rule_path: str, commit_grouping: tuple, rule_grouping: Union[str, tuple]
+    ):
+        """ReleaseRule should return the match_result if the commit matches."""
+        # Assemble
+        rule = release_hint.ReleaseRule(match_result="success", path=rule_path, grouping=rule_grouping)
+        commit_ctx = commit_context_factory(grouping=commit_grouping, files=commit_paths)
+
+        # Act and Assert
+        assert rule(commit_ctx, "master") == "success"
 
 
 def test_releaserule_match_path_grouping_and_branch():
