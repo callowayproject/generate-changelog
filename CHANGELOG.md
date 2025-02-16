@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.13.0 (2025-02-16)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.12.1...0.13.0)
+
+    
+### New
+ 
+- Add GitHub Action details and Python dependency lockfile. [bf32a74](https://github.com/callowayproject/generate-changelog/commit/bf32a74d036e3ccbc4f59e3dd9bdbed573b71c7c)
+    
+  Updated the README to include configuration and usage instructions for the new GitHub Action. Added the `uv.lock` file to track Python dependencies for reproducible builds. These changes improve documentation and enhance dependency management.
+    
+- Add GitHub Action to generate and update changelog. [93fc1bc](https://github.com/callowayproject/generate-changelog/commit/93fc1bc1cdfef7af267e2293666379f87fd844c7)
+    
+  This commit introduces a new GitHub Action using `generate-changelog` to automate changelog creation or updates. It includes an `action.yml` for configuration, an `entrypoint.sh` script for handling inputs and execution, and a `Dockerfile` to set up the required environment.
+ 
+### Updates
+
+- Update github action to use uv. [c93a125](https://github.com/callowayproject/generate-changelog/commit/c93a12570ee5c0aeb1ff40bb3ddc47379b43fb61)
+
+- Refactor release rule matching for paths and grouping. [291b925](https://github.com/callowayproject/generate-changelog/commit/291b9253cbc700808aee646f6b7e82bbc9dfc4f7)
+    
+  Normalize paths as sequences in the release rule logic, enabling support for multiple path patterns. Refactor tests to improve modularity and readability, ensuring consistency with the updated path handling mechanism. Extend functionality to handle more flexible path and grouping validations.
+
+- Updated the PR workflow. [738cdb0](https://github.com/callowayproject/generate-changelog/commit/738cdb0689429760cbc58a798c8dd78541178f70)
+    
+- Refactor dependency groups and update bumpversion config. [dbaa2c8](https://github.com/callowayproject/generate-changelog/commit/dbaa2c8a6cf53f7302339d2a17dac795cfaafebf)
+    
+  Renamed `[project.optional-dependencies]` to `[dependency-groups]` for clarity and alignment with updated conventions. Added `Dockerfile` to the bumpversion configuration to ensure version consistency across all relevant files.
+
 ## 0.12.1 (2025-01-11)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.12.0...0.12.1)
