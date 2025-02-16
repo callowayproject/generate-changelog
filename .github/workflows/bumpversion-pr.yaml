@@ -26,26 +26,19 @@ jobs:
 
       - name: Get the changelog and release hint
         id: changelog
-        uses: ./
+        uses: callowayproject/generate-changelog@master
         with:
           branch_override: ${{ github.base_ref }}
           skip_output_pipeline: True
 
-      - name: Get the release hint
-        id: generate-changelog
-        run: |
-          RELEASE_KIND=$(generate-changelog --output release-hint --branch-override ${{ github.base_ref }} --skip-output-pipeline)
-          echo "::notice::Suggested release type upon merge to ${{ github.base_ref }}: ${RELEASE_KIND}"
-          echo "RELEASE_KIND=$RELEASE_KIND" >> $GITHUB_ENV
-          echo "release-kind=$RELEASE_KIND" >> $GITHUB_OUTPUT
-
       - name: Bump version dry run
-        if: ${{ env.RELEASE_KIND != 'no-release' }}
+        if: ${{ steps.changelog.outputs.release_hint != 'no-release' }}
         shell: bash
         run: |
           PR_NUMBER=$(gh pr view --json number -q .number || echo "")
           REVISION=$(git describe --tags --long | awk -F- '{print $2}')
-          export PR_NUMBER REVISION
+          RELEASE_KIND="${{ steps.changelog.outputs.release_hint }}"
+          export PR_NUMBER REVISION RELEASE_KIND
 
           # This will display a full log of what would happen if we were to bump the version.
           bump-my-version bump --dry-run --verbose "$RELEASE_KIND"
@@ -56,7 +49,7 @@ jobs:
           echo "NEW_VERSION=$(echo $VERSION_INFO | jq -r .new_version)" >> $GITHUB_ENV
 
       - name: Set no-release information
-        if: ${{ env.RELEASE_KIND == 'no-release' }}
+        if: ${{ steps.changelog.outputs.release_hint == 'no-release' }}
         run: |
           echo "CURRENT_VERSION=$(bump-my-version show current_version)" >> $GITHUB_ENV
           echo "NEW_VERSION=$(bump-my-version show current_version)" >> $GITHUB_ENV
@@ -65,6 +58,6 @@ jobs:
         uses: s-gehring/singleton-comment@v1
         with:
           comment-body: |
-            **Version hint:** ${{ env.RELEASE_KIND }}
+            **Version hint:** ${{ steps.changelog.outputs.release_hint }}
             **Current version:** ${{ env.CURRENT_VERSION }}
             **New version (when merged):** ${{ env.NEW_VERSION }}
