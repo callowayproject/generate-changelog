@@ -33,7 +33,7 @@ jobs:
           skip_output_pipeline: True
 
       - name: release-notes
-        uses: callowayproject/action-changelog-to-releasenotes
+        uses: callowayproject/action-changelog-to-releasenotes@master
         with:
           target-version: Unreleased
 
