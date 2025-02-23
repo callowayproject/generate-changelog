@@ -41,7 +41,21 @@ class TagInfo:
 
 @dataclass(frozen=True)
 class GitTag:
-    """A git tag with information and commits."""
+    """
+    Represents a Git tag and its associated data.
+
+    This class is used to encapsulate details about a Git tag, including its
+    name, additional information, and a list of related commits. It is immutable
+    to ensure the integrity of the stored data, making it safe for concurrent
+    and controlled usage.
+
+    Attributes:
+        tag_name: The name of the Git tag.
+        tag_info: Metadata and additional details associated with the
+            Git tag.
+        commits: The list of commits that are associated with
+            this Git tag.
+    """
 
     tag_name: str
     tag_info: TagInfo
