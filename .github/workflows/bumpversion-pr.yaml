@@ -26,16 +26,10 @@ jobs:
 
       - name: Generate release hint if merged
         id: changelog
-#        uses: callowayproject/generate-changelog@master
-        uses: ./
+        uses: callowayproject/generate-changelog@v0
         with:
           branch_override: ${{ github.base_ref }}
           skip_output_pipeline: True
-
-      - name: release-notes
-        uses: callowayproject/action-changelog-to-releasenotes@main
-        with:
-          target-version: 0.13.0
 
       - name: Set release information
         if: ${{ steps.changelog.outputs.release_hint != 'no-release' }}
