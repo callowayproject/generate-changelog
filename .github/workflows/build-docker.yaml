@@ -1,3 +1,4 @@
+name: Build container
 on:
   workflow_call:
 
