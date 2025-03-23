@@ -26,7 +26,8 @@ jobs:
 
       - name: Generate release hint if merged
         id: changelog
-        uses: callowayproject/generate-changelog@v0
+#        uses: callowayproject/generate-changelog@v0
+        uses: ./
         with:
           branch_override: ${{ github.base_ref }}
           skip_output_pipeline: True
