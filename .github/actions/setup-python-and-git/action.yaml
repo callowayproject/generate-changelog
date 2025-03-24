@@ -1,5 +1,5 @@
-name: checkout-and-setup-python
-description: 'Checkout the repository and setup Python'
+name: setup-python-and-git
+description: 'Setup Python and git'
 inputs:
   python-version:
     description: 'Python version to use'
@@ -8,7 +8,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       name: Setup Python
       with:
         python-version: ${{ inputs.python-version }}
@@ -16,8 +16,8 @@ runs:
 
     - name: Git check
       run: |
-        git config --global user.email "bump-my-version@github.actions"
-        git config --global user.name "Testing Git"
+        git config --global user.email "git-actions@github.actions"
+        git config --global user.name "Git Action"
         git --version
         git config --list
       shell: bash

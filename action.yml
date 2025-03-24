@@ -26,4 +26,4 @@ branding:
   icon: "file-text"
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: "ghcr.io/callowayproject/generate-changelog:v0"
