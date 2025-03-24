@@ -34,6 +34,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
+            type=ref,event=workflow_dispatch
             type=pep440,pattern=v{{major}}
             type=pep440,pattern=v{{major}}.{{minor}}
 
