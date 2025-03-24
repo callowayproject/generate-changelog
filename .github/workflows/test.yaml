@@ -8,13 +8,13 @@ on:
       - master
     paths:
       - 'generate_changelog/*'
-      - 'test/*'
+      - 'tests/*'
   pull_request:
     branches:
       - master
     paths:
       - 'generate_changelog/*'
-      - 'test/*'
+      - 'tests/*'
   # Also trigger on page_build, as well as release created events
   page_build:
   release:
