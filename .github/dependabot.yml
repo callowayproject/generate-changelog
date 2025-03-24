@@ -1,0 +1,8 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    interval: "weekly"
