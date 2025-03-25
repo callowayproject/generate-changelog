@@ -37,7 +37,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
+            type=raw,value=latest,enable=${{ github.event_name == 'workflow_dispatch' }}
             type=pep440,pattern=v{{major}}
             type=pep440,pattern=v{{major}}.{{minor}}
 
