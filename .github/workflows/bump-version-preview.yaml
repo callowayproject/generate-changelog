@@ -1,4 +1,4 @@
-name: Display the version hint
+name: Display version hint
 on:
   pull_request:
     types: [synchronize, opened, reopened, ready_for_review]
@@ -8,8 +8,8 @@ jobs:
   preview-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        name: Checkout the repository
+      - name: Checkout the repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}

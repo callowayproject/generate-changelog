@@ -1,4 +1,4 @@
-name: Bump the version on merge and build the artifacts
+name: Bump the version on merge
 on:
   pull_request:
     types: [closed]
@@ -11,8 +11,8 @@ jobs:
     outputs:
       build_package: ${{ steps.bump-version.outputs.build_package }}
     steps:
-      - uses: actions/checkout@v4
-        name: Checkout the repository
+      - name: Checkout the repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
