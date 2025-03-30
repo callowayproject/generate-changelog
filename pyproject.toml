@@ -1,11 +1,11 @@
 [build-system]
-requires = ["setuptools>=61.2"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "generate_changelog"
 description = "Generate a changelog file from a local git checkout"
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 authors = [{ name = "Corey Oordt", email = "coreyoordt@gmail.com" }]
 classifiers = [
     "Environment :: Console",
@@ -81,22 +81,11 @@ test = [
     "pytest-mock",
 ]
 
-[tool.setuptools]
-zip-safe = false
-include-package-data = true
-license-files = ["LICENSE"]
+[tool.hatch.version]
+path = "generate_changelog/__init__.py"
 
-[tool.setuptools.packages.find]
-exclude = [
-    "example*",
-    "tests*",
-    "docs*",
-    "build",
-]
-namespaces = false
-
-[tool.setuptools.dynamic]
-version = {attr = "generate_changelog.__version__"}
+[tool.hatch.build.targets.wheel]
+packages = ["generate_changelog"]
 
 [tool.coverage.run]
 branch = true
@@ -198,7 +187,7 @@ select = [
     "B", # flake8-bugbear
     "BLE", # flake8-blind except
     "D", # pydocstyle
-#    "DOC", # pydoclint  Commented out until Ruff includes configurations for this
+    #    "DOC", # pydoclint  Commented out until Ruff includes configurations for this
     "S", # flakeu-bandit
     "RUF", # Ruff-specific rules
     "NPY", # NumPy-specific rules
@@ -283,6 +272,7 @@ serialize = [
     "{major}.{minor}.{patch}"
 ]
 message = "Version updated from {current_version} to {new_version}"
+pre_commit_hooks = ["uv sync --upgrade", "git add uv.lock"]
 
 [tool.bumpversion.parts.dev]
 values = ["release", "post"]
@@ -300,4 +290,15 @@ search = "{current_version}...HEAD"
 replace = "{current_version}...{new_version}"
 
 [[tool.bumpversion.files]]
+filename = "action.yml"
+search = "generate-changelog:v{current_major}"
+replace = "generate-changelog:v{new_major}"
+
+[[tool.bumpversion.files]]
 filename = "Dockerfile"
+
+[[tool.bumpversion.files]]
+filename = "Dockerfile"
+search = "created=\\d{{4}}-\\d{{2}}-\\d{{2}}T\\d{{2}}:\\d{{2}}:\\d{{2}}Z"
+replace = "created={utcnow:%Y-%m-%dT%H:%M:%SZ}"
+regex = true
