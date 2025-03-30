@@ -1,0 +1,10 @@
+name: Build Python Package
+
+on: workflow_call
+
+jobs:
+  build-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Package
+        uses: hynek/build-and-inspect-python-package@v2

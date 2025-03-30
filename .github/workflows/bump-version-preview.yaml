@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  release-hint:
+  preview-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,34 +13,36 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
-          token: ${{ secrets.PAT }}
 
-      - name: Setup Python and Git
-        uses: ./.github/actions/setup-python-and-git
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.12"
+
+      - name: Setup Git
+        uses: .github/actions/setup-git
 
       - name: Install requirements
         run: |
-          python -m pip install . bump-my-version
+          python -m pip install bump-my-version
 
-      - name: Generate release hint if merged
+      - name: Get the release hint
         id: changelog
-#        uses: callowayproject/generate-changelog@v0
         uses: ./
-        with:
-          branch_override: ${{ github.base_ref }}
-          skip_output_pipeline: True
 
-      - name: Set release information
-        if: ${{ steps.changelog.outputs.release_hint != 'no-release' }}
+      - name: Get Metadata
+        id: get-metadata
+        run: |
+          PR_NUMBER=$(gh pr view --json number -q .number || echo "${{ github.event.number }}")
+          REVISION=$(git describe --tags --long | awk -F- '{print $2}')
+          echo "RELEASE_KIND=${{ steps.changelog.outputs.release_hint }}" >> $GITHUB_ENV
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+          echo "REVISION=$REVISION" >> $GITHUB_ENV
+
+      - name: Bump version dry run
+        if: ${{ env.RELEASE_KIND != 'no-release' }}
         shell: bash
         run: |
-          PR_NUMBER=$(gh pr view --json number -q .number || echo "")
-          REVISION=$(git describe --tags --long | awk -F- '{print $2}')
-          RELEASE_KIND="${{ steps.changelog.outputs.release_hint }}"
-          export PR_NUMBER REVISION RELEASE_KIND
-
           # This will display a full log of what would happen if we were to bump the version.
           bump-my-version bump --dry-run --verbose "$RELEASE_KIND"
 
@@ -50,7 +52,7 @@ jobs:
           echo "NEW_VERSION=$(echo $VERSION_INFO | jq -r .new_version)" >> $GITHUB_ENV
 
       - name: Set no-release information
-        if: ${{ steps.changelog.outputs.release_hint == 'no-release' }}
+        if: ${{ env.RELEASE_KIND == 'no-release' }}
         run: |
           echo "CURRENT_VERSION=$(bump-my-version show current_version)" >> $GITHUB_ENV
           echo "NEW_VERSION=$(bump-my-version show current_version)" >> $GITHUB_ENV
@@ -59,6 +61,6 @@ jobs:
         uses: s-gehring/singleton-comment@v1
         with:
           comment-body: |
-            **Version hint:** ${{ steps.changelog.outputs.release_hint }}
+            **Version hint:** ${{ env.RELEASE_KIND }}
             **Current version:** ${{ env.CURRENT_VERSION }}
             **New version (when merged):** ${{ env.NEW_VERSION }}
