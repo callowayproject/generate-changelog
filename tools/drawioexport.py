@@ -24,9 +24,9 @@ def get_executable_paths() -> list[str]:
     elif sys.platform.startswith("linux"):
         return ["/opt/draw.io/drawio"]
     elif sys.platform.startswith("win32"):
-        program_files = [os.environ["ProgramFiles"]]
+        program_files = [os.environ["ProgramFiles"]]  # NOQA: SIM112
         if "ProgramFiles(x86)" in os.environ:
-            program_files.append(os.environ["ProgramFiles(x86)"])
+            program_files.append(os.environ["ProgramFiles(x86)"])  # NOQA: SIM112
         return [os.path.join(d, "draw.io", "draw.io.exe") for d in program_files]
     else:
         return []
@@ -44,8 +44,7 @@ def get_drawio_executable(executable_names: Optional[List[str]] = None) -> Optio
     executable_names = executable_names or ["draw.io", "drawio"]
 
     for executable_name in executable_names:
-        executable = shutil.which(executable_name)
-        if executable:
+        if executable := shutil.which(executable_name):
             return executable
 
     executable_paths = get_executable_paths()
