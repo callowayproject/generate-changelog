@@ -5,7 +5,7 @@ on:
 
 jobs:
   call-build-python:
-    uses: .github/workflows/build-python.yaml
+    uses: ./.github/workflows/build-python.yaml
 
   release-pypi:
     needs: call-build-python
