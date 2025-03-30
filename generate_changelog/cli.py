@@ -73,15 +73,9 @@ def cli(
     echo_func = functools.partial(echo, quiet=bool(output))
     configuration = get_user_config(config, echo_func)
 
-    if repo_path:  # pragma: no cover
-        repository = Repo(repo_path)
-    else:
-        repository = Repo(search_parent_directories=True)
+    repository = Repo(repo_path) if repo_path else Repo(search_parent_directories=True)
 
-    if repository.head.is_detached:
-        current_branch = repository.head
-    else:
-        current_branch = repository.active_branch
+    current_branch = repository.head if repository.head.is_detached else repository.active_branch
 
     # get starting tag based on configuration if not passed in
     if not starting_tag and configuration.starting_tag_pipeline:

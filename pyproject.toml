@@ -179,26 +179,31 @@ line-length = 119
 [tool.ruff.lint]
 preview = true
 select = [
+    "A", # flake8-builtins
+    "ANN", # flake8-annotations
+    "B", # flake8-bugbear
+    "BLE", # flake8-blind except
+    "C4", # flake8-comprehensions
+    "C90", # McCabe complexity
+    "D", # pydocstyle
     "E", # pycodestyle errors
-    "W", # pycodestyle warnings
+    "EXE", # flake8-executable
     "F", # pyflakes
     "I", # isort
     "N", # PEP8 naming
-    "B", # flake8-bugbear
-    "BLE", # flake8-blind except
-    "D", # pydocstyle
-    #    "DOC", # pydoclint  Commented out until Ruff includes configurations for this
-    "S", # flakeu-bandit
-    "RUF", # Ruff-specific rules
     "NPY", # NumPy-specific rules
     "PD", # Pandas-vet
+    "PERF", # Perflint
     "PGH", # PyGrep hooks
-    "ANN", # flake8-annotations
-    "C90", # McCabe complexity
     "PLC", # Pylint conventions
     "PLE", # Pylint errors
     "PLW", # Pylint warnings
+    "Q", # flake8-quotes
+    "RUF", # Ruff-specific rules
+    "S", # flake8-bandit
+    "SIM", # flake8-simplify
     "TCH", # Flake8 type-checking
+    "W", # pycodestyle warnings
 ]
 ignore = [
     "ANN002", # missing-type-args

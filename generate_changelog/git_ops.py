@@ -125,7 +125,7 @@ def get_tags(repository: Repo) -> List[TagInfo]:
         if tag.tag:
             tzoffset = datetime.timedelta(seconds=-tag.tag.tagger_tz_offset)
             tzone = datetime.timezone(tzoffset)
-            tag_datetime = datetime.datetime.utcfromtimestamp(tag.tag.tagged_date).astimezone(tzone)
+            tag_datetime = datetime.datetime.fromtimestamp(tag.tag.tagged_date, tzone)
             tagger = tag.tag.tagger
         else:
             tag_datetime = tag.commit.committed_datetime
