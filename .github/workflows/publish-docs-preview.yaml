@@ -35,6 +35,9 @@ jobs:
       with:
         python-version: "3.12"
 
+    - name: Set up Git
+      uses: ./.github/actions/setup-git
+
     - name: Install dependencies
       run: uv sync --group docs
 

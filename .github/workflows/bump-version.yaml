@@ -22,7 +22,7 @@ jobs:
           python-version: "3.12"
 
       - name: Setup Git
-        uses: .github/actions/setup-git
+        uses: ./.github/actions/setup-git
 
       - name: Install requirements
         run: |
