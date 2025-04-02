@@ -21,6 +21,12 @@ jobs:
 
       - name: Setup Git
         uses: ./.github/actions/setup-git
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: which git
+        run: |
+          which git
 
       - name: Install requirements
         run: |
