@@ -1,5 +1,9 @@
-name: Build container
-on: [workflow_call, workflow_dispatch]
+name: Build and release container
+on:
+  push:
+    tags: ["*"]
+  workflow_call: {}
+  workflow_dispatch: {}
 
 jobs:
   build-and-push-image:
@@ -34,6 +38,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
+            type=raw,value=latest,enable=${{ github.event_name == 'workflow_dispatch' }}
             type=pep440,pattern=v{{major}}
             type=pep440,pattern=v{{major}}.{{minor}}
 

@@ -1,25 +1,10 @@
 name: Test
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
-  push:
-    branches:
-      - master
-    paths:
-      - 'generate_changelog/*'
-      - 'test/*'
   pull_request:
-    branches:
-      - master
     paths:
       - 'generate_changelog/*'
-      - 'test/*'
-  # Also trigger on page_build, as well as release created events
-  page_build:
-  release:
-    types: # Does not affect page_build above.
-      - created
+      - 'tests/*'
 
 jobs:
   test:
@@ -45,8 +30,8 @@ jobs:
     - name: Install dependencies
       run: uv sync --all-extras --all-groups --dev
 
-    - name: Test with pytest
+    - name: Run Tests
       run: uv run pytest
 
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5

@@ -94,7 +94,7 @@ def resolve_name(obj: Any, name: str, default: Any = None) -> Any:
                 current = current[bit]
                 # ValueError/IndexError are for numpy.array lookup on
                 # numpy < 1.9 and 1.9+ respectively
-            except (TypeError, AttributeError, KeyError, ValueError, IndexError):
+            except (TypeError, AttributeError, KeyError, ValueError, IndexError):  # NOQA: PERF203
                 try:  # attribute lookup
                     current = getattr(current, bit)
                 except (TypeError, AttributeError):

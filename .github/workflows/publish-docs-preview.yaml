@@ -1,8 +1,14 @@
-name: Publish Final Documentation
+name: Publish Preview Documentation
 
 on:
-  push:
-    branches: [$default-branch]
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency: preview-${{ github.ref }}
 
 jobs:
   publish-docs:
@@ -35,7 +41,5 @@ jobs:
     - name: Install dependencies
       run: uv sync --group docs
 
-    - name: Build and publish docs preview
-      uses: rossjrw/pr-preview-action@v1
-      with:
-        source-dir: ./site/
+    - name: Build and publish docs
+      run: uv run mkdocs gh-deploy --strict

@@ -85,10 +85,7 @@ class IncrementalFileInsert:
         existing_text = filename.read_text() if filename.exists() else ""
 
         match = re.search(pattern, existing_text, re.MULTILINE)
-        if match:
-            new_text = f"{text}\n{existing_text[match.start():]}"
-        else:
-            new_text = text
+        new_text = f"{text}\n{existing_text[match.start():]}" if match else text
 
         filename.write_text(new_text, encoding="utf-8")
         return input_text

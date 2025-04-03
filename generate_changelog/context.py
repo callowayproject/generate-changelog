@@ -70,8 +70,7 @@ class CommitContext:
 
         self._authors = []
         for author in raw_authors:
-            match = author_regex.match(author)
-            if match:
+            if match := author_regex.match(author):
                 self._authors.append(match.groupdict())
             else:
                 self._authors.append({"name": author, "email": ""})

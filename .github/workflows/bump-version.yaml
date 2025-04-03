@@ -1,0 +1,68 @@
+name: Bump the version on merge
+on:
+  pull_request:
+    types: [closed]
+    branches: [master]
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    outputs:
+      build_package: ${{ steps.bump-version.outputs.build_package }}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Setup Git
+        uses: ./.github/actions/setup-git
+
+      - name: Install requirements
+        run: |
+          python -m pip install bump-my-version
+
+      - name: Generate changelog and release hint
+        id: changelog
+        uses: ./
+
+      - name: Bump version
+        id: bump-version
+        shell: bash
+        run: |
+          PR_NUMBER=$(gh pr view --json number -q .number || echo "")
+          REVISION=$(git describe --tags --long | awk -F- '{print $2}')
+          RELEASE_KIND=${{ steps.changelog.outputs.release_hint }}
+          export PR_NUMBER REVISION RELEASE_KIND
+          case "$RELEASE_KIND" in
+            major|minor|patch)
+              bump-my-version bump --allow-dirty --verbose "$RELEASE_KIND"
+              git push
+              git push --tags
+              echo "build_package=false" >> $GITHUB_OUTPUTS
+              ;;
+            dev)
+              echo "Intentionally not bumping version for dev release"
+              echo "build_package=false" >> $GITHUB_OUTPUTS
+              # to build a dev release
+              # bump-my-python bump --allow-dirty --verbose --no-commit --no-tag
+              # echo "build_package=true" >> $GITHUB_OUTPUTS
+              ;;
+            no-release)
+              echo "build_package=false" >> $GITHUB_OUTPUTS
+              ;;
+            *)
+              echo "build_package=false" >> $GITHUB_OUTPUTS
+              ;;
+          esac
+
+  call-build-python:
+    needs: bump-version
+    if: ${{ needs.bump-version.outputs.build_package == 'true' }}
+    uses: ./.github/workflows/build-python.yaml

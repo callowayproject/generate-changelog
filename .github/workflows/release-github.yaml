@@ -1,0 +1,36 @@
+name: Release to GitHub
+on:
+  push:
+    tags: ["*"]
+
+jobs:
+  # Create a GitHub release
+  release:
+    name: Create a GitHub release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout the repository
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        uses: ./.github/actions/setup-git
+
+      - name: release-notes
+        uses: callowayproject/action-changelog-to-releasenotes@main
+        with:
+          target-version: ${GITHUB_REF#refs/tags/}
+
+      - name: Download packages built by build-and-inspect-python-package
+        uses: actions/download-artifact@v4
+        with:
+          name: Packages
+          path: dist
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          tag_name: ${GITHUB_REF#refs/tags/}
+          body_path: release-notes.md

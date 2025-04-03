@@ -1,0 +1,22 @@
+name: Release to Python
+on:
+  push:
+    tags: ["*"]
+
+jobs:
+  call-build-python:
+    uses: ./.github/workflows/build-python.yaml
+
+  release-pypi:
+    needs: call-build-python
+    name: Publish released package to pypi.org
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download packages built by build-and-inspect-python-package
+        uses: actions/download-artifact@v4
+        with:
+          name: Packages
+          path: dist
+
+      - name: Upload package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
