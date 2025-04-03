@@ -1,5 +1,72 @@
 # Changelog
 
+## 0.14.0 (2025-04-03)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.13.0...0.14.0)
+
+### Fixes
+
+- Fixed typo in test workflow. [d451948](https://github.com/callowayproject/generate-changelog/commit/d451948a5979bbc9cce62cc981683e0a9db56c15)
+    
+- Fix dependabot config. [70d91cf](https://github.com/callowayproject/generate-changelog/commit/70d91cfd72f0f00ad006143c916239cb8f04a679)
+    
+### New
+
+- Add non-root user and update Dockerfile metadata. [a38b154](https://github.com/callowayproject/generate-changelog/commit/a38b154996e7c151cddb65f1cd36af129877485f)
+    
+  Introduced a non-root user with configurable UID and GID for better security and flexibility. Updated Dockerfile metadata to include authors, creation date, license, and improved labeling for compliance with OCI standards.
+- Add ref container tag when triggered by workflow dispatch. [31d24c7](https://github.com/callowayproject/generate-changelog/commit/31d24c77c5034da83dd389168bf44daf4e754cde)
+    
+- Add dependabot config. [670c42b](https://github.com/callowayproject/generate-changelog/commit/670c42b3f1acc9c9213041a2475ae052efaf5c9b)
+    
+- Added workflow_dispatch as a trigger for building containers. [cc4c027](https://github.com/callowayproject/generate-changelog/commit/cc4c0275cc003636453143bfe71a19a7c268008d)
+    
+- Added name to build container workflow. [428788f](https://github.com/callowayproject/generate-changelog/commit/428788f124617a831970b0b225b55a0e0da7c58d)
+    
+- Adds docker building. [4c47587](https://github.com/callowayproject/generate-changelog/commit/4c47587aef298c70cfc3759c987d47ba68dd471c)
+    
+- Added moveable version tags for github actions. [ee676a9](https://github.com/callowayproject/generate-changelog/commit/ee676a96f7aed141b90a7779a54a799c48c6161c)
+    
+### Other
+
+- Upgrade GitHub Actions to latest stable versions. [165f157](https://github.com/callowayproject/generate-changelog/commit/165f1573d18835d36bada5dfd444ecb9378d6fe9)
+    
+  Updated actions in workflows to use newer versions, including CodeQL actions (v3), Codecov action (v5), and GitHub release action (v2). This ensures compatibility, access to new features, and improved performance.
+- [pre-commit.ci] pre-commit autoupdate. [410317c](https://github.com/callowayproject/generate-changelog/commit/410317ce61fd42347a76d74e13edd6c69bc703d1)
+    
+  **updates:** - [github.com/astral-sh/ruff-pre-commit: v0.9.6 → v0.11.2](https://github.com/astral-sh/ruff-pre-commit/compare/v0.9.6...v0.11.2)
+
+- Modularize GitHub workflows and streamline release process. [61bedea](https://github.com/callowayproject/generate-changelog/commit/61bedeae62e310d88c490da242452d4aed6f8702)
+    
+  Reorganized and consolidated workflows for clarity and efficiency. Deprecated unnecessary workflows like `bumpversion.yaml` and `release.yaml`, introduced modular workflows (e.g., `build-python.yaml`, `release-pypi.yaml`), and ensured consistent dependency and Python setup across jobs. Enhanced documentation and test workflows for better alignment with project needs.
+- Switch to Hatch for build system and update project configuration. [f32d026](https://github.com/callowayproject/generate-changelog/commit/f32d02623fb5cdd39ad2ce72d717947544a4e5a3)
+    
+  - Replaced setuptools with Hatch as the build system, updating related configurations in `pyproject.toml`.
+  - Adjusted license declaration, versioning setup, and package management to align with Hatch's conventions.
+  - Included changes to `bumpversion` workflow for consistency.
+- Fies container tag on workflow_dispatch. [7edaef4](https://github.com/callowayproject/generate-changelog/commit/7edaef4929ea33dd2936fded2b0b418efadc2e0e)
+    
+- [pre-commit.ci] pre-commit autoupdate. [736ddfa](https://github.com/callowayproject/generate-changelog/commit/736ddfad57860264b57cc486adc89bcbac2ae5d4)
+    
+  **updates:** - [github.com/astral-sh/ruff-pre-commit: v0.8.6 → v0.9.6](https://github.com/astral-sh/ruff-pre-commit/compare/v0.8.6...v0.9.6)
+
+### Updates
+
+- Rename and simplify action to setup-git. [fc64f9b](https://github.com/callowayproject/generate-changelog/commit/fc64f9b970d725c3103f6b16a0a2d0591ce32766)
+    
+  Removed Python setup steps to focus solely on Git configuration. Updated Git user email and name setup to dynamically use GitHub actor details for improved accuracy.
+- Rename setup python and git action. [237f460](https://github.com/callowayproject/generate-changelog/commit/237f460a959eb39b7b034a8be09952fdeaf38ef2)
+    
+- Changes the ocker image used for the action. [5b76d03](https://github.com/callowayproject/generate-changelog/commit/5b76d03bfa12a443f34859e1b2a763f3face07a0)
+    
+- Modify release hint workflow. [63fca08](https://github.com/callowayproject/generate-changelog/commit/63fca085c29d4ab896fddd2040509dc9f44f2770)
+    
+- Refactored the PR workflow. [5c9cc84](https://github.com/callowayproject/generate-changelog/commit/5c9cc84081dc7b401c252ad5fe7f6661942d1d6a)
+    
+- Update workflows. [01e24e4](https://github.com/callowayproject/generate-changelog/commit/01e24e44447834c8dfa027b0d754a709e6745c9f)
+    
+  Enhanced the GitTag class docstring for clarity and detailed explanation of attributes. Updated GitHub workflows to remove unnecessary PAT tokens, upgrade dependencies, and streamline configurations for package building and artifact downloading.
+
 ## 0.13.0 (2025-02-16)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.12.1...0.13.0)
