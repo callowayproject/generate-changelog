@@ -20,8 +20,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 FROM debian:bookworm-slim
 
 ARG USERNAME=app
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+ARG USER_UID=1001
+ARG USER_GID=118
 ARG APP_DIR=/app
 ARG WORKDIR=/github/workspace
 
