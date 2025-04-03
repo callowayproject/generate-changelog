@@ -29,7 +29,7 @@ if [[ -n ${INPUT_BRANCH_OVERRIDE} ]]; then
   changelog_args+=("-b" "${INPUT_BRANCH_OVERRIDE}")
 fi
 
-cd /github/workspace
+cd /action/workspace
 ls -al
 echo "[action-generate-changelog] Generating the changelog with arguments '${changelog_args[*]}'"
 

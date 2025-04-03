@@ -24,10 +24,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-      - name: which git
-        run: |
-          which git
-
       - name: Install requirements
         run: |
           python -m pip install bump-my-version
