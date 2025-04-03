@@ -23,7 +23,7 @@ ARG USERNAME=app
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 ARG APP_DIR=/app
-ARG WORKDIR=/action/workspace
+ARG WORKDIR=/github/workspace
 
 ENV APP_DIR=$APP_DIR
 
