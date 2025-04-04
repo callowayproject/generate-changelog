@@ -1,7 +1,5 @@
 name: Build and release container
 on:
-  push:
-    tags: ["*"]
   workflow_call: {}
   workflow_dispatch: {}
 
