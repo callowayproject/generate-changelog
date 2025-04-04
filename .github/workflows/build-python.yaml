@@ -1,10 +1,48 @@
 name: Build Python Package
 
-on: workflow_call
+on:
+  push:
+    tags-ignore:
+      - v*
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: The branch, tag or SHA to checkout. Otherwise, uses the default branch.
+        required: false
+        type: string
+        default: ""
 
 jobs:
   build-package:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      attestations: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.ref }}
       - name: Package
         uses: hynek/build-and-inspect-python-package@v2
+        with:
+          attest-build-provenance-github: 'true'
+
+  release-container:
+    needs: build-package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/release-container.yaml
+
+  release-github:
+    needs: build-package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/release-github.yaml
+
+  release-pypi:
+    needs: build-package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/release-pypi.yaml

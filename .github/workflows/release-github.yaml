@@ -1,13 +1,15 @@
 name: Release to GitHub
 on:
-  push:
-    tags: ["*"]
+  workflow_call: {} # This workflow requires the artifacts from build-python.yaml
 
 jobs:
-  # Create a GitHub release
   release:
     name: Create a GitHub release
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         name: Checkout the repository
