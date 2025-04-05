@@ -48,7 +48,7 @@ def get_context_from_tags(
 
 def create_version_context(config: Configuration, tag: GitTag) -> VersionContext:
     """
-    Generate a :class:`VersionContext` from a tag dictionary.
+    Generate a [`VersionContext`][generate_changelog.context.VersionContext] from a tag dictionary.
 
     Args:
         config: The current configuration object.
@@ -144,15 +144,15 @@ def generate_commit_context(
     return commit_ctx
 
 
-def sort_group_commits(commit_groups: dict) -> list:
+def sort_group_commits(commit_groups: dict) -> list[GroupingContext]:
     """
-    Sort the commit groups and convert the `dict` into a list of `GroupedCommit` objects.
+    Sort the commit groups and convert the `dict` into a list of `GroupingContext` objects.
 
     Args:
         commit_groups: A dict where the keys are grouping values.
 
     Returns:
-        A list
+        A list of `GroupingContext` objects.
     """
     # Props to this sorting method goes to:
     # https://scipython.com/book2/chapter-4-the-core-python-language-ii/questions/sorting-a-list-containing-none/

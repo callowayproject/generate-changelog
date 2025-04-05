@@ -130,10 +130,10 @@ def get_user_config(config_file: Optional[Path], echo_func: Callable) -> Configu
     from generate_changelog.configuration import get_config
 
     config = get_config()
-    user_config = config_file or next(
-        (Path.cwd() / Path(name) for name in DEFAULT_CONFIG_FILE_NAMES if (Path.cwd() / Path(name)).exists()), None
-    )
-    if user_config:
+    if user_config := config_file or next(
+        (Path.cwd() / Path(name) for name in DEFAULT_CONFIG_FILE_NAMES if (Path.cwd() / Path(name)).exists()),
+        None,
+    ):
         echo_func(f"Using configuration file: {user_config}")
         config.update_from_file(user_config)
     else:

@@ -13,10 +13,10 @@ class SummaryRegexMatch:
     r"""
     Matches the commit summary using a regular expression.
 
-    If ``pattern`` is ``None`` all commits will match.
+    If `pattern` is `None` all commits will match.
 
-    Example:
-        In ``.changelog-config.yaml`` ::
+    Examples:
+        In `.changelog-config.yaml`:
 
             commit_classifiers:
             - action: SummaryRegexMatch
@@ -44,7 +44,7 @@ class MetadataMatch:
     Evaluates an attribute in the metadata against a value using an operator.
 
     Examples:
-        To group breaking changes::
+        To group breaking changes:
 
             - action: MetadataMatch
               category: Breaking Changes
@@ -53,7 +53,7 @@ class MetadataMatch:
                 operator: is
                 value: True
 
-        To match a specific value::
+        To match a specific value:
 
             - action: MetadataMatch
               category: Feature
@@ -62,7 +62,7 @@ class MetadataMatch:
                 operator: ==
                 value: feat
 
-        To match multiple values::
+        To match multiple values:
 
             - action: MetadataMatch
               category: Updates

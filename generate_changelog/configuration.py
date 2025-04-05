@@ -208,13 +208,13 @@ class Configuration:
     """Only tags matching this regular expression are used for the changelog."""
 
     include_merges: bool = False
-    """Tells ``git-log`` whether to include merge commits in the log."""
+    """Tells `git-log` whether to include merge commits in the log."""
 
     ignore_patterns: list = field(default_factory=list)
     """Ignore commits whose summary line matches any of these regular expression patterns."""
 
     commit_classifiers: list = field(default_factory=list)
-    """Set the commit's category metadata to the first classifier that returns ``True``."""
+    """Set the commit's category metadata to the first classifier that returns `True`."""
 
     valid_author_tokens: list = field(default_factory=list)
     """Tokens in git commit trailers that indicate authorship."""
@@ -266,7 +266,7 @@ class Configuration:
 
 def get_default_config() -> Configuration:
     """
-    Create a new :py:class:`Configuration` object with default values.
+    Create a new [`Configuration`][generate_changelog.configuration.Configuration] object with default values.
 
     Returns:
         A new Configuration object

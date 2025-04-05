@@ -14,9 +14,9 @@ class RenderedChangelog:
     r"""
     The output of rendering a changelog.
 
-    If it is an incremental changelog, ``full`` contains ``{heading}\n{notes}``
+    If it is an incremental changelog, `full` contains `{heading}\n{notes}`
 
-    If it is a full changelog, ``heading`` and ``notes`` are empty.
+    If it is a full changelog, `heading` and `notes` are empty.
     """
 
     heading: Optional[str] = None
@@ -56,7 +56,7 @@ def render_changelog(
     Args:
         version_context: The processed commits
         config: The current configuration object.
-        incremental: ``True`` to generate an incremental changelog. ``False`` to render the entire thing.
+        incremental: `True` to generate an incremental changelog. `False` to render the entire thing.
 
     Returns:
         The full or partial changelog

@@ -131,9 +131,9 @@ def import_function(function_path: str) -> Callable:
     """
     Import a function from a dotted path.
 
-    Example:
-           >>> import_function("generate_changelog.pipeline.noop_func")
-           <function noop_func at 0x11016d280>
+    Examples:
+        >>> import_function("generate_changelog.pipeline.noop_func")
+        <function noop_func at 0x11016d280>
 
     Args:
         function_path: A dotted path to a function
@@ -156,13 +156,13 @@ def pipeline_factory(
     **kwargs: Any,
 ) -> Pipeline:
     """
-    Create a :py:class:`~Pipeline` from a list of actions specified by dictionaries.
+    Create a [`Pipeline`][generate_changelog.pipeline.Pipeline] from a list of actions specified by dictionaries.
 
     Args:
-        action_list: A ``list`` of ``dict`` s that specify :py:class:`~Action` attributes
+        action_list: A `list` of `dict`s that specify [`Action`][generate_changelog.pipeline.Action] attributes
         commit_metadata_func: Optional callable that actions can use to set commit metadata
         version_metadata_func: Optional callable that actions can use to set version metadata
-        **kwargs: keyword arguments to pass to the :py:class:`~Pipeline` constructor
+        **kwargs: keyword arguments to pass to the [`Pipeline`][generate_changelog.pipeline.Pipeline] constructor
 
     Returns:
         The instantiated Pipeline

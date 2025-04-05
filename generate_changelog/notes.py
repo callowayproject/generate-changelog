@@ -18,7 +18,7 @@ def pairs(iterable: Iterable) -> Iterator[Tuple[Any, Any]]:
     """
     Return successive non-overlapping pairs taken from the input iterable.
 
-    Example:
+    Examples:
         >>> list(pairs('ABCDEFG'))
         [('A', 'B'), ('C', 'D'), ('E', 'F'), ('G', None)]
 
@@ -38,8 +38,9 @@ def split_changelog(contents: str, section_pattern: Optional[str] = None) -> Lis
 
     Args:
         contents: The contents of the changelog.
-        section_pattern: A regex pattern to split the changelog into sections. If ``None``, the pattern
-            is derived from the ``starting_tag_pipeline`` configuration option.
+        section_pattern: A regex pattern to split the changelog into sections.
+            If `None`, the pattern is derived from the [`starting_tag_pipeline`]
+            [generate_changelog.configuration.Configuration.starting_tag_pipeline] configuration option.
 
     Returns:
         A list of version and note sections.

@@ -71,7 +71,7 @@ class ParseIssue:
 
     def __call__(self, message: str) -> str:
         """
-        Put the issue(s) reference into the commit metadata using the keyword ``issue`` .
+        Put the issue(s) reference into the commit metadata using the keyword `issue` .
 
         Args:
             message: The commit message
@@ -79,8 +79,7 @@ class ParseIssue:
         Returns:
             The commit message for later processing.
         """
-        matches = self.issue_pattern.findall(message)
-        if matches:
+        if matches := self.issue_pattern.findall(message):
             self.commit_metadata(issue=matches)
         return message
 
@@ -91,7 +90,7 @@ class ParseGitHubIssue(ParseIssue):
 
     Link these GitHub issues to their source using a URL pattern like:
 
-    https://github.com/<owner>/<repository>/issues/<issue number>
+    `https://github.com/<owner>/<repository>/issues/<issue number>`
 
     References:
       - https://docs.github.com/en/\
@@ -106,7 +105,8 @@ class ParseJiraIssue(ParseIssue):
     """
     Parse Jira issues from commits.
 
-    https://support.atlassian.com/jira-software-cloud/docs/process-issues-with-smart-commits/
+    References:
+      - https://support.atlassian.com/jira-software-cloud/docs/process-issues-with-smart-commits/
     """
 
     issue_pattern = re.compile(r"(?im)([a-z]{3}-\d+)")
@@ -119,7 +119,7 @@ class ParseAzureBoardIssue(ParseIssue):
 
     Link these Azure board issues to their source using a URL pattern like:
 
-    https://dev.azure.com/<organization>/<project>/_workitems/edit/<issue number>
+    `https://dev.azure.com/<organization>/<project>/_workitems/edit/<issue number>`
 
     References:
         - https://docs.microsoft.com/en-us/azure/devops/boards/github/link-to-from-github
@@ -181,10 +181,10 @@ class ParseConventionalCommit:
     """
     Parse a line of text using the conventional commit syntax.
 
-    The metadata will contain ``commit_type``, a string and ``scopes``, an empty list or a list of strings.
+    The metadata will contain `commit_type`, a string and `scopes`, an empty list or a list of strings.
 
-    If a breaking change is indicated (with the ``!``), metadata will also contain ``has_breaking_change`` set
-    to ``True``.
+    If a breaking change is indicated (with the `!`), metadata will also contain `has_breaking_change` set
+    to `True`.
 
     The description is returned for further processing.
 

@@ -85,6 +85,7 @@ plugins:
               - griffe_pydantic:
                   schema: true
             group_by_category: true
+            line_length: 80
             members_order: alphabetical
             merge_init_into_class: true
             separate_signature: true
@@ -95,6 +96,8 @@ plugins:
             show_symbol_type_heading: true
             show_symbol_type_toc: true
             show_category_heading: true
+            signature_crossrefs: true
+            summary: true
 
 extra_javascript:
   - "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"
@@ -104,3 +107,6 @@ extra_css:
   - assets/css/mkdocstrings.css
   - assets/css/cards.css
   - assets/css/field-list.css
+
+watch:
+  - generate_changelog
