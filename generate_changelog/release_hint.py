@@ -143,8 +143,7 @@ class RuleProcessor:
             The release hint
         """
         suggestions = {rule(commit, current_branch) for rule in self.rules}
-        unknown_suggestions = suggestions - set(RELEASE_TYPE_ORDER)
-        if unknown_suggestions:
+        if unknown_suggestions := suggestions - set(RELEASE_TYPE_ORDER):
             return unknown_suggestions.pop()  # Return a random value from the unknowns
 
         sorted_suggestions = sorted(suggestions, key=lambda s: RELEASE_TYPE_ORDER.index(s))

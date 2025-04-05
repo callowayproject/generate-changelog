@@ -71,13 +71,13 @@ class IncrementalFileInsert:
 
     def __call__(self, input_text: StrOrCallable) -> StrOrCallable:
         """
-        Replace the beginning of the file up to ``last_heading_pattern`` with ``input_text`` .
+        Replace the beginning of the file up to `last_heading_pattern` with `input_text` .
 
         Args:
             input_text: The text to insert.
 
         Returns:
-            The same ``input_text``
+            The same `input_text`
         """
         filename = Path(eval_if_callable(self.filename))
         pattern = eval_if_callable(self.last_heading_pattern)
