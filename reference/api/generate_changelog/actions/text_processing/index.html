@@ -2371,6 +2371,185 @@
 
 
 
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">CLASS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            AppendString
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.AppendString)" href="#generate_changelog.actions.text_processing.AppendString">AppendString</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Create a callable that can append a string to the input.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            FirstRegExMatch
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.FirstRegExMatch)" href="#generate_changelog.actions.text_processing.FirstRegExMatch">FirstRegExMatch</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>When called, returns the first match in a string using a predefined regex.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            FirstRegExMatchPosition
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.FirstRegExMatchPosition)" href="#generate_changelog.actions.text_processing.FirstRegExMatchPosition">FirstRegExMatchPosition</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>When called, returns the position of the first match in a string using a predefined regex.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            PrefixLines
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.PrefixLines)" href="#generate_changelog.actions.text_processing.PrefixLines">PrefixLines</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Creates a callable to prefix lines to input text.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            PrefixString
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.PrefixString)" href="#generate_changelog.actions.text_processing.PrefixString">PrefixString</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Prefix a string to the input when called.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            RegExCommand
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.RegExCommand)" href="#generate_changelog.actions.text_processing.RegExCommand">RegExCommand</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>A base class to hold regular expression information.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            RegexSub
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.RegexSub)" href="#generate_changelog.actions.text_processing.RegexSub">RegexSub</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Create a callable that will make substitutions using regular expressions.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            SetDefault
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.SetDefault)" href="#generate_changelog.actions.text_processing.SetDefault">SetDefault</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Return a default value when called with an empty value.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            Slice
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.Slice)" href="#generate_changelog.actions.text_processing.Slice">Slice</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>When called, return a slice of the sequence.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            Strip
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.Strip)" href="#generate_changelog.actions.text_processing.Strip">Strip</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Create a callable that will strip a string from the ends of an input.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            WrapParagraphs
+
+
+  
+      dataclass
+   (generate_changelog.actions.text_processing.WrapParagraphs)" href="#generate_changelog.actions.text_processing.WrapParagraphs">WrapParagraphs</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Create a callable to wrap the paragraphs of a string.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">FUNCTION</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            capitalize (generate_changelog.actions.text_processing.capitalize)" href="#generate_changelog.actions.text_processing.capitalize">capitalize</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Capitalize the first character for a string.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
 
   <div class="doc doc-children">
 
@@ -2394,7 +2573,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.AppendString" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">AppendString</span><span class="p">(</span><span class="n">postfix</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">AppendString</span><span class="p">(</span><span class="n">postfix</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2407,6 +2591,67 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.AppendString.__call__)" href="#generate_changelog.actions.text_processing.AppendString.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Append a string to the input_text.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            postfix
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.AppendString.postfix)" href="#generate_changelog.actions.text_processing.AppendString.postfix">postfix</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The string to append.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2433,7 +2678,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.AppendString.postfix" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">postfix</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">postfix</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2454,7 +2704,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.AppendString.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2488,15 +2743,25 @@
 
 <a href="#generate_changelog.actions.text_processing.FirstRegExMatch" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">FirstRegExMatch</span><span class="p">(</span>
-    <span class="n">pattern</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">,</span>
-    <span class="n">ascii_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">ignorecase_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">locale_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">multiline_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">dotall_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">verbose_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">named_subgroup</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">default_value</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">,</span>
+    <span class="n">ascii_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">ignorecase_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">locale_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">multiline_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">dotall_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">named_subgroup</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">default_value</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2517,6 +2782,87 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.FirstRegExMatch.__call__)" href="#generate_changelog.actions.text_processing.FirstRegExMatch.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Search the input_text for the predefined pattern and return it.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            default_value
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.FirstRegExMatch.default_value)" href="#generate_changelog.actions.text_processing.FirstRegExMatch.default_value">default_value</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The value to return if no match is found.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            named_subgroup
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.FirstRegExMatch.named_subgroup)" href="#generate_changelog.actions.text_processing.FirstRegExMatch.named_subgroup">named_subgroup</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The named subgroup defined in the pattern to return.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2543,7 +2889,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.FirstRegExMatch.default_value" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">default_value</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">default_value</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2568,7 +2919,7 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.FirstRegExMatch.named_subgroup" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">named_subgroup</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">named_subgroup</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2589,7 +2940,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.FirstRegExMatch.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2623,13 +2979,18 @@
 
 <a href="#generate_changelog.actions.text_processing.FirstRegExMatchPosition" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">FirstRegExMatchPosition</span><span class="p">(</span>
-    <span class="n">pattern</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">,</span>
-    <span class="n">ascii_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">ignorecase_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">locale_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">multiline_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">dotall_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">verbose_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">,</span>
+    <span class="n">ascii_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">ignorecase_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">locale_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">multiline_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">dotall_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2654,6 +3015,30 @@
 
 
 
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.FirstRegExMatchPosition.__call__)" href="#generate_changelog.actions.text_processing.FirstRegExMatchPosition.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Search the input_text for the predefined pattern and return its position.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
   <div class="doc doc-children">
 
 
@@ -2672,7 +3057,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.FirstRegExMatchPosition.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2705,10 +3095,17 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.PrefixLines" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PrefixLines</span><span class="p">(</span>
-    <span class="n">prefix</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">,</span>
-    <span class="n">first_line</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StrOrCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PrefixLines</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">,</span> <span class="n">first_line</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2721,6 +3118,91 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.PrefixLines.__call__)" href="#generate_changelog.actions.text_processing.PrefixLines.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Prepend characters to the lines in input text.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            first_line
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.PrefixLines.first_line)" href="#generate_changelog.actions.text_processing.PrefixLines.first_line">first_line</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>Prefix the first line with these characters.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a>]</code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            prefix
+
+
+  
+      instance-attribute
+   (generate_changelog.actions.text_processing.PrefixLines.prefix)" href="#generate_changelog.actions.text_processing.PrefixLines.prefix">prefix</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The characters to put in front of each line.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2747,7 +3229,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.PrefixLines.first_line" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">first_line</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StrOrCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">first_line</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2771,7 +3258,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.PrefixLines.prefix" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">prefix</span><span class="p">:</span> <span class="n">StrOrCallable</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">prefix</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2792,7 +3284,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.PrefixLines.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2825,7 +3322,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.PrefixString" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PrefixString</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PrefixString</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2838,6 +3340,67 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.PrefixString.__call__)" href="#generate_changelog.actions.text_processing.PrefixString.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Prefix input_text.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            prefix
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.PrefixString.prefix)" href="#generate_changelog.actions.text_processing.PrefixString.prefix">prefix</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The string to prefix</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2864,7 +3427,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.PrefixString.prefix" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">prefix</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">prefix</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2885,7 +3453,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.PrefixString.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2919,13 +3492,18 @@
 
 <a href="#generate_changelog.actions.text_processing.RegExCommand" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">RegExCommand</span><span class="p">(</span>
-    <span class="n">pattern</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">,</span>
-    <span class="n">ascii_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">ignorecase_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">locale_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">multiline_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">dotall_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">verbose_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">,</span>
+    <span class="n">ascii_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">ignorecase_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">locale_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">multiline_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">dotall_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2939,6 +3517,65 @@
 
 
 
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            flags
+
+
+  
+      property
+   (generate_changelog.actions.text_processing.RegExCommand.flags)" href="#generate_changelog.actions.text_processing.RegExCommand.flags">flags</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The combined RegexFlags.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" title="re.RegexFlag" href="https://docs.python.org/3/library/re.html#re.RegexFlag">RegexFlag</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            pattern
+
+
+  
+      instance-attribute
+   (generate_changelog.actions.text_processing.RegExCommand.pattern)" href="#generate_changelog.actions.text_processing.RegExCommand.pattern">pattern</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The regular expression to match against.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2964,7 +3601,7 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.RegExCommand.flags" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">flags</span><span class="p">:</span> <span class="n">RegexFlag</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">flags</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="re.RegexFlag" href="https://docs.python.org/3/library/re.html#re.RegexFlag">RegexFlag</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2988,7 +3625,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.RegExCommand.pattern" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">pattern</span><span class="p">:</span> <span class="n">StrOrCallable</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3023,14 +3665,24 @@
 
 <a href="#generate_changelog.actions.text_processing.RegexSub" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">RegexSub</span><span class="p">(</span>
-    <span class="n">pattern</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">,</span>
-    <span class="n">ascii_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">ignorecase_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">locale_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">multiline_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">dotall_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">verbose_flag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">replacement</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">,</span>
+    <span class="n">ascii_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">ignorecase_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">locale_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">multiline_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">dotall_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose_flag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">replacement</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -3051,6 +3703,67 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.RegexSub.__call__)" href="#generate_changelog.actions.text_processing.RegexSub.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Do the substitution on the input_text.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            replacement
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.RegexSub.replacement)" href="#generate_changelog.actions.text_processing.RegexSub.replacement">replacement</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The replacement string for matches.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -3077,7 +3790,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.RegexSub.replacement" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">replacement</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">replacement</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3098,7 +3816,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.RegexSub.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3131,7 +3854,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.SetDefault" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">SetDefault</span><span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">SetDefault</span><span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3142,6 +3870,30 @@
 
 
 
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.SetDefault.__call__)" href="#generate_changelog.actions.text_processing.SetDefault.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Return a default value when called with an empty value.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
 
 
 
@@ -3166,7 +3918,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.SetDefault.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3200,9 +3957,24 @@
 
 <a href="#generate_changelog.actions.text_processing.Slice" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">Slice</span><span class="p">(</span>
-    <span class="n">start</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IntOrCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">stop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IntOrCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">step</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IntOrCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">start</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            IntOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.IntOrCallable)" href="../../configuration/#generate_changelog.configuration.IntOrCallable">IntOrCallable</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">stop</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            IntOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.IntOrCallable)" href="../../configuration/#generate_changelog.configuration.IntOrCallable">IntOrCallable</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">step</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            IntOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.IntOrCallable)" href="../../configuration/#generate_changelog.configuration.IntOrCallable">IntOrCallable</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -3216,6 +3988,117 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.Slice.__call__)" href="#generate_changelog.actions.text_processing.Slice.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Slice the sequence.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            start
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.Slice.start)" href="#generate_changelog.actions.text_processing.Slice.start">start</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The start of the slice. None means the beginning of the sequence.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-internal" title="            IntOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.IntOrCallable)" href="../../configuration/#generate_changelog.configuration.IntOrCallable">IntOrCallable</a>]</code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            step
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.Slice.step)" href="#generate_changelog.actions.text_processing.Slice.step">step</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>Slice using this step betweeen indices. None means don&rsquo;t use the step.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-internal" title="            IntOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.IntOrCallable)" href="../../configuration/#generate_changelog.configuration.IntOrCallable">IntOrCallable</a>]</code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            stop
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.Slice.stop)" href="#generate_changelog.actions.text_processing.Slice.stop">stop</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The end of the slice. None means the end of the sequence.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-internal" title="            IntOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.IntOrCallable)" href="../../configuration/#generate_changelog.configuration.IntOrCallable">IntOrCallable</a>]</code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -3242,7 +4125,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.Slice.start" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">start</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IntOrCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">start</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            IntOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.IntOrCallable)" href="../../configuration/#generate_changelog.configuration.IntOrCallable">IntOrCallable</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3267,7 +4155,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.Slice.step" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">step</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IntOrCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">step</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            IntOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.IntOrCallable)" href="../../configuration/#generate_changelog.configuration.IntOrCallable">IntOrCallable</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3292,7 +4185,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.Slice.stop" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">stop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IntOrCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">stop</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            IntOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.IntOrCallable)" href="../../configuration/#generate_changelog.configuration.IntOrCallable">IntOrCallable</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3313,7 +4211,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.Slice.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3346,7 +4249,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.Strip" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">Strip</span><span class="p">(</span><span class="n">chars</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">Strip</span><span class="p">(</span><span class="n">chars</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3357,6 +4265,30 @@
 
 
 
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.Strip.__call__)" href="#generate_changelog.actions.text_processing.Strip.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Strip characters from the ends of the input.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
 
 
 
@@ -3381,7 +4313,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.Strip.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3415,9 +4352,19 @@
 
 <a href="#generate_changelog.actions.text_processing.WrapParagraphs" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">WrapParagraphs</span><span class="p">(</span>
-    <span class="n">paragraph_pattern</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="n">paragraph_join</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">88</span><span class="p">,</span>
+    <span class="n">paragraph_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">paragraph_join</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">88</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -3431,6 +4378,112 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.text_processing.WrapParagraphs.__call__)" href="#generate_changelog.actions.text_processing.WrapParagraphs.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Wrap each paragraph of the input text.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            paragraph_join
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.WrapParagraphs.paragraph_join)" href="#generate_changelog.actions.text_processing.WrapParagraphs.paragraph_join">paragraph_join</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>Join the wrapped paragraphs with this string.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            paragraph_pattern
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.WrapParagraphs.paragraph_pattern)" href="#generate_changelog.actions.text_processing.WrapParagraphs.paragraph_pattern">paragraph_pattern</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>Pattern to detect paragraphs.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            width
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.text_processing.WrapParagraphs.width)" href="#generate_changelog.actions.text_processing.WrapParagraphs.width">width</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The maximum width of each line of the paragraph.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -3457,7 +4510,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.WrapParagraphs.paragraph_join" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">paragraph_join</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">paragraph_join</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3482,7 +4540,12 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.WrapParagraphs.paragraph_pattern" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">paragraph_pattern</span><span class="p">:</span> <span class="n">StrOrCallable</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">paragraph_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3507,7 +4570,7 @@
   </span>
 
 <a href="#generate_changelog.actions.text_processing.WrapParagraphs.width" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">88</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">width</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">88</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3528,7 +4591,12 @@
 
 
 <a href="#generate_changelog.actions.text_processing.WrapParagraphs.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3557,7 +4625,7 @@
 
 
 <a href="#generate_changelog.actions.text_processing.capitalize" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">capitalize</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">capitalize</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">

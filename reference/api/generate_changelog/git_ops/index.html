@@ -1775,6 +1775,92 @@
 
 
 
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">CLASS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            GitTag
+
+
+  
+      dataclass
+   (generate_changelog.git_ops.GitTag)" href="#generate_changelog.git_ops.GitTag">GitTag</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Represents a Git tag and its associated data.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            TagInfo
+
+
+  
+      dataclass
+   (generate_changelog.git_ops.TagInfo)" href="#generate_changelog.git_ops.TagInfo">TagInfo</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Simple storage of tag information.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">FUNCTION</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_commits_by_tags (generate_changelog.git_ops.get_commits_by_tags)" href="#generate_changelog.git_ops.get_commits_by_tags">get_commits_by_tags</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Group commits by the tags they belong to.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_repo (generate_changelog.git_ops.get_repo)" href="#generate_changelog.git_ops.get_repo">get_repo</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Get the git repo from a specific path or the current working directory.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_tags (generate_changelog.git_ops.get_tags)" href="#generate_changelog.git_ops.get_tags">get_tags</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Get all the tags in a repository.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            parse_commits (generate_changelog.git_ops.parse_commits)" href="#generate_changelog.git_ops.parse_commits">parse_commits</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Parse the commits for later processing.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
 
   <div class="doc doc-children">
 
@@ -1798,9 +1884,12 @@
   </span>
 
 <a href="#generate_changelog.git_ops.GitTag" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">GitTag</span><span class="p">(</span>
-    <span class="n">tag_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tag_info</span><span class="p">:</span> <span class="n">TagInfo</span><span class="p">,</span> <span class="n">commits</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Commit</span><span class="p">]</span>
-<span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">GitTag</span><span class="p">(</span><span class="n">tag_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">tag_info</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            TagInfo
+
+
+  
+      dataclass
+   (generate_changelog.git_ops.TagInfo)" href="#generate_changelog.git_ops.TagInfo">TagInfo</a></span><span class="p">,</span> <span class="n">commits</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><span title="git.Commit">Commit</span></span><span class="p">])</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1882,6 +1971,10 @@ this Git tag.</p>
 
 
 
+
+
+
+
   <div class="doc doc-children">
 
 
@@ -1914,10 +2007,7 @@ this Git tag.</p>
 
 <a href="#generate_changelog.git_ops.TagInfo" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">TagInfo</span><span class="p">(</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">commit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">tagger</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Actor</span><span class="p">],</span>
-    <span class="n">tagged_datetime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">commit</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">tagger</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><span title="git.Actor">Actor</span></span><span class="p">],</span> <span class="n">tagged_datetime</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.datetime" href="https://docs.python.org/3/library/datetime.html#datetime.datetime">datetime</a></span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -1931,6 +2021,41 @@ this Git tag.</p>
 
 
 
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            date_string
+
+
+  
+      property
+   (generate_changelog.git_ops.TagInfo.date_string)" href="#generate_changelog.git_ops.TagInfo.date_string">date_string</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>Convenience method to return an ISO8601 date string.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -1956,7 +2081,7 @@ this Git tag.</p>
   </span>
 
 <a href="#generate_changelog.git_ops.TagInfo.date_string" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">date_string</span><span class="p">:</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">date_string</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1987,10 +2112,15 @@ this Git tag.</p>
 
 <a href="#generate_changelog.git_ops.get_commits_by_tags" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_commits_by_tags</span><span class="p">(</span>
-    <span class="n">repository</span><span class="p">:</span> <span class="n">Repo</span><span class="p">,</span>
-    <span class="n">tag_filter_pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">starting_tag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">GitTag</span><span class="p">]</span>
+    <span class="n">repository</span><span class="p">:</span> <span class="n"><span title="git.Repo">Repo</span></span><span class="p">,</span>
+    <span class="n">tag_filter_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span>
+    <span class="n">starting_tag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            GitTag
+
+
+  
+      dataclass
+   (generate_changelog.git_ops.GitTag)" href="#generate_changelog.git_ops.GitTag">GitTag</a></span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2103,7 +2233,7 @@ this Git tag.</p>
 
 
 <a href="#generate_changelog.git_ops.get_repo" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_repo</span><span class="p">(</span><span class="n">repo_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Repo</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_repo</span><span class="p">(</span><span class="n">repo_path</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="git.Repo">Repo</span></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2179,7 +2309,12 @@ this Git tag.</p>
 
 
 <a href="#generate_changelog.git_ops.get_tags" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_tags</span><span class="p">(</span><span class="n">repository</span><span class="p">:</span> <span class="n">Repo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TagInfo</span><span class="p">]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_tags</span><span class="p">(</span><span class="n">repository</span><span class="p">:</span> <span class="n"><span title="git.Repo">Repo</span></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            TagInfo
+
+
+  
+      dataclass
+   (generate_changelog.git_ops.TagInfo)" href="#generate_changelog.git_ops.TagInfo">TagInfo</a></span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2257,10 +2392,10 @@ this Git tag.</p>
 
 <a href="#generate_changelog.git_ops.parse_commits" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">parse_commits</span><span class="p">(</span>
-    <span class="n">repository</span><span class="p">:</span> <span class="n">Repo</span><span class="p">,</span>
-    <span class="n">starting_rev</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">ending_rev</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span>
+    <span class="n">repository</span><span class="p">:</span> <span class="n"><span title="git.Repo">Repo</span></span><span class="p">,</span>
+    <span class="n">starting_rev</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ending_rev</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">

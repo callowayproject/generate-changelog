@@ -1909,6 +1909,91 @@
 
 
 
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">CLASS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            MetadataCollector
+
+
+  
+      dataclass
+   (generate_changelog.actions.metadata.MetadataCollector)" href="#generate_changelog.actions.metadata.MetadataCollector">MetadataCollector</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Creates a callable to collect key-value metadata.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            ParseAzureBoardIssue (generate_changelog.actions.metadata.ParseAzureBoardIssue)" href="#generate_changelog.actions.metadata.ParseAzureBoardIssue">ParseAzureBoardIssue</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Parse Azure board issues from commits.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            ParseBreakingChangeFooter (generate_changelog.actions.metadata.ParseBreakingChangeFooter)" href="#generate_changelog.actions.metadata.ParseBreakingChangeFooter">ParseBreakingChangeFooter</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Parse a breaking change footer.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            ParseConventionalCommit (generate_changelog.actions.metadata.ParseConventionalCommit)" href="#generate_changelog.actions.metadata.ParseConventionalCommit">ParseConventionalCommit</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Parse a line of text using the conventional commit syntax.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            ParseGitHubIssue (generate_changelog.actions.metadata.ParseGitHubIssue)" href="#generate_changelog.actions.metadata.ParseGitHubIssue">ParseGitHubIssue</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Parse GitHub issue references from commits.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            ParseIssue (generate_changelog.actions.metadata.ParseIssue)" href="#generate_changelog.actions.metadata.ParseIssue">ParseIssue</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Base class to parse an issue reference and put it into the commit metadata.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            ParseJiraIssue (generate_changelog.actions.metadata.ParseJiraIssue)" href="#generate_changelog.actions.metadata.ParseJiraIssue">ParseJiraIssue</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Parse Jira issues from commits.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            ParseTrailers (generate_changelog.actions.metadata.ParseTrailers)" href="#generate_changelog.actions.metadata.ParseTrailers">ParseTrailers</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Parse and extract trailers from a commit message.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
 
   <div class="doc doc-children">
 
@@ -1932,7 +2017,7 @@
   </span>
 
 <a href="#generate_changelog.actions.metadata.MetadataCollector" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">MetadataCollector</span><span class="p">(</span><span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">())</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">MetadataCollector</span><span class="p">(</span><span class="n">metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">())</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1943,6 +2028,30 @@
 
 
 
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.metadata.MetadataCollector.__call__)" href="#generate_changelog.actions.metadata.MetadataCollector.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Put keyword arguments into metadata storage.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
 
 
 
@@ -1967,7 +2076,7 @@
 
 
 <a href="#generate_changelog.actions.metadata.MetadataCollector.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="o">**</span><span class="nf">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="o">**</span><span class="nf">kwargs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2029,8 +2138,7 @@
 
 <a href="#generate_changelog.actions.metadata.ParseAzureBoardIssue" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseAzureBoardIssue</span><span class="p">(</span>
-    <span class="n">commit_metadata</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">issue_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">commit_metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">,</span> <span class="n">issue_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2041,7 +2149,7 @@
 
         <p>Parse Azure board issues from commits.</p>
 <p>Link these Azure board issues to their source using a URL pattern like:</p>
-<p>https://dev.azure.com/<organization>/<project>/_workitems/edit/<issue number></p>
+<p><code>https://dev.azure.com/&lt;organization&gt;/&lt;project&gt;/_workitems/edit/&lt;issue number&gt;</code></p>
 
 
 <details class="references" open>
@@ -2050,6 +2158,10 @@
 <li>https://docs.microsoft.com/en-us/azure/devops/boards/github/link-to-from-github</li>
 </ul>
 </details>
+
+
+
+
 
 
 
@@ -2086,7 +2198,7 @@
 
 
 <a href="#generate_changelog.actions.metadata.ParseBreakingChangeFooter" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseBreakingChangeFooter</span><span class="p">(</span><span class="n">commit_metadata</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseBreakingChangeFooter</span><span class="p">(</span><span class="n">commit_metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2097,6 +2209,30 @@
 
 
 
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.metadata.ParseBreakingChangeFooter.__call__)" href="#generate_changelog.actions.metadata.ParseBreakingChangeFooter.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Parse a BREAKING CHANGE footer.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2121,7 +2257,7 @@
 
 
 <a href="#generate_changelog.actions.metadata.ParseBreakingChangeFooter.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">message</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2202,7 +2338,7 @@
 
 
 <a href="#generate_changelog.actions.metadata.ParseConventionalCommit" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseConventionalCommit</span><span class="p">(</span><span class="n">commit_metadata</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseConventionalCommit</span><span class="p">(</span><span class="n">commit_metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2218,6 +2354,30 @@ to <code>True</code>.</p>
 
 
 
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.metadata.ParseConventionalCommit.__call__)" href="#generate_changelog.actions.metadata.ParseConventionalCommit.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Parse a line of text using the conventional commit syntax.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2242,7 +2402,7 @@ to <code>True</code>.</p>
 
 
 <a href="#generate_changelog.actions.metadata.ParseConventionalCommit.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">message</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2324,8 +2484,7 @@ to <code>True</code>.</p>
 
 <a href="#generate_changelog.actions.metadata.ParseGitHubIssue" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseGitHubIssue</span><span class="p">(</span>
-    <span class="n">commit_metadata</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">issue_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">commit_metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">,</span> <span class="n">issue_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2336,7 +2495,7 @@ to <code>True</code>.</p>
 
         <p>Parse GitHub issue references from commits.</p>
 <p>Link these GitHub issues to their source using a URL pattern like:</p>
-<p>https://github.com/<owner>/<repository>/issues/<issue number></p>
+<p><code>https://github.com/&lt;owner&gt;/&lt;repository&gt;/issues/&lt;issue number&gt;</code></p>
 
 
 <details class="references" open>
@@ -2345,6 +2504,10 @@ to <code>True</code>.</p>
 <li>https://docs.github.com/en/        get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls</li>
 </ul>
 </details>
+
+
+
+
 
 
 
@@ -2381,10 +2544,7 @@ to <code>True</code>.</p>
 
 
 <a href="#generate_changelog.actions.metadata.ParseIssue" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseIssue</span><span class="p">(</span>
-    <span class="n">commit_metadata</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">issue_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseIssue</span><span class="p">(</span><span class="n">commit_metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">,</span> <span class="n">issue_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2395,6 +2555,30 @@ to <code>True</code>.</p>
 
 
 
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.metadata.ParseIssue.__call__)" href="#generate_changelog.actions.metadata.ParseIssue.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Put the issue(s) reference into the commit metadata using the keyword <code>issue</code> .</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2419,7 +2603,7 @@ to <code>True</code>.</p>
 
 
 <a href="#generate_changelog.actions.metadata.ParseIssue.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">message</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2500,10 +2684,7 @@ to <code>True</code>.</p>
 
 
 <a href="#generate_changelog.actions.metadata.ParseJiraIssue" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseJiraIssue</span><span class="p">(</span>
-    <span class="n">commit_metadata</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">issue_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseJiraIssue</span><span class="p">(</span><span class="n">commit_metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">,</span> <span class="n">issue_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2512,7 +2693,17 @@ to <code>True</code>.</p>
 
 
         <p>Parse Jira issues from commits.</p>
-<p>https://support.atlassian.com/jira-software-cloud/docs/process-issues-with-smart-commits/</p>
+
+
+<details class="references" open>
+  <summary>References</summary>
+  <ul>
+<li>https://support.atlassian.com/jira-software-cloud/docs/process-issues-with-smart-commits/</li>
+</ul>
+</details>
+
+
+
 
 
 
@@ -2550,7 +2741,7 @@ to <code>True</code>.</p>
 
 
 <a href="#generate_changelog.actions.metadata.ParseTrailers" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseTrailers</span><span class="p">(</span><span class="n">commit_metadata</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ParseTrailers</span><span class="p">(</span><span class="n">commit_metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2561,6 +2752,30 @@ to <code>True</code>.</p>
 
 
 
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.metadata.ParseTrailers.__call__)" href="#generate_changelog.actions.metadata.ParseTrailers.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Parse and extract trailers from a commit message.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2585,7 +2800,7 @@ to <code>True</code>.</p>
 
 
 <a href="#generate_changelog.actions.metadata.ParseTrailers.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">message</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">

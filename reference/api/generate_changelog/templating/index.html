@@ -1727,6 +1727,71 @@
 
 
 
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">CLASS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            RenderedChangelog
+
+
+  
+      dataclass
+   (generate_changelog.templating.RenderedChangelog)" href="#generate_changelog.templating.RenderedChangelog">RenderedChangelog</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>The output of rendering a changelog.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">FUNCTION</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_default_env (generate_changelog.templating.get_default_env)" href="#generate_changelog.templating.get_default_env">get_default_env</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>The default Jinja environment for rendering a changelog.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_pipeline_env (generate_changelog.templating.get_pipeline_env)" href="#generate_changelog.templating.get_pipeline_env">get_pipeline_env</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>The Jinja environment for rendering actions and pipelines.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            render_changelog (generate_changelog.templating.render_changelog)" href="#generate_changelog.templating.render_changelog">render_changelog</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Render the full or incremental changelog for the repository to a string.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
 
   <div class="doc doc-children">
 
@@ -1751,9 +1816,9 @@
 
 <a href="#generate_changelog.templating.RenderedChangelog" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">RenderedChangelog</span><span class="p">(</span>
-    <span class="n">heading</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">notes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">full</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">heading</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">notes</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">full</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -1763,6 +1828,10 @@
         <p>The output of rendering a changelog.</p>
 <p>If it is an incremental changelog, <code>full</code> contains <code>{heading}\n{notes}</code></p>
 <p>If it is a full changelog, <code>heading</code> and <code>notes</code> are empty.</p>
+
+
+
+
 
 
 
@@ -1800,9 +1869,12 @@
 
 
 <a href="#generate_changelog.templating.get_default_env" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_default_env</span><span class="p">(</span>
-    <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Environment</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_default_env</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            Configuration
+
+
+  
+      dataclass
+   (generate_changelog.configuration.Configuration)" href="../configuration/#generate_changelog.configuration.Configuration">Configuration</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="jinja2.Environment">Environment</span></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1822,9 +1894,12 @@
 
 
 <a href="#generate_changelog.templating.get_pipeline_env" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_pipeline_env</span><span class="p">(</span>
-    <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Environment</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_pipeline_env</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            Configuration
+
+
+  
+      dataclass
+   (generate_changelog.configuration.Configuration)" href="../configuration/#generate_changelog.configuration.Configuration">Configuration</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="jinja2.Environment">Environment</span></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1845,10 +1920,25 @@
 
 <a href="#generate_changelog.templating.render_changelog" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">render_changelog</span><span class="p">(</span>
-    <span class="n">version_context</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">VersionContext</span><span class="p">],</span>
-    <span class="n">config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
-    <span class="n">incremental</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RenderedChangelog</span>
+    <span class="n">version_context</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            VersionContext
+
+
+  
+      dataclass
+   (generate_changelog.context.VersionContext)" href="../context/#generate_changelog.context.VersionContext">VersionContext</a></span><span class="p">],</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            Configuration
+
+
+  
+      dataclass
+   (generate_changelog.configuration.Configuration)" href="../configuration/#generate_changelog.configuration.Configuration">Configuration</a></span><span class="p">,</span>
+    <span class="n">incremental</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="            RenderedChangelog
+
+
+  
+      dataclass
+   (generate_changelog.templating.RenderedChangelog)" href="#generate_changelog.templating.RenderedChangelog">RenderedChangelog</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">

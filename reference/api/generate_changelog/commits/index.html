@@ -1731,6 +1731,67 @@
 
 
 
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">FUNCTION</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            create_version_context (generate_changelog.commits.create_version_context)" href="#generate_changelog.commits.create_version_context">create_version_context</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Generate a <a class="autorefs autorefs-internal" title="            VersionContext
+
+
+  
+      dataclass
+  " href="../context/#generate_changelog.context.VersionContext"><code>VersionContext</code></a> from a tag dictionary.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            first_matching (generate_changelog.commits.first_matching)" href="#generate_changelog.commits.first_matching">first_matching</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Return the first section that matches the given commit summary.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            generate_commit_context (generate_changelog.commits.generate_commit_context)" href="#generate_changelog.commits.generate_commit_context">generate_commit_context</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Create the renderable context for this commit.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_context_from_tags (generate_changelog.commits.get_context_from_tags)" href="#generate_changelog.commits.get_context_from_tags">get_context_from_tags</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Generate the template context from git tags.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            sort_group_commits (generate_changelog.commits.sort_group_commits)" href="#generate_changelog.commits.sort_group_commits">sort_group_commits</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Sort the commit groups and convert the <code>dict</code> into a list of <code>GroupingContext</code> objects.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+
   <div class="doc doc-children">
 
 
@@ -1749,14 +1810,32 @@
 
 
 <a href="#generate_changelog.commits.create_version_context" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">create_version_context</span><span class="p">(</span>
-    <span class="n">config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="n">GitTag</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VersionContext</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">create_version_context</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            Configuration
+
+
+  
+      dataclass
+   (generate_changelog.configuration.Configuration)" href="../configuration/#generate_changelog.configuration.Configuration">Configuration</a></span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            GitTag
+
+
+  
+      dataclass
+   (generate_changelog.git_ops.GitTag)" href="../git_ops/#generate_changelog.git_ops.GitTag">GitTag</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="            VersionContext
+
+
+  
+      dataclass
+   (generate_changelog.context.VersionContext)" href="../context/#generate_changelog.context.VersionContext">VersionContext</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Generate a :class:<code>VersionContext</code> from a tag dictionary.</p>
+        <p>Generate a <a class="autorefs autorefs-internal" title="            VersionContext
+
+
+  
+      dataclass
+  " href="../context/#generate_changelog.context.VersionContext"><code>VersionContext</code></a> from a tag dictionary.</p>
 
 
 <table>
@@ -1854,9 +1933,12 @@
 
 
 <a href="#generate_changelog.commits.first_matching" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">first_matching</span><span class="p">(</span>
-    <span class="n">actions</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">commit</span><span class="p">:</span> <span class="n">CommitContext</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">first_matching</span><span class="p">(</span><span class="n">actions</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">,</span> <span class="n">commit</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            CommitContext
+
+
+  
+      dataclass
+   (generate_changelog.context.CommitContext)" href="../context/#generate_changelog.context.CommitContext">CommitContext</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1950,10 +2032,20 @@
 
 <a href="#generate_changelog.commits.generate_commit_context" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">generate_commit_context</span><span class="p">(</span>
-    <span class="n">commit</span><span class="p">:</span> <span class="n">Commit</span><span class="p">,</span>
-    <span class="n">config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
-    <span class="n">version_metadata_func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CommitContext</span>
+    <span class="n">commit</span><span class="p">:</span> <span class="n"><span title="git.Commit">Commit</span></span><span class="p">,</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            Configuration
+
+
+  
+      dataclass
+   (generate_changelog.configuration.Configuration)" href="../configuration/#generate_changelog.configuration.Configuration">Configuration</a></span><span class="p">,</span>
+    <span class="n">version_metadata_func</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="            CommitContext
+
+
+  
+      dataclass
+   (generate_changelog.context.CommitContext)" href="../context/#generate_changelog.context.CommitContext">CommitContext</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2069,10 +2161,18 @@
 
 <a href="#generate_changelog.commits.get_context_from_tags" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_context_from_tags</span><span class="p">(</span>
-    <span class="n">repository</span><span class="p">:</span> <span class="n">Repo</span><span class="p">,</span>
-    <span class="n">config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
-    <span class="n">starting_tag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">VersionContext</span><span class="p">]</span>
+    <span class="n">repository</span><span class="p">:</span> <span class="n"><span title="git.Repo">Repo</span></span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            Configuration
+
+
+  
+      dataclass
+   (generate_changelog.configuration.Configuration)" href="../configuration/#generate_changelog.configuration.Configuration">Configuration</a></span><span class="p">,</span> <span class="n">starting_tag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            VersionContext
+
+
+  
+      dataclass
+   (generate_changelog.context.VersionContext)" href="../context/#generate_changelog.context.VersionContext">VersionContext</a></span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2190,12 +2290,17 @@
 
 
 <a href="#generate_changelog.commits.sort_group_commits" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">sort_group_commits</span><span class="p">(</span><span class="n">commit_groups</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">sort_group_commits</span><span class="p">(</span><span class="n">commit_groups</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            GroupingContext
+
+
+  
+      dataclass
+   (generate_changelog.context.GroupingContext)" href="../context/#generate_changelog.context.GroupingContext">GroupingContext</a></span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Sort the commit groups and convert the <code>dict</code> into a list of <code>GroupedCommit</code> objects.</p>
+        <p>Sort the commit groups and convert the <code>dict</code> into a list of <code>GroupingContext</code> objects.</p>
 
 
 <table>
@@ -2237,12 +2342,17 @@
           <tr class="doc-section-item">
             <td>
                 <span class="doc-returns-annotation">
-                    <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
+                    <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-internal" title="            GroupingContext
+
+
+  
+      dataclass
+   (generate_changelog.context.GroupingContext)" href="../context/#generate_changelog.context.GroupingContext">GroupingContext</a>]</code>
                 </span>
             </td>
             <td class="doc-returns-details">
               <div class="doc-md-description">
-                <p>A list</p>
+                <p>A list of <code>GroupingContext</code> objects.</p>
               </div>
             </td>
           </tr>
