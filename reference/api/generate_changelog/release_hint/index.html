@@ -848,6 +848,8 @@
       
         
       
+        
+      
     
     
     
@@ -1223,6 +1225,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../indented_logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    indented_logger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notes/" class="md-nav__link">
         
   
@@ -1418,6 +1443,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#generate_changelog.release_hint.ReleaseRuleResult" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ReleaseRuleResult
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" ReleaseRuleResult">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate_changelog.release_hint.ReleaseRuleResult-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate_changelog.release_hint.ReleaseRuleResult.matches_all" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;matches_all
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#generate_changelog.release_hint.RuleProcessor" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;RuleProcessor
@@ -1441,6 +1505,15 @@
   <a href="#generate_changelog.release_hint.RuleProcessor.__call__" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;__call__
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_changelog.release_hint.RuleProcessor.rule_string" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;rule_string
     </span>
   </a>
   
@@ -1470,6 +1543,24 @@
   
     <nav class="md-nav" aria-label="Functions">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate_changelog.release_hint.format_bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;format_bool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_changelog.release_hint.print_table" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;print_table
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#generate_changelog.release_hint.suggest_release_type" class="md-nav__link">
@@ -1848,6 +1939,19 @@
             </td>
           </tr>
           <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            ReleaseRuleResult
+
+
+  
+      dataclass
+   (generate_changelog.release_hint.ReleaseRuleResult)" href="#generate_changelog.release_hint.ReleaseRuleResult">ReleaseRuleResult</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>The result of evaluating a release rule.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
             <td><code><a class="autorefs autorefs-internal" title="            RuleProcessor (generate_changelog.release_hint.RuleProcessor)" href="#generate_changelog.release_hint.RuleProcessor">RuleProcessor</a></code></td>
             <td class="doc-class-details">
               <div class="doc-md-description">
@@ -1869,6 +1973,22 @@
         </tr>
       </thead>
       <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            format_bool (generate_changelog.release_hint.format_bool)" href="#generate_changelog.release_hint.format_bool">format_bool</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Format a boolean value as a string.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            print_table (generate_changelog.release_hint.print_table)" href="#generate_changelog.release_hint.print_table">print_table</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Print the test results as a table.</p>
+                </div>
+              </td>
+            </tr>
             <tr class="doc-section-item">
               <td><code><a class="autorefs autorefs-internal" title="            suggest_release_type (generate_changelog.release_hint.suggest_release_type)" href="#generate_changelog.release_hint.suggest_release_type">suggest_release_type</a></code></td>
               <td class="doc-function-details">
@@ -2137,7 +2257,12 @@
 
   
       dataclass
-   (generate_changelog.context.CommitContext)" href="../context/#generate_changelog.context.CommitContext">CommitContext</a></span><span class="p">,</span> <span class="n">current_branch</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span>
+   (generate_changelog.context.CommitContext)" href="../context/#generate_changelog.context.CommitContext">CommitContext</a></span><span class="p">,</span> <span class="n">current_branch</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="            ReleaseRuleResult
+
+
+  
+      dataclass
+   (generate_changelog.release_hint.ReleaseRuleResult)" href="#generate_changelog.release_hint.ReleaseRuleResult">ReleaseRuleResult</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2410,6 +2535,118 @@
 
 
 
+<h3 id="generate_changelog.release_hint.ReleaseRuleResult" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">ReleaseRuleResult</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#generate_changelog.release_hint.ReleaseRuleResult" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ReleaseRuleResult</span><span class="p">(</span>
+    <span class="n">matches_grouping</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span><span class="p">,</span>
+    <span class="n">matches_path</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span><span class="p">,</span>
+    <span class="n">matches_branch</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span><span class="p">,</span>
+    <span class="n">result</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+        <p>The result of evaluating a release rule.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            matches_all
+
+
+  
+      property
+   (generate_changelog.release_hint.ReleaseRuleResult.matches_all)" href="#generate_changelog.release_hint.ReleaseRuleResult.matches_all">matches_all</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>All the commit criteria were met.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+<h4 id="generate_changelog.release_hint.ReleaseRuleResult-attributes">Attributes<a href="#generate_changelog.release_hint.ReleaseRuleResult-attributes" class="headerlink" title="Permanent link">&para;</a></h4>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="generate_changelog.release_hint.ReleaseRuleResult.matches_all" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">matches_all</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+<a href="#generate_changelog.release_hint.ReleaseRuleResult.matches_all" class="headerlink" title="Permanent link">&para;</a></h5>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">matches_all</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>All the commit criteria were met.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
 <h3 id="generate_changelog.release_hint.RuleProcessor" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">RuleProcessor</span>
 
@@ -2473,6 +2710,14 @@
               <td class="doc-function-details">
                 <div class="doc-md-description">
                   <p>Return the result of applying all the rules to a commit.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            rule_string (generate_changelog.release_hint.RuleProcessor.rule_string)" href="#generate_changelog.release_hint.RuleProcessor.rule_string">rule_string</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Return a string representation of the rules.</p>
                 </div>
               </td>
             </tr>
@@ -2592,6 +2837,26 @@
 
 </div>
 
+<div class="doc doc-object doc-function">
+
+
+<h5 id="generate_changelog.release_hint.RuleProcessor.rule_string" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">rule_string</span>
+
+
+<a href="#generate_changelog.release_hint.RuleProcessor.rule_string" class="headerlink" title="Permanent link">&para;</a></h5>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">rule_string</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return a string representation of the rules.</p>
+
+
+    </div>
+
+</div>
+
 
 
   </div>
@@ -2600,6 +2865,46 @@
 
 </div>
 <h2 id="generate_changelog.release_hint-functions">Functions<a href="#generate_changelog.release_hint-functions" class="headerlink" title="Permanent link">&para;</a></h2>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="generate_changelog.release_hint.format_bool" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">format_bool</span>
+
+
+<a href="#generate_changelog.release_hint.format_bool" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">format_bool</span><span class="p">(</span><span class="n">bool_var</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="rich.text.Text">Text</span></span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Format a boolean value as a string.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="generate_changelog.release_hint.print_table" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">print_table</span>
+
+
+<a href="#generate_changelog.release_hint.print_table" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">print_table</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Print the test results as a table.</p>
+
+
+    </div>
+
+</div>
 
 <div class="doc doc-object doc-function">
 

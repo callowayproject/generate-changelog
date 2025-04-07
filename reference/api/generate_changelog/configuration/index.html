@@ -848,6 +848,8 @@
       
         
       
+        
+      
     
     
     
@@ -1401,6 +1403,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#generate_changelog.configuration.Configuration.verbosity" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;verbosity
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1568,6 +1579,29 @@
   
   <span class="md-ellipsis">
     git_ops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../indented_logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    indented_logger
     
   </span>
   
@@ -2331,6 +2365,7 @@
     <span class="n">output_pipeline</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">(),</span>
     <span class="n">template_dirs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">(),</span>
     <span class="n">group_by</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">(),</span>
+    <span class="n">verbosity</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">tag_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s2">&quot;^[0-9]+</span><span class="se">\\</span><span class="s2">.[0-9]+(?:</span><span class="se">\\</span><span class="s2">.[0-9]+)?$&quot;</span><span class="p">,</span>
     <span class="n">include_merges</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">ignore_patterns</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">(),</span>
@@ -2668,6 +2703,26 @@
                   <span class="doc-attribute-annotation">
                     <b>TYPE:</b>
                       <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            verbosity
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.configuration.Configuration.verbosity)" href="#generate_changelog.configuration.Configuration.verbosity">verbosity</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>Level of verbose logging output.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
                   </span>
               </p>
             </td>
@@ -3032,6 +3087,31 @@ Leave empty to always start at first commit.</p>
     <div class="doc doc-contents ">
 
         <p>User variables for reference in other parts of the configuration.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="generate_changelog.configuration.Configuration.verbosity" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">verbosity</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#generate_changelog.configuration.Configuration.verbosity" class="headerlink" title="Permanent link">&para;</a></h5>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">verbosity</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Level of verbose logging output.</p>
 
     </div>
 
