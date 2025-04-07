@@ -12,6 +12,7 @@ from git import Repo
 from generate_changelog import __version__
 from generate_changelog.commits import get_context_from_tags
 from generate_changelog.configuration import DEFAULT_CONFIG_FILE_NAMES, Configuration, write_default_config
+from generate_changelog.indented_logger import setup_logging
 from generate_changelog.release_hint import suggest_release_type
 
 
@@ -57,6 +58,13 @@ def generate_config_callback(ctx: Context, param: Parameter, value: bool) -> Non
 @click.option("--output", "-o", type=click.Choice(["release-hint", "notes", "all"]), help="What output to generate.")
 @click.option("--skip-output-pipeline", is_flag=True, help="Do not execute the output pipeline in the configuration.")
 @click.option("--branch-override", "-b", help="Override the current branch for release hint decisions.")
+@click.option(
+    "--verbose",
+    "-v",
+    count=True,
+    required=False,
+    help="Print verbose logging to stderr. Can specify several times for more verbosity.",
+)
 @click.version_option(version=__version__)
 def cli(
     config: Optional[Path],
@@ -65,6 +73,7 @@ def cli(
     output: Optional[str],
     skip_output_pipeline: bool,
     branch_override: Optional[str],
+    verbose: int,
 ) -> None:
     """Generate a change log from git commits."""
     from generate_changelog import templating
@@ -72,6 +81,9 @@ def cli(
 
     echo_func = functools.partial(echo, quiet=bool(output))
     configuration = get_user_config(config, echo_func)
+
+    verbosity = verbose or configuration.verbosity
+    setup_logging(verbosity)
 
     repository = Repo(repo_path) if repo_path else Repo(search_parent_directories=True)
 

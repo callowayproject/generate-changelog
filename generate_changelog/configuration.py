@@ -201,6 +201,9 @@ class Configuration:
     group_by: list = field(default_factory=list)
     """Group the commits within a version by these commit attributes."""
 
+    verbosity: int = 0
+    """Level of verbose logging output."""
+
     #
     # Commit filtering
     #

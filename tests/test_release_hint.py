@@ -127,7 +127,7 @@ class TestReleaseRule:
         commit_ctx = commit_context_factory(grouping=commit_grouping)
 
         # Act and Assert
-        assert rule(commit_ctx, "master") == "success"
+        assert rule(commit_ctx, "master").result == "success"
 
     @pytest.mark.parametrize(
         ["commit_grouping", "rule_grouping"],
@@ -152,7 +152,7 @@ class TestReleaseRule:
         commit_ctx = commit_context_factory(grouping=commit_grouping)
 
         # Act and Assemble
-        assert rule(commit_ctx, "master") == "fail"
+        assert rule(commit_ctx, "master").result == "fail"
 
     @pytest.mark.parametrize(
         ["commit_paths", "rule_path"],
@@ -171,7 +171,7 @@ class TestReleaseRule:
         commit_ctx = commit_context_factory(files=commit_paths)
 
         # Act and Assemble
-        assert rule(commit_ctx, "master") == "success"
+        assert rule(commit_ctx, "master").result == "success"
 
     @pytest.mark.parametrize(
         ["commit_paths", "rule_path"],
@@ -187,7 +187,7 @@ class TestReleaseRule:
         commit_ctx = commit_context_factory(files=commit_paths)
 
         # Act and Assert
-        assert rule(commit_ctx, "master") == "failure"
+        assert rule(commit_ctx, "master").result == "failure"
 
     @pytest.mark.parametrize(
         ["commit_paths", "rule_path", "commit_grouping", "rule_grouping"],
@@ -216,7 +216,7 @@ class TestReleaseRule:
         commit_ctx = commit_context_factory(grouping=commit_grouping, files=commit_paths)
 
         # Act and Assert
-        assert rule(commit_ctx, "master") == "success"
+        assert rule(commit_ctx, "master").result == "success"
 
 
 def test_releaserule_match_path_grouping_and_branch():
@@ -230,10 +230,10 @@ def test_releaserule_match_path_grouping_and_branch():
     )
     dev_rule = release_hint.ReleaseRule(match_result="success", path=rule_path, grouping=rule_grouping, branch="dev")
     commit_ctx = commit_context_factory(grouping=commit_grouping, files=commit_paths)
-    assert master_rule(commit_ctx, "master") == "success"
-    assert master_rule(commit_ctx, "dev") == "no-release"
-    assert dev_rule(commit_ctx, "master") == "no-release"
-    assert dev_rule(commit_ctx, "dev") == "success"
+    assert master_rule(commit_ctx, "master").result == "success"
+    assert master_rule(commit_ctx, "dev").result == "no-release"
+    assert dev_rule(commit_ctx, "master").result == "no-release"
+    assert dev_rule(commit_ctx, "dev").result == "success"
 
 
 def test_releaserule_match_invalid():
