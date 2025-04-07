@@ -848,8 +848,6 @@
       
         
       
-        
-      
     
     
     
@@ -1659,29 +1657,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../indented_logger/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    indented_logger
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../notes/" class="md-nav__link">
         
   
@@ -2073,74 +2048,6 @@
 
 
 
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">CLASS</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            ChangelogContext
-
-
-  
-      dataclass
-   (generate_changelog.context.ChangelogContext)" href="#generate_changelog.context.ChangelogContext">ChangelogContext</a></code></td>
-            <td class="doc-class-details">
-              <div class="doc-md-description">
-                <p>The primary context used when rendering a changelog.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            CommitContext
-
-
-  
-      dataclass
-   (generate_changelog.context.CommitContext)" href="#generate_changelog.context.CommitContext">CommitContext</a></code></td>
-            <td class="doc-class-details">
-              <div class="doc-md-description">
-                <p>Commit information for the template context.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            GroupingContext
-
-
-  
-      dataclass
-   (generate_changelog.context.GroupingContext)" href="#generate_changelog.context.GroupingContext">GroupingContext</a></code></td>
-            <td class="doc-class-details">
-              <div class="doc-md-description">
-                <p>A combination of a tuple of the sorted values and a list of the CommitContexts in that group.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            VersionContext
-
-
-  
-      dataclass
-   (generate_changelog.context.VersionContext)" href="#generate_changelog.context.VersionContext">VersionContext</a></code></td>
-            <td class="doc-class-details">
-              <div class="doc-md-description">
-                <p>Version information for the template context.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-
-
-
-
 
   <div class="doc doc-children">
 
@@ -2165,17 +2072,8 @@
 
 <a href="#generate_changelog.context.ChangelogContext" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">ChangelogContext</span><span class="p">(</span>
-    <span class="n">config</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            Configuration
-
-
-  
-      dataclass
-   (generate_changelog.configuration.Configuration)" href="../configuration/#generate_changelog.configuration.Configuration">Configuration</a></span><span class="p">,</span> <span class="n">versions</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            VersionContext
-
-
-  
-      dataclass
-   (generate_changelog.context.VersionContext)" href="#generate_changelog.context.VersionContext">VersionContext</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">()</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
+    <span class="n">versions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">VersionContext</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(),</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2189,171 +2087,6 @@
 
 
 
-
-
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">METHOD</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-            <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="            as_dict (generate_changelog.context.ChangelogContext.as_dict)" href="#generate_changelog.context.ChangelogContext.as_dict">as_dict</a></code></td>
-              <td class="doc-function-details">
-                <div class="doc-md-description">
-                  <p>Safely generate a dict version of this object.</p>
-                </div>
-              </td>
-            </tr>
-      </tbody>
-    </table>
-
-
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">ATTRIBUTE</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            config
-
-
-  
-      instance-attribute
-   (generate_changelog.context.ChangelogContext.config)" href="#generate_changelog.context.ChangelogContext.config">config</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The changelog generation configuration.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-internal" title="            Configuration
-
-
-  
-      dataclass
-   (generate_changelog.configuration.Configuration)" href="../configuration/#generate_changelog.configuration.Configuration">Configuration</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            group_by
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.ChangelogContext.group_by)" href="#generate_changelog.context.ChangelogContext.group_by">group_by</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The configured grouping aspects for commits within a version.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            group_depth
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.ChangelogContext.group_depth)" href="#generate_changelog.context.ChangelogContext.group_depth">group_depth</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The number of levels version commits are grouped by.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            unreleased_label
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.ChangelogContext.unreleased_label)" href="#generate_changelog.context.ChangelogContext.unreleased_label">unreleased_label</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The configured label used as the version title of the changes since the last valid tag.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            valid_author_tokens
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.ChangelogContext.valid_author_tokens)" href="#generate_changelog.context.ChangelogContext.valid_author_tokens">valid_author_tokens</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The configured tokens in git commit trailers that indicate authorship.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            versions
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.ChangelogContext.versions)" href="#generate_changelog.context.ChangelogContext.versions">versions</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The version contexts to render in the changelog.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a>[<a class="autorefs autorefs-internal" title="            VersionContext
-
-
-  
-      dataclass
-   (generate_changelog.context.VersionContext)" href="#generate_changelog.context.VersionContext">VersionContext</a>]</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-      </tbody>
-    </table>
 
 
 
@@ -2379,12 +2112,7 @@
   </span>
 
 <a href="#generate_changelog.context.ChangelogContext.config" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">config</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            Configuration
-
-
-  
-      dataclass
-   (generate_changelog.configuration.Configuration)" href="../configuration/#generate_changelog.configuration.Configuration">Configuration</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">config</span><span class="p">:</span> <span class="n">Configuration</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2409,7 +2137,9 @@
   </span>
 
 <a href="#generate_changelog.context.ChangelogContext.group_by" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">group_by</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(init)">init</span></span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n"><span title="dataclasses.field(default_factory)">default_factory</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">group_by</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+    <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span>
+<span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2434,7 +2164,7 @@
   </span>
 
 <a href="#generate_changelog.context.ChangelogContext.group_depth" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">group_depth</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(init)">init</span></span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">group_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2459,7 +2189,7 @@
   </span>
 
 <a href="#generate_changelog.context.ChangelogContext.unreleased_label" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">unreleased_label</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(init)">init</span></span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">unreleased_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2484,7 +2214,9 @@
   </span>
 
 <a href="#generate_changelog.context.ChangelogContext.valid_author_tokens" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">valid_author_tokens</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(init)">init</span></span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n"><span title="dataclasses.field(default_factory)">default_factory</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">valid_author_tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+    <span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span>
+<span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2509,12 +2241,7 @@
   </span>
 
 <a href="#generate_changelog.context.ChangelogContext.versions" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">versions</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            VersionContext
-
-
-  
-      dataclass
-   (generate_changelog.context.VersionContext)" href="#generate_changelog.context.VersionContext">VersionContext</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(default_factory)">default_factory</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">versions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">VersionContext</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2535,7 +2262,7 @@
 
 
 <a href="#generate_changelog.context.ChangelogContext.as_dict" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">as_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">as_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2569,14 +2296,14 @@
 
 <a href="#generate_changelog.context.CommitContext" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">CommitContext</span><span class="p">(</span>
-    <span class="n">sha</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span>
-    <span class="n">commit_datetime</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.datetime" href="https://docs.python.org/3/library/datetime.html#datetime.datetime">datetime</a></span><span class="p">,</span>
-    <span class="n">summary</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span>
-    <span class="n">body</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span>
-    <span class="n">committer</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span>
-    <span class="n">grouping</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></span><span class="p">(),</span>
-    <span class="n">metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">(),</span>
-    <span class="n">files</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#set">set</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#set">set</a></span><span class="p">(),</span>
+    <span class="n">sha</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">commit_datetime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+    <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">committer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">grouping</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(),</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(),</span>
+    <span class="n">files</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2590,254 +2317,6 @@
 
 
 
-
-
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">METHOD</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-            <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="            __post_init__ (generate_changelog.context.CommitContext.__post_init__)" href="#generate_changelog.context.CommitContext.__post_init__">__post_init__</a></code></td>
-              <td class="doc-function-details">
-                <div class="doc-md-description">
-                  <p>Set the cached author information to None.</p>
-                </div>
-              </td>
-            </tr>
-      </tbody>
-    </table>
-
-
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">ATTRIBUTE</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            author_names
-
-
-  
-      property
-   (generate_changelog.context.CommitContext.author_names)" href="#generate_changelog.context.CommitContext.author_names">author_names</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>A list of the authors&rsquo; names.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            authors
-
-
-  
-      property
-   (generate_changelog.context.CommitContext.authors)" href="#generate_changelog.context.CommitContext.authors">authors</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>A list of authors&rsquo; names and emails.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            body
-
-
-  
-      instance-attribute
-   (generate_changelog.context.CommitContext.body)" href="#generate_changelog.context.CommitContext.body">body</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The commit message sans the first line.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            commit_datetime
-
-
-  
-      instance-attribute
-   (generate_changelog.context.CommitContext.commit_datetime)" href="#generate_changelog.context.CommitContext.commit_datetime">commit_datetime</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The date and time of the commit with timezone offset.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" title="datetime.datetime" href="https://docs.python.org/3/library/datetime.html#datetime.datetime">datetime</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            committer
-
-
-  
-      instance-attribute
-   (generate_changelog.context.CommitContext.committer)" href="#generate_changelog.context.CommitContext.committer">committer</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The name and email of the committer as <code>name &lt;email@ex.com&gt;</code>.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            files
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.CommitContext.files)" href="#generate_changelog.context.CommitContext.files">files</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The file paths (relative to the repository root) modified by this commit.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#set">set</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            grouping
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.CommitContext.grouping)" href="#generate_changelog.context.CommitContext.grouping">grouping</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The values to group this commit based on the <code>group_by</code> configuration.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            metadata
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.CommitContext.metadata)" href="#generate_changelog.context.CommitContext.metadata">metadata</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>Metadata for this commit parsed from the commit message.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            sha
-
-
-  
-      instance-attribute
-   (generate_changelog.context.CommitContext.sha)" href="#generate_changelog.context.CommitContext.sha">sha</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The full hex SHA of the commit.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            short_sha
-
-
-  
-      property
-   (generate_changelog.context.CommitContext.short_sha)" href="#generate_changelog.context.CommitContext.short_sha">short_sha</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The first seven characters of the hex sha.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            summary
-
-
-  
-      instance-attribute
-   (generate_changelog.context.CommitContext.summary)" href="#generate_changelog.context.CommitContext.summary">summary</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The first line of the commit message.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-      </tbody>
-    </table>
 
 
 
@@ -2863,7 +2342,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.author_names" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">author_names</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">author_names</span><span class="p">:</span> <span class="nb">list</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2887,7 +2366,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.authors" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">authors</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">authors</span><span class="p">:</span> <span class="nb">list</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2935,7 +2414,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.body" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">body</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">body</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2959,7 +2438,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.commit_datetime" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">commit_datetime</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.datetime" href="https://docs.python.org/3/library/datetime.html#datetime.datetime">datetime</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">commit_datetime</span><span class="p">:</span> <span class="n">datetime</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2983,7 +2462,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.committer" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">committer</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">committer</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3008,7 +2487,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.files" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">files</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#set">set</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(default_factory)">default_factory</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#set">set</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">files</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">set</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3033,7 +2512,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.grouping" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">grouping</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(default_factory)">default_factory</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">grouping</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">tuple</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3058,7 +2537,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.metadata" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(default_factory)">default_factory</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3082,7 +2561,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.sha" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">sha</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">sha</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3106,7 +2585,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.short_sha" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">short_sha</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">short_sha</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3130,7 +2609,7 @@
   </span>
 
 <a href="#generate_changelog.context.CommitContext.summary" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">summary</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">summary</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3184,22 +2663,15 @@
   </span>
 
 <a href="#generate_changelog.context.GroupingContext" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">GroupingContext</span><span class="p">(</span><span class="n">grouping</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Tuple" href="https://docs.python.org/3/library/typing.html#typing.Tuple">Tuple</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">commits</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            CommitContext
-
-
-  
-      dataclass
-   (generate_changelog.context.CommitContext)" href="#generate_changelog.context.CommitContext">CommitContext</a></span><span class="p">])</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">GroupingContext</span><span class="p">(</span>
+    <span class="n">grouping</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">commits</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CommitContext</span><span class="p">]</span>
+<span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
 
         <p>A combination of a tuple of the sorted values and a list of the CommitContexts in that group.</p>
-
-
-
-
 
 
 
@@ -3242,18 +2714,13 @@
 
 <a href="#generate_changelog.context.VersionContext" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">VersionContext</span><span class="p">(</span>
-    <span class="n">label</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span>
-    <span class="n">date_time</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="datetime.datetime" href="https://docs.python.org/3/library/datetime.html#datetime.datetime">datetime</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">tag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">previous_tag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">tagger</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">grouped_commits</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            GroupingContext
-
-
-  
-      dataclass
-   (generate_changelog.context.GroupingContext)" href="#generate_changelog.context.GroupingContext">GroupingContext</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">(),</span>
-    <span class="n">metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">(),</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">date_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">previous_tag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tagger</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">grouped_commits</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">GroupingContext</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(),</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(),</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -3267,166 +2734,6 @@
 
 
 
-
-
-
-
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">ATTRIBUTE</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            date_time
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.VersionContext.date_time)" href="#generate_changelog.context.VersionContext.date_time">date_time</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The date and time with timezone offset the version was tagged.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="datetime.datetime" href="https://docs.python.org/3/library/datetime.html#datetime.datetime">datetime</a>]</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            grouped_commits
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.VersionContext.grouped_commits)" href="#generate_changelog.context.VersionContext.grouped_commits">grouped_commits</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The sections that group the commits in this version.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a>[<a class="autorefs autorefs-internal" title="            GroupingContext
-
-
-  
-      dataclass
-   (generate_changelog.context.GroupingContext)" href="#generate_changelog.context.GroupingContext">GroupingContext</a>]</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            label
-
-
-  
-      instance-attribute
-   (generate_changelog.context.VersionContext.label)" href="#generate_changelog.context.VersionContext.label">label</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The version label.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            metadata
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.VersionContext.metadata)" href="#generate_changelog.context.VersionContext.metadata">metadata</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>Metadata for this version parsed from commits.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            previous_tag
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.VersionContext.previous_tag)" href="#generate_changelog.context.VersionContext.previous_tag">previous_tag</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The previous tag.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            tag
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.VersionContext.tag)" href="#generate_changelog.context.VersionContext.tag">tag</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The tag.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            tagger
-
-
-  
-      class-attribute
-      instance-attribute
-   (generate_changelog.context.VersionContext.tagger)" href="#generate_changelog.context.VersionContext.tagger">tagger</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The name and email of the person who tagged this version in <code>name &lt;email@ex.com&gt;</code> format.</p>
-              </div>
-              <p>
-                  <span class="doc-attribute-annotation">
-                    <b>TYPE:</b>
-                      <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-      </tbody>
-    </table>
 
 
 
@@ -3453,7 +2760,7 @@
   </span>
 
 <a href="#generate_changelog.context.VersionContext.date_time" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">date_time</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="datetime.datetime" href="https://docs.python.org/3/library/datetime.html#datetime.datetime">datetime</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">date_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3478,12 +2785,9 @@
   </span>
 
 <a href="#generate_changelog.context.VersionContext.grouped_commits" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">grouped_commits</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            GroupingContext
-
-
-  
-      dataclass
-   (generate_changelog.context.GroupingContext)" href="#generate_changelog.context.GroupingContext">GroupingContext</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(default_factory)">default_factory</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">grouped_commits</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">GroupingContext</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+    <span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span>
+<span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3507,7 +2811,7 @@
   </span>
 
 <a href="#generate_changelog.context.VersionContext.label" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">label</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3532,7 +2836,7 @@
   </span>
 
 <a href="#generate_changelog.context.VersionContext.metadata" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">metadata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="dataclasses.field" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">field</a></span><span class="p">(</span><span class="n"><span title="dataclasses.field(default_factory)">default_factory</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3557,7 +2861,7 @@
   </span>
 
 <a href="#generate_changelog.context.VersionContext.previous_tag" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">previous_tag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">previous_tag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3582,7 +2886,7 @@
   </span>
 
 <a href="#generate_changelog.context.VersionContext.tag" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">tag</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">tag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3607,7 +2911,7 @@
   </span>
 
 <a href="#generate_changelog.context.VersionContext.tagger" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">tagger</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">tagger</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">

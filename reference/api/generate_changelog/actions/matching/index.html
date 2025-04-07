@@ -848,8 +848,6 @@
       
         
       
-        
-      
     
     
     
@@ -1400,29 +1398,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../indented_logger/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    indented_logger
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../notes/" class="md-nav__link">
         
   
@@ -1814,38 +1789,6 @@
 
 
 
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">CLASS</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            MetadataMatch (generate_changelog.actions.matching.MetadataMatch)" href="#generate_changelog.actions.matching.MetadataMatch">MetadataMatch</a></code></td>
-            <td class="doc-class-details">
-              <div class="doc-md-description">
-                <p>Evaluates an attribute in the metadata against a value using an operator.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            SummaryRegexMatch (generate_changelog.actions.matching.SummaryRegexMatch)" href="#generate_changelog.actions.matching.SummaryRegexMatch">SummaryRegexMatch</a></code></td>
-            <td class="doc-class-details">
-              <div class="doc-md-description">
-                <p>Matches the commit summary using a regular expression.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-
-
-
-
 
   <div class="doc doc-children">
 
@@ -1865,7 +1808,7 @@
 
 
 <a href="#generate_changelog.actions.matching.MetadataMatch" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">MetadataMatch</span><span class="p">(</span><span class="n">attribute</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">operator</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">MetadataMatch</span><span class="p">(</span><span class="n">attribute</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">operator</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1875,7 +1818,7 @@
 
 
 <p><span class="doc-section-title">Examples:</span></p>
-    <p>To group breaking changes:</p>
+    <p>To group breaking changes::</p>
 <div class="highlight"><pre><span></span><code>- action: MetadataMatch
   category: Breaking Changes
   kwargs:
@@ -1883,7 +1826,7 @@
     operator: is
     value: True
 </code></pre></div>
-<p>To match a specific value:</p>
+<p>To match a specific value::</p>
 <div class="highlight"><pre><span></span><code>- action: MetadataMatch
   category: Feature
   kwargs:
@@ -1891,7 +1834,7 @@
     operator: ==
     value: feat
 </code></pre></div>
-<p>To match multiple values:</p>
+<p>To match multiple values::</p>
 <div class="highlight"><pre><span></span><code>- action: MetadataMatch
   category: Updates
   kwargs:
@@ -2025,30 +1968,6 @@
 
 
 
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">METHOD</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-            <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.matching.MetadataMatch.__call__)" href="#generate_changelog.actions.matching.MetadataMatch.__call__">__call__</a></code></td>
-              <td class="doc-function-details">
-                <div class="doc-md-description">
-                  <p>Does the commit metadata attribute meet the conditional?</p>
-                </div>
-              </td>
-            </tr>
-      </tbody>
-    </table>
-
-
-
-
-
-
   <div class="doc doc-children">
 
 
@@ -2070,17 +1989,17 @@
   </span>
 
 <a href="#generate_changelog.actions.matching.MetadataMatch.operator_map" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">operator_map</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Dict" href="https://docs.python.org/3/library/typing.html#typing.Dict">Dict</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;==&quot;</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="operator.eq" href="https://docs.python.org/3/library/operator.html#operator.eq">eq</a></span><span class="p">,</span>
-    <span class="s2">&quot;!=&quot;</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="operator.ne" href="https://docs.python.org/3/library/operator.html#operator.ne">ne</a></span><span class="p">,</span>
-    <span class="s2">&quot;&lt;&quot;</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="operator.lt" href="https://docs.python.org/3/library/operator.html#operator.lt">lt</a></span><span class="p">,</span>
-    <span class="s2">&quot;&gt;&quot;</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="operator.gt" href="https://docs.python.org/3/library/operator.html#operator.gt">gt</a></span><span class="p">,</span>
-    <span class="s2">&quot;&gt;=&quot;</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="operator.ge" href="https://docs.python.org/3/library/operator.html#operator.ge">ge</a></span><span class="p">,</span>
-    <span class="s2">&quot;&lt;=&quot;</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="operator.le" href="https://docs.python.org/3/library/operator.html#operator.le">le</a></span><span class="p">,</span>
-    <span class="s2">&quot;is&quot;</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="operator.is_" href="https://docs.python.org/3/library/operator.html#operator.is_">is_</a></span><span class="p">,</span>
-    <span class="s2">&quot;is not&quot;</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="operator.is_not" href="https://docs.python.org/3/library/operator.html#operator.is_not">is_not</a></span><span class="p">,</span>
-    <span class="s2">&quot;in&quot;</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="operator.contains" href="https://docs.python.org/3/library/operator.html#operator.contains">contains</a></span><span class="p">,</span>
-    <span class="s2">&quot;not in&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n"><span title="x">x</span></span> <span class="ow">not</span> <span class="ow">in</span> <span class="n"><span title="y">y</span></span><span class="p">,</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">operator_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;==&quot;</span><span class="p">:</span> <span class="n">eq</span><span class="p">,</span>
+    <span class="s2">&quot;!=&quot;</span><span class="p">:</span> <span class="n">ne</span><span class="p">,</span>
+    <span class="s2">&quot;&lt;&quot;</span><span class="p">:</span> <span class="n">lt</span><span class="p">,</span>
+    <span class="s2">&quot;&gt;&quot;</span><span class="p">:</span> <span class="n">gt</span><span class="p">,</span>
+    <span class="s2">&quot;&gt;=&quot;</span><span class="p">:</span> <span class="n">ge</span><span class="p">,</span>
+    <span class="s2">&quot;&lt;=&quot;</span><span class="p">:</span> <span class="n">le</span><span class="p">,</span>
+    <span class="s2">&quot;is&quot;</span><span class="p">:</span> <span class="n">is_</span><span class="p">,</span>
+    <span class="s2">&quot;is not&quot;</span><span class="p">:</span> <span class="n">is_not</span><span class="p">,</span>
+    <span class="s2">&quot;in&quot;</span><span class="p">:</span> <span class="n">contains</span><span class="p">,</span>
+    <span class="s2">&quot;not in&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">y</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -2102,12 +2021,7 @@
 
 
 <a href="#generate_changelog.actions.matching.MetadataMatch.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">commit</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            CommitContext
-
-
-  
-      dataclass
-   (generate_changelog.context.CommitContext)" href="../../context/#generate_changelog.context.CommitContext">CommitContext</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">commit</span><span class="p">:</span> <span class="n">CommitContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2136,7 +2050,7 @@
 
 
 <a href="#generate_changelog.actions.matching.SummaryRegexMatch" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">SummaryRegexMatch</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">SummaryRegexMatch</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2146,15 +2060,16 @@
 <p>If <code>pattern</code> is <code>None</code> all commits will match.</p>
 
 
-<p><span class="doc-section-title">Examples:</span></p>
-    <p>In <code>.changelog-config.yaml</code>:</p>
+<details class="example" open>
+  <summary>Example</summary>
+  <p>In <code>.changelog-config.yaml</code> ::</p>
 <div class="highlight"><pre><span></span><code>commit_classifiers:
 - action: SummaryRegexMatch
   category: New
   kwargs:
     pattern: (?i)^(?:new|add)[^\n]*$
 </code></pre></div>
-
+</details>
 
 <table>
       <thead>
@@ -2196,30 +2111,6 @@
 
 
 
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">METHOD</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-            <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.matching.SummaryRegexMatch.__call__)" href="#generate_changelog.actions.matching.SummaryRegexMatch.__call__">__call__</a></code></td>
-              <td class="doc-function-details">
-                <div class="doc-md-description">
-                  <p>Does the commit summary match the pattern?</p>
-                </div>
-              </td>
-            </tr>
-      </tbody>
-    </table>
-
-
-
-
-
-
   <div class="doc doc-children">
 
 
@@ -2238,12 +2129,7 @@
 
 
 <a href="#generate_changelog.actions.matching.SummaryRegexMatch.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">commit</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            CommitContext
-
-
-  
-      dataclass
-   (generate_changelog.context.CommitContext)" href="../../context/#generate_changelog.context.CommitContext">CommitContext</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">commit</span><span class="p">:</span> <span class="n">CommitContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">

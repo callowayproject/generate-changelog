@@ -848,8 +848,6 @@
       
         
       
-        
-      
     
     
     
@@ -1210,29 +1208,6 @@
   
   <span class="md-ellipsis">
     git_ops
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../indented_logger/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    indented_logger
     
   </span>
   
@@ -1639,129 +1614,6 @@
 
 
 
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">MODULE</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="generate_changelog.actions.file_processing" href="file_processing/#generate_changelog.actions.file_processing">file_processing</a></code></td>
-            <td class="doc-module-details">
-              <div class="doc-md-description">
-                <p>File reading and writing actions.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="generate_changelog.actions.matching" href="matching/#generate_changelog.actions.matching">matching</a></code></td>
-            <td class="doc-module-details">
-              <div class="doc-md-description">
-                <p>Commit matching functions.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="generate_changelog.actions.metadata" href="metadata/#generate_changelog.actions.metadata">metadata</a></code></td>
-            <td class="doc-module-details">
-              <div class="doc-md-description">
-                <p>Metadata callback and processing functions.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="generate_changelog.actions.shell" href="shell/#generate_changelog.actions.shell">shell</a></code></td>
-            <td class="doc-module-details">
-              <div class="doc-md-description">
-                <p>Shell commands for processing.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="generate_changelog.actions.text_processing" href="text_processing/#generate_changelog.actions.text_processing">text_processing</a></code></td>
-            <td class="doc-module-details">
-              <div class="doc-md-description">
-                <p>Text functions.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">CLASS</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            Registry (generate_changelog.actions.Registry)" href="#generate_changelog.actions.Registry">Registry</a></code></td>
-            <td class="doc-class-details">
-              <div class="doc-md-description">
-                <p>Built-in action registry.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">FUNCTION</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-            <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="            register_builtin (generate_changelog.actions.register_builtin)" href="#generate_changelog.actions.register_builtin">register_builtin</a></code></td>
-              <td class="doc-function-details">
-                <div class="doc-md-description">
-                  <p>A decorator that registers a function with an optional name.</p>
-                </div>
-              </td>
-            </tr>
-      </tbody>
-    </table>
-
-
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">ATTRIBUTE</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            BUILT_INS
-
-
-  
-      module-attribute
-   (generate_changelog.actions.BUILT_INS)" href="#generate_changelog.actions.BUILT_INS">BUILT_INS</a></code></td>
-            <td class="doc-attribute-details">
-              <div class="doc-md-description">
-                <p>The registered actions that are considered to be built-in.</p>
-              </div>
-              <p>
-              </p>
-            </td>
-          </tr>
-      </tbody>
-    </table>
 
 
 
@@ -1786,7 +1638,7 @@
   </span>
 
 <a href="#generate_changelog.actions.BUILT_INS" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">BUILT_INS</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="            Registry (generate_changelog.actions.Registry)" href="#generate_changelog.actions.Registry">Registry</a></span><span class="p">()</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">BUILT_INS</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">()</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1807,7 +1659,11 @@
 
 
 <a href="#generate_changelog.actions.Registry" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">Registry</span><span class="p">(</span><span class="n">initialdata</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="typing.MutableMapping" href="https://docs.python.org/3/library/typing.html#typing.MutableMapping">MutableMapping</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">Registry</span><span class="p">(</span>
+    <span class="n">initialdata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span>
+        <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1823,46 +1679,6 @@ getting the key.</p>
 
 
 
-
-
-
-
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">METHOD</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-            <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="            __contains__ (generate_changelog.actions.Registry.__contains__)" href="#generate_changelog.actions.Registry.__contains__">__contains__</a></code></td>
-              <td class="doc-function-details">
-                <div class="doc-md-description">
-                  <p>Make sure the built-in actions are loaded before testing containment.</p>
-                </div>
-              </td>
-            </tr>
-            <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="            __getitem__ (generate_changelog.actions.Registry.__getitem__)" href="#generate_changelog.actions.Registry.__getitem__">__getitem__</a></code></td>
-              <td class="doc-function-details">
-                <div class="doc-md-description">
-                  <p>Make sure the built-in actions are loaded.</p>
-                </div>
-              </td>
-            </tr>
-            <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="            load_builtins (generate_changelog.actions.Registry.load_builtins)" href="#generate_changelog.actions.Registry.load_builtins">load_builtins</a></code></td>
-              <td class="doc-function-details">
-                <div class="doc-md-description">
-                  <p>Import all submodules so the decorated functions get registered.</p>
-                </div>
-              </td>
-            </tr>
-      </tbody>
-    </table>
 
 
 
@@ -1887,7 +1703,7 @@ getting the key.</p>
 
 
 <a href="#generate_changelog.actions.Registry.__contains__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__contains__</span><span class="p">(</span><span class="nf">key</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#object">object</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__contains__</span><span class="p">(</span><span class="nf">key</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1907,7 +1723,7 @@ getting the key.</p>
 
 
 <a href="#generate_changelog.actions.Registry.__getitem__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__getitem__</span><span class="p">(</span><span class="nf">key</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__getitem__</span><span class="p">(</span><span class="nf">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1956,7 +1772,9 @@ getting the key.</p>
 
 
 <a href="#generate_changelog.actions.register_builtin" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">register_builtin</span><span class="p">(</span><span class="n">function_or_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Callable" href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a></span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">register_builtin</span><span class="p">(</span>
+    <span class="n">function_or_name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
