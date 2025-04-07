@@ -214,6 +214,7 @@ def suggest_release_type(current_branch: str, version_contexts: List[VersionCont
     logger.info("Processing commits to suggest release type...")
     logger.indent()
     rule_processor = RuleProcessor(rule_list=config.release_hint_rules)
+    logger.debug("Current branch: %s", current_branch)
     logger.debug(rule_processor.rule_string())
 
     # If the latest release is not "unreleased", there is no need for a release

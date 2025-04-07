@@ -34,6 +34,9 @@ jobs:
       - name: Get the release hint
         id: changelog
         uses: ./
+        with:
+          branch_override: ${{ github.event.pull_request.base.ref }}
+          skip_output_pipeline: "true"
 
       - name: Get Metadata
         id: get-metadata
