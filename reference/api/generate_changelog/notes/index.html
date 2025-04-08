@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../git_ops/">
+        <link rel="prev" href="../indented_logger/">
       
       
         <link rel="next" href="../pipeline/">
@@ -848,6 +848,8 @@
       
         
       
+        
+      
     
     
     
@@ -1206,6 +1208,29 @@
   
   <span class="md-ellipsis">
     git_ops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../indented_logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    indented_logger
     
   </span>
   
@@ -1745,6 +1770,82 @@
 
 
 
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">CLASS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            MissingConfigurationError (generate_changelog.notes.MissingConfigurationError)" href="#generate_changelog.notes.MissingConfigurationError">MissingConfigurationError</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>An optional part of the configuration is missing for this operation.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">FUNCTION</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_changelog_path (generate_changelog.notes.get_changelog_path)" href="#generate_changelog.notes.get_changelog_path">get_changelog_path</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Return the path to the changelog.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_section_pattern (generate_changelog.notes.get_section_pattern)" href="#generate_changelog.notes.get_section_pattern">get_section_pattern</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Get the version section pattern for the changelog.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_version_notes (generate_changelog.notes.get_version_notes)" href="#generate_changelog.notes.get_version_notes">get_version_notes</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Parse the changelog.md file and return the notes for the given version.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            pairs (generate_changelog.notes.pairs)" href="#generate_changelog.notes.pairs">pairs</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Return successive non-overlapping pairs taken from the input iterable.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            split_changelog (generate_changelog.notes.split_changelog)" href="#generate_changelog.notes.split_changelog">split_changelog</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Read the changelog and split it into version and note sections.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
 
   <div class="doc doc-children">
 
@@ -1780,6 +1881,10 @@
 
 
 
+
+
+
+
     </div>
 
 </div>
@@ -1793,7 +1898,7 @@
 
 
 <a href="#generate_changelog.notes.get_changelog_path" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_changelog_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_changelog_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1861,7 +1966,7 @@
 
 
 <a href="#generate_changelog.notes.get_section_pattern" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_section_pattern</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_section_pattern</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1929,7 +2034,7 @@
 
 
 <a href="#generate_changelog.notes.get_version_notes" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_version_notes</span><span class="p">(</span><span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_version_notes</span><span class="p">(</span><span class="n">version</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1949,7 +2054,7 @@
 
 
 <a href="#generate_changelog.notes.pairs" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">pairs</span><span class="p">(</span><span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">pairs</span><span class="p">(</span><span class="n">iterable</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Iterable" href="https://docs.python.org/3/library/typing.html#typing.Iterable">Iterable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Iterator" href="https://docs.python.org/3/library/typing.html#typing.Iterator">Iterator</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="typing.Tuple" href="https://docs.python.org/3/library/typing.html#typing.Tuple">Tuple</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">]]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1957,17 +2062,11 @@
         <p>Return successive non-overlapping pairs taken from the input iterable.</p>
 
 
-<details class="example" open>
-  <summary>Example</summary>
-  <blockquote>
-<blockquote>
-<blockquote>
-<p>list(pairs(&lsquo;ABCDEFG&rsquo;))
-[(&lsquo;A&rsquo;, &lsquo;B&rsquo;), (&lsquo;C&rsquo;, &lsquo;D&rsquo;), (&lsquo;E&rsquo;, &lsquo;F&rsquo;), (&lsquo;G&rsquo;, None)]</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</details>
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">pairs</span><span class="p">(</span><span class="s1">&#39;ABCDEFG&#39;</span><span class="p">))</span>
+<span class="go">[(&#39;A&#39;, &#39;B&#39;), (&#39;C&#39;, &#39;D&#39;), (&#39;E&#39;, &#39;F&#39;), (&#39;G&#39;, None)]</span>
+</code></pre></div>
+
 
 <table>
       <thead>
@@ -2034,8 +2133,8 @@
 
 <a href="#generate_changelog.notes.split_changelog" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">split_changelog</span><span class="p">(</span>
-    <span class="n">contents</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">section_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
+    <span class="n">contents</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">section_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="typing.Tuple" href="https://docs.python.org/3/library/typing.html#typing.Tuple">Tuple</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2073,8 +2172,14 @@
             </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
-                <p>A regex pattern to split the changelog into sections. If <code>None</code>, the pattern
-is derived from the <code>starting_tag_pipeline</code> configuration option.</p>
+                <p>A regex pattern to split the changelog into sections.
+If <code>None</code>, the pattern is derived from the <a class="autorefs autorefs-internal" title="            starting_tag_pipeline
+
+
+  
+      class-attribute
+      instance-attribute
+  " href="../configuration/#generate_changelog.configuration.Configuration.starting_tag_pipeline"><code>starting_tag_pipeline</code></a> configuration option.</p>
               </div>
               <p>
                   <span class="doc-param-annotation">

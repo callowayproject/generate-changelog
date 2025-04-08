@@ -848,6 +848,8 @@
       
         
       
+        
+      
     
     
     
@@ -1527,6 +1529,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../indented_logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    indented_logger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../notes/" class="md-nav__link">
         
   
@@ -1918,6 +1943,81 @@
 
 
 
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">CLASS</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            IncrementalFileInsert
+
+
+  
+      dataclass
+   (generate_changelog.actions.file_processing.IncrementalFileInsert)" href="#generate_changelog.actions.file_processing.IncrementalFileInsert">IncrementalFileInsert</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Replace the start of a file with text.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            ReadFile
+
+
+  
+      dataclass
+   (generate_changelog.actions.file_processing.ReadFile)" href="#generate_changelog.actions.file_processing.ReadFile">ReadFile</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Return a file&rsquo;s contents when called.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            WriteFile
+
+
+  
+      dataclass
+   (generate_changelog.actions.file_processing.WriteFile)" href="#generate_changelog.actions.file_processing.WriteFile">WriteFile</a></code></td>
+            <td class="doc-class-details">
+              <div class="doc-md-description">
+                <p>Write the passed string to a file when called.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">FUNCTION</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            stdout (generate_changelog.actions.file_processing.stdout)" href="#generate_changelog.actions.file_processing.stdout">stdout</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Write content to stdout.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
 
   <div class="doc doc-children">
 
@@ -1942,8 +2042,17 @@
 
 <a href="#generate_changelog.actions.file_processing.IncrementalFileInsert" class="headerlink" title="Permanent link">&para;</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">IncrementalFileInsert</span><span class="p">(</span>
-    <span class="n">filename</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">,</span>
-    <span class="n">last_heading_pattern</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">,</span>
+    <span class="n">filename</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">,</span> <span class="n">last_heading_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -1957,6 +2066,90 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.file_processing.IncrementalFileInsert.__call__)" href="#generate_changelog.actions.file_processing.IncrementalFileInsert.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Replace the beginning of the file up to <code>last_heading_pattern</code> with <code>input_text</code> .</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            filename
+
+
+  
+      instance-attribute
+   (generate_changelog.actions.file_processing.IncrementalFileInsert.filename)" href="#generate_changelog.actions.file_processing.IncrementalFileInsert.filename">filename</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The file name to write when called.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            last_heading_pattern
+
+
+  
+      instance-attribute
+   (generate_changelog.actions.file_processing.IncrementalFileInsert.last_heading_pattern)" href="#generate_changelog.actions.file_processing.IncrementalFileInsert.last_heading_pattern">last_heading_pattern</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>A regular expression to detect the last heading. Content before this position is re-rendered and inserted.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -1982,7 +2175,12 @@
   </span>
 
 <a href="#generate_changelog.actions.file_processing.IncrementalFileInsert.filename" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">filename</span><span class="p">:</span> <span class="n">StrOrCallable</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2006,7 +2204,12 @@
   </span>
 
 <a href="#generate_changelog.actions.file_processing.IncrementalFileInsert.last_heading_pattern" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">last_heading_pattern</span><span class="p">:</span> <span class="n">StrOrCallable</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">last_heading_pattern</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2027,7 +2230,17 @@
 
 
 <a href="#generate_changelog.actions.file_processing.IncrementalFileInsert.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StrOrCallable</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2122,9 +2335,12 @@
   </span>
 
 <a href="#generate_changelog.actions.file_processing.ReadFile" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ReadFile</span><span class="p">(</span>
-    <span class="n">filename</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">,</span> <span class="n">create_if_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">ReadFile</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">,</span> <span class="n">create_if_missing</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2137,6 +2353,86 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.file_processing.ReadFile.__call__)" href="#generate_changelog.actions.file_processing.ReadFile.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Return the contents of the file.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            create_if_missing
+
+
+  
+      class-attribute
+      instance-attribute
+   (generate_changelog.actions.file_processing.ReadFile.create_if_missing)" href="#generate_changelog.actions.file_processing.ReadFile.create_if_missing">create_if_missing</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>When True, create a missing file. Otherwise returns an error.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            filename
+
+
+  
+      instance-attribute
+   (generate_changelog.actions.file_processing.ReadFile.filename)" href="#generate_changelog.actions.file_processing.ReadFile.filename">filename</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The file name to read when called.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2163,7 +2459,7 @@
   </span>
 
 <a href="#generate_changelog.actions.file_processing.ReadFile.create_if_missing" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">create_if_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">create_if_missing</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">True</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2187,7 +2483,12 @@
   </span>
 
 <a href="#generate_changelog.actions.file_processing.ReadFile.filename" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">filename</span><span class="p">:</span> <span class="n">StrOrCallable</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2208,7 +2509,7 @@
 
 
 <a href="#generate_changelog.actions.file_processing.ReadFile.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="o">*</span><span class="nf">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="o">*</span><span class="nf">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2241,7 +2542,12 @@
   </span>
 
 <a href="#generate_changelog.actions.file_processing.WriteFile" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">WriteFile</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">WriteFile</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2254,6 +2560,66 @@
 
 
 
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">METHOD</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            __call__ (generate_changelog.actions.file_processing.WriteFile.__call__)" href="#generate_changelog.actions.file_processing.WriteFile.__call__">__call__</a></code></td>
+              <td class="doc-function-details">
+                <div class="doc-md-description">
+                  <p>Writes input_text to the pre-configured file.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">ATTRIBUTE</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            filename
+
+
+  
+      instance-attribute
+   (generate_changelog.actions.file_processing.WriteFile.filename)" href="#generate_changelog.actions.file_processing.WriteFile.filename">filename</a></code></td>
+            <td class="doc-attribute-details">
+              <div class="doc-md-description">
+                <p>The file name to write when called.</p>
+              </div>
+              <p>
+                  <span class="doc-attribute-annotation">
+                    <b>TYPE:</b>
+                      <code><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></code>
+                  </span>
+              </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2279,7 +2645,12 @@
   </span>
 
 <a href="#generate_changelog.actions.file_processing.WriteFile.filename" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">filename</span><span class="p">:</span> <span class="n">StrOrCallable</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2300,7 +2671,17 @@
 
 
 <a href="#generate_changelog.actions.file_processing.WriteFile.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n">StrOrCallable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StrOrCallable</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">input_text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="            StrOrCallable
+
+
+  
+      module-attribute
+   (generate_changelog.configuration.StrOrCallable)" href="../../configuration/#generate_changelog.configuration.StrOrCallable">StrOrCallable</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2329,7 +2710,7 @@
 
 
 <a href="#generate_changelog.actions.file_processing.stdout" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">stdout</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">stdout</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
