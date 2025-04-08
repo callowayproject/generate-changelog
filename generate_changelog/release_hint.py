@@ -3,9 +3,15 @@
 import copy
 import fnmatch
 import re
+from collections import defaultdict
 from dataclasses import dataclass
-from typing import List, Optional, Sequence, Set, Union
+from itertools import groupby
+from operator import attrgetter
+from typing import Iterable, List, Optional, Sequence, Set, Union
 
+from rich.box import SIMPLE
+from rich.console import Group, RenderableType, group
+from rich.padding import Padding
 from rich.table import Table
 from rich.text import Text
 
@@ -26,6 +32,8 @@ class InvalidRuleError(Exception):
 class ReleaseRuleResult:
     """The result of evaluating a release rule."""
 
+    rule_id: int
+    commit: str
     matches_grouping: bool
     matches_path: bool
     matches_branch: bool
@@ -45,6 +53,7 @@ class ReleaseRule:
     A commit evaluation rule for hinting at the level of change.
 
     Args:
+        id_: The id of this rule. Used for debugging.
         match_result: Release type if a commit context matches the rule.
         no_match_result: Release type if a commit context doesn't match the rule.
         grouping: The partial or exact grouping of the commit context
@@ -54,12 +63,14 @@ class ReleaseRule:
 
     def __init__(
         self,
+        id_: int,
         match_result: Optional[str],
         no_match_result: Optional[str] = "no-release",
         grouping: Union[str, tuple, list, None] = None,
         path: Optional[Union[str, Sequence[str]]] = None,
         branch: Optional[str] = None,
     ):
+        self.id = id_
         self.match_result = match_result
         self.no_match_result = no_match_result or "no-release"
         self.grouping = grouping if grouping != "*" else None
@@ -146,6 +157,8 @@ class ReleaseRule:
         matches_all = all([matches_grouping, matches_path, matches_branch])
         result = self.match_result if matches_all else self.no_match_result
         return ReleaseRuleResult(
+            rule_id=self.id,
+            commit=commit.sha[:7],
             matches_grouping=matches_grouping,
             matches_path=matches_path,
             matches_branch=matches_branch,
@@ -162,7 +175,7 @@ class RuleProcessor:
     """
 
     def __init__(self, rule_list: List[dict]):
-        self.rules = [ReleaseRule(**kwargs) for kwargs in rule_list]
+        self.rules = [ReleaseRule(id_=idx, **kwargs) for idx, kwargs in enumerate(rule_list)]
         self.results: List[ReleaseRuleResult] = []
 
     def __call__(self, commit: CommitContext, current_branch: str) -> Optional[str]:
@@ -187,13 +200,14 @@ class RuleProcessor:
     def rule_string(self) -> str:
         """Return a string representation of the rules."""
         output: List[str] = []
-        for i, rule in enumerate(self.rules):
+        for rule in self.rules:
             output.extend(
                 (
-                    f"Rule: {i}",
+                    f"Rule: {rule.id}",
                     f"  Grouping: {rule.grouping}",
                     f"  Path: {rule.path}",
                     f"  Branch: {rule.branch}",
+                    f"  Match (no-match) Result: {rule.match_result} ({rule.no_match_result})",
                 )
             )
         return "\n".join(output)
@@ -224,12 +238,17 @@ def suggest_release_type(current_branch: str, version_contexts: List[VersionCont
         return "no-release"
 
     suggestions = set()
-    results = {}
+    results = defaultdict(list)
+    commit_results = {}
     for commit_group in version_contexts[0].grouped_commits:
-        suggestions |= {rule_processor(commit, current_branch) for commit in commit_group.commits}
-        results["Grouping: " + " ".join(commit_group.grouping)] = copy.deepcopy(rule_processor.results)
+        for commit in commit_group.commits:
+            new_suggestions = rule_processor(commit, current_branch)
+            suggestions.add(new_suggestions)
+            grouping_str = "Grouping: " + " ".join(commit_group.grouping)
+            commit_results[commit.sha] = new_suggestions
+            results[grouping_str].extend(copy.deepcopy(rule_processor.results))
 
-    print_table(results)
+    print_table(results, commit_results)
 
     if not suggestions:
         logger.info("No suggestions found. No release is suggested.")
@@ -248,22 +267,35 @@ def format_bool(bool_var: bool) -> Text:
     return Text("X", style="bold green") if bool_var else Text("-", style="bold red")
 
 
-def print_table(results: dict) -> None:
+def print_table(results: dict, commit_results: dict) -> None:
     """Print the test results as a table."""
+    group = []
     for group_name, result_list in results.items():
-        table = Table(title=group_name, title_justify="left")
-        table.add_column("Rule", justify="center")
-        table.add_column("Group", justify="center")
-        table.add_column("Path", justify="center")
-        table.add_column("Branch", justify="center")
-        table.add_column("Result")
+        group.append(Text(group_name))
 
-        for i, result in enumerate(result_list):
-            table.add_row(
-                str(i),
-                format_bool(result.matches_grouping),
-                format_bool(result.matches_path),
-                format_bool(result.matches_branch),
-                result.result,
-            )
-        logger.debug(table)
+        group.extend(
+            Padding(get_commit_results(list(commit_results)), (0, 0, 0, 2))
+            for commit_sha, commit_results in groupby(result_list, attrgetter("commit"))
+        )
+    logger.debug(Group(*group))
+
+
+@group()
+def get_commit_results(results: List[ReleaseRuleResult]) -> Iterable[RenderableType]:
+    """Return the contents of the commit results table."""
+    yield Text(f"Commit {results[0].commit}")
+    table = Table(box=SIMPLE)
+    table.add_column("Rule", justify="center")
+    table.add_column("Group", justify="center")
+    table.add_column("Path", justify="center")
+    table.add_column("Branch", justify="center")
+    table.add_column("Result")
+    for result in results:
+        table.add_row(
+            str(result.rule_id),
+            format_bool(result.matches_grouping),
+            format_bool(result.matches_path),
+            format_bool(result.matches_branch),
+            result.result,
+        )
+    yield Padding(table, (0, 0, 0, 2))
