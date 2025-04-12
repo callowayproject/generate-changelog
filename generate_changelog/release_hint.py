@@ -7,10 +7,11 @@ from collections import defaultdict
 from dataclasses import dataclass
 from itertools import groupby
 from operator import attrgetter
+from pathlib import Path
 from typing import Iterable, List, Optional, Sequence, Set, Union
 
 from rich.box import SIMPLE
-from rich.console import Group, RenderableType, group
+from rich.console import Console, Group, RenderableType, group
 from rich.padding import Padding
 from rich.table import Table
 from rich.text import Text
@@ -227,9 +228,12 @@ def suggest_release_type(current_branch: str, version_contexts: List[VersionCont
     """
     logger.info("Processing commits to suggest release type...")
     logger.indent()
+
     rule_processor = RuleProcessor(rule_list=config.release_hint_rules)
-    logger.debug("Current branch: %s", current_branch)
-    logger.debug(rule_processor.rule_string())
+    report_parts = [
+        Text(f"Current branch: {current_branch}"),
+        rule_processor.rule_string(),
+    ]
 
     # If the latest release is not "unreleased", there is no need for a release
     if version_contexts[0].label != config.unreleased_label:
@@ -248,7 +252,7 @@ def suggest_release_type(current_branch: str, version_contexts: List[VersionCont
             commit_results[commit.sha] = new_suggestions
             results[grouping_str].extend(copy.deepcopy(rule_processor.results))
 
-    print_table(results, commit_results)
+    report_parts.append(print_table(results, commit_results))
 
     if not suggestions:
         logger.info("No suggestions found. No release is suggested.")
@@ -257,6 +261,9 @@ def suggest_release_type(current_branch: str, version_contexts: List[VersionCont
 
     sorted_suggestions = sorted(suggestions, key=lambda s: RELEASE_TYPE_ORDER.index(s))
     result = sorted_suggestions[-1] or "no-release"
+
+    report_parts.append(Text(f"Suggested release type: {result}"))
+    output_report(report_parts, config.report_path)
     logger.info("Suggested release type: %s", result)
     logger.dedent()
     return result
@@ -267,7 +274,7 @@ def format_bool(bool_var: bool) -> Text:
     return Text("X", style="bold green") if bool_var else Text("-", style="bold red")
 
 
-def print_table(results: dict, commit_results: dict) -> None:
+def print_table(results: dict, commit_results: dict) -> RenderableType:
     """Print the test results as a table."""
     group = []
     for group_name, result_list in results.items():
@@ -277,7 +284,7 @@ def print_table(results: dict, commit_results: dict) -> None:
             Padding(get_commit_results(list(commit_results)), (0, 0, 0, 2))
             for commit_sha, commit_results in groupby(result_list, attrgetter("commit"))
         )
-    logger.debug(Group(*group))
+    return Group(*group)
 
 
 @group()
@@ -291,11 +298,27 @@ def get_commit_results(results: List[ReleaseRuleResult]) -> Iterable[RenderableT
     table.add_column("Branch", justify="center")
     table.add_column("Result")
     for result in results:
+        style = "default" if result.result == "no-release" else "default on cornsilk1"
         table.add_row(
             str(result.rule_id),
             format_bool(result.matches_grouping),
             format_bool(result.matches_path),
             format_bool(result.matches_branch),
             result.result,
+            style=style,
         )
     yield Padding(table, (0, 0, 0, 2))
+
+
+def output_report(renderables: List[RenderableType], path: Optional[Path] = None) -> None:
+    """Output the release hint report."""
+    if path is None:
+        return
+
+    logger.info(f"Writing release hint report to {path}")
+    console = Console(force_terminal=True)
+    with console.capture() as capture:
+        for renderable in renderables:
+            console.print(renderable)
+    output = capture.get()
+    path.write_text(output)

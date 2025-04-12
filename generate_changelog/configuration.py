@@ -204,6 +204,9 @@ class Configuration:
     verbosity: int = 0
     """Level of verbose logging output."""
 
+    report_path: Optional[Path] = None
+    """Path to write a report of the changelog to."""
+
     #
     # Commit filtering
     #
