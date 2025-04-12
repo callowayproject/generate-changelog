@@ -15,7 +15,7 @@ function parse_boolean() {
   esac
 }
 
-changelog_args=("-o" "release-hint")
+changelog_args=("-o" "release-hint" "-d" "/tmp/debug-report.txt")
 
 if [[ -n ${INPUT_STARTING_TAG} ]]; then
   changelog_args+=("-t" "${INPUT_STARTING_TAG}")
@@ -33,5 +33,8 @@ cd /github/workspace
 echo "[action-generate-changelog] Generating the changelog with arguments '${changelog_args[*]}'"
 
 RELEASE_HINT=$(generate-changelog ${changelog_args[*]})
+echo "::group::Release hint details"
+cat /tmp/debug-report.txt
+echo "::endgroup::"
 echo "::notice::Suggested release type for this branch is: ${RELEASE_HINT}"
 echo "release_hint=$RELEASE_HINT" >> $GITHUB_OUTPUT
