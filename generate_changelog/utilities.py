@@ -4,24 +4,24 @@ from typing import Any, Iterable, Optional
 
 
 def is_action(value: Any) -> bool:
-    """Returns ``True`` if the value is an action."""
+    """Returns `True` if the value is an action."""
     return isinstance(value, dict) and "action" in value
 
 
 def is_pipeline(value: Any) -> bool:
-    """Returns ``True`` if the value is a pipeline."""
+    """Returns `True` if the value is a pipeline."""
     return value and isinstance(value, list) and is_action(value[0])
 
 
 def eval_if_callable(value: Any) -> Any:
     """
-    Tries to evaluate ``value`` as an action, a pipeline, or a callable if possible.
+    Tries to evaluate `value` as an action, a pipeline, or a callable if possible.
 
     Args:
         value: A callable, action dictionary, list of action dictionaries, or other.
 
     Returns:
-        The original value if it can not be evaluated further.
+        The original value if it cannot be evaluated further.
     """
     from generate_changelog.configuration import get_config
     from generate_changelog.pipeline import pipeline_factory
@@ -41,7 +41,7 @@ def pairs(iterable: Iterable) -> Iterable:
     """
     Return successive pairs taken from the input iterable.
 
-    Like :py:func:`itertools.pairwise` in 3.10, but will always include the last element by itself.
+    Like `itertools.pairwise` in 3.10, but will always include the last element by itself.
 
     Example:
             >>> list(pairs("ABCD"))
@@ -64,7 +64,7 @@ def pairs(iterable: Iterable) -> Iterable:
 
 def resolve_name(obj: Any, name: str, default: Any = None) -> Any:
     """
-    Get a key or attr ``name`` from obj or default value.
+    Get a key or attr `name` from obj or default value.
 
     Copied and modified from Django Template variable resolutions
 
@@ -76,7 +76,7 @@ def resolve_name(obj: Any, name: str, default: Any = None) -> Any:
 
     Args:
         obj: The object to access
-        name: A dotted name to the value, such as ``mykey.0.name``
+        name: A dotted name to the value, such as `mykey.0.name`
         default: If the name cannot be resolved from the object, return this value
 
     Returns:

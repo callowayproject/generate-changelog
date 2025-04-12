@@ -1,15 +1,14 @@
 """Testing fixtures."""
 
-from collections.abc import Generator
-from contextlib import contextmanager
-from pathlib import Path
-from typing import Optional
-
 import collections
 import datetime
 import textwrap
 from collections import OrderedDict
+from collections.abc import Generator
+from contextlib import contextmanager
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Optional
 
 import pytest
 from faker import Faker
@@ -108,9 +107,13 @@ def commit_factory(
 
 
 @pytest.fixture
-def bare_git_repo(tmp_path):
+def bare_git_repo(tmp_path) -> Repo:
     """Create a temporary bare git repository."""
-    return Repo.init(tmp_path / "bare-repo", bare=True, initial_branch="master")
+    repo = Repo.init(tmp_path / "bare-repo", bare=True, initial_branch="master")
+    configparser = repo.config_writer("repository")
+    configparser.set_value("commit", "gpgsign", False)
+    configparser.set_value("tag", "gpgsign", False)
+    return repo
 
 
 @pytest.fixture

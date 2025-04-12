@@ -12,6 +12,7 @@ from git import Repo
 from generate_changelog import __version__
 from generate_changelog.commits import get_context_from_tags
 from generate_changelog.configuration import DEFAULT_CONFIG_FILE_NAMES, Configuration, write_default_config
+from generate_changelog.indented_logger import get_indented_logger, setup_logging
 from generate_changelog.release_hint import suggest_release_type
 
 
@@ -57,6 +58,15 @@ def generate_config_callback(ctx: Context, param: Parameter, value: bool) -> Non
 @click.option("--output", "-o", type=click.Choice(["release-hint", "notes", "all"]), help="What output to generate.")
 @click.option("--skip-output-pipeline", is_flag=True, help="Do not execute the output pipeline in the configuration.")
 @click.option("--branch-override", "-b", help="Override the current branch for release hint decisions.")
+@click.option(
+    "--debug-report",
+    "-d",
+    type=click.Path(file_okay=True, dir_okay=False, path_type=Path),
+    required=False,
+    help="Output a debug report to a file.",
+    envvar="CHANGELOG_REPORT_FILE",
+)
+@click.option("--verbose", "-v", count=True, help="Increase verbosity.")
 @click.version_option(version=__version__)
 def cli(
     config: Optional[Path],
@@ -65,6 +75,8 @@ def cli(
     output: Optional[str],
     skip_output_pipeline: bool,
     branch_override: Optional[str],
+    debug_report: Optional[Path],
+    verbose: int,
 ) -> None:
     """Generate a change log from git commits."""
     from generate_changelog import templating
@@ -72,6 +84,13 @@ def cli(
 
     echo_func = functools.partial(echo, quiet=bool(output))
     configuration = get_user_config(config, echo_func)
+    if verbose:
+        configuration.verbosity = verbose
+    if debug_report:
+        configuration.report_path = debug_report
+
+    setup_logging(configuration.verbosity)
+    logger = get_indented_logger(__name__)
 
     repository = Repo(repo_path) if repo_path else Repo(search_parent_directories=True)
 
@@ -83,9 +102,9 @@ def cli(
         starting_tag = start_tag_pipeline.run()
 
     if not starting_tag:
-        echo_func("No starting tag found. Generating entire change log.")
+        logger.info("No starting tag found. Generating entire change log.")
     else:
-        echo_func(f"Generating change log from tag: '{starting_tag}'.")
+        logger.info(f"Generating change log from tag: '{starting_tag}'.")
 
     version_contexts = get_context_from_tags(repository, configuration, starting_tag)
 
@@ -130,10 +149,10 @@ def get_user_config(config_file: Optional[Path], echo_func: Callable) -> Configu
     from generate_changelog.configuration import get_config
 
     config = get_config()
-    user_config = config_file or next(
-        (Path.cwd() / Path(name) for name in DEFAULT_CONFIG_FILE_NAMES if (Path.cwd() / Path(name)).exists()), None
-    )
-    if user_config:
+    if user_config := config_file or next(
+        (Path.cwd() / Path(name) for name in DEFAULT_CONFIG_FILE_NAMES if (Path.cwd() / Path(name)).exists()),
+        None,
+    ):
         echo_func(f"Using configuration file: {user_config}")
         config.update_from_file(user_config)
     else:

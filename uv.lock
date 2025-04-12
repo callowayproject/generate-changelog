@@ -1132,7 +1132,7 @@ python = [
 
 [[package]]
 name = "mkdocstrings-python"
-version = "1.16.8"
+version = "1.16.10"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "griffe" },
@@ -1140,9 +1140,9 @@ dependencies = [
     { name = "mkdocstrings" },
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8e/b8/62190ea298fdb1e84670ef548590748c633ab4e05b35bcf902e89f2f28c6/mkdocstrings_python-1.16.8.tar.gz", hash = "sha256:9453ccae69be103810c1cf6435ce71c8f714ae37fef4d87d16aa92a7c800fe1d", size = 205119 }
+sdist = { url = "https://files.pythonhosted.org/packages/44/c8/600c4201b6b9e72bab16802316d0c90ce04089f8e6bb5e064cd2a5abba7e/mkdocstrings_python-1.16.10.tar.gz", hash = "sha256:f9eedfd98effb612ab4d0ed6dd2b73aff6eba5215e0a65cea6d877717f75502e", size = 205771 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/67/d0/ef6e82f7a68c7ac02e1a01815fbe88773f4f9e40728ed35bd1664a5d76f2/mkdocstrings_python-1.16.8-py3-none-any.whl", hash = "sha256:211b7aaf776cd45578ecb531e5ad0d3a35a8be9101a6bfa10de38a69af9d8fd8", size = 124116 },
+    { url = "https://files.pythonhosted.org/packages/53/37/19549c5e0179785308cc988a68e16aa7550e4e270ec8a9878334e86070c6/mkdocstrings_python-1.16.10-py3-none-any.whl", hash = "sha256:63bb9f01f8848a644bdb6289e86dc38ceddeaa63ecc2e291e3b2ca52702a6643", size = 124112 },
 ]
 
 [[package]]
@@ -1962,11 +1962,11 @@ wheels = [
 
 [[package]]
 name = "typing-extensions"
-version = "4.13.0"
+version = "4.13.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/0e/3e/b00a62db91a83fff600de219b6ea9908e6918664899a2d85db222f4fbf19/typing_extensions-4.13.0.tar.gz", hash = "sha256:0a4ac55a5820789d87e297727d229866c9650f6521b64206413c4fbada24d95b", size = 106520 }
+sdist = { url = "https://files.pythonhosted.org/packages/76/ad/cd3e3465232ec2416ae9b983f27b9e94dc8171d56ac99b345319a9475967/typing_extensions-4.13.1.tar.gz", hash = "sha256:98795af00fb9640edec5b8e31fc647597b4691f099ad75f469a2616be1a76dff", size = 106633 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/86/39b65d676ec5732de17b7e3c476e45bb80ec64eb50737a8dce1a4178aba1/typing_extensions-4.13.0-py3-none-any.whl", hash = "sha256:c8dd92cc0d6425a97c18fbb9d1954e5ff92c1ca881a309c45f06ebc0b79058e5", size = 45683 },
+    { url = "https://files.pythonhosted.org/packages/df/c5/e7a0b0f5ed69f94c8ab7379c599e6036886bffcde609969a5325f47f1332/typing_extensions-4.13.1-py3-none-any.whl", hash = "sha256:4b6cf02909eb5495cfbc3f6e8fd49217e6cc7944e145cdda8caa3734777f9e69", size = 45739 },
 ]
 
 [[package]]

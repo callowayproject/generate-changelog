@@ -30,7 +30,7 @@ class CommitContext:
     """The name and email of the committer as `name <email@ex.com>`."""
 
     grouping: tuple = field(default_factory=tuple)
-    """The values to group this commit based on the ``group_by`` configuration."""
+    """The values to group this commit based on the `group_by` configuration."""
 
     metadata: dict = field(default_factory=dict)
     """Metadata for this commit parsed from the commit message."""
