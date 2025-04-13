@@ -1,5 +1,61 @@
 # Changelog
 
+## 0.15.0 (2025-04-13)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.14.0...0.15.0)
+
+### Fixes
+
+- Fixed workflows. [e314026](https://github.com/callowayproject/generate-changelog/commit/e314026e460854c14b041e70a6511fe21cb07dae)
+    
+  - Replaced custom setup-git action with published action
+  - fixed docker source in action
+- Fix bug in bump-version-preview.yaml. [b3d5106](https://github.com/callowayproject/generate-changelog/commit/b3d5106b3c67d3a1beadb8aa3f97358aba82d151)
+    
+  The dry-run of bump-my-version requires the CHANGELOG.md to have an 0.15.0 header
+- Fix: bump-version-preview and debugging. [a684bcc](https://github.com/callowayproject/generate-changelog/commit/a684bcc7224bf3384a8d999aaa46e2d73570a040)
+    
+- Fixed docstring rendering. [cc9f7eb](https://github.com/callowayproject/generate-changelog/commit/cc9f7eb77b765316357e55814fb7eb00087bb732)
+    
+- Fixed bump-version.yaml workflow. [8bdbf11](https://github.com/callowayproject/generate-changelog/commit/8bdbf110431516e64736e57c24776d1719f034d1)
+    
+  - Added contents: write permission for committing and pushing
+  - Added missing `uv` step
+### New
+
+- Added release hint debuging report to GitHub action output. [4da1360](https://github.com/callowayproject/generate-changelog/commit/4da1360273a59bfd68a73097b8f5af3d0c7fcf30)
+    
+- Add support for generating debug reports in release hints. [f045d37](https://github.com/callowayproject/generate-changelog/commit/f045d3747767eeb0788c254b67d3a6e6286d67ec)
+    
+  Introduced a `report_path` configuration option to write detailed release hint reports to a file. Enhanced logging and report generation, modularized outputs with `output_report`, and added a CLI option `--debug-report` to configure the report file path. Adjusted test cases and imports to accommodate changes.
+- Added workflow_call to build_python workflow. [6a83ef0](https://github.com/callowayproject/generate-changelog/commit/6a83ef090aaadad05bd1f6a3dded3875068c2a6d)
+    
+- Add concurrency control to GitHub Actions workflows. [e29fcee](https://github.com/callowayproject/generate-changelog/commit/e29fcee0de0f4dd9dea51611a7318d5b98a40d1a)
+    
+  Added concurrency groups to "bump-version-preview" and "publish-docs" workflows to prevent overlapping runs. This ensures cleaner and more reliable workflow executions by canceling redundant jobs.
+### Other
+
+- [pre-commit.ci] pre-commit autoupdate. [97a227d](https://github.com/callowayproject/generate-changelog/commit/97a227d6351f31d3d0938ff1cda30234a8a3b542)
+    
+  **updates:** - [github.com/astral-sh/ruff-pre-commit: v0.11.3 → v0.11.4](https://github.com/astral-sh/ruff-pre-commit/compare/v0.11.3...v0.11.4)
+
+- Enable manual workflow triggering and add build provenance. [bfee4b3](https://github.com/callowayproject/generate-changelog/commit/bfee4b39dbfffc887f8942966e7f0d72b3ce0799)
+    
+  Added `workflow_dispatch` to allow manual triggering of the workflow. Included additional permissions and steps to support build provenance attestation via GitHub Actions. This improves the security and flexibility of the build process.
+### Updates
+
+- Refactored verbose release hint logging. [c5b3001](https://github.com/callowayproject/generate-changelog/commit/c5b3001f9424819c6b0922d08f998065a5f20d93)
+    
+- Refactor release hint logic and add indented logger. [529ae78](https://github.com/callowayproject/generate-changelog/commit/529ae78b38ed65bf3ba3f8e4768ea8405bc98271)
+    
+  Refactored `ReleaseRule` to return structured results and updated related tests. Introduced `IndentedLoggerAdapter` for structured, indented logging and integrated it into the change log generation process. Enhanced CLI with verbosity options and improved logging outputs for better traceability.
+- Update release workflows. [692705d](https://github.com/callowayproject/generate-changelog/commit/692705d933491f4ee17999780ce022a84b103a22)
+    
+  Now they are callable from the build-python workflow
+- Update build workflow with release jobs and input support. [a823f51](https://github.com/callowayproject/generate-changelog/commit/a823f51a9ceb2b2e229434c5cb25a8a0988a9864)
+    
+  Added optional `ref` input for workflow_dispatch to support flexible checkouts. Introduced additional jobs for container, GitHub, and PyPI releases, enhancing the release process automation. Adjusted triggers to exclude tag pushes prefixed with 'v'.
+
 ## 0.14.0 (2025-04-03)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.13.0...0.14.0)
