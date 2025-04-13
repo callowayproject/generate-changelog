@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Git
-        uses: ./.github/actions/setup-git
+        uses: fregante/setup-git-user@v2
 
       - name: release-notes
         uses: callowayproject/action-changelog-to-releasenotes@main
