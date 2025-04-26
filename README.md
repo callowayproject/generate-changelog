@@ -101,7 +101,7 @@ jobs:
     steps:
       - name: Generate changelog and release hint
         id: changelog
-        uses: callowayproject/generate-changelog@v1
+        uses: callowayproject/generate-changelog@v0
         with:
           config_file: .changelog-config.yaml
       - name: Use the release hint

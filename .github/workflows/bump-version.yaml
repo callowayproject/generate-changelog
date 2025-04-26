@@ -52,20 +52,20 @@ jobs:
               bump-my-version bump --allow-dirty --verbose "$RELEASE_KIND"
               git push
               git push --tags
-              echo "build_package=false" >> $GITHUB_OUTPUTS
+              echo "build_package=false" >> $GITHUB_OUTPUT
               ;;
             dev)
               echo "Intentionally not bumping version for dev release"
-              echo "build_package=false" >> $GITHUB_OUTPUTS
+              echo "build_package=false" >> $GITHUB_OUTPUT
               # to build a dev release
               # bump-my-python bump --allow-dirty --verbose --no-commit --no-tag
-              # echo "build_package=true" >> $GITHUB_OUTPUTS
+              # echo "build_package=true" >> $GITHUB_OUTPUT
               ;;
             no-release)
-              echo "build_package=false" >> $GITHUB_OUTPUTS
+              echo "build_package=false" >> $GITHUB_OUTPUT
               ;;
             *)
-              echo "build_package=false" >> $GITHUB_OUTPUTS
+              echo "build_package=false" >> $GITHUB_OUTPUT  
               ;;
           esac
 

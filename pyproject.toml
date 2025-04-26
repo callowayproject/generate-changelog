@@ -300,6 +300,11 @@ search = "generate-changelog:v{current_major}"
 replace = "generate-changelog:v{new_major}"
 
 [[tool.bumpversion.files]]
+filename = "README.md"
+search = "generate-changelog:v{current_major}"
+replace = "generate-changelog:v{new_major}"
+
+[[tool.bumpversion.files]]
 filename = "Dockerfile"
 
 [[tool.bumpversion.files]]
