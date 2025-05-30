@@ -2,6 +2,7 @@
 
 import logging
 import logging.config
+import sys
 from contextvars import ContextVar
 from typing import Any, MutableMapping, Optional, Tuple, Union
 
@@ -11,6 +12,7 @@ from rich.padding import Padding
 from rich.text import Text
 
 CURRENT_INDENT = ContextVar("current_indent", default=0)
+PYTHON_3_10_OR_GREATER = sys.version_info >= (3, 10)
 
 
 class IndentedLoggerAdapter(logging.LoggerAdapter):
@@ -85,7 +87,7 @@ class IndentedLoggerAdapter(logging.LoggerAdapter):
         Returns:
             A tuple containing the message and keyword arguments.
         """
-        if isinstance(msg, RenderableType):
+        if PYTHON_3_10_OR_GREATER and isinstance(msg, RenderableType):
             with self.console.capture() as capture:
                 self.console.print(Padding(msg, (0, 0, 0, len(self.indent_str))))
             msg = Text.from_ansi(capture.get())
