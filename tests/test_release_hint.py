@@ -324,7 +324,8 @@ def test_suggest_release_type_multi_groups():
             label=config.unreleased_label,
             grouped_commits=[
                 GroupingContext(
-                    grouping=("ignored",), commits=[commit_context_factory(("Fixes",), {"src/file.py"})]  # "patch"
+                    grouping=("ignored",),
+                    commits=[commit_context_factory(("Fixes",), {"src/file.py"})],  # "patch"
                 ),
                 GroupingContext(
                     grouping=("ignored", "forsure"),
