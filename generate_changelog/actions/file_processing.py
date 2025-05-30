@@ -85,7 +85,33 @@ class IncrementalFileInsert:
         existing_text = filename.read_text() if filename.exists() else ""
 
         match = re.search(pattern, existing_text, re.MULTILINE)
-        new_text = f"{text}\n{existing_text[match.start():]}" if match else text
+        new_text = f"{text}\n{existing_text[match.start() :]}" if match else text
 
         filename.write_text(new_text, encoding="utf-8")
         return input_text
+
+
+@register_builtin
+@dataclass(frozen=True)
+class MDFormat:
+    """Run `mdformat` on a file."""
+
+    filename: StrOrCallable
+    """The file name to format when called."""
+
+    def __call__(self, *args, **kwargs) -> StrOrCallable:
+        """
+        Read the text into a buffer and write it back out with `mdformat`.
+
+        Returns:
+            The formatted text
+        """
+        from mdformat import text as mdformat_text
+
+        filename = Path(eval_if_callable(self.filename))
+        existing_text = filename.read_text() if filename.exists() else ""
+
+        new_text = mdformat_text(existing_text)
+
+        filename.write_text(new_text, encoding="utf-8")
+        return new_text

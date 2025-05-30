@@ -258,6 +258,7 @@ style = "google"
 exclude = '\.git|tests'
 require-return-section-when-returning-nothing = false
 arg-type-hints-in-docstring = false
+should-document-star-arguments = false
 check-return-types = false
 quiet = true
 
