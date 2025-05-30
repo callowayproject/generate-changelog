@@ -91,7 +91,7 @@ class Action:
             try:
                 self.action_function = import_function(action)
             except ImportError:
-                logger.warning("Action '%s' not found. Using noop function.", action)
+                logger.warning(f"Action '{action}' not found. Using noop function.")
                 self.action_function = noop_func
 
     def run(self, context: dict, input_value: Any) -> str:
