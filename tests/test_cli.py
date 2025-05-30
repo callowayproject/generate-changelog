@@ -7,112 +7,145 @@ from pathlib import Path
 from click.testing import CliRunner
 
 import generate_changelog
+from generate_changelog.cli import cli
 from generate_changelog.configuration import write_default_config
 from tests.conftest import inside_dir
-from generate_changelog.cli import cli
 
 runner = CliRunner()
 
 
-def test_app_version():
-    result = runner.invoke(cli, ["--version"])
-    assert result.exit_code == 0
-    assert generate_changelog.__version__ in result.stdout
+class TestCLI:
+    """Tests of the command line interface."""
 
+    def test_version_option_displays_version(self):
+        """The version option displays the version number."""
+        result = runner.invoke(cli, ["--version"])
+        assert result.exit_code == 0
+        assert generate_changelog.__version__ in result.stdout
 
-def test_app_generate_config(mocker):
-    func = mocker.patch("generate_changelog.cli.write_default_config")
-    result = runner.invoke(cli, ["--generate-config"])
-    if result.exit_code != 0:
-        print(result.stdout)
-        traceback.print_exception(*result.exc_info)
-    assert result.exit_code == 0
-    func.assert_called()
-    assert "The configuration file was written to" in result.stdout
+    def test_generate_config_option_generates_config(self, tmp_path: Path):
+        """The generate-config option should write a default configuration file to the current directory."""
+        # Assemble and Act
+        with inside_dir(tmp_path):
+            result = runner.invoke(cli, ["--generate-config"])
 
+        # Assert
+        if result.exit_code != 0:
+            print(result.stdout)
+            traceback.print_exception(*result.exc_info)
+        assert result.exit_code == 0
+        assert "The configuration file was written to" in result.stdout
 
-def test_app_generate_changelog(default_repo):
-    config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
-    result = runner.invoke(cli, ["-r", default_repo.git_dir, "-c", str(config)])
-    if result.exit_code != 0:
-        print(result.stdout)
-        traceback.print_exception(*result.exc_info)
-    assert result.exit_code == 0
-    assert f"Using configuration file: {config}" in result.stdout
+    def test_generate_changelog_to_stdout(self, default_repo, tmp_path: Path):
+        """Generate a changelog to standard out from the default repository."""
+        # Assemble
+        config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
 
+        # Act
+        with inside_dir(tmp_path):
+            result = runner.invoke(cli, ["-r", default_repo.git_dir, "-c", str(config)])
 
-def test_app_generate_release_hint(default_repo):
-    config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
-    result = runner.invoke(
-        cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "release-hint"]
-    )
-    if result.exit_code != 0:
-        print(result.stdout)
-        traceback.print_exception(*result.exc_info)
-    assert result.exit_code == 0
-    assert "minor" in result.stdout
+        # Assert
+        if result.exit_code != 0:
+            print(result.stdout)
+            traceback.print_exception(*result.exc_info)
 
+        assert result.exit_code == 0
+        assert f"Using configuration file: {config}" in result.stdout
+        assert "# Changelog" in result.stdout
 
-def test_app_generate_release_hint_branch_override(default_repo):
-    config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
-    new_branch = default_repo.create_head("my-branch")
-    default_repo.head.reference = new_branch
-    assert default_repo.active_branch.name == "my-branch"
+    def test_generate_release_hint_only(self, default_repo):
+        """Generate a release hint and no changelog from the default repository."""
+        # Assemble
+        config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
 
-    # Check that the default behavior returns a "dev" release hint
-    result = runner.invoke(
-        cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "release-hint"]
-    )
-    if result.exit_code != 0:
-        print(result.stdout)
-        traceback.print_exception(*result.exc_info)
-    assert result.exit_code == 0
-    assert "dev" in result.stdout
+        # Act
+        result = runner.invoke(
+            cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "release-hint"]
+        )
 
-    # Check that the override returns a "minor" release hint
-    result = runner.invoke(
-        cli,
-        [
-            "-r",
-            default_repo.git_dir,
-            "-c",
-            str(config),
-            "-b",
-            "master",
-            "--skip-output-pipeline",
-            "-o",
-            "release-hint",
-        ],
-    )
-    if result.exit_code != 0:
-        print(result.stdout)
-        traceback.print_exception(*result.exc_info)
-    assert result.exit_code == 0
-    assert "minor" in result.stdout
+        # Assert
+        if result.exit_code != 0:
+            print(result.stdout)
+            traceback.print_exception(*result.exc_info)
+        assert result.exit_code == 0
+        assert "minor" in result.stdout
 
+    def test_generate_release_hint_branch_override(self, default_repo):
+        """Can override the branch to generate the release hint from, if different from the current branch."""
+        # Assemble
+        config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
+        new_branch = default_repo.create_head("my-branch")
+        default_repo.head.reference = new_branch
+        assert default_repo.active_branch.name == "my-branch"
 
-def test_app_generate_notes(default_repo):
-    config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
-    result = runner.invoke(
-        cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "notes"]
-    )
-    if result.exit_code != 0:
-        print(result.stdout)
-        traceback.print_exception(*result.exc_info)
-    assert result.exit_code == 0
-    assert result.stdout.startswith("# Changelog")
+        # Check for the default release hint
+        result = runner.invoke(
+            cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "release-hint"]
+        )
 
+        if result.exit_code != 0:
+            print(result.stdout)
+            traceback.print_exception(*result.exc_info)
+        assert result.exit_code == 0
+        assert "dev" in result.stdout
 
-def test_app_generate_all(default_repo):
-    config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
-    result = runner.invoke(cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "all"])
-    if result.exit_code != 0:
-        print(result.stdout)
-        traceback.print_exception(*result.exc_info)
-    assert result.exit_code == 0
-    output = json.loads(result.stdout)
-    assert output["notes"].startswith("# Changelog")
-    assert "minor" == output["release_hint"]
+        # Check that the override returns a "minor" release hint
+        result = runner.invoke(
+            cli,
+            [
+                "-r",
+                default_repo.git_dir,
+                "-c",
+                str(config),
+                "-b",
+                "master",
+                "--skip-output-pipeline",
+                "-o",
+                "release-hint",
+            ],
+        )
+        if result.exit_code != 0:
+            print(result.stdout)
+            traceback.print_exception(*result.exc_info)
+        assert result.exit_code == 0
+        assert "minor" in result.stdout
+
+    def test_generate_notes(self, default_repo):
+        """Generate changelog notes."""
+        # Assemble
+        config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
+
+        # Act
+        result = runner.invoke(
+            cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "notes"]
+        )
+
+        # Assemble
+        if result.exit_code != 0:
+            print(result.stdout)
+            traceback.print_exception(*result.exc_info)
+        assert result.exit_code == 0
+        assert result.stdout.startswith("# Changelog")
+
+    def test_generate_notes_and_hint(self, default_repo):
+        """Generate changelog notes and release hint."""
+        # Assemble
+        config = Path(__file__).parent / "fixtures" / "std-out-config.yaml"
+
+        # Act
+        result = runner.invoke(
+            cli, ["-r", default_repo.git_dir, "-c", str(config), "--skip-output-pipeline", "-o", "all"]
+        )
+
+        # Assert
+        if result.exit_code != 0:
+            print(result.stdout)
+            traceback.print_exception(*result.exc_info)
+        assert result.exit_code == 0
+        output = json.loads(result.stdout)
+        assert output["notes"].startswith("# Changelog")
+        assert output["release_hint"] == "minor"
 
 
 def test_alternative_changelog_path(default_repo):

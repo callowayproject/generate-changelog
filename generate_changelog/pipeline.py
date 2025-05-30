@@ -3,9 +3,12 @@
 from typing import Any, Callable, Optional, Union
 
 from generate_changelog.actions import BUILT_INS
+from generate_changelog.indented_logger import get_indented_logger
+
+logger = get_indented_logger(__name__)
 
 
-def noop_func(**kwargs) -> None:
+def noop_func(*args, **kwargs) -> None:
     """A function that does nothing when called."""
     pass
 
@@ -85,7 +88,11 @@ class Action:
         if action in BUILT_INS:
             self.action_function = BUILT_INS[action]
         else:
-            self.action_function = import_function(action)
+            try:
+                self.action_function = import_function(action)
+            except ImportError:
+                logger.warning(f"Action '{action}' not found. Using noop function.")
+                self.action_function = noop_func
 
     def run(self, context: dict, input_value: Any) -> str:
         """
@@ -159,10 +166,9 @@ def pipeline_factory(
     Create a [`Pipeline`][generate_changelog.pipeline.Pipeline] from a list of actions specified by dictionaries.
 
     Args:
-        action_list: A `list` of `dict`s that specify [`Action`][generate_changelog.pipeline.Action] attributes
+        action_list: A `list` of `dict` that specify [`Action`][generate_changelog.pipeline.Action] attributes
         commit_metadata_func: Optional callable that actions can use to set commit metadata
         version_metadata_func: Optional callable that actions can use to set version metadata
-        **kwargs: keyword arguments to pass to the [`Pipeline`][generate_changelog.pipeline.Pipeline] constructor
 
     Returns:
         The instantiated Pipeline

@@ -43,3 +43,8 @@ jobs:
 
     - name: Build and publish docs
       run: uv run mkdocs gh-deploy --strict
+
+    - name: Build and publish docs preview
+      uses: rossjrw/pr-preview-action@v1
+      with:
+        source-dir: ./site/

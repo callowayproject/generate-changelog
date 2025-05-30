@@ -11,9 +11,6 @@ def deep_merge(*dicts: dict) -> dict:
 
     Pass the dictionaries to merge as parameters to the function.
 
-    Args:
-        *dicts: Dicts to merge with the first one as the base
-
     Returns:
         dict: The merged dict
     """
@@ -56,9 +53,6 @@ def comprehensive_merge(*args: Any) -> Any:  # NOQA: C901
     - Scalars are overwritten by the new values
     - lists are merged and de-duplicated
     - dicts are recursively merged
-
-    Args:
-        *args: Dicts to merge with the first one the base
 
     Returns:
         The merged data
