@@ -2,6 +2,8 @@
 
 from pathlib import Path
 
+import pytest
+
 from generate_changelog import pipeline
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
@@ -23,6 +25,18 @@ def test_action_args_kwargs():
     """Test actions with args and kwargs."""
     action = pipeline.Action("PrefixLines", args=("  ",), kwargs={"first_line": "- "})
     assert action.run({}, "foo\nbar") == "- foo\n  bar\n"
+
+
+def test_action_missing_function_becomes_noop(caplog):
+    """If an action cannot import its function, it becomes a noop action and logs a warning."""
+    # Assemble
+    action = pipeline.Action("foo.bar")
+
+    # Act
+    action.run({}, "foo")
+
+    # Assert
+    assert "Action 'foo.bar' not found" in caplog.text
 
 
 def test_pipeline_factory():
