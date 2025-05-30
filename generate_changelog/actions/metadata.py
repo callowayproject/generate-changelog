@@ -21,12 +21,7 @@ class MetadataCollector:
     metadata: dict = field(default_factory=dict)
 
     def __call__(self, **kwargs: dict):
-        """
-        Put keyword arguments into metadata storage.
-
-        Args:
-            **kwargs: keyword arguments to update metadata
-        """
+        """Put keyword arguments into metadata storage."""
         self.metadata = comprehensive_merge(self.metadata, kwargs)
 
 
