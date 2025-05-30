@@ -30,6 +30,7 @@ dependencies = [
     "click>=8.1.7",
     "GitPython",
     "jinja2",
+    "mdformat>=0.7.22",
     "more-itertools",
     "rich-click>=1.8.4",
     "ruamel.yaml",
