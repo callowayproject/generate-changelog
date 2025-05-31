@@ -265,7 +265,7 @@ quiet = true
 
 [tool.bumpversion]
 allow_dirty = true
-current_version = "0.15.0"
+current_version = "0.16.0"
 commit = true
 commit_args = "--no-verify"
 tag = true
@@ -304,8 +304,8 @@ replace = "generate-changelog:v{new_major}"
 
 [[tool.bumpversion.files]]
 filename = "README.md"
-search = "generate-changelog:v{current_major}"
-replace = "generate-changelog:v{new_major}"
+search = "generate-changelog@v{current_major}"
+replace = "generate-changelog@v{new_major}"
 
 [[tool.bumpversion.files]]
 filename = "Dockerfile"
