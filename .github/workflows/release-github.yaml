@@ -1,13 +1,18 @@
 name: Release to GitHub
 on:
-  workflow_call: {} # This workflow requires the artifacts from build-python.yaml
+  workflow_call:
+    inputs:
+      ref:
+        description: The branch, tag or SHA to checkout. Otherwise, uses the default branch.
+        required: true
+        type: string
 
 jobs:
-  release:
+  release-github:
     name: Create a GitHub release
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
       id-token: write
     steps:
@@ -22,7 +27,7 @@ jobs:
       - name: release-notes
         uses: callowayproject/action-changelog-to-releasenotes@main
         with:
-          target-version: ${GITHUB_REF#refs/tags/}
+          target-version: ${{ inputs.ref }}
 
       - name: Download packages built by build-and-inspect-python-package
         uses: actions/download-artifact@v4
@@ -34,5 +39,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*
-          tag_name: ${GITHUB_REF#refs/tags/}
+          tag_name: ${{ inputs.ref }}
           body_path: release-notes.md

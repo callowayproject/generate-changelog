@@ -72,4 +72,11 @@ jobs:
   call-build-python:
     needs: bump-version
     if: ${{ needs.bump-version.outputs.build_package == 'true' }}
+    permissions:
+      contents: write
+      attestations: write
+      id-token: write
+      packages: write
     uses: ./.github/workflows/build-python.yaml
+    with:
+      ref: ${{ needs.bump-version.outputs.tag_name }}

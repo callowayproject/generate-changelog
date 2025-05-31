@@ -1,10 +1,13 @@
 name: Build Python Package
 
 on:
-  push:
-    tags-ignore:
-      - v*
-  workflow_call: {}
+  workflow_call:
+    inputs:
+      ref:
+        description: The branch, tag or SHA to checkout. Otherwise, uses the default branch.
+        required: false
+        type: string
+        default: ""
   workflow_dispatch:
     inputs:
       ref:
@@ -30,20 +33,39 @@ jobs:
         with:
           attest-build-provenance-github: 'true'
 
-  release-container:
+  call-release-github:
     needs: build-package
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/release-container.yaml
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/release-github.yaml
+    with:
+      ref: ${{ inputs.ref }}
 
-  release-github:
+  call-release-container:
     needs: build-package
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/release-github.yaml
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/release-container.yaml
+    with:
+      ref: ${{ inputs.ref }}
 
   release-pypi:
     needs: build-package
+    permissions:
+      contents: read
+      id-token: write
+    name: Publish released package to pypi.org
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/release-pypi.yaml
+      - name: Download packages built by build-and-inspect-python-package
+        uses: actions/download-artifact@v4
+        with:
+          name: Packages
+          path: dist
+
+      - name: Upload package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
