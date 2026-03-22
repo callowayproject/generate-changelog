@@ -1,12 +1,12 @@
 """Test basic git ops."""
 
-from unittest.mock import patch
+from unittest.mock import MagicMock
 
 import pytest
 from pytest import param
 
 from generate_changelog import git_ops
-from generate_changelog.configuration import Configuration, get_config
+from generate_changelog.configuration import Configuration, get_default_config
 
 
 @pytest.mark.parametrize(
@@ -39,7 +39,7 @@ def test_get_tags(default_repo):
 
 def test_get_commits_by_all_tags(default_repo):
     """Commits should be grouped by tags and filtered."""
-    grouping = git_ops.get_commits_by_tags(default_repo, get_config().tag_pattern)
+    grouping = git_ops.get_commits_by_tags(default_repo, get_default_config().tag_pattern)
 
     assert len(grouping) == 4
 
@@ -51,7 +51,7 @@ def test_get_commits_by_all_tags(default_repo):
 
 def test_get_commits_since_tag(default_repo):
     """Commits should be grouped by tags and filtered since tag."""
-    grouping = git_ops.get_commits_by_tags(default_repo, get_config().tag_pattern, "0.0.2")
+    grouping = git_ops.get_commits_by_tags(default_repo, get_default_config().tag_pattern, "0.0.2")
 
     assert len(grouping) == 2
 
@@ -73,14 +73,11 @@ def test_get_commits_since_tag(default_repo):
 )
 def test_parse_commits_include_merges_flag(include_merges, expect_no_merges_flag):
     """parse_commits should pass --no-merges only when include_merges is False."""
-    from unittest.mock import MagicMock
-
     config = Configuration(include_merges=include_merges)
     mock_repo = MagicMock()
     mock_repo.git.log.return_value = ""  # empty string → no commits
 
-    with patch("generate_changelog.git_ops.get_config", return_value=config):
-        git_ops.parse_commits(mock_repo)
+    git_ops.parse_commits(mock_repo, config=config)
 
     call_args = list(mock_repo.git.log.call_args[0])
 

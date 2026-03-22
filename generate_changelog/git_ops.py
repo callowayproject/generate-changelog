@@ -8,7 +8,7 @@ from typing import List, Optional, Union
 
 from git import Actor, Commit, Repo
 
-from generate_changelog.configuration import get_config
+from generate_changelog.configuration import Configuration, get_config
 
 GIT_FORMAT_KEYS = {
     "sha1": "%H",
@@ -76,7 +76,12 @@ def get_repo(repo_path: Optional[str] = None) -> Repo:
     return Repo(repo_path or os.getcwd())
 
 
-def parse_commits(repository: Repo, starting_rev: Optional[str] = None, ending_rev: Optional[str] = None) -> list:
+def parse_commits(
+    repository: Repo,
+    starting_rev: Optional[str] = None,
+    ending_rev: Optional[str] = None,
+    config: Optional[Configuration] = None,
+) -> list:
     """
     Parse the commits for later processing.
 
@@ -84,10 +89,14 @@ def parse_commits(repository: Repo, starting_rev: Optional[str] = None, ending_r
         repository: The repository object.
         starting_rev: Include all commits after this revision.
         ending_rev: include all commmits before and including this revision.
+        config: The configuration to use. If ``None``, the global config is used.
 
     Returns:
         A list of CommitInfo objects.
     """
+    if config is None:
+        config = get_config()
+
     if starting_rev and ending_rev:
         revs = f"{starting_rev}..{ending_rev}"
     elif starting_rev:
@@ -99,7 +108,7 @@ def parse_commits(repository: Repo, starting_rev: Optional[str] = None, ending_r
 
     log_opts = ["-z", "--topo-order", "--pretty=tformat:%H"]
 
-    if not get_config().include_merges:
+    if not config.include_merges:
         log_opts.append("--no-merges")
 
     log_opts.append(revs)
@@ -145,7 +154,12 @@ def get_tags(repository: Repo) -> List[TagInfo]:
     return tags_list
 
 
-def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag: Optional[str] = None) -> List[GitTag]:
+def get_commits_by_tags(
+    repository: Repo,
+    tag_filter_pattern: str,
+    starting_tag: Optional[str] = None,
+    config: Optional[Configuration] = None,
+) -> List[GitTag]:
     """
     Group commits by the tags they belong to.
 
@@ -153,6 +167,7 @@ def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag:
         repository: The git repository object
         tag_filter_pattern: A regular expression pattern that matches valid tags as versions
         starting_tag: Only include tags after this one
+        config: The configuration to use. If ``None``, the global config is used.
 
     Returns:
         A list of dictionaries with tag information with most recent first
@@ -179,7 +194,7 @@ def get_commits_by_tags(repository: Repo, tag_filter_pattern: str, starting_tag:
             GitTag(
                 tag_name=end_tag.name,
                 tag_info=end_tag,
-                commits=parse_commits(repository, start_tag_name, end_tag.name),
+                commits=parse_commits(repository, start_tag_name, end_tag.name, config),
             )
         )
         if starting_tag and start_tag_name == starting_tag:
