@@ -26,7 +26,7 @@ def generate_config_callback(ctx: Context, param: Parameter, value: bool) -> Non
         overwrite = click.confirm(f"{file_path} already exists. Overwrite it?")
         if not overwrite:
             click.echo("Aborting configuration file generation.")
-            click.Abort()
+            raise click.Abort()
     write_default_config(f)
     click.echo(f"The configuration file was written to {f}.")
     ctx.exit()
