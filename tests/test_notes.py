@@ -33,6 +33,18 @@ def test_get_section_pattern():
     with pytest.raises(MissingConfigurationError):
         notes.get_section_pattern()
 
+
+def test_missing_config_error_message_has_no_double_is():
+    """MissingConfigurationError messages must not contain the 'is is' typo."""
+    configuration._CONFIG = configuration.get_default_config()
+    configuration._CONFIG.starting_tag_pipeline = []
+
+    with pytest.raises(MissingConfigurationError, match=r"(?<!is )is required"):
+        notes.get_section_pattern()
+
+    with pytest.raises(MissingConfigurationError, match=r"(?<!is )is required"):
+        notes.get_changelog_path()
+
     configuration._CONFIG.starting_tag_pipeline = [
         {"action": "ReadFile", "kwargs": {"filename": "{{ changelog_filename }}"}},
     ]

@@ -72,7 +72,7 @@ def get_section_pattern() -> str:
 
     if not config.starting_tag_pipeline:
         raise MissingConfigurationError(
-            "The 'starting_tag_pipeline' configuration is is required for parsing the changelog."
+            "The 'starting_tag_pipeline' configuration is required for parsing the changelog."
         )
 
     regex = next(
@@ -106,7 +106,7 @@ def get_changelog_path() -> Path:
 
     if not config.starting_tag_pipeline:
         raise MissingConfigurationError(
-            "The 'starting_tag_pipeline' configuration is is required for parsing the changelog."
+            "The 'starting_tag_pipeline' configuration is required for parsing the changelog."
         )
 
     changelog_path = next(
