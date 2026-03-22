@@ -21,6 +21,7 @@ GIT_FORMAT_KEYS = {
     "summary": "%s",
     "body": "%b",
 }
+# %x00 (null) and %x1F (ASCII unit separator) are safe field delimiters — they never appear in commit messages
 GIT_FULL_FORMAT_STRING = "%x00".join(GIT_FORMAT_KEYS.values()) + "%x1F"
 
 
