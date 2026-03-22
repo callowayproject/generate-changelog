@@ -1,10 +1,12 @@
 """Test basic git ops."""
 
+from unittest.mock import patch
+
 import pytest
 from pytest import param
 
 from generate_changelog import git_ops
-from generate_changelog.configuration import get_config
+from generate_changelog.configuration import Configuration, get_config
 
 
 @pytest.mark.parametrize(
@@ -60,3 +62,29 @@ def test_get_commits_since_tag(default_repo):
     for group, expect in zip(grouping, expected):
         assert group.tag_name == expect[0]
         assert len(group.commits) == expect[1]
+
+
+@pytest.mark.parametrize(
+    ["include_merges", "expect_no_merges_flag"],
+    (
+        param(True, False, id="include-merges-true-no-flag"),
+        param(False, True, id="include-merges-false-has-flag"),
+    ),
+)
+def test_parse_commits_include_merges_flag(include_merges, expect_no_merges_flag):
+    """parse_commits should pass --no-merges only when include_merges is False."""
+    from unittest.mock import MagicMock
+
+    config = Configuration(include_merges=include_merges)
+    mock_repo = MagicMock()
+    mock_repo.git.log.return_value = ""  # empty string → no commits
+
+    with patch("generate_changelog.git_ops.get_config", return_value=config):
+        git_ops.parse_commits(mock_repo)
+
+    call_args = list(mock_repo.git.log.call_args[0])
+
+    if expect_no_merges_flag:
+        assert "--no-merges" in call_args
+    else:
+        assert "--no-merges" not in call_args

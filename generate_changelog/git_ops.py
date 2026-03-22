@@ -98,7 +98,7 @@ def parse_commits(repository: Repo, starting_rev: Optional[str] = None, ending_r
 
     log_opts = ["-z", "--topo-order", "--pretty=tformat:%H"]
 
-    if get_config().include_merges:
+    if not get_config().include_merges:
         log_opts.append("--no-merges")
 
     log_opts.append(revs)
