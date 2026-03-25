@@ -62,6 +62,7 @@ def test_commit_with_no_email():
         grouping=(None,),
         body="\n".join(commit.message.splitlines()[1:]),
         metadata={"trailers": {"co-authored-by": [name_only]}},
+        valid_author_tokens=["co-authored-by"],
     )
     assert name_only in context.author_names
     assert {"name": name_only, "email": ""} in context.authors
