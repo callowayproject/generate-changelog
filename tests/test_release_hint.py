@@ -360,3 +360,118 @@ def test_suggest_release_type_all_nones():
     ]
 
     assert release_hint.suggest_release_type("master", version_contexts, config) == "no-release"
+
+
+class TestProcessCommits:
+    """Tests for the _process_commits helper."""
+
+    def test_empty_commits_returns_empty_collections(self):
+        """Empty grouped_commits yields empty suggestions, results, and commit_results."""
+        # Arrange
+        rule_processor = release_hint.RuleProcessor(rule_list=TEST_RULES)
+        version_contexts = [
+            VersionContext(
+                label="Unreleased",
+                grouped_commits=[GroupingContext(grouping=("ignored",), commits=[])],
+            )
+        ]
+
+        # Act
+        suggestions, results, commit_results = release_hint._process_commits(
+            version_contexts, rule_processor, "master"
+        )
+
+        # Assert
+        assert suggestions == set()
+        assert len(results) == 0
+        assert commit_results == {}
+
+    def test_empty_grouped_commits_list_returns_empty_collections(self):
+        """VersionContext with no GroupingContext objects yields empty collections."""
+        # Arrange
+        rule_processor = release_hint.RuleProcessor(rule_list=TEST_RULES)
+        version_contexts = [VersionContext(label="Unreleased", grouped_commits=[])]
+
+        # Act
+        suggestions, results, commit_results = release_hint._process_commits(
+            version_contexts, rule_processor, "master"
+        )
+
+        # Assert
+        assert suggestions == set()
+        assert len(results) == 0
+        assert commit_results == {}
+
+    @pytest.mark.parametrize(
+        ["grouping", "files", "expected_suggestion"],
+        [
+            pytest.param(("New",), {"src/file.py"}, "minor", id="minor from New+src"),
+            pytest.param(("Fixes",), {"src/file.py"}, "patch", id="patch from Fixes+src"),
+            pytest.param(("Fixes",), {"docs/file.py"}, "no-release", id="no-release outside src"),
+        ],
+    )
+    def test_commits_with_known_rules_produce_expected_suggestion(self, grouping, files, expected_suggestion):
+        """Commits evaluated by rules produce the expected suggestion in the returned set."""
+        # Arrange
+        rule_processor = release_hint.RuleProcessor(rule_list=TEST_RULES)
+        commit = commit_context_factory(grouping, files)
+        version_contexts = [
+            VersionContext(
+                label="Unreleased",
+                grouped_commits=[GroupingContext(grouping=("test",), commits=[commit])],
+            )
+        ]
+
+        # Act
+        suggestions, results, commit_results = release_hint._process_commits(
+            version_contexts, rule_processor, "master"
+        )
+
+        # Assert
+        assert expected_suggestion in suggestions
+        assert commit.sha in commit_results
+        assert commit_results[commit.sha] == expected_suggestion
+
+    def test_results_keyed_by_grouping_string(self):
+        """results dict is keyed by 'Grouping: <words>' string."""
+        # Arrange
+        rule_processor = release_hint.RuleProcessor(rule_list=TEST_RULES)
+        commit = commit_context_factory(("New",), {"src/file.py"})
+        version_contexts = [
+            VersionContext(
+                label="Unreleased",
+                grouped_commits=[GroupingContext(grouping=("mygroup",), commits=[commit])],
+            )
+        ]
+
+        # Act
+        suggestions, results, commit_results = release_hint._process_commits(
+            version_contexts, rule_processor, "master"
+        )
+
+        # Assert
+        assert "Grouping: mygroup" in results
+
+
+def test_suggest_release_type_regression_minor():
+    """End-to-end regression: minor wins over patch and no-release."""
+    config = configuration.get_default_config()
+    config.release_hint_rules = TEST_RULES
+
+    version_contexts = [
+        VersionContext(
+            label=config.unreleased_label,
+            grouped_commits=[
+                GroupingContext(
+                    grouping=("ignored",),
+                    commits=[
+                        commit_context_factory(("Fixes",), {"docs/file.py"}),  # no-release
+                        commit_context_factory(("Fixes",), {"src/file.py"}),  # patch
+                        commit_context_factory(("New",), {"src/file.py"}),  # minor
+                    ],
+                ),
+            ],
+        )
+    ]
+
+    assert release_hint.suggest_release_type("master", version_contexts, config) == "minor"

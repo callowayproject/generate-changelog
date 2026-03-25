@@ -36,6 +36,18 @@ class TestCLI:
         assert result.exit_code == 0
         assert "The configuration file was written to" in result.stdout
 
+    def test_generate_config_no_overwrite_does_not_write_file(self, tmp_path: Path):
+        """Answering 'n' to the overwrite prompt must not overwrite the config file."""
+        original_content = "original content"
+        config_file = tmp_path / ".changelog-config.yaml"
+        config_file.write_text(original_content)
+
+        with inside_dir(tmp_path):
+            result = runner.invoke(cli, ["--generate-config"], input="n\n")
+
+        assert "Aborting" in result.output
+        assert config_file.read_text() == original_content
+
     def test_generate_changelog_to_stdout(self, default_repo, tmp_path: Path):
         """Generate a changelog to standard out from the default repository."""
         # Assemble
