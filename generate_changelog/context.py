@@ -6,7 +6,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Callable, List, Optional, Tuple
 
-from generate_changelog.configuration import Configuration, get_config
+from generate_changelog.configuration import Configuration
 from generate_changelog.utilities import diff_index
 
 
@@ -38,6 +38,9 @@ class CommitContext:
     files: set = field(default_factory=set)
     """The file paths (relative to the repository root) modified by this commit."""
 
+    valid_author_tokens: List[str] = field(default_factory=list)
+    """The configured tokens in git commit trailers that indicate authorship."""
+
     _authors: Optional[list] = field(init=False)  # list of dicts with name and email keys
     _author_names: Optional[list] = field(init=False)  # list of just the names
 
@@ -64,7 +67,7 @@ class CommitContext:
 
         raw_authors = [self.committer]
         trailers = self.metadata.get("trailers", collections.defaultdict(list))
-        for token in get_config().valid_author_tokens:
+        for token in self.valid_author_tokens:
             raw_authors.extend(trailers.get(token, []))
         author_regex = re.compile(r"^(?P<name>[^<]+)\s+(?:<(?P<email>[^>]+)>)?$")
 

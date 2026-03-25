@@ -62,10 +62,11 @@ def render_changelog(
         The full or partial changelog
     """
     context = ChangelogContext(config=config, versions=version_context)
+    env = get_default_env(config)
     if incremental:
-        heading_str = get_default_env(config).get_template("heading.md.jinja").render()
-        versions_str = get_default_env(config).get_template("versions.md.jinja").render(context.as_dict())
+        heading_str = env.get_template("heading.md.jinja").render()
+        versions_str = env.get_template("versions.md.jinja").render(context.as_dict())
         return RenderedChangelog(heading=heading_str, notes=versions_str, full=f"{heading_str}\n{versions_str}")
 
-    chglog = get_default_env(config).get_template("base.md.jinja").render(context.as_dict())
+    chglog = env.get_template("base.md.jinja").render(context.as_dict())
     return RenderedChangelog(full=chglog)
