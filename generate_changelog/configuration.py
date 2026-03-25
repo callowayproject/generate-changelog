@@ -338,3 +338,10 @@ def get_config() -> Configuration:
         The global configuration object.
     """
     return _CONFIG
+
+
+def reset_config() -> Configuration:
+    """Reset the global config to defaults. Use in tests only."""
+    global _CONFIG  # noqa: PLW0603
+    _CONFIG = get_default_config()
+    return _CONFIG

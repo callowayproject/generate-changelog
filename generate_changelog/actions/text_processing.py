@@ -231,7 +231,7 @@ def capitalize(msg: str) -> str:
     Returns:
         The capitalized string
     """
-    return msg[0].upper() + msg[1:]
+    return msg[0].upper() + msg[1:] if msg else msg
 
 
 @register_builtin
