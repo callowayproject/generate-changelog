@@ -1,10 +1,12 @@
 """Test basic git ops."""
 
+from unittest.mock import MagicMock
+
 import pytest
 from pytest import param
 
 from generate_changelog import git_ops
-from generate_changelog.configuration import get_config
+from generate_changelog.configuration import Configuration, get_default_config
 
 
 @pytest.mark.parametrize(
@@ -37,7 +39,7 @@ def test_get_tags(default_repo):
 
 def test_get_commits_by_all_tags(default_repo):
     """Commits should be grouped by tags and filtered."""
-    grouping = git_ops.get_commits_by_tags(default_repo, get_config().tag_pattern)
+    grouping = git_ops.get_commits_by_tags(default_repo, get_default_config().tag_pattern)
 
     assert len(grouping) == 4
 
@@ -49,7 +51,7 @@ def test_get_commits_by_all_tags(default_repo):
 
 def test_get_commits_since_tag(default_repo):
     """Commits should be grouped by tags and filtered since tag."""
-    grouping = git_ops.get_commits_by_tags(default_repo, get_config().tag_pattern, "0.0.2")
+    grouping = git_ops.get_commits_by_tags(default_repo, get_default_config().tag_pattern, "0.0.2")
 
     assert len(grouping) == 2
 
@@ -60,3 +62,26 @@ def test_get_commits_since_tag(default_repo):
     for group, expect in zip(grouping, expected):
         assert group.tag_name == expect[0]
         assert len(group.commits) == expect[1]
+
+
+@pytest.mark.parametrize(
+    ["include_merges", "expect_no_merges_flag"],
+    (
+        param(True, False, id="include-merges-true-no-flag"),
+        param(False, True, id="include-merges-false-has-flag"),
+    ),
+)
+def test_parse_commits_include_merges_flag(include_merges, expect_no_merges_flag):
+    """parse_commits should pass --no-merges only when include_merges is False."""
+    config = Configuration(include_merges=include_merges)
+    mock_repo = MagicMock()
+    mock_repo.git.log.return_value = ""  # empty string → no commits
+
+    git_ops.parse_commits(mock_repo, config=config)
+
+    call_args = list(mock_repo.git.log.call_args[0])
+
+    if expect_no_merges_flag:
+        assert "--no-merges" in call_args
+    else:
+        assert "--no-merges" not in call_args
