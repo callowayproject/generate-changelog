@@ -212,6 +212,7 @@ ignore = [
     "ANN204", # missing-return-type-special-method
     "ANN401", # any-type
     "S101", # assert
+    "RUF067",
     "S104", # hardcoded-bind-all-interfaces
     "S404", # suspicious-subprocess-import
     "S602", # subprocess-popen-with-shell-equals-true

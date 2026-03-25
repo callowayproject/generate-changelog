@@ -15,7 +15,7 @@ def test_tags_on_multiple_branches(bare_git_repo, capsys):
 
     Target tree:
 
-    $ git log --all --pretty=tformat:%s\ %d --graph
+    $ git log --all --pretty=tformat:%s\\ %d --graph
     *   Merge branch 'develop' into master (HEAD -> master, tag: 0.0.4)
     |\
     | * new: some new commit

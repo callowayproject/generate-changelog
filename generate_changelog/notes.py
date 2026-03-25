@@ -69,11 +69,11 @@ def get_section_pattern(config: Optional[Configuration] = None) -> str:
     Args:
         config: The configuration to use. If ``None``, the global config is used.
 
-    Raises:
-        MissingConfigurationError: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
-
     Returns:
         The version section pattern.
+
+    Raises:
+        MissingConfigurationError: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
     """
     if config is None:
         config = get_config()
@@ -107,11 +107,11 @@ def get_changelog_path(config: Optional[Configuration] = None) -> Path:
     Args:
         config: The configuration to use. If ``None``, the global config is used.
 
-    Raises:
-        MissingConfigurationError: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
-
     Returns:
         The path to the changelog.
+
+    Raises:
+        MissingConfigurationError: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
     """
     if config is None:
         config = get_config()
