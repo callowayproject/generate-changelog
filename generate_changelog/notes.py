@@ -5,7 +5,7 @@ from itertools import islice, tee, zip_longest
 from pathlib import Path
 from typing import Any, Iterable, Iterator, List, Optional, Tuple
 
-from generate_changelog.configuration import get_config
+from generate_changelog.configuration import Configuration, get_config
 
 
 class MissingConfigurationError(Exception):
@@ -32,7 +32,9 @@ def pairs(iterable: Iterable) -> Iterator[Tuple[Any, Any]]:
     return zip_longest(islice(a, 0, None, 2), islice(b, 1, None, 2))
 
 
-def split_changelog(contents: str, section_pattern: Optional[str] = None) -> List[Tuple[str, str]]:
+def split_changelog(
+    contents: str, section_pattern: Optional[str] = None, config: Optional[Configuration] = None
+) -> List[Tuple[str, str]]:
     """
     Read the changelog and split it into version and note sections.
 
@@ -41,14 +43,16 @@ def split_changelog(contents: str, section_pattern: Optional[str] = None) -> Lis
         section_pattern: A regex pattern to split the changelog into sections.
             If `None`, the pattern is derived from the [`starting_tag_pipeline`]
             [generate_changelog.configuration.Configuration.starting_tag_pipeline] configuration option.
+        config: The configuration to use. If ``None``, the global config is used.
 
     Returns:
         A list of version and note sections.
     """
     from generate_changelog.templating import get_default_env
 
-    config = get_config()
-    section_pattern = section_pattern or get_section_pattern()
+    if config is None:
+        config = get_config()
+    section_pattern = section_pattern or get_section_pattern(config)
     header_text = get_default_env(config).get_template("heading.md.jinja").render()
 
     parts = re.split(section_pattern, contents)
@@ -58,9 +62,12 @@ def split_changelog(contents: str, section_pattern: Optional[str] = None) -> Lis
     return list(pairs(parts))
 
 
-def get_section_pattern() -> str:
+def get_section_pattern(config: Optional[Configuration] = None) -> str:
     """
     Get the version section pattern for the changelog.
+
+    Args:
+        config: The configuration to use. If ``None``, the global config is used.
 
     Raises:
         MissingConfigurationError: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
@@ -68,11 +75,12 @@ def get_section_pattern() -> str:
     Returns:
         The version section pattern.
     """
-    config = get_config()
+    if config is None:
+        config = get_config()
 
     if not config.starting_tag_pipeline:
         raise MissingConfigurationError(
-            "The 'starting_tag_pipeline' configuration is is required for parsing the changelog."
+            "The 'starting_tag_pipeline' configuration is required for parsing the changelog."
         )
 
     regex = next(
@@ -92,9 +100,12 @@ def get_section_pattern() -> str:
     return regex
 
 
-def get_changelog_path() -> Path:
+def get_changelog_path(config: Optional[Configuration] = None) -> Path:
     """
     Return the path to the changelog.
+
+    Args:
+        config: The configuration to use. If ``None``, the global config is used.
 
     Raises:
         MissingConfigurationError: If the ``starting_tag_pipeline`` configuration is missing or incorrect.
@@ -102,11 +113,12 @@ def get_changelog_path() -> Path:
     Returns:
         The path to the changelog.
     """
-    config = get_config()
+    if config is None:
+        config = get_config()
 
     if not config.starting_tag_pipeline:
         raise MissingConfigurationError(
-            "The 'starting_tag_pipeline' configuration is is required for parsing the changelog."
+            "The 'starting_tag_pipeline' configuration is required for parsing the changelog."
         )
 
     changelog_path = next(
@@ -126,12 +138,27 @@ def get_changelog_path() -> Path:
     return changelog_path
 
 
-def get_version_notes(version: str) -> str:
-    """Parse the changelog.md file and return the notes for the given version."""
-    changelog_path = get_changelog_path()
+def get_version_notes(version: str, config: Optional[Configuration] = None) -> str:
+    """
+    Parse the changelog.md file and return the notes for the given version.
+
+    Args:
+        version: The version string to retrieve notes for.
+        config: The configuration to use. If ``None``, the global config is used.
+
+    Returns:
+        The release notes for the given version.
+    """
+    if config is None:
+        config = get_config()
+    changelog_path = get_changelog_path(config)
     changelog_contents = changelog_path.read_text()
 
     return next(
-        (notes.strip() for vrsn, notes in split_changelog(changelog_contents) if vrsn.startswith(version)),
+        (
+            notes.strip()
+            for vrsn, notes in split_changelog(changelog_contents, config=config)
+            if vrsn.startswith(version)
+        ),
         "",
     )
