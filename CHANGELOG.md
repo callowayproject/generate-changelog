@@ -1,5 +1,232 @@
 # Changelog
 
+## 0.17.0 (2026-03-26)
+
+[Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.16.0...0.17.0)
+
+### Fixes
+
+- Fix linting errors. [b79fea2](https://github.com/callowayproject/generate-changelog/commit/b79fea213f28e833336403b8d0d0eb83e38898f7)
+
+- Fix typo in `MissingConfigurationError` message and add tests to prevent regression. [d3e98b1](https://github.com/callowayproject/generate-changelog/commit/d3e98b10db7fbbf83c76d872d1c5cd89be47163d)
+
+- Fix handling of `--no-merges` flag based on `include_merges` config and add corresponding unit test. [106d3e5](https://github.com/callowayproject/generate-changelog/commit/106d3e5fd4b2ea68a56e7376af9ff2da26ae19c2)
+
+### New
+
+- Add support for optional `Configuration` injection in `eval_if_callable` for enhanced flexibility. [4c95870](https://github.com/callowayproject/generate-changelog/commit/4c95870a2ec9bb73ebec534ce624f19578f01aa1)
+
+- Add `reset_config` function to reset global configuration for testing purposes. [0990d06](https://github.com/callowayproject/generate-changelog/commit/0990d063a8e6c86902877408e4e27bb0dc12fe08)
+
+- Add tests for `capitalize` function and handle empty string edge case in implementation. [b558f8a](https://github.com/callowayproject/generate-changelog/commit/b558f8a0362c6cf1f8cc7d22099937d17f7655b6)
+
+- Add test for config overwrite prompt and fix abort handling in CLI. [9d6ce54](https://github.com/callowayproject/generate-changelog/commit/9d6ce5454f2111c3b7acc4529be5aa182acf08a9)
+
+### Other
+
+- Bump `anyio`, `babel`, `backrefs`, `beautifulsoup4`, and `black` dependencies to their latest versions. [5edd0ac](https://github.com/callowayproject/generate-changelog/commit/5edd0acf608a6c3bdbcabfb26c668ae0ac9d5417)
+
+- Grant `attestations: write` permission in build-python workflow. [90b30b2](https://github.com/callowayproject/generate-changelog/commit/90b30b2e0384141b32b63b515a5fcd263e70d961)
+
+- Bump cryptography from 45.0.3 to 46.0.5. [a086c55](https://github.com/callowayproject/generate-changelog/commit/a086c552ea3df759e8c9ff1f6586c22d9d3368e6)
+
+  Bumps [cryptography](https://github.com/pyca/cryptography) from 45.0.3 to 46.0.5.
+
+  - [Changelog](https://github.com/pyca/cryptography/blob/main/CHANGELOG.rst)
+  - [Commits](https://github.com/pyca/cryptography/compare/45.0.3...46.0.5)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: cryptography
+  dependency-version: 46.0.5
+  dependency-type: indirect
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Bump filelock from 3.18.0 to 3.20.3. [6a2b20b](https://github.com/callowayproject/generate-changelog/commit/6a2b20b38b2e68f577384fff497d672a850c474d)
+
+  Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.18.0 to 3.20.3.
+
+  - [Release notes](https://github.com/tox-dev/py-filelock/releases)
+  - [Changelog](https://github.com/tox-dev/filelock/blob/main/docs/changelog.rst)
+  - [Commits](https://github.com/tox-dev/py-filelock/compare/3.18.0...3.20.3)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: filelock
+  dependency-version: 3.20.3
+  dependency-type: indirect
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Bump urllib3 from 1.26.20 to 2.6.3. [6397a55](https://github.com/callowayproject/generate-changelog/commit/6397a552ead1a7850a4cf3f657f7d40bf7d4762c)
+
+  Bumps [urllib3](https://github.com/urllib3/urllib3) from 1.26.20 to 2.6.3.
+
+  - [Release notes](https://github.com/urllib3/urllib3/releases)
+  - [Changelog](https://github.com/urllib3/urllib3/blob/main/CHANGES.rst)
+  - [Commits](https://github.com/urllib3/urllib3/compare/1.26.20...2.6.3)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: urllib3
+  dependency-version: 2.6.3
+  dependency-type: indirect
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Bump pynacl from 1.5.0 to 1.6.2. [cc63ed7](https://github.com/callowayproject/generate-changelog/commit/cc63ed727b7e5052a703058e817027138fdc3b68)
+
+  Bumps [pynacl](https://github.com/pyca/pynacl) from 1.5.0 to 1.6.2.
+
+  - [Changelog](https://github.com/pyca/pynacl/blob/main/CHANGELOG.rst)
+  - [Commits](https://github.com/pyca/pynacl/compare/1.5.0...1.6.2)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: pynacl
+  dependency-version: 1.6.2
+  dependency-type: indirect
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Bump markdown from 3.8 to 3.8.1. [55bf3c4](https://github.com/callowayproject/generate-changelog/commit/55bf3c4a03b07e1e5abcce7dbf9720622d3639cd)
+
+  Bumps [markdown](https://github.com/Python-Markdown/markdown) from 3.8 to 3.8.1.
+
+  - [Release notes](https://github.com/Python-Markdown/markdown/releases)
+  - [Changelog](https://github.com/Python-Markdown/markdown/blob/master/docs/changelog.md)
+  - [Commits](https://github.com/Python-Markdown/markdown/compare/3.8...3.8.1)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: markdown
+  dependency-version: 3.8.1
+  dependency-type: indirect
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Bump pyjwt from 2.10.1 to 2.12.0. [f6ec4ec](https://github.com/callowayproject/generate-changelog/commit/f6ec4ec4a1b2667643b3aee49a6354bbfe6ae43d)
+
+  Bumps [pyjwt](https://github.com/jpadilla/pyjwt) from 2.10.1 to 2.12.0.
+
+  - [Release notes](https://github.com/jpadilla/pyjwt/releases)
+  - [Changelog](https://github.com/jpadilla/pyjwt/blob/master/CHANGELOG.rst)
+  - [Commits](https://github.com/jpadilla/pyjwt/compare/2.10.1...2.12.0)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: pyjwt
+  dependency-version: 2.12.0
+  dependency-type: indirect
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Pass `valid_author_tokens` from `Configuration` to `Context` and update related tests. [0144823](https://github.com/callowayproject/generate-changelog/commit/01448233628ffa2a0f0bdd20627e72b3e5b2a2d6)
+
+- Inject `Configuration` as optional parameter across `notes` functions and update corresponding tests. [73b3779](https://github.com/callowayproject/generate-changelog/commit/73b377928eecbec9e50e7154f5ed0c82d3aeacf1)
+
+- Replace `get_config().valid_author_tokens` with instance-level `valid_author_tokens` in `Context`. [b3b35b4](https://github.com/callowayproject/generate-changelog/commit/b3b35b4d415fff2d6fdd93fc096f64a6e4623a28)
+
+- Document the use of null and unit separator as safe delimiters in `GIT_FULL_FORMAT_STRING`. [e166c19](https://github.com/callowayproject/generate-changelog/commit/e166c1960c07288a231a2f75aeffb38c27200969)
+
+- Bump actions/download-artifact from 4 to 6. [15a6a39](https://github.com/callowayproject/generate-changelog/commit/15a6a3934c03abade5c545d66617c1083d7fa2e7)
+
+  Bumps [actions/download-artifact](https://github.com/actions/download-artifact) from 4 to 6.
+
+  - [Release notes](https://github.com/actions/download-artifact/releases)
+  - [Commits](https://github.com/actions/download-artifact/compare/v4...v6)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: actions/download-artifact
+  dependency-version: '6'
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Bump github/codeql-action from 3 to 4. [aa26229](https://github.com/callowayproject/generate-changelog/commit/aa262292e13109e104977a2d38c19138ccc22d48)
+
+  Bumps [github/codeql-action](https://github.com/github/codeql-action) from 3 to 4.
+
+  - [Release notes](https://github.com/github/codeql-action/releases)
+  - [Changelog](https://github.com/github/codeql-action/blob/main/CHANGELOG.md)
+  - [Commits](https://github.com/github/codeql-action/compare/v3...v4)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: github/codeql-action
+  dependency-version: '4'
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Bump actions/setup-python from 5 to 6. [4e4d407](https://github.com/callowayproject/generate-changelog/commit/4e4d407a2b94ef967f78aeff60bd949272209bb3)
+
+  Bumps [actions/setup-python](https://github.com/actions/setup-python) from 5 to 6.
+
+  - [Release notes](https://github.com/actions/setup-python/releases)
+  - [Commits](https://github.com/actions/setup-python/compare/v5...v6)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: actions/setup-python
+  dependency-version: '6'
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Bump actions/attest-build-provenance from 2 to 3. [eb58ce4](https://github.com/callowayproject/generate-changelog/commit/eb58ce40fb806628be1988e6426dfe7adebb897e)
+
+  Bumps [actions/attest-build-provenance](https://github.com/actions/attest-build-provenance) from 2 to 3.
+
+  - [Release notes](https://github.com/actions/attest-build-provenance/releases)
+  - [Changelog](https://github.com/actions/attest-build-provenance/blob/main/RELEASE.md)
+  - [Commits](https://github.com/actions/attest-build-provenance/compare/v2...v3)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: actions/attest-build-provenance
+  dependency-version: '3'
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- Bump actions/checkout from 4 to 5. [6c7b485](https://github.com/callowayproject/generate-changelog/commit/6c7b4853905f071a76bf81dacc3c23b353dc26f2)
+
+  Bumps [actions/checkout](https://github.com/actions/checkout) from 4 to 5.
+
+  - [Release notes](https://github.com/actions/checkout/releases)
+  - [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md)
+  - [Commits](https://github.com/actions/checkout/compare/v4...v5)
+
+  ______________________________________________________________________
+
+  **updated-dependencies:** - dependency-name: actions/checkout
+  dependency-version: '5'
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+
+  **signed-off-by:** dependabot[bot] <support@github.com>
+
+- [pre-commit.ci] pre-commit autoupdate. [0c2d6a3](https://github.com/callowayproject/generate-changelog/commit/0c2d6a3f5a937e13e897299a0ba59524b78cf7d6)
+
+  **updates:** - [github.com/astral-sh/ruff-pre-commit: v0.11.12 → v0.15.7](https://github.com/astral-sh/ruff-pre-commit/compare/v0.11.12...v0.15.7)
+
+### Updates
+
+- Refactor `suggest_release_type` by extracting `_process_commits`, `_build_report_table`, and `_write_report` for improved modularity and testability; add unit tests for new helper functions. [8c86e67](https://github.com/callowayproject/generate-changelog/commit/8c86e6795bad44cf697f5e0aae138e4dac316f4c)
+
+- Update `git_ops` to support customizable configuration injection and refactor tests accordingly. [48735ba](https://github.com/callowayproject/generate-changelog/commit/48735baacef280e0f566390d3a21f1e6dfffce3f)
+
+- Refactor `render_changelog` to reuse `get_default_env` and add tests to ensure single call per render. [5c06304](https://github.com/callowayproject/generate-changelog/commit/5c06304ad92dade273945251c11ba2ae6f3185bd)
+
+- Updated GitHub workflows. [4116652](https://github.com/callowayproject/generate-changelog/commit/4116652dda7e7d95e63c56517b95784487ad20ef)
+
 ## 0.16.0 (2025-05-30)
 
 [Compare the full difference.](https://github.com/callowayproject/generate-changelog/compare/0.15.0...0.16.0)
