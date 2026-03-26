@@ -32,7 +32,7 @@ class ReadFile:
         if not filepath.exists():
             raise click.UsageError(f"The file '{filepath}' does not exist.")
 
-        return filepath.read_text() or ""
+        return filepath.read_text(encoding="utf-8") or ""
 
 
 @register_builtin
@@ -82,7 +82,7 @@ class IncrementalFileInsert:
         filename = Path(eval_if_callable(self.filename))
         pattern = eval_if_callable(self.last_heading_pattern)
         text = eval_if_callable(input_text)
-        existing_text = filename.read_text() if filename.exists() else ""
+        existing_text = filename.read_text(encoding="utf-8") if filename.exists() else ""
 
         match = re.search(pattern, existing_text, re.MULTILINE)
         new_text = f"{text}\n{existing_text[match.start() :]}" if match else text
@@ -109,7 +109,7 @@ class MDFormat:
         from mdformat import text as mdformat_text
 
         filename = Path(eval_if_callable(self.filename))
-        existing_text = filename.read_text() if filename.exists() else ""
+        existing_text = filename.read_text(encoding="utf-8") if filename.exists() else ""
 
         new_text = mdformat_text(existing_text)
 

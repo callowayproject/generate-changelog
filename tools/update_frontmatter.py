@@ -49,7 +49,7 @@ def process_file(markdown_path: Path) -> None:
     """Process a single file."""
     if not (markdown_path.is_file() and markdown_path.suffix == ".md"):
         return
-    raw_text = markdown_path.read_text()
+    raw_text = markdown_path.read_text(encoding="utf-8")
     post = frontmatter.loads(raw_text)
 
     update = calculate_update(post)
@@ -58,7 +58,7 @@ def process_file(markdown_path: Path) -> None:
             post[key] = value
         new_text = frontmatter.dumps(post)
         print(f"Updating {markdown_path}")
-        markdown_path.write_text(new_text)
+        markdown_path.write_text(new_text, encoding="utf-8")
 
 
 def parse_args() -> argparse.Namespace:

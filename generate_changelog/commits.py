@@ -29,7 +29,7 @@ def get_context_from_tags(
     Returns:
         A list of VersionContext objects.
     """
-    tags = git_ops.get_commits_by_tags(repository, config.tag_pattern, starting_tag)
+    tags = git_ops.get_commits_by_tags(repository, config.tag_pattern, starting_tag, config)
     output: List[VersionContext] = []
 
     for tag in tags:
@@ -133,6 +133,7 @@ def generate_commit_context(
         grouping=(),
         metadata=commit_metadata_func.metadata.copy(),
         files=set(commit.stats.files.keys()),
+        valid_author_tokens=config.valid_author_tokens,
     )
     category = first_matching(config.commit_classifiers, commit_ctx)
     commit_ctx.metadata["category"] = category

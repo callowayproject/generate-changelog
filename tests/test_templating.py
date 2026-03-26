@@ -2,6 +2,7 @@
 
 import textwrap
 from pathlib import Path
+from unittest.mock import patch
 
 from generate_changelog import configuration, templating
 from generate_changelog.commits import get_context_from_tags
@@ -38,6 +39,26 @@ def test_render_from_tag(default_repo, capsys):
     """
     )
     assert output.full.strip() == expected.strip()
+
+
+def test_get_default_env_called_once_for_full_changelog(default_repo):
+    """render_changelog should call get_default_env exactly once for a full render."""
+    config = configuration.get_default_config()
+    config.template_dirs = []
+    version_context = get_context_from_tags(default_repo, config, None)
+    with patch("generate_changelog.templating.get_default_env", wraps=templating.get_default_env) as mock_env:
+        templating.render_changelog(version_context, config, incremental=False)
+        mock_env.assert_called_once()
+
+
+def test_get_default_env_called_once_for_incremental_changelog(default_repo):
+    """render_changelog should call get_default_env exactly once for an incremental render."""
+    config = configuration.get_default_config()
+    config.template_dirs = []
+    version_context = get_context_from_tags(default_repo, config, "0.0.3")
+    with patch("generate_changelog.templating.get_default_env", wraps=templating.get_default_env) as mock_env:
+        templating.render_changelog(version_context, config, incremental=True)
+        mock_env.assert_called_once()
 
 
 def test_incremental_context(default_repo, capsys):

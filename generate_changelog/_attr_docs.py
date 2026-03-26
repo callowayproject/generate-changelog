@@ -28,6 +28,6 @@ def attribute_docstrings(obj: type) -> dict:
             docstrings[name] = inspect.cleandoc(b.value.value).strip()
         elif isinstance(b, ast.Expr) and isinstance(b.value, ast.Str):  # pragma: no cover
             # Python <= 3.7
-            docstrings[name] = inspect.cleandoc(b.value.s).strip()
+            docstrings[name] = inspect.cleandoc(str(b.value.s)).strip()
 
     return docstrings

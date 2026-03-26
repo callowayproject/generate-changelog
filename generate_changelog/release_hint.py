@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from itertools import groupby
 from operator import attrgetter
 from pathlib import Path
-from typing import Iterable, List, Optional, Sequence, Set, Union
+from typing import Dict, Iterable, List, Optional, Sequence, Set, Tuple, Union
 
 from rich.box import SIMPLE
 from rich.console import Console, Group, RenderableType, group
@@ -214,6 +214,63 @@ class RuleProcessor:
         return "\n".join(output)
 
 
+def _process_commits(
+    version_contexts: List[VersionContext],
+    rule_processor: RuleProcessor,
+    current_branch: str,
+) -> Tuple[Set[str], Dict[str, list], Dict[str, str]]:
+    """
+    Iterate unreleased commits, apply rules, and collect results.
+
+    Args:
+        version_contexts: The processed version contexts; index 0 is the unreleased version.
+        rule_processor: The configured rule processor to apply to each commit.
+        current_branch: The name of the current branch.
+
+    Returns:
+        A tuple of (suggestions, results, commit_results) where:
+        - suggestions is the set of release type strings produced by the rules,
+        - results maps grouping strings to lists of ReleaseRuleResult,
+        - commit_results maps commit SHA to its release type string.
+    """
+    suggestions: Set[str] = set()
+    results: Dict[str, list] = defaultdict(list)
+    commit_results: Dict[str, str] = {}
+    for commit_group in version_contexts[0].grouped_commits:
+        for commit in commit_group.commits:
+            new_suggestion = rule_processor(commit, current_branch)
+            suggestions.add(new_suggestion)
+            grouping_str = "Grouping: " + " ".join(commit_group.grouping)
+            commit_results[commit.sha] = new_suggestion
+            results[grouping_str].extend(copy.deepcopy(rule_processor.results))
+    return suggestions, results, commit_results
+
+
+def _build_report_table(results: Dict[str, list], commit_results: Dict[str, str]) -> "RenderableType":
+    """
+    Build the Rich renderable table from rule results.
+
+    Args:
+        results: Maps grouping strings to lists of ReleaseRuleResult.
+        commit_results: Maps commit SHA to its release type string.
+
+    Returns:
+        A Rich RenderableType representing the report table.
+    """
+    return print_table(results, commit_results)
+
+
+def _write_report(report_parts: List["RenderableType"], output_file: Optional[Path]) -> None:
+    """
+    Write the release hint report to the output file.
+
+    Args:
+        report_parts: The list of Rich renderables to write.
+        output_file: The path to write the report to, or None to skip.
+    """
+    output_report(report_parts, output_file)
+
+
 def suggest_release_type(current_branch: str, version_contexts: List[VersionContext], config: Configuration) -> str:
     """
     Suggest the type of release based on the unreleased commits.
@@ -241,18 +298,8 @@ def suggest_release_type(current_branch: str, version_contexts: List[VersionCont
         logger.dedent()
         return "no-release"
 
-    suggestions = set()
-    results = defaultdict(list)
-    commit_results = {}
-    for commit_group in version_contexts[0].grouped_commits:
-        for commit in commit_group.commits:
-            new_suggestions = rule_processor(commit, current_branch)
-            suggestions.add(new_suggestions)
-            grouping_str = "Grouping: " + " ".join(commit_group.grouping)
-            commit_results[commit.sha] = new_suggestions
-            results[grouping_str].extend(copy.deepcopy(rule_processor.results))
-
-    report_parts.append(print_table(results, commit_results))
+    suggestions, results, commit_results = _process_commits(version_contexts, rule_processor, current_branch)
+    report_parts.append(_build_report_table(results, commit_results))
 
     if not suggestions:
         logger.info("No suggestions found. No release is suggested.")
@@ -263,7 +310,7 @@ def suggest_release_type(current_branch: str, version_contexts: List[VersionCont
     result = sorted_suggestions[-1] or "no-release"
 
     report_parts.append(Text(f"Suggested release type: {result}"))
-    output_report(report_parts, config.report_path)
+    _write_report(report_parts, config.report_path)
     logger.info("Suggested release type: %s", result)
     logger.dedent()
     return result

@@ -1,6 +1,9 @@
 """Utility methods."""
 
-from typing import Any, Iterable, Optional
+from typing import TYPE_CHECKING, Any, Iterable, Optional
+
+if TYPE_CHECKING:
+    from generate_changelog.configuration import Configuration
 
 
 def is_action(value: Any) -> bool:
@@ -13,12 +16,13 @@ def is_pipeline(value: Any) -> bool:
     return value and isinstance(value, list) and is_action(value[0])
 
 
-def eval_if_callable(value: Any) -> Any:
+def eval_if_callable(value: Any, config: "Optional[Configuration]" = None) -> Any:
     """
     Tries to evaluate `value` as an action, a pipeline, or a callable if possible.
 
     Args:
         value: A callable, action dictionary, list of action dictionaries, or other.
+        config: The configuration to use. If ``None``, the global config is used.
 
     Returns:
         The original value if it cannot be evaluated further.
@@ -26,7 +30,8 @@ def eval_if_callable(value: Any) -> Any:
     from generate_changelog.configuration import get_config
     from generate_changelog.pipeline import pipeline_factory
 
-    config = get_config()
+    if config is None:
+        config = get_config()
 
     if is_action(value):
         # convert it into a single action and call it
